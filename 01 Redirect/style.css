@@ -1,0 +1,57 @@
+body {
+    overflow: hidden;
+    background-color: black;
+}
+
+.container {
+    color: white;
+}
+
+.lead {
+    font-size: xx-large;
+}
+
+.p {
+    font-size: x-large;
+    color: aqua;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    margin-top: 50px;
+    text-align: center;
+    font-family: Arial;
+    position: absolute;
+    z-index: 1;
+}
+
+.bg-image {
+    /* The image used */
+    background-image: url("https://github.com/sonicjhon1/sonicjhon1.github.io/blob/1afaa7d505bf467c7767a8304997a86063c7fcda/01%20Redirect/Kemonomimi%20Loli%20in%20Forest.png");
+    background-size: cover;
+  
+    /* Add the blur effect */
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px) brightness(200%) opacity(20%);
+  
+    /* Full height */
+    height: 105%;
+    width: 105%;
+    left: -1%;
+    top: -1%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    display: block;
+    z-index: 0;
+  }
