@@ -1193,6 +1193,8 @@ li {
   text-align: center;
   overflow: hidden;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 }
 .mix:after,
 .mix:before {
@@ -1218,8 +1220,20 @@ li {
   opacity: 0.5;
 }
 .mix:hover img {
-  filter: hue-rotate(50deg);
+  animation: animate-blur;
+  animation-duration: 1.3s;
+  animation-fill-mode: both;
 }
+
+@keyframes animate-blur {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 60%;
+  }
+}
+
 .mix .info {
   width: 100%;
   padding: 0 20px;
