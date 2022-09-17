@@ -1384,16 +1384,11 @@ ul.container {
   justify-content: center;
 }
 .contact-section .contact-form .form-group .form-control:-webkit-autofill,
-.contact-section
-  .contact-form
-  .form-group
-  .form-control:-webkit-autofill:active,
+.contact-section .contact-form .form-group .form-control:-webkit-autofill:active,
 .contact-section .contact-form .form-group .form-control:-webkit-autofill:focus,
-.contact-section
-  .contact-form
-  .form-group
-  .form-control:-webkit-autofill:hover {
+.contact-section .contact-form .form-group .form-control:-webkit-autofill:hover {
   -webkit-box-shadow: 0 0 10px rgb(0 0 0 / 85%);
+  box-shadow: 0 0 10px rgb(0 0 0 / 85%);
   -webkit-text-fill-color: #777 !important;
   -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
