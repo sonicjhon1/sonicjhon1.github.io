@@ -95,29 +95,58 @@ $(document).ready(function () {
 
 
 var mixer = mixitup(".portfolio-list");
-$("[data-fancybox]").fancybox({
-  selector : ".mix:visible a",
-  loop : true,
-  hash : true,
-  transitionEffect : "slide",
-  clickContent : function(image) {
-    return ("image" === image.type) && "next";
-  }
-}),
-$(".funfacts-box").each(function() {
-  var offset = $(this).offset().top - window.innerHeight;
-  var countNum = $(this).find(".counter");
-  var data_to = countNum.attr("data-to");
-  var duration = parseInt(countNum.attr("data-time"));
-  if (offset < $(window).scrollTop()) {
-    $({countNum : countNum.text()}).animate({countNum : data_to}, { 
-      duration : duration,
-      easing : "swing",
-      step : function() {countNum.text(Math.floor(this.countNum))},
-      complete : function() {countNum.text(this.countNum)}
-    });
-  }
+fancybox_items = document.querySelectorAll("a")
+fancybox_items.forEach(item => {
+  if (!item.hasAttribute("data-caption")) return;
+
+  item.setAttribute('data-fancybox', "gallery");
+
+  let currentImg = document.createElement("img");
+  currentImg.src = item.href;
+  currentImg.alt = item.dataset.dataCaption;
+  item.appendChild(currentImg);
+
+  let currentDiv = document.createElement("div");
+  currentDiv.className = "info";
+  item.appendChild(currentDiv);
+
+  let currentH3 = document.createElement("h3");
+  currentH3.className = "title";
+  currentH3.textContent += "GFX";
+  currentDiv.appendChild(currentH3);
+
+  let currentSpan = document.createElement("span");
+  currentSpan.className = "post";
+  currentSpan.textContent += "View";
+  currentDiv.appendChild(currentSpan);
+
+  console.log(item.dataset);
+  console.log(item);
 });
+
+//$("[data-fancybox]").fancybox({
+//  selector : ".mix:visible a",
+//  loop : true,
+//  hash : true,
+//  transitionEffect : "slide",
+//  clickContent : function(image) {
+//    return ("image" === image.type) && "next";
+//  }
+//}),
+//$(".funfacts-box").each(function() {
+//  var offset = $(this).offset().top - window.innerHeight;
+//  var countNum = $(this).find(".counter");
+//  var data_to = countNum.attr("data-to");
+//  var duration = parseInt(countNum.attr("data-time"));
+//  if (offset < $(window).scrollTop()) {
+//    $({countNum : countNum.text()}).animate({countNum : data_to}, { 
+//      duration : duration,
+//      easing : "swing",
+//      step : function() {countNum.text(Math.floor(this.countNum))},
+//      complete : function() {countNum.text(this.countNum)}
+//    });
+//  }
+//});
 
   
 let btn = document.getElementById("dl-button");
