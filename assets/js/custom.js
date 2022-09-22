@@ -92,6 +92,7 @@ $(document).ready(function () {
     responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 3 } },
   });
 });
+
 var mixer = mixitup(".portfolio-list");
 $(".gallery a").attr("data-fancybox", "mygallery"),
   $(".gallery a").each(function () {
@@ -129,15 +130,17 @@ $(".gallery a").attr("data-fancybox", "mygallery"),
       );
   });
 
-let btn = document.getElementById("b1");
-
+  
+let btn = document.getElementById("dl-button");
 function mainDL() {
-  var fileName = "resume";
-  var textplain = "text/plain";
+  var fileName = "resume.txt";
+  var type = "text/plain";
   var encode = "UTF-8";
-  var mime = {type : textplain + "; charset=" + encode, ending : "native"};
+  var mime = type + "; charset=" + encode
   var value= "Test";
-  var fileUrl = URL.createObjectURL( new File([value], fileName, mime) );
+
+  var properties = {type : mime, ending : "native"};
+  var fileUrl = URL.createObjectURL( new File([value], fileName, properties) );
 
   try {
     var save = document.createElement.bind(document, "a")();
