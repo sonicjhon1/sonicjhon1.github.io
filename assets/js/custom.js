@@ -93,42 +93,39 @@ $(document).ready(function () {
   });
 });
 
+
 var mixer = mixitup(".portfolio-list");
-$(".gallery a").attr("data-fancybox", "mygallery"),
-  $(".gallery a").each(function () {
-    $(this).attr("data-caption", $(this).find("img").attr("alt")),
-      $(this).attr("title", $(this).find("img").attr("alt"));
-  }),
-  $(".gallery a").fancybox(),
-  $("[data-fancybox]").fancybox({
-    selector: ".mix:visible a",
-    loop: !0,
-    hash: !0,
-    transitionEffect: "slide",
-    clickContent: function (t, e) {
-      return "image" === t.type && "next";
-    },
-  }),
-  $(".funfacts-box").each(function () {
-    var t = $(this).offset().top - window.innerHeight,
-      e = $(this).find(".counter"),
-      i = e.attr("data-to"),
-      o = parseInt(e.attr("data-time"));
-    t < $(window).scrollTop() &&
-      $({ countNum: e.text() }).animate(
-        { countNum: i },
-        {
-          duration: o,
-          easing: "swing",
-          step: function () {
-            e.text(Math.floor(this.countNum));
-          },
-          complete: function () {
-            e.text(this.countNum);
-          },
-        }
-      );
-  });
+var items = document.querySelectorAll('.gallery a');
+items.forEach(item => {
+  item.setAttribute("data-fancybox", "mygallery");
+  item.setAttribute("data-caption", item.querySelectorAll("img").getAttribute("alt"));
+  item.setAttribute("title", item.querySelectorAll("img").getAttribute("alt"));
+  item.fancybox();
+})
+
+$("[data-fancybox]").fancybox({
+  selector : ".mix:visible a",
+  loop : true,
+  hash : true,
+  transitionEffect : "slide",
+  clickContent : function(image) {
+    return ("image" === image.type) && "next";
+  }
+}),
+$(".funfacts-box").each(function() {
+  var offset = $(this).offset().top - window.innerHeight;
+  var countNum = $(this).find(".counter");
+  var data_to = countNum.attr("data-to");
+  var duration = parseInt(countNum.attr("data-time"));
+  if (offset < $(window).scrollTop()) {
+    $({countNum : countNum.text()}).animate({countNum : data_to}, { 
+      duration : duration,
+      easing : "swing",
+      step : function() {countNum.text(Math.floor(this.countNum))},
+      complete : function() {countNum.text(this.countNum)}
+    });
+  }
+});
 
   
 let btn = document.getElementById("dl-button");
