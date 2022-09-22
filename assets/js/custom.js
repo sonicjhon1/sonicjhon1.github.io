@@ -95,14 +95,12 @@ $(document).ready(function () {
 
 
 var mixer = mixitup(".portfolio-list");
-var items = document.querySelectorAll('.gallery a');
-items.forEach(item => {
-  item.setAttribute("data-fancybox", "mygallery");
-  item.setAttribute("data-caption", item.querySelectorAll("img").getAttribute("alt"));
-  item.setAttribute("title", item.querySelectorAll("img").getAttribute("alt"));
-  item.fancybox();
-})
-
+$(".gallery a").attr("data-fancybox", "mygallery"),
+$(".gallery a").each(function () {
+  $(this).attr("data-caption", $(this).find("img").attr("alt")),
+  $(this).attr("title", $(this).find("img").attr("alt"));
+}),
+$(".gallery a").fancybox(),
 $("[data-fancybox]").fancybox({
   selector : ".mix:visible a",
   loop : true,
