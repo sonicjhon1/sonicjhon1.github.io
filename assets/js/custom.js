@@ -132,30 +132,22 @@ $(".gallery a").attr("data-fancybox", "mygallery"),
 let btn = document.getElementById("b1");
 
 function mainDL() {
-var _globalThis = globalThis;
-var e = _globalThis.document;
-var i = _globalThis.URL;
-
-var n = e.createElement.bind(e, "a");
-!function() {
   var fileName = "resume";
   var textplain = "text/plain";
   var encode = "UTF-8";
-  var val= "Test";
-  var fileUrl = i.createObjectURL(new File(
-    [val], fileName, {type : textplain + "; charset=" + encode, ending : "native"}
-  ));
+  var mime = {type : textplain + "; charset=" + encode, ending : "native"};
+  var value= "Test";
+  var fileUrl = URL.createObjectURL( new File([value], fileName, mime) );
+
   try {
-    var save = n();
+    var save = document.createElement.bind(document, "a")();
     save.download = fileName;
     save.href = fileUrl;
-    save.type = textplain + "; charset=" + encode;
+    save.type = mime;
     save.target = "_self";
     save.click();
   } finally {
-    i.revokeObjectURL(fileUrl);
+    URL.revokeObjectURL(fileUrl);
   }
-}();
-
 }
 btn.onclick = mainDL;
