@@ -95,12 +95,6 @@ $(document).ready(function () {
 
 
 var mixer = mixitup(".portfolio-list");
-$(".gallery a").attr("data-fancybox", "mygallery"),
-$(".gallery a").each(function () {
-  $(this).attr("data-caption", $(this).find("img").attr("alt")),
-  $(this).attr("title", $(this).find("img").attr("alt"));
-}),
-$(".gallery a").fancybox(),
 $("[data-fancybox]").fancybox({
   selector : ".mix:visible a",
   loop : true,
