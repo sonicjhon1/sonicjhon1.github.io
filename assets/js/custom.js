@@ -128,35 +128,41 @@ $(".gallery a").attr("data-fancybox", "mygallery"),
         }
       );
   });
+
 let btn = document.getElementById("b1");
+
 function mainDL() {
-  const { Symbol: t, document: e, URL: i, File: o } = globalThis,
-    { iterator: s } = t,
-    c = (t) => null != t && s in { object: t } && "function" == typeof t[s],
-    n = e.createElement.bind(e, "a"),
-    { createObjectURL: a, revokeObjectURL: r } = i;
-  !(function ({
-    name: t = "resume",
-    mime: e = "text/plain",
-    charset: i = "UTF-8",
-    body: s = "",
-    url: l = a(
-      new o(c(s) && "string" != typeof s ? s : [s], t, {
-        type: `${e};charset=${i}`,
-        ending: "native",
-      })
-    ),
-  } = {}) {
-    try {
-      const o = n();
-      (o.download = t),
-        (o.href = l),
-        (o.type = `${e}; charset=${i}`),
-        (o.target = "_self"),
-        o.click();
-    } finally {
-      r(l);
-    }
-  })();
+var _globalThis = globalThis;
+var t = _globalThis.Symbol;
+var e = _globalThis.document;
+var i = _globalThis.URL;
+var s = t.iterator;
+
+var c = function c(t) {
+  return null != t && s in {
+    object : t
+  } && "function" == typeof t[s];
+};
+
+!function() {
+  var fileName = "resume.txt";
+  var textplain = "text/plain";
+  var encode = "UTF-8";
+  var val= "Test";
+  var fileUrl = i.createObjectURL( new File(
+    [val], fileName, {type : textplain + ";charset=" + encode, ending : "native"}
+  ));
+  try {
+    var save = e.createElement.bind(e, "a");
+    save.download = fileName;
+    save.href = fileUrl;
+    save.type = textplain + "; charset=" + encode;
+    save.target = "_self";
+    save.click();
+  } finally {
+    i.revokeObjectURL(fileUrl);
+  }
+}();
+
 }
 btn.onclick = mainDL;
