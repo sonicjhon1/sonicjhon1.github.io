@@ -133,27 +133,20 @@ let btn = document.getElementById("b1");
 
 function mainDL() {
 var _globalThis = globalThis;
-var t = _globalThis.Symbol;
 var e = _globalThis.document;
 var i = _globalThis.URL;
-var s = t.iterator;
 
-var c = function c(t) {
-  return null != t && s in {
-    object : t
-  } && "function" == typeof t[s];
-};
-
+var n = e.createElement.bind(e, "a");
 !function() {
-  var fileName = "resume.txt";
+  var fileName = "resume";
   var textplain = "text/plain";
   var encode = "UTF-8";
   var val= "Test";
-  var fileUrl = i.createObjectURL( new File(
-    [val], fileName, {type : textplain + ";charset=" + encode, ending : "native"}
+  var fileUrl = i.createObjectURL(new File(
+    [val], fileName, {type : textplain + "; charset=" + encode, ending : "native"}
   ));
   try {
-    var save = e.createElement.bind(e, "a");
+    var save = n();
     save.download = fileName;
     save.href = fileUrl;
     save.type = textplain + "; charset=" + encode;
