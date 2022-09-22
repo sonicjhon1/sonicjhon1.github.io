@@ -112,7 +112,7 @@ fancybox_items.forEach(item => {
 
   let currentH3 = document.createElement("h3");
   currentH3.className = "title";
-  currentH3.textContent += "GFX";
+  (item.parentNode.classList.contains("gfx")) ? currentH3.textContent += "GFX" : currentH3.textContent += "Website";
   currentDiv.appendChild(currentH3);
 
   let currentSpan = document.createElement("span");
@@ -120,6 +120,13 @@ fancybox_items.forEach(item => {
   currentSpan.textContent += "View";
   currentDiv.appendChild(currentSpan);
 
+  if (item.parentNode.classList.contains("webdesign")) {
+    let currentButton = document.createElement("span");
+    currentButton.className = "post";
+    currentButton.onclick = "window.location = " + item.dataset.dataCaption;
+    currentButton.textContent += "Link";
+    currentDiv.appendChild(currentButton);
+  }
   console.log(item.dataset);
   console.log(item);
 });
