@@ -103,7 +103,7 @@ fancybox_items.forEach(item => {
 
   let currentImg = document.createElement("img");
   currentImg.src = item.href;
-  currentImg.alt = item.dataset.dataCaption;
+  currentImg.alt = item.dataset.caption;
   item.appendChild(currentImg);
 
   let currentDiv = document.createElement("div");
@@ -121,14 +121,17 @@ fancybox_items.forEach(item => {
   currentDiv.appendChild(currentSpan);
 
   if (item.parentNode.classList.contains("webdesign")) {
+    let currentA = document.createElement("a");
+    currentA.href = item.dataset.caption;
+    currentDiv.appendChild(currentA);
+
     let currentButton = document.createElement("span");
     currentButton.className = "post";
-    currentButton.onclick = "window.location = " + item.dataset.dataCaption;
+    currentButton.onclick = function() {window.location = item.dataset.caption}
     currentButton.textContent += "Link";
-    currentDiv.appendChild(currentButton);
+    currentA.appendChild(currentButton);
   }
-  console.log(item.dataset);
-  console.log(item);
+  console.log(item.dataset.caption);
 });
 
 //$("[data-fancybox]").fancybox({
