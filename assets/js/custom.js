@@ -151,20 +151,20 @@ fancybox_items.forEach(item => {
   }
 });
 
-//$(".funfacts-box").each(function() {
-//  var offset = $(this).offset().top - window.innerHeight;
-//  var countNum = $(this).find(".counter");
-//  var data_to = countNum.attr("data-to");
-//  var duration = parseInt(countNum.attr("data-time"));
-//  if (offset < $(window).scrollTop()) {
-//    $({countNum : countNum.text()}).animate({countNum : data_to}, { 
-//      duration : duration,
-//      easing : "swing",
-//      step : function() {countNum.text(Math.floor(this.countNum))},
-//      complete : function() {countNum.text(this.countNum)}
-//    });
-//  }
-//});
+$(".funfacts-box").each(function() {
+  var offset = $(this).offset().top - window.innerHeight;
+  var countNum = $(this).find(".counter");
+  var data_to = countNum.attr("data-to");
+  var duration = parseInt(countNum.attr("data-time"));
+  if (offset < $(window).scrollTop()) {
+    $({countNum : countNum.text()}).animate({countNum : data_to}, { 
+      duration : duration,
+      easing : "swing",
+      step : function() {countNum.text(Math.floor(this.countNum))},
+      complete : function() {countNum.text(this.countNum)}
+    });
+  }
+});
   
 let btn = document.getElementById("dl-button");
 function mainDL() {
