@@ -55,4 +55,4 @@ isMobile
     }, 800),
     setTimeout(function () {
       preloader.remove();
-    }, 2e3));
+    }, 2000));

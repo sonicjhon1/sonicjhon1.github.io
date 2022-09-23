@@ -81,16 +81,16 @@ $(document).ready(function () {
       (t.style.visibility = "visible"),
       (e.style.visibility = "visible");
   }
-  $("#atestimonial").owlCarousel({
-    loop: !0,
-    margin: 20,
-    dots: !0,
-    nav: !1,
-    autoplay: !0,
-    autoplayTimeout: 5e3,
-    autoplayHoverPause: !0,
-    responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 3 } },
-  });
+  //$("#atestimonial").owlCarousel({
+  //  loop: !0,
+  //  margin: 20,
+  //  dots: !0,
+  //  nav: !1,
+  //  autoplay: !0,
+  //  autoplayTimeout: 5e3,
+  //  autoplayHoverPause: !0,
+  //  responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 3 } },
+  //});
 });
 
 const myCarousel = new Carousel(document.querySelector(".carousel"), {

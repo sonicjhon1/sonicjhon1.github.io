@@ -1095,9 +1095,16 @@ section.active {
   top: -48px;
   left: 30px;
 }
-.testimonial-item p {
-  margin: 0;
+div.carousel__slide.item {
+  padding-top: 2.5rem;
+  width: unset;
+  margin: 0px;
   text-align: center;
+}
+div.testimonial-item {
+  padding: 1.5rem;
+  width: 25em;
+  height: 20em;
 }
 .testimonial-item .rating {
   unicode-bidi: bidi-override;
@@ -1107,31 +1114,18 @@ section.active {
   bottom: 10px;
   right: 10px;
 }
-.owl-dots {
-  justify-content: center;
-  text-align: center;
-  transform: translateY(-100%);
-  display: flex;
-}
-.owl-dot {
-  display: block;
-  justify-content: center;
-  text-align: center;
-  color: #ff651c;
-}
-.owl-dot span {
-  border: 3px solid #ff651c;
-  margin: 5px;
+ol.carousel__dots > li.carousel__dot.is-selected::after {
   width: 15px;
   height: 15px;
-  border-radius: 50%;
-  display: inline-block;
-  background-color: transparent;
-  transition: all 0.5s ease-in-out;
+  background-color: #e01b67e1;
+  border-color: #e01b6700;
 }
-.owl-dot.active span {
-  background-color: #ff651c;
-  border-color: #ff651c;
+ol.carousel__dots > li.carousel__dot::after {
+  margin: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 3px solid #e01b65;
 }
 .funfacts-section .funfacts-box {
   margin-bottom: 30px;
@@ -1574,6 +1568,70 @@ ul.container {
 .content-description p {
   margin: 0;
 }
+
+.animated-bar,
+.clickbtn,
+.cursor-inner,
+.cursor-inner.cursor-hover,
+.homecolor-box,
+.resume-section .resume-item .item-arrow::before,
+.service-line::after,
+.social__tooltip,
+.social__tooltip::after,
+.style-switch-wrapper .purchse-btn {
+  background-color: #e01b65;
+}
+.about-content .about-you .value a,
+.about-content .personal-infotitle span,
+.about-content .personal-title span,
+.about-content .social-icons li a:hover,
+.about-subtitle span,
+.animated-text h3,
+.blog-content .blog-body .title,
+.blog-content .blog-body h4,
+.blog-content .blog-header span i,
+.blog-content .content-title,
+.blog-section .single-post .post-content .content-date,
+.contact-section .contact-info .list-info .info-details .info-value,
+.contact-section .contact-info .list-info .info-details .info-value a,
+.contact-section .contact-info .list-info .info-details .info-value a:focus,
+.contact-section .contact-info .list-info .info-details .info-value a:hover,
+.contact-section .contact-info .list-info .info-icon i,
+.fixed-block .social-icons a:hover,
+.funfacts-box h3,
+.funfacts-section .funfacts-box h3::after,
+.navigation ul li.active a .icon,
+.owl-dot,
+.progress-line span::after,
+.resume-section .resume-item .item-title,
+.section-title .common-title span,
+.service-line,
+.single-post:hover .post-content .content-title h5 > a,
+.testimonial-item .quote,
+.testimonial-item .rating {
+  color: #e01b65;
+}
+.clickbtn,
+.cursor-outer,
+.style-switch-wrapper .purchse-btn {
+  border: 2px solid #e01b65;
+}
+.resume-section .resume-item {
+  border-left: 2px solid #e01b65;
+}
+.funfacts-section .funfacts-box,
+.testimonial-item {
+  border: 1px solid #e01b65;
+}
+.resume-section .resume-item .item-arrow::after {
+  border-left-color: #e01b65;
+}
+.bar .progress-line span,
+.mix .info .post,
+.switch {
+  background: #e01b65;
+}
+
 @-webkit-keyframes heading-move {
   0% {
     transform: translateX(-1px);
