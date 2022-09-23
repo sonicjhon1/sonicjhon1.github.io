@@ -93,7 +93,10 @@ $(document).ready(function () {
   });
 });
 
+// Copyright year
+document.getElementById("current-year").text = new Date().getFullYear();
 
+// Fancybox
 var mixer = mixitup(".portfolio-list");
 fancybox_items = document.querySelectorAll("a")
 fancybox_items.forEach(item => {
@@ -131,7 +134,6 @@ fancybox_items.forEach(item => {
     currentButton.textContent += "Link";
     currentA.appendChild(currentButton);
   }
-  console.log(item.dataset.caption);
 });
 
 //$("[data-fancybox]").fancybox({
