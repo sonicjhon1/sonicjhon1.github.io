@@ -151,15 +151,6 @@ fancybox_items.forEach(item => {
   }
 });
 
-//$("[data-fancybox]").fancybox({
-//  selector : ".mix:visible a",
-//  loop : true,
-//  hash : true,
-//  transitionEffect : "slide",
-//  clickContent : function(image) {
-//    return ("image" === image.type) && "next";
-//  }
-//}),
 //$(".funfacts-box").each(function() {
 //  var offset = $(this).offset().top - window.innerHeight;
 //  var countNum = $(this).find(".counter");
@@ -174,7 +165,6 @@ fancybox_items.forEach(item => {
 //    });
 //  }
 //});
-
   
 let btn = document.getElementById("dl-button");
 function mainDL() {
