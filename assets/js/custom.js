@@ -93,6 +93,12 @@ $(document).ready(function () {
   });
 });
 
+// Get webp
+function getImg(input, ext) {
+  let image = input.split(".");
+  return (image[image.length - 2] + "." + ext);
+}
+
 // Copyright year
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
@@ -102,22 +108,18 @@ fancybox_items = document.querySelectorAll("a")
 fancybox_items.forEach(item => {
   if (!item.hasAttribute("data-caption")) return;
   
-  // Get webp
-  var png = item.href.split(".");
-  var webp = png[0] + ".webp";
-  
   // Set attribute
   item.setAttribute("data-fancybox", "gallery");
   if (item.parentNode.classList.contains("gfx")) {
     item.setAttribute("data-type", "image");
-    item.setAttribute("data-thumb", webp);
+    item.setAttribute("data-thumb", getImg(item.href, "webp"));
    } else { 
     item.setAttribute("data-type", "iframe");
     item.setAttribute("data-preload", "false");
    }
 
   let currentImg = document.createElement("img");
-  (item.parentNode.classList.contains("gfx")) ? currentImg.src = webp : currentImg.src = item.dataset.thumb.split(".")[0]+".jpg";
+  (item.parentNode.classList.contains("gfx")) ? currentImg.src = getImg(item.href, "webp") : currentImg.src = getImg(item.dataset.thumb, "jpg");
   currentImg.alt = item.dataset.caption;
   item.appendChild(currentImg);
 
