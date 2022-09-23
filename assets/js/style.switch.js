@@ -1,58 +1,69 @@
-"use strict";
-var myCursor = jQuery(".mouse-cursor");
-if (myCursor.length && $("body")) {
-  const r = document.querySelector(".cursor-inner"),
-    e = document.querySelector(".cursor-outer");
-  let o,
-    s = 0,
-    t = !1;
-  (window.onmousemove = function (i) {
-    t ||
-      (e.style.transform =
-        "translate(" + i.clientX + "px, " + i.clientY + "px)"),
-      (r.style.transform =
-        "translate(" + i.clientX + "px, " + i.clientY + "px)"),
-      (o = i.clientY),
-      (s = i.clientX);
-  }),
-    $("body").on("mouseenter", "a,.trigger, .cursor-pointer", function () {
-      r.classList.add("cursor-hover"), e.classList.add("cursor-hover");
-    }),
-    $("body").on("mouseleave", "a,.trigger, .cursor-pointer", function () {
-      ($(this).is("a") && $(this).closest(".cursor-pointer").length) ||
-        (r.classList.remove("cursor-hover"),
-        e.classList.remove("cursor-hover"));
-    }),
-    (r.style.visibility = "visible"),
-    (e.style.visibility = "visible");
+function docReady(fn) {
+  // see if DOM is already available
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+      // call on next available tick
+      setTimeout(fn, 10);
+  } else {
+      document.addEventListener("DOMContentLoaded", fn);
+  }
 }
-var wrapper = jQuery(".gaspar"),
-  button = jQuery(".style-switch-wrapper .cursor li a"),
-  show = jQuery(".style-switch-wrapper .cursor li a.show"),
-  hide = jQuery(".style-switch-wrapper .cursor li a.hide");
-button.on("click", function () {
-  var r = jQuery(this);
-  return (
-    r.hasClass("showme") ||
-      (button.removeClass("showme"), r.addClass("showme")),
-    !1
-  );
-}),
-  show.on("click", function () {
-    wrapper.attr("data-magic-cursor", "");
-  }),
-  hide.on("click", function () {
-    wrapper.attr("data-magic-cursor", "hide");
+
+"use strict";
+var Cursor = document.querySelector(".mouse-cursor");
+if (Cursor.length && document.querySelector("body")) {
+  var innerElement = document.querySelector(".cursor-inner");
+  var outerElement = document.querySelector(".cursor-outer");
+  var mouseX;
+  var mouseY;
+  window.onmousemove = function (x) {
+    outerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
+    innerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
+    mouseX = x.clientX;
+    mouseY = x.clientY;
+  };
+  document.querySelector("body").on("mouseenter", "a,.trigger, .cursor-pointer", function () {
+    innerElement.classList.add("cursor-hover");
+    outerElement.classList.add("cursor-hover");
   });
-var isMobile = !!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(
-    navigator.userAgent
-  ),
-  preloader = $("#preloader");
-isMobile
-  ? preloader.remove()
-  : (setTimeout(function () {
-      preloader.addClass("preloaded");
-    }, 800),
-    setTimeout(function () {
-      preloader.remove();
-    }, 2000));
+  document.querySelector("body").on("mouseleave", "a,.trigger, .cursor-pointer", function () {
+    if (!(document.querySelector(this).is("a") && document.querySelector(this).closest(".cursor-pointer").length)) {
+      innerElement.classList.remove("cursor-hover");
+      outerElement.classList.remove("cursor-hover");
+    }
+  });
+  innerElement.style.visibility = "visible";
+  outerElement.style.visibility = "visible";
+}
+
+var wrapper = document.querySelector(".gaspar");
+var buttons = document.querySelectorAll(".style-switch-wrapper .cursor li a");
+var shows = document.querySelectorAll(".style-switch-wrapper .cursor li a.show");
+var hides = document.querySelectorAll(".style-switch-wrapper .cursor li a.hide");
+
+buttons.forEach(button => {
+  button.on("click", function () {
+    var nav_target = document.querySelector(this);
+    return ( nav_target.classList.contains("showme") || (button.classList.remove("showme"), nav_target.classList.add("showme")), false );
+  });
+});
+
+shows.forEach(show => {
+  show.on("click", function () {
+    wrapper.setAttribute("data-magic-cursor", "")
+  });
+})
+
+hides.forEach(hide => {
+  hide.on("click", function () {
+    wrapper.setAttribute("data-magic-cursor", "hide")
+  });
+})
+
+var preloader = document.querySelector("#preloader");
+var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( navigator.userAgent );
+if (isMobile) {
+  preloader.remove();
+} else {
+  setTimeout(function () { preloader.classList.add("preloaded") }, 500);
+  setTimeout(function () { preloader.classList.remove() }, 1500);
+}
