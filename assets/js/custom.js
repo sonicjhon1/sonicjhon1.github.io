@@ -96,7 +96,8 @@ $(document).ready(function () {
 // Get webp
 function getImg(input, ext) {
   let image = input.split(".");
-  return (image[image.length - 2] + "." + ext);
+  image.pop();
+  return (image.join(".") + "." + ext);
 }
 
 // Copyright year
