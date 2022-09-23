@@ -81,7 +81,7 @@ $(document).ready(function () {
       (t.style.visibility = "visible"),
       (e.style.visibility = "visible");
   }
-  $("#testimonial").owlCarousel({
+  $("#atestimonial").owlCarousel({
     loop: !0,
     margin: 20,
     dots: !0,
@@ -92,6 +92,18 @@ $(document).ready(function () {
     responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 3 } },
   });
 });
+
+const myCarousel = new Carousel(document.querySelector(".carousel"), {
+  preload: 5,
+  center: false,
+  Autoplay: {
+    timeout: 1250,
+    hoverPause: false
+  },
+});
+
+myCarousel.plugins.Autoplay.start()
+myCarousel.updatePage();
 
 // Get webp
 function getImg(input, ext) {
