@@ -119,7 +119,7 @@ fancybox_items.forEach(item => {
    }
 
   let currentImg = document.createElement("img");
-  (item.parentNode.classList.contains("gfx")) ? currentImg.src = getImg(item.href, "webp") : currentImg.src = getImg(item.dataset.thumb, "jpg");
+  (item.parentNode.classList.contains("gfx")) ? currentImg.src = getImg(item.href, "webp") : currentImg.src = getImg(item.dataset.thumb, "webp");
   currentImg.alt = item.dataset.caption;
   item.appendChild(currentImg);
 
