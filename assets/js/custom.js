@@ -94,18 +94,30 @@ $(document).ready(function () {
 });
 
 // Copyright year
-document.getElementById("current-year").text = new Date().getFullYear();
+document.getElementById("current-year").textContent = new Date().getFullYear();
 
 // Fancybox
 var mixer = mixitup(".portfolio-list");
 fancybox_items = document.querySelectorAll("a")
 fancybox_items.forEach(item => {
   if (!item.hasAttribute("data-caption")) return;
-
-  item.setAttribute('data-fancybox', "gallery");
+  
+  // Get webp
+  var png = item.href.split(".");
+  var webp = png[0] + ".webp";
+  
+  // Set attribute
+  item.setAttribute("data-fancybox", "gallery");
+  if (item.parentNode.classList.contains("gfx")) {
+    item.setAttribute("data-type", "image");
+    item.setAttribute("data-thumb", webp);
+   } else { 
+    item.setAttribute("data-type", "iframe");
+    item.setAttribute("data-preload", "false");
+   }
 
   let currentImg = document.createElement("img");
-  currentImg.src = item.href;
+  (item.parentNode.classList.contains("gfx")) ? currentImg.src = webp : currentImg.src = item.dataset.thumb;
   currentImg.alt = item.dataset.caption;
   item.appendChild(currentImg);
 
@@ -130,7 +142,7 @@ fancybox_items.forEach(item => {
 
     let currentButton = document.createElement("span");
     currentButton.className = "post";
-    currentButton.onclick = function() {window.location = item.dataset.caption}
+    currentButton.onclick = function() {window.location = item.href}
     currentButton.textContent += "Link";
     currentA.appendChild(currentButton);
   }
