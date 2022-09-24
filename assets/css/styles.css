@@ -1002,6 +1002,10 @@ button.carousel__button {
   box-shadow: 0 0 10px rgb(0 0 0 / 85%);
   width: 100%;
 }
+div.funfacts-box {
+  margin-top: 10px;
+  height: 90%;
+}
 .funfacts-box h3 {
   position: relative;
   display: inline-block;

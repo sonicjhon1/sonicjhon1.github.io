@@ -163,20 +163,29 @@ fancybox_items.forEach(item => {
   }
 });
 
-$(".funfacts-box").each(function() {
-  var offset = $(this).offset().top - window.innerHeight;
-  var countNum = $(this).find(".counter");
-  var data_to = countNum.attr("data-to");
-  var duration = parseInt(countNum.attr("data-time"));
-  if (offset < $(window).scrollTop()) {
-    $({countNum : countNum.text()}).animate({countNum : data_to}, { 
-      duration : duration,
-      easing : "swing",
-      step : function() {countNum.text(Math.floor(this.countNum))},
-      complete : function() {countNum.text(this.countNum)}
-    });
-  }
-});
+let funfactBox = document.querySelector(".funfacts-box");
+var offset = funfactBox.getBoundingClientRect().top - funfactBox.ownerDocument.defaultView.pageYOffset;
+
+let funfactBoxes = document.querySelectorAll(".funfacts-box");
+funfactBoxes.forEach(funfactBox => {
+  funfactBox.querySelectorAll(".counter").forEach(countNum => {
+    var data_to = countNum.getAttribute("data-to");
+    var duration = parseInt(countNum.getAttribute("data-time"));
+      var value = 0;
+      let counts = setInterval(updated, duration - (value));
+      let counts2 = setInterval(updated2, 80);
+      
+      function updated(){
+        countNum.innerText = parseInt(countNum.innerText) + value++;
+        if( parseInt(countNum.innerText) >= data_to ) clearInterval(counts);
+      }
+      
+      function updated2(){
+        countNum.innerText++;
+        if( parseInt(countNum.innerText) >= data_to ) clearInterval(counts2);
+      }
+  });
+})
   
 let btn = document.getElementById("dl-button");
 function mainDL() {
