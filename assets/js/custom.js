@@ -93,6 +93,7 @@ $(document).ready(function () {
   //});
 });
 
+// Carousel
 const myCarousel = new Carousel(document.querySelector(".carousel"), {
   preload: 5,
   center: false,
@@ -102,6 +103,7 @@ const myCarousel = new Carousel(document.querySelector(".carousel"), {
   },
 });
 
+// Autoplay
 myCarousel.plugins.Autoplay.start()
 myCarousel.updatePage();
 
@@ -163,9 +165,8 @@ fancybox_items.forEach(item => {
   }
 });
 
-let funfactBox = document.querySelector(".funfacts-box");
-var offset = funfactBox.getBoundingClientRect().top - funfactBox.ownerDocument.defaultView.pageYOffset;
-
+// Count up funfact boxes
+function countFun() {
 let funfactBoxes = document.querySelectorAll(".funfacts-box");
 funfactBoxes.forEach(funfactBox => {
   funfactBox.querySelectorAll(".counter").forEach(countNum => {
@@ -186,7 +187,23 @@ funfactBoxes.forEach(funfactBox => {
       }
   });
 })
-  
+}
+
+// Trigger funfact boxes count
+function onVisible(element, callback) {
+  new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.intersectionRatio > 0) {
+        callback(element);
+        observer.disconnect();
+      }
+    });
+  }).observe(element);
+}
+let funfactBox = document.querySelector(".funfacts-box");
+onVisible(funfactBox, countFun);
+
+// Download button
 let btn = document.getElementById("dl-button");
 function mainDL() {
   var fileName = "resume.txt";
