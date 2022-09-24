@@ -968,15 +968,31 @@ div.carousel__slide.item {
 div.testimonial-item {
   padding: 1.5rem;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 .testimonial-item .rating {
   unicode-bidi: bidi-override;
-  color: #ff651c;
+  color: #ff1c64;
   position: absolute;
   font-size: 4px;
   bottom: 10px;
   right: 10px;
+}
+ol.carousel__dots > li.carousel__dot.is-selected::after {
+  width: 15px;
+  height: 15px;
+  background-color: #e01b67e1;
+  border-color: #e01b6700;
+}
+ol.carousel__dots > li.carousel__dot::after {
+  margin: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 3px solid #e01b65;
+}
+button.carousel__button {
+  --carousel-button-color: #fff;
 }
 .funfacts-section .funfacts-box {
   margin-bottom: 30px;
