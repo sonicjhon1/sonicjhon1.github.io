@@ -61,11 +61,6 @@ hides.forEach(hide => {
 
 docReady( function() {
   var preloader = document.querySelector("#preloader");
-  var isMobile = !!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( navigator.userAgent );
-  if (isMobile) {
-    preloader.remove();
-  } else {
-    sleep(1000).then(() => {preloader.classList.add("preloaded")});
-    sleep(2000).then(() => {preloader.remove()});
-  }
+  sleep(1000).then(() => {preloader.classList.add("preloaded")});
+  sleep(2500).then(() => {preloader.remove()});
 });
