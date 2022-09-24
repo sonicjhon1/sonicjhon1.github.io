@@ -967,8 +967,8 @@ div.carousel__slide.item {
 }
 div.testimonial-item {
   padding: 1.5rem;
-  width: 25em;
-  height: 20em;
+  width: 100%;
+  height: auto;
 }
 .testimonial-item .rating {
   unicode-bidi: bidi-override;
