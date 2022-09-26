@@ -1,30 +1,3 @@
-"use strict";
-var Cursor = document.querySelector(".mouse-cursor");
-if (Cursor.length && document.querySelector("body")) {
-  var innerElement = document.querySelector(".cursor-inner");
-  var outerElement = document.querySelector(".cursor-outer");
-  var mouseX;
-  var mouseY;
-  window.onmousemove = function (x) {
-    outerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
-    innerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
-    mouseX = x.clientX;
-    mouseY = x.clientY;
-  };
-  document.querySelector("body").on("mouseenter", "a,.trigger, .cursor-pointer", function () {
-    innerElement.classList.add("cursor-hover");
-    outerElement.classList.add("cursor-hover");
-  });
-  document.querySelector("body").on("mouseleave", "a,.trigger, .cursor-pointer", function () {
-    if (!(document.querySelector(this).is("a") && document.querySelector(this).closest(".cursor-pointer").length)) {
-      innerElement.classList.remove("cursor-hover");
-      outerElement.classList.remove("cursor-hover");
-    }
-  });
-  innerElement.style.visibility = "visible";
-  outerElement.style.visibility = "visible";
-}
-
 var wrapper = document.querySelector(".gaspar");
 var buttons = document.querySelectorAll(".style-switch-wrapper .cursor li a");
 var shows = document.querySelectorAll(".style-switch-wrapper .cursor li a.show");

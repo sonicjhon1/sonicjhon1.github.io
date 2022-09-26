@@ -53,41 +53,44 @@ function LoadThis() {
       }
     });
   }
+
   if (
     (document.querySelector(".my-project").addEventListener("click", function () {
-      const t = this.getAttribute("data-section-index");
-      toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(t);
+      const sectionIndex = this.getAttribute("data-section-index");
+      toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
     }),
     document.querySelector(".about-me").addEventListener("click", function () {
-      const t = this.getAttribute("data-section-index");
-      toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(t);
-    }),
-    jQuery(".mouse-cursor").length && $("body"))
-  ) {
-    const t = document.querySelector(".cursor-inner"),
-      e = document.querySelector(".cursor-outer");
-    let i,
-      o = 0,
-      s = !1;
-    (window.onmousemove = function (c) {
-      s ||
-        (e.style.transform =
-          "translate(" + c.clientX + "px, " + c.clientY + "px)"),
-        (t.style.transform =
-          "translate(" + c.clientX + "px, " + c.clientY + "px)"),
-        (i = c.clientY),
-        (o = c.clientX);
-    }),
-      $("body").on("mouseenter", "a,.trigger, .cursor-pointer", function () {
-        t.classList.add("cursor-hover"), e.classList.add("cursor-hover");
-      }),
-      $("body").on("mouseleave", "a,.trigger, .cursor-pointer", function () {
-        ($(this).is("a") && $(this).closest(".cursor-pointer").length) ||
-          (t.classList.remove("cursor-hover"),
-          e.classList.remove("cursor-hover"));
-      }),
-      (t.style.visibility = "visible"),
-      (e.style.visibility = "visible");
+      const sectionIndex = this.getAttribute("data-section-index");
+      toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
+    })
+    )
+    ) {
+    "use strict";
+    var Cursor = document.querySelector(".mouse-cursor");
+    if (Cursor.length && document.querySelector("body")) {
+      var innerElement = document.querySelector(".cursor-inner");
+      var outerElement = document.querySelector(".cursor-outer");
+      var mouseX;
+      var mouseY;
+      window.onmousemove = function (x) {
+        outerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
+        innerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
+        mouseX = x.clientX;
+        mouseY = x.clientY;
+      };
+      document.querySelector("body").on("mouseenter", "a,.trigger, .cursor-pointer", function () {
+        innerElement.classList.add("cursor-hover");
+        outerElement.classList.add("cursor-hover");
+      });
+      document.querySelector("body").on("mouseleave", "a,.trigger, .cursor-pointer", function () {
+        if (!(document.querySelector(this).is("a") && document.querySelector(this).closest(".cursor-pointer").length)) {
+          innerElement.classList.remove("cursor-hover");
+          outerElement.classList.remove("cursor-hover");
+        }
+      });
+      innerElement.style.visibility = "visible";
+      outerElement.style.visibility = "visible";
+    }
   }
 
   // Carousel
