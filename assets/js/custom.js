@@ -1,58 +1,62 @@
 function LoadThis() {
-  $(".list").click(function () {
-    $(".list").removeClass("active"), $(this).addClass("active");
-  });
-  const t = document.querySelectorAll(".list");
-  function e() {
-    t.forEach((t) => t.classList.remove("active")),
+  document.querySelectorAll(".list").forEach( list => {
+    list.addEventListener("click", function() {
+      list.classList.remove("active");
       this.classList.add("active");
-  }
-  t.forEach((t) => t.addEventListener("click", e));
-  const i = document.querySelector(".nav").querySelectorAll("li"),
-    o = i.length,
-    s = document.querySelectorAll(".section"),
-    c = s.length;
-  for (let t = 0; t < o; t++) {
-    i[t].querySelector("a").addEventListener("click", function () {
-      n();
-      for (let t = 0; t < o; t++)
-        i[t].querySelector("a").classList.contains("active") && a(t),
-          i[t].classList.contains("active") && a(t),
-          i[t].querySelector("a").classList.remove("active"),
-          i[t].classList.remove("active");
+    });
+  })
+  const navLists = document.querySelector(".nav").querySelectorAll("li"),
+        navListsLength = navLists.length,
+        sections = document.querySelectorAll(".section"),
+        sectionsLength = sections.length;
+  navLists.forEach( list => {
+    list.querySelector("a").addEventListener("click", function () {
+      removeBackSection();
+      let i = 0; 
+      navLists.forEach( list_ => {
+        list_.querySelector("a").classList.contains("active") && sections[i].classList.add("back-section"),
+        list_.classList.contains("active") &&  sections[i].classList.add("back-section");
+        list_.querySelector("a").classList.remove("active")
+        list_.classList.remove("active");
+        i++;
+      })
       this.classList.add("active"), r(this);
     });
+  });
+
+  function removeBackSection() {
+    sections.forEach( section => {
+      section.classList.remove("back-section");
+    })
   }
-  function n() {
-    for (let t = 0; t < c; t++) s[t].classList.remove("back-section");
+  function addBackSection(i) {
+    sections[i].classList.add("back-section");
   }
-  function a(t) {
-    s[t].classList.add("back-section");
-  }
-  function r(t) {
-    for (let t = 0; t < c; t++) s[t].classList.remove("active");
-    const e = t.getAttribute("href").split("#")[1];
-    document.querySelector("#" + e).classList.add("active");
+  function r(i) {
+    sections.forEach( section => {
+      document.querySelector("#" + i.getAttribute("href").split("#")[1]).classList.add("active");
+      section.classList.remove("active");
+    })
   }
   function l(t) {
-    for (let e = 0; e < o; e++) {
-      i[e].querySelector("a").classList.remove("active"),
-        i[e].classList.remove("active");
+    for (let e = 0; e < navListsLength; e++) {
+      navLists[e].querySelector("a").classList.remove("active"),
+        navLists[e].classList.remove("active");
       const o = t.getAttribute("href").split("#")[1];
-      o === i[e].querySelector("a").getAttribute("href").split("#")[1] &&
-        i[e].querySelector("a").classList.add("active"),
-        o === i[e].querySelector("a").getAttribute("href").split("#")[1] &&
-          i[e].classList.add("active");
+      o === navLists[e].querySelector("a").getAttribute("href").split("#")[1] &&
+        navLists[e].querySelector("a").classList.add("active"),
+        o === navLists[e].querySelector("a").getAttribute("href").split("#")[1] &&
+          navLists[e].classList.add("active");
     }
   }
   if (
     (document.querySelector(".my-project").addEventListener("click", function () {
       const t = this.getAttribute("data-section-index");
-      r(this), l(this), n(), a(t);
+      r(this), l(this), removeBackSection(), addBackSection(t);
     }),
     document.querySelector(".about-me").addEventListener("click", function () {
       const t = this.getAttribute("data-section-index");
-      r(this), l(this), n(), a(t);
+      r(this), l(this), removeBackSection(), addBackSection(t);
     }),
     jQuery(".mouse-cursor").length && $("body"))
   ) {
