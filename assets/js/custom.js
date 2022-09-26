@@ -1,4 +1,4 @@
-$(document).ready(function () {
+function LoadThis() {
   $(".list").click(function () {
     $(".list").removeClass("active"), $(this).addClass("active");
   });
@@ -91,34 +91,35 @@ $(document).ready(function () {
   //  autoplayHoverPause: !0,
   //  responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 3 } },
   //});
-});
 
-// Carousel
-const myCarousel = new Carousel(document.querySelector(".carousel"), {
-  preload: 5,
-  center: false,
-  Autoplay: {
-    timeout: 1250,
-    hoverPause: false
-  },
-});
+  // Carousel
+  const myCarousel = new Carousel(document.querySelector(".carousel"), {
+    preload: 5,
+    center: false,
+    Autoplay: {
+      timeout: 1250,
+      hoverPause: false
+    },
+  });
 
-// Autoplay
-myCarousel.plugins.Autoplay.start()
-myCarousel.updatePage();
+  // Carousel autoplay
+  myCarousel.plugins.Autoplay.start()
+  myCarousel.updatePage();
+  
+  // Copyright year
+  document.getElementById("current-year").textContent = new Date().getFullYear();
+  mixitup(".portfolio-list");
 
-// Get webp
-function getImg(input, ext) {
-  let image = input.split(".");
-  image.pop();
-  return (image.join(".") + "." + ext);
-}
+  // Trigger funfact boxes count on visible
+  onVisible(document.querySelector(".funfacts-box"), countFun);
 
-// Copyright year
-document.getElementById("current-year").textContent = new Date().getFullYear();
+  // Download button
+  let btn = document.getElementById("dl-button").onclick = downloadPDF;
+};
+
+docReady(LoadThis());
 
 // Fancybox
-var mixer = mixitup(".portfolio-list");
 fancybox_items = document.querySelectorAll("a")
 fancybox_items.forEach(item => {
   if (!item.hasAttribute("data-caption")) return;
@@ -164,56 +165,3 @@ fancybox_items.forEach(item => {
     currentA.appendChild(currentButton);
   }
 });
-
-// Count up funfact boxes
-function countFun() {
-  let funfactBoxes = document.querySelectorAll(".funfacts-box");
-  funfactBoxes.forEach(funfactBox => {
-    funfactBox.querySelectorAll(".counter").forEach(countNum => {
-      var data_to = countNum.getAttribute("data-to");
-      var duration = parseInt(countNum.getAttribute("data-time"));
-        var value = 0;
-        let counts = setInterval(updated, duration - (value));
-        let counts2 = setInterval(updated2, 80);
-
-        function updated(){
-          countNum.innerText = parseInt(countNum.innerText) + value++;
-          if( parseInt(countNum.innerText) >= data_to ) clearInterval(counts);
-        }
-
-        function updated2(){
-          countNum.innerText++;
-          if( parseInt(countNum.innerText) >= data_to ) clearInterval(counts2);
-        }
-    });
-  })
-}
-
-// Trigger funfact boxes count
-let funfactBox = document.querySelector(".funfacts-box");
-onVisible(funfactBox, countFun);
-
-// Download button
-let btn = document.getElementById("dl-button");
-function mainDL() {
-  var fileName = "resume.txt";
-  var type = "text/plain";
-  var encode = "UTF-8";
-  var mime = type + "; charset=" + encode
-  var value= "Test";
-
-  var properties = {type : mime, ending : "native"};
-  var fileUrl = URL.createObjectURL( new File([value], fileName, properties) );
-
-  try {
-    var save = document.createElement.bind(document, "a")();
-    save.download = fileName;
-    save.href = fileUrl;
-    save.type = mime;
-    save.target = "_self";
-    save.click();
-  } finally {
-    URL.revokeObjectURL(fileUrl);
-  }
-}
-btn.onclick = mainDL;
