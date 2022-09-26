@@ -14,9 +14,11 @@ function LoadThis() {
       removeBackSection();
       let i = 0; 
       navLists.forEach( list_ => {
-        list_.querySelector("a").classList.contains("active") && sections[i].classList.add("back-section"),
-        list_.classList.contains("active") && sections[i].classList.add("back-section");
-        list_.querySelector("a").classList.remove("active")
+        list_.querySelector("a").classList.contains("active");
+        sections[i].classList.add("back-section");
+        list_.classList.contains("active");
+        sections[i].classList.add("back-section");
+        list_.querySelector("a").classList.remove("active");
         list_.classList.remove("active");
         i++;
       })
@@ -41,25 +43,24 @@ function LoadThis() {
     });
   }
 
-  function l(t) {
-    for (let e = 0; e < navListsLength; e++) {
-      navLists[e].querySelector("a").classList.remove("active"),
-        navLists[e].classList.remove("active");
-      const o = t.getAttribute("href").split("#")[1];
-      o === navLists[e].querySelector("a").getAttribute("href").split("#")[1] &&
-        navLists[e].querySelector("a").classList.add("active"),
-        o === navLists[e].querySelector("a").getAttribute("href").split("#")[1] &&
-          navLists[e].classList.add("active");
-    }
+  function buttonToggleSection(i) {
+    navLists.forEach( list => {
+      list.querySelector("a").classList.remove("active");
+      list.classList.remove("active");
+      if (i.getAttribute("href") === list.querySelector("a").getAttribute("href")) {
+        list.querySelector("a").classList.add("active"),
+        list.classList.add("active");
+      }
+    });
   }
   if (
     (document.querySelector(".my-project").addEventListener("click", function () {
       const t = this.getAttribute("data-section-index");
-      toggleSection(this), l(this), removeBackSection(), addBackSection(t);
+      toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(t);
     }),
     document.querySelector(".about-me").addEventListener("click", function () {
       const t = this.getAttribute("data-section-index");
-      toggleSection(this), l(this), removeBackSection(), addBackSection(t);
+      toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(t);
     }),
     jQuery(".mouse-cursor").length && $("body"))
   ) {
