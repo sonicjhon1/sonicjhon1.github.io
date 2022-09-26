@@ -54,14 +54,15 @@ function LoadThis() {
 
   // Add EventListener to buttons
   document.querySelector(".my-project").addEventListener("click", function () {
-  const sectionIndex = this.getAttribute("data-section-index");
-  toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
+    const sectionIndex = this.getAttribute("data-section-index");
+    toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
   }),
   document.querySelector(".about-me").addEventListener("click", function () {
-  const sectionIndex = this.getAttribute("data-section-index");
-  toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
+    const sectionIndex = this.getAttribute("data-section-index");
+    toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
   })
 
+  // Init cursor
   var Cursor = document.querySelectorAll(".mouse-cursor");
   if (Cursor.length) {
     var innerElement = document.querySelector(".cursor-inner");
@@ -75,27 +76,9 @@ function LoadThis() {
       mouseY = x.clientY;
     };
 
-    function mouseEntered () {
-      innerElement.classList.add("cursor-hover");
-      outerElement.classList.add("cursor-hover");
-    }
+    innerElement.classList.add("cursor-hover");
+    outerElement.classList.add("cursor-hover");
 
-    document.querySelectorAll("a").forEach(a => {
-      a.addEventListener("mouseenter", mouseEntered());
-    });
-    document.querySelectorAll(".trigger").forEach(trigger => {
-      trigger.addEventListener("mouseenter", mouseEntered());
-    });
-    document.querySelectorAll(".cursor-pointer").forEach(cursor => {
-      cursor.addEventListener("mouseenter", mouseEntered());
-    })
-
-    //document.querySelector("body").on("mouseleave", "a, .trigger, .cursor-pointer", function () {
-    //  if (!(document.querySelector(this).is("a") && document.querySelector(this).closest(".cursor-pointer").length)) {
-    //    innerElement.classList.remove("cursor-hover");
-    //    outerElement.classList.remove("cursor-hover");
-    //  }
-    //});
     innerElement.style.visibility = "visible";
     outerElement.style.visibility = "visible";
   }
