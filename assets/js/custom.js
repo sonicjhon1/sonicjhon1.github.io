@@ -5,10 +5,8 @@ function LoadThis() {
       this.classList.add("active");
     });
   })
-  const navLists = document.querySelector(".nav").querySelectorAll("li"),
-        navListsLength = navLists.length,
-        sections = document.querySelectorAll(".section"),
-        sectionsLength = sections.length;
+  const navLists = document.querySelector(".nav").querySelectorAll("li");
+  const sections = document.querySelectorAll(".section");
   navLists.forEach( list => {
     list.querySelector("a").addEventListener("click", function () {
       removeBackSection();
@@ -54,49 +52,58 @@ function LoadThis() {
     });
   }
 
-  if (
-    (document.querySelector(".my-project").addEventListener("click", function () {
-      const sectionIndex = this.getAttribute("data-section-index");
-      toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
-    }),
-    document.querySelector(".about-me").addEventListener("click", function () {
-      const sectionIndex = this.getAttribute("data-section-index");
-      toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
-    })
-    )
-    ) {
-    "use strict";
-    var Cursor = document.querySelector(".mouse-cursor");
-    if (Cursor.length && document.querySelector("body")) {
-      var innerElement = document.querySelector(".cursor-inner");
-      var outerElement = document.querySelector(".cursor-outer");
-      var mouseX;
-      var mouseY;
-      window.onmousemove = function (x) {
-        outerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
-        innerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
-        mouseX = x.clientX;
-        mouseY = x.clientY;
-      };
-      document.querySelector("body").on("mouseenter", "a,.trigger, .cursor-pointer", function () {
-        innerElement.classList.add("cursor-hover");
-        outerElement.classList.add("cursor-hover");
-      });
-      document.querySelector("body").on("mouseleave", "a,.trigger, .cursor-pointer", function () {
-        if (!(document.querySelector(this).is("a") && document.querySelector(this).closest(".cursor-pointer").length)) {
-          innerElement.classList.remove("cursor-hover");
-          outerElement.classList.remove("cursor-hover");
-        }
-      });
-      innerElement.style.visibility = "visible";
-      outerElement.style.visibility = "visible";
+  // Add EventListener to buttons
+  document.querySelector(".my-project").addEventListener("click", function () {
+  const sectionIndex = this.getAttribute("data-section-index");
+  toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
+  }),
+  document.querySelector(".about-me").addEventListener("click", function () {
+  const sectionIndex = this.getAttribute("data-section-index");
+  toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
+  })
+
+  var Cursor = document.querySelectorAll(".mouse-cursor");
+  if (Cursor.length) {
+    var innerElement = document.querySelector(".cursor-inner");
+    var outerElement = document.querySelector(".cursor-outer");
+    var mouseX;
+    var mouseY;
+    window.onmousemove = function (x) {
+      outerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
+      innerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
+      mouseX = x.clientX;
+      mouseY = x.clientY;
+    };
+
+    function mouseEntered () {
+      innerElement.classList.add("cursor-hover");
+      outerElement.classList.add("cursor-hover");
     }
+
+    document.querySelectorAll("a").forEach(a => {
+      a.addEventListener("mouseenter", mouseEntered());
+    });
+    document.querySelectorAll(".trigger").forEach(trigger => {
+      trigger.addEventListener("mouseenter", mouseEntered());
+    });
+    document.querySelectorAll(".cursor-pointer").forEach(cursor => {
+      cursor.addEventListener("mouseenter", mouseEntered());
+    })
+
+    //document.querySelector("body").on("mouseleave", "a, .trigger, .cursor-pointer", function () {
+    //  if (!(document.querySelector(this).is("a") && document.querySelector(this).closest(".cursor-pointer").length)) {
+    //    innerElement.classList.remove("cursor-hover");
+    //    outerElement.classList.remove("cursor-hover");
+    //  }
+    //});
+    innerElement.style.visibility = "visible";
+    outerElement.style.visibility = "visible";
   }
 
   // Carousel
   const myCarousel = new Carousel(document.querySelector(".carousel"), {
     preload: 5,
-    center: false,
+    center: true,
     Autoplay: {
       timeout: 1250,
       hoverPause: false
