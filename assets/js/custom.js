@@ -1,10 +1,12 @@
 function LoadThis() {
+  
   document.querySelectorAll(".list").forEach( list => {
     list.addEventListener("click", function() {
       list.classList.remove("active");
       this.classList.add("active");
     });
   })
+
   const navLists = document.querySelector(".nav").querySelectorAll("li");
   const sections = document.querySelectorAll(".section");
   navLists.forEach( list => {
