@@ -167,39 +167,29 @@ fancybox_items.forEach(item => {
 
 // Count up funfact boxes
 function countFun() {
-let funfactBoxes = document.querySelectorAll(".funfacts-box");
-funfactBoxes.forEach(funfactBox => {
-  funfactBox.querySelectorAll(".counter").forEach(countNum => {
-    var data_to = countNum.getAttribute("data-to");
-    var duration = parseInt(countNum.getAttribute("data-time"));
-      var value = 0;
-      let counts = setInterval(updated, duration - (value));
-      let counts2 = setInterval(updated2, 80);
-      
-      function updated(){
-        countNum.innerText = parseInt(countNum.innerText) + value++;
-        if( parseInt(countNum.innerText) >= data_to ) clearInterval(counts);
-      }
-      
-      function updated2(){
-        countNum.innerText++;
-        if( parseInt(countNum.innerText) >= data_to ) clearInterval(counts2);
-      }
-  });
-})
+  let funfactBoxes = document.querySelectorAll(".funfacts-box");
+  funfactBoxes.forEach(funfactBox => {
+    funfactBox.querySelectorAll(".counter").forEach(countNum => {
+      var data_to = countNum.getAttribute("data-to");
+      var duration = parseInt(countNum.getAttribute("data-time"));
+        var value = 0;
+        let counts = setInterval(updated, duration - (value));
+        let counts2 = setInterval(updated2, 80);
+
+        function updated(){
+          countNum.innerText = parseInt(countNum.innerText) + value++;
+          if( parseInt(countNum.innerText) >= data_to ) clearInterval(counts);
+        }
+
+        function updated2(){
+          countNum.innerText++;
+          if( parseInt(countNum.innerText) >= data_to ) clearInterval(counts2);
+        }
+    });
+  })
 }
 
 // Trigger funfact boxes count
-function onVisible(element, callback) {
-  new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if(entry.intersectionRatio > 0) {
-        callback(element);
-        observer.disconnect();
-      }
-    });
-  }).observe(element);
-}
 let funfactBox = document.querySelector(".funfacts-box");
 onVisible(funfactBox, countFun);
 

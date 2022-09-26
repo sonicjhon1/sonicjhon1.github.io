@@ -1,17 +1,3 @@
-function docReady(fn) {
-  // see if DOM is already available
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-      // call on next available tick
-      setTimeout(fn, 10);
-  } else {
-      document.addEventListener("DOMContentLoaded", fn);
-  }
-}
-
-function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
 "use strict";
 var Cursor = document.querySelector(".mouse-cursor");
 if (Cursor.length && document.querySelector("body")) {
