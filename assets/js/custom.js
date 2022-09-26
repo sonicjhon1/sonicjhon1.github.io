@@ -15,12 +15,12 @@ function LoadThis() {
       let i = 0; 
       navLists.forEach( list_ => {
         list_.querySelector("a").classList.contains("active") && sections[i].classList.add("back-section"),
-        list_.classList.contains("active") &&  sections[i].classList.add("back-section");
+        list_.classList.contains("active") && sections[i].classList.add("back-section");
         list_.querySelector("a").classList.remove("active")
         list_.classList.remove("active");
         i++;
       })
-      this.classList.add("active"), r(this);
+      this.classList.add("active"), toggleSection(this);
     });
   });
 
@@ -29,15 +29,18 @@ function LoadThis() {
       section.classList.remove("back-section");
     })
   }
+
   function addBackSection(i) {
     sections[i].classList.add("back-section");
   }
-  function r(i) {
+
+  function toggleSection(i) {    
     sections.forEach( section => {
-      document.querySelector("#" + i.getAttribute("href").split("#")[1]).classList.add("active");
       section.classList.remove("active");
-    })
+      document.querySelector(i.getAttribute("href")).classList.add("active");
+    });
   }
+
   function l(t) {
     for (let e = 0; e < navListsLength; e++) {
       navLists[e].querySelector("a").classList.remove("active"),
@@ -52,11 +55,11 @@ function LoadThis() {
   if (
     (document.querySelector(".my-project").addEventListener("click", function () {
       const t = this.getAttribute("data-section-index");
-      r(this), l(this), removeBackSection(), addBackSection(t);
+      toggleSection(this), l(this), removeBackSection(), addBackSection(t);
     }),
     document.querySelector(".about-me").addEventListener("click", function () {
       const t = this.getAttribute("data-section-index");
-      r(this), l(this), removeBackSection(), addBackSection(t);
+      toggleSection(this), l(this), removeBackSection(), addBackSection(t);
     }),
     jQuery(".mouse-cursor").length && $("body"))
   ) {
