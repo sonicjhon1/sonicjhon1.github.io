@@ -724,7 +724,15 @@ section.active {
 .about-subtitle span {
   color: #ff651c;
 }
+@media screen and (max-width: 800px){
+  .resume-section div.resume-item {
+    width: 100% !important;
+  }
+}
 .resume-section .resume-item {
+  width: 45%;
+  height: 100%;
+  margin-left: 3.8%;
   background-color: #232323;
   border-left: 2px solid #ff651c;
   padding: 32px 48px;
@@ -1428,4 +1436,8 @@ ul.container {
   100% {
     opacity: 1;
   }
+}
+
+div.projects > div.row {
+  width: 100%;
 }
