@@ -9,17 +9,18 @@ function LoadThis() {
 
   const navLists = document.querySelector(".nav").querySelectorAll("li");
   const sections = document.querySelectorAll(".section");
-  navLists.forEach( list => {
-    list.querySelector("a").addEventListener("click", function () {
-      removeList();
-      this.classList.add("active"), toggleSection(this);
+  navLists.forEach( nav => {
+    nav.querySelector("a").addEventListener("click", function () {
+      toggleNav(this);
     });
   });
 
-  async function removeList() {
-    navLists.forEach( list => {
-      list.querySelector("a").classList.remove("active");
-      list.classList.remove("active");
+  async function toggleNav(i) {
+    navLists.forEach( nav => {
+      nav.querySelector("a").classList.remove("active");
+      nav.classList.remove("active");
+      i.classList.add("active");
+      toggleSection(i);
     })
   }
 
@@ -35,19 +36,17 @@ function LoadThis() {
       list.querySelector("a").classList.remove("active");
       list.classList.remove("active");
       if (i.getAttribute("href") === list.querySelector("a").getAttribute("href")) {
-        list.querySelector("a").classList.add("active"),
         list.classList.add("active");
       }
     });
+    document.querySelector(i.getAttribute("href")).querySelector("a").classList.add("active");
   }
 
   // Add EventListener to buttons
   document.querySelector(".my-project").addEventListener("click", async function () {
-    const sectionIndex = this.getAttribute("data-section-index");
     toggleSection(this), buttonToggleSection(this);
   }),
   document.querySelector(".about-me").addEventListener("click", async function () {
-    const sectionIndex = this.getAttribute("data-section-index");
     toggleSection(this), buttonToggleSection(this);
   })
 
