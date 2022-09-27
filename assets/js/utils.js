@@ -1,4 +1,4 @@
-function docReady(fn) {
+async function docReady(fn) {
   // see if DOM is already available
   if (document.readyState === "complete" || document.readyState === "interactive") {
       // call on next available tick
@@ -12,7 +12,7 @@ function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-function onVisible(element, callback) {
+async function onVisible(element, callback) {
   new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if(entry.intersectionRatio > 0) {

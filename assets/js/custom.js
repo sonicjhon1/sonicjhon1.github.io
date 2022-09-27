@@ -11,40 +11,27 @@ function LoadThis() {
   const sections = document.querySelectorAll(".section");
   navLists.forEach( list => {
     list.querySelector("a").addEventListener("click", function () {
-      removeBackSection();
-      let i = 0; 
-      navLists.forEach( list_ => {
-        list_.querySelector("a").classList.contains("active");
-        sections[i].classList.add("back-section");
-        list_.classList.contains("active");
-        sections[i].classList.add("back-section");
-        list_.querySelector("a").classList.remove("active");
-        list_.classList.remove("active");
-        i++;
-      })
+      removeList();
       this.classList.add("active"), toggleSection(this);
     });
   });
 
-  function removeBackSection() {
-    sections.forEach( section => {
-      section.classList.remove("back-section");
+  async function removeList() {
+    navLists.forEach( list => {
+      list.querySelector("a").classList.remove("active");
+      list.classList.remove("active");
     })
   }
 
-  function addBackSection(i) {
-    sections[i].classList.add("back-section");
-  }
-
-  function toggleSection(i) {    
-    sections.forEach( section => {
+  async function toggleSection(i) {    
+    sections.forEach( async section => {
       section.classList.remove("active");
-      document.querySelector(i.getAttribute("href")).classList.add("active");
     });
+    document.querySelector(i.getAttribute("href")).classList.add("active");
   }
 
-  function buttonToggleSection(i) {
-    navLists.forEach( list => {
+  async function buttonToggleSection(i) {
+    navLists.forEach( async list => {
       list.querySelector("a").classList.remove("active");
       list.classList.remove("active");
       if (i.getAttribute("href") === list.querySelector("a").getAttribute("href")) {
@@ -55,13 +42,13 @@ function LoadThis() {
   }
 
   // Add EventListener to buttons
-  document.querySelector(".my-project").addEventListener("click", function () {
+  document.querySelector(".my-project").addEventListener("click", async function () {
     const sectionIndex = this.getAttribute("data-section-index");
-    toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
+    toggleSection(this), buttonToggleSection(this);
   }),
-  document.querySelector(".about-me").addEventListener("click", function () {
+  document.querySelector(".about-me").addEventListener("click", async function () {
     const sectionIndex = this.getAttribute("data-section-index");
-    toggleSection(this), buttonToggleSection(this), removeBackSection(), addBackSection(sectionIndex);
+    toggleSection(this), buttonToggleSection(this);
   })
 
   // Init cursor
@@ -71,7 +58,7 @@ function LoadThis() {
     var outerElement = document.querySelector(".cursor-outer");
     var mouseX;
     var mouseY;
-    window.onmousemove = function (x) {
+    window.onmousemove = async function (x) {
       outerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
       innerElement.style.transform = "translate(" + x.clientX + "px, " + x.clientY + "px)";
       mouseX = x.clientX;
