@@ -770,7 +770,8 @@ section.active {
 .resume-section .resume-item .item-details {
   display: inline-block;
   margin-bottom: 10px;
-  color: #fff;
+  color: rgb(231, 231, 231);
+  font-size: medium;
 }
 .skill-bars {
   width: 700px;
@@ -814,26 +815,65 @@ section.active {
   background: #ff651c;
   animation: animate 4s 1s cubic-bezier(1, 0, 0.5, 1) forwards;
 }
-.bar .progress-line.Photoshop span {
-  width: 70%;
+.bar .progress-line.CSS span {
+  width: 96%;
 }
-.bar .progress-line.Illustrator span {
-  width: 90%;
+.bar .progress-line.HTML span {
+  width: 100%;
 }
-.bar .progress-line.html span {
-  width: 80%;
+.bar .progress-line.JS span {
+  width: 88%;
 }
-.bar .progress-line.css span {
-  width: 60%;
+.bar .progress-line.UXML span {
+  width: 76%;
 }
-.bar .progress-line.jquery span {
+.bar .progress-line.MD span {
   width: 85%;
 }
-.bar .progress-line.python span {
-  width: 50%;
+.bar .progress-line.CSharp span {
+  width: 90%;
 }
-.bar .progress-line.mysql span {
-  width: 70%;
+.bar .progress-line.Python span {
+  width: 37%;
+}
+.bar .progress-line.GDScript span {
+  width: 78%;
+}
+.bar .progress-line.Bash span {
+  width: 86%;
+}
+.bar .progress-line.Kotlin span {
+  width: 21%;
+}
+.progress-line.CSS span::after {
+  content: "96%";
+}
+.progress-line.HTML span::after {
+  content: "100%";
+}
+.progress-line.JS span::after {
+  content: "88%";
+}
+.progress-line.UXML span::after {
+  content: "76%";
+}
+.progress-line.MD span::after {
+  content: "85%";
+}
+.progress-line.CSharp span::after {
+  content: "90%";
+}
+.progress-line.Python span::after {
+  content: "37%";
+}
+.progress-line.GDScript span::after {
+  content: "78%";
+}
+.progress-line.Bash span::after {
+  content: "86%";
+}
+.progress-line.Kotlin span::after {
+  content: "21%";
 }
 .progress-line span::before {
   position: absolute;
@@ -861,80 +901,6 @@ section.active {
   border-radius: 3px;
   opacity: 0;
   animation: showText2 1s 3s linear forwards;
-}
-.progress-line.Photoshop span::after {
-  content: "70%";
-}
-.progress-line.Illustrator span::after {
-  content: "90%";
-}
-.progress-line.html span::after {
-  content: "80%";
-}
-.progress-line.css span::after {
-  content: "60%";
-}
-.progress-line.jquery span::after {
-  content: "85%";
-}
-.progress-line.python span::after {
-  content: "50%";
-}
-.progress-line.mysql span::after {
-  content: "70%";
-}
-.services-section .service-text {
-  margin-bottom: 30px;
-}
-.services-box .service-item {
-  padding: 20px 15px;
-  background-color: #232323;
-  margin-bottom: 30px;
-  box-shadow: 0 0 10px rgb(0 0 0 / 85%);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.5s all ease-in-out;
-}
-.services-box .service-item:hover {
-  background: linear-gradient(to right bottom, #000, #1d1d1d);
-  transition: 0.4s all ease-in-out;
-}
-.services-box .service-item i {
-  font-size: 45px;
-  color: #fff;
-  width: 90px;
-  height: 90px;
-  line-height: 90px;
-  animation: icon-rotate 10s ease-in-out infinite;
-  transition: all 0.5s ease-in-out;
-}
-@keyframes icon-rotate {
-  0% {
-    transform: rotateY(0);
-  }
-  100% {
-    transform: rotateY(360deg);
-  }
-}
-.service-line {
-  color: #ff651c;
-  margin-top: 10px;
-  text-transform: capitalize;
-  position: relative;
-}
-.service-line::after {
-  content: "";
-  position: absolute;
-  height: 2px;
-  width: 0;
-  bottom: -8px;
-  left: 0;
-  background-color: #ff651c;
-  transition: all 0.5s ease-in-out;
-}
-.service-content .services-box .service-item:hover .service-line:after {
-  right: auto;
-  width: 100%;
 }
 #testimonial .item {
   padding: 45px 0;
