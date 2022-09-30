@@ -72,17 +72,17 @@ function LoadThis() {
   }
 
   // Carousel
-  const friendCarousel = new Carousel(document.querySelector("#friends.carousel"), {
-    center: true,
-    Autoplay: {
-      timeout: 500,
-      hoverPause: false
-    },
-  });
-
-  // Carousel autoplay
-  friendCarousel.plugins.Autoplay.start()
-  friendCarousel.updatePage();
+  //const friendCarousel = new Carousel(document.querySelector("#friends.carousel"), {
+  //  center: true,
+  //  Autoplay: {
+  //    timeout: 500,
+  //    hoverPause: false
+  //  },
+  //});
+  //
+  //// Carousel autoplay
+  //friendCarousel.plugins.Autoplay.start()
+  //friendCarousel.updatePage();
 
   // Fancybox autoplay fix
   Fancybox.bind('[data-fancybox="gallery"]', {
