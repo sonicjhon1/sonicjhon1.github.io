@@ -108,6 +108,9 @@ function LoadThis() {
 
   // Download button
   document.getElementById("dl-button").onclick = downloadPDF;
+
+  // Email me button
+  document.getElementById("contact-submit").onclick = mailTo;
 };
 
 docReady(LoadThis());
