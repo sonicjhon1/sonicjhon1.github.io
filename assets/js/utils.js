@@ -32,14 +32,9 @@ function getImg(input, ext) {
 
 //
 function downloadPDF() {
-  var fileName = "resume.txt";
-  var type = "text/plain";
-  var encode = "UTF-8";
-  var mime = type + "; charset=" + encode
-  var value= "Test";
-
-  var properties = {type : mime, ending : "native"};
-  var fileUrl = URL.createObjectURL( new File([value], fileName, properties) );
+  var fileName = "Resume.pdf";
+  var mime = "application/pdf";
+  var fileUrl= "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/assets/Resume.pdf";
 
   try {
     var save = document.createElement.bind(document, "a")();
