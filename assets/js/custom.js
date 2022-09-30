@@ -95,7 +95,6 @@ function LoadThis() {
     on: {
       init: Carousel.Plugins.Autoplay.stop,
       initLayout: Carousel.Plugins.Autoplay.stop,
-      "*": console.log("Test"),//console.log(document.querySelector(".fancybox__thumbs.is-draggable")),
       destroy: Carousel.Plugins.Autoplay.stop
     }
   });
