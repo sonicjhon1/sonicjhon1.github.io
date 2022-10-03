@@ -12,7 +12,12 @@ module.exports = {
 			'orange': {
 				'500': '#f97316',
 			},
-      		'yellow': '#facc15',
+			'amber': {
+				'400': '#fbbf24',
+			},
+      		'yellow': {
+				'400': '#facc15',
+			},
 			'blue': {
 				'500': '#3b82f6',
 				'900': '#1e3a8a',
