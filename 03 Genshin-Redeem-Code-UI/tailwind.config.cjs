@@ -9,6 +9,9 @@ module.exports = {
       		'current': 'currentColor',
 			'black': '#000',
 			'white': '#fff',
+			'orange': {
+				'500': '#f97316',
+			},
       		'yellow': '#facc15',
 			'blue': {
 				'500': '#3b82f6',
@@ -39,6 +42,10 @@ module.exports = {
 				'800': '#1e293b',
 				'900': '#0f172a'
 			},
+			'rose': {
+				'600': '#e11d48',
+				'700': '#be123c',
+			}
 		},
 		extend: {},
 	},
