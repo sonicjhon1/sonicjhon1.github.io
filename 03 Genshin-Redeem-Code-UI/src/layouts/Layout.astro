@@ -1,0 +1,33 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark font-sans">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="h-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
+		<header class="min-w-full flex fixed p-3 py-4 text-white backdrop-blur bg-gradient-to-r from-black/30 to-black/50">
+			<div>
+				<button class="px-4 py-2 w-20 mr-6 bg-slate-500 rounded-xl">Back</button>
+				<button class="px-4 py-2 w-20 mr-6 bg-slate-500 rounded-xl">Home</button>
+			</div>
+			<div class="absolute right-0">
+				<button class="px-4 py-2 w-20 mr-6 bg-slate-500 rounded-xl">Back</button>
+			</div>
+		</header>
+		<slot />
+		<footer class="min-w-full flex justify-center my-4">
+			<span class="text-slate-500">Copyright Sonicj 2022</span>
+		</footer>
+	</body>
+</html>
