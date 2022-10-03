@@ -7,18 +7,18 @@ const { title } = Astro.props;
 import Core from '../components/Core.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import '../components/Fonts.astro';
 ---
 <!DOCTYPE html>
-<html lang="en" class="font-Lato-400">
+<html lang="en" class="font-Lato-400 dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" href="Style.css">
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<Core></Core>
 	</head>
-	<Core></Core>
 	<body class="h-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
 		<Header></Header>
 		<slot />
