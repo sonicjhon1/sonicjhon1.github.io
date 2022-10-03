@@ -2,5 +2,5 @@
 > •Star 🌟
 
 ```js
- ctx.printLog('Hello World')
+ console.log('Hello World')
 ```
