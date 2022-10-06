@@ -10,7 +10,7 @@ import Card from '../components/Card.astro';
 	<BackButton slot="BackButton"/>
 </Header>
 <Layout title="Genshin Redeems">
-	<main class="min-h-full pt-20 m-auto p-6">
+	<main class="min-h-full max-w-3xl pt-20 m-auto p-6">
 		<h1 class="text-center leading-7 font-Lato-400 py-6 text-slate-900/75 dark:text-gray-400/75">
 			<span class="text-5xl font-Lato-900 text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">FAQs</span><br>
 			(Frequently Asked Questions)
@@ -40,7 +40,7 @@ import Card from '../components/Card.astro';
 			<Card
 			title="Where did you get the redeem code from?"
 			tldr="The redeem code is scraped from"
-			body="/r/Genshin_Impact/comments/wndcai/list_of_all_active_promotional_codes reddit post by KaiRegis. ">
+			body="a reddit post by KaiRegis. ">
 				<a class="text-slate-200 underline" href="https://reddit.com/r/Genshin_Impact/comments/wndcai/list_of_all_active_promotional_codes">You can view the reddit post here!</a>
 			</Card>
 			<Card
@@ -52,14 +52,3 @@ import Card from '../components/Card.astro';
 		</ul>
 	</main>
 </Layout>
-
-<style>
-main {
-	max-width: 80ch;
-}
-
-.instructions {
-	line-height: 1.6;
-	margin: 1rem 0;
-}
-</style>
