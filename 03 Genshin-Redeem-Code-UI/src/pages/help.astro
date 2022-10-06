@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro'
+import BackButton from '../components/BackButton.astro';
+---
+<Header>
+	<BackButton/>
+</Header>
+<Layout title="Genshin Redeems">
+	<main class="min-h-full pt-20">
+		<h1 class="text-center text-5xl font-Lato-900 py-6 text-slate-900 dark:text-white">Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">My Page</span></h1>
+		<p class="instructions text-center">
+			To get started, open the directory <code class="bg-indigo-700/90 font-mono text-purple-200 p-1.5 rounded">src/pages</code> in your project.<br />
+			<strong>Code Challenge:</strong> Tweak the "Welcome to" message above.
+		</p>
+	</main>
+</Layout>
