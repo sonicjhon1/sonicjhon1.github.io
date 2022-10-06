@@ -4,10 +4,10 @@ import Header from '../components/Header.astro';
 import Card from '../components/Card.astro';
 import HomeButton from '../components/HomeButton.astro';
 ---
-<Header>
-	<HomeButton slot="HomeButton"/>
-</Header>
 <Layout title="Genshin Redeems">
+	<Header>
+		<HomeButton slot="HomeButton"/>
+	</Header>
 	<main class="min-h-full max-w-3xl pt-20 m-auto p-6">
 		<h1 class="text-center text-5xl font-Lato-900 py-6 m-0 text-slate-900 dark:text-white">Genshin's <span class="text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">Redeem Codes!</span></h1>
 		<p class="bg-white rounded-lg p-4 mb-4 leading-relaxed border-solid border-2 border-sky-400 dark:border-violet-900 text-center">
@@ -16,14 +16,14 @@ import HomeButton from '../components/HomeButton.astro';
 		</p>
 		<ul role="list" class="link-card-grid">
 			<Card
-				tldr=""
-				title="Documentation"
-				body="Learn how Lorem Ipsum works and explore the official API docs."
+			title="Documentation"
+			tldr=""
+			body="Learn how Lorem Ipsum works and explore the official API docs."
 			/>
 			<Card
-				tldr=""
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
+			title="Integrations"
+			tldr=""
+			body="Supercharge your project with new frameworks and libraries."
 			/>
 		</ul>
 	</main>
