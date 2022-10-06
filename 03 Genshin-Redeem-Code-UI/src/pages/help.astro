@@ -2,16 +2,66 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro'
 import BackButton from '../components/BackButton.astro';
+import HomeButton from '../components/HomeButton.astro';
+import Card from '../components/Card.astro';
 ---
 <Header>
-	<BackButton/>
+	<HomeButton slot="HomeButton"/>
+	<BackButton slot="BackButton"/>
 </Header>
 <Layout title="Genshin Redeems">
 	<main class="min-h-full pt-20">
-		<h1 class="text-center text-5xl font-Lato-900 py-6 text-slate-900 dark:text-white">Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">My Page</span></h1>
-		<p class="instructions text-center">
-			To get started, open the directory <code class="bg-indigo-700/90 font-mono text-purple-200 p-1.5 rounded">src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to" message above.
-		</p>
+		<h1 class="text-center leading-7 font-Lato-400 py-6 text-slate-900/75 dark:text-gray-400/75">
+			<span class="text-5xl font-Lato-900 text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">FAQs</span><br>
+			(Frequently Asked Questions)
+		</h1>
+		<ul>
+			<Card 
+			title="How do I use this thing?"
+			tldr="It's very simple!"
+			body="Simply tap on any codes in the home tab, and it will redirect you to Genshin's Redeem website with the code automatically filled in, then you can simply tap redeem!">
+			</Card>
+			<Card 
+			title="Is this safe?"
+			tldr="Yes, it is. "
+			body="This is fully open-sourced, you can check the code in my Github repository below.">
+			</Card>
+			<Card 
+			title="Can my Genshin account get banned / stolen?"
+			tldr="No, "
+			body="This website is just for redirecting the users to Genshin's redeem code website with the code automatically filled in. It is safe and open-sourced, links to Github below.">
+				<a class="text-slate-200 underline" href="https://github.com/sonicjhon1/sonicjhon1.github.io">The code in is the 03 folder.</a>
+			</Card>
+			<Card 
+			title="How is this possible? How did you fill the code automatically?"
+			tldr="This is possible because: "
+			body="Genshin's website '?code=' parameters, and an API I created to scrape Genshin's redeem code. It is essentially free and automatic primogems :)">
+			</Card>
+			<Card
+			title="Where did you get the redeem code from?"
+			tldr="The redeem code is scraped from"
+			body="/r/Genshin_Impact/comments/wndcai/list_of_all_active_promotional_codes reddit post by KaiRegis. ">
+				<a class="text-slate-200 underline" href="https://reddit.com/r/Genshin_Impact/comments/wndcai/list_of_all_active_promotional_codes">You can view the reddit post here!</a>
+			</Card>
+			<Card
+			title="So, can I use your API for my own APP / Projects?"
+			tldr="Please don't, "
+			body="My API currently have the limit of 100.000 request per month. If it exceeds this limit, other users won't be able to use this website until the limit resets.">
+				<a class="text-slate-200 underline" href="https://github.com/sonicjhon1/sonicjhon1.github.io/tree/main/03%20Genshin-Redeem-Code">But it's okay if you host your own API!</a>
+			</Card>
+		</ul>
 	</main>
 </Layout>
+
+<style>
+main {
+	margin: auto;
+	padding: 1.5rem;
+	max-width: 80ch;
+}
+
+.instructions {
+	line-height: 1.6;
+	margin: 1rem 0;
+}
+</style>
