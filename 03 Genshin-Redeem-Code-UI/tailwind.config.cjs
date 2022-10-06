@@ -14,6 +14,7 @@ module.exports = {
 			},
 			'amber': {
 				'400': '#fbbf24',
+				'500': '#f59e0b',
 			},
       		'yellow': {
 				'400': '#facc15',
