@@ -10,7 +10,7 @@ import Card from '../components/Card.astro';
 	<BackButton slot="BackButton"/>
 </Header>
 <Layout title="Genshin Redeems">
-	<main class="min-h-full pt-20">
+	<main class="min-h-full pt-20 m-auto p-6">
 		<h1 class="text-center leading-7 font-Lato-400 py-6 text-slate-900/75 dark:text-gray-400/75">
 			<span class="text-5xl font-Lato-900 text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">FAQs</span><br>
 			(Frequently Asked Questions)
@@ -28,7 +28,7 @@ import Card from '../components/Card.astro';
 			</Card>
 			<Card 
 			title="Can my Genshin account get banned / stolen?"
-			tldr="No, "
+			tldr="Nope, "
 			body="This website is just for redirecting the users to Genshin's redeem code website with the code automatically filled in. It is safe and open-sourced, links to Github below.">
 				<a class="text-slate-200 underline" href="https://github.com/sonicjhon1/sonicjhon1.github.io">The code in is the 03 folder.</a>
 			</Card>
@@ -55,8 +55,6 @@ import Card from '../components/Card.astro';
 
 <style>
 main {
-	margin: auto;
-	padding: 1.5rem;
 	max-width: 80ch;
 }
 
