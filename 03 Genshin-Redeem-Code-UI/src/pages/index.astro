@@ -8,9 +8,9 @@ import HomeButton from '../components/HomeButton.astro';
 	<HomeButton slot="HomeButton"/>
 </Header>
 <Layout title="Genshin Redeems">
-	<main class="min-h-full pt-20">
-		<h1 class="text-center text-5xl font-Lato-900 py-6 text-slate-900 dark:text-white">Genshin's <span class="text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">Redeem Codes!</span></h1>
-		<p class="instructions text-center">
+	<main class="min-h-full max-w-3xl pt-20 m-auto p-6">
+		<h1 class="text-center text-5xl font-Lato-900 py-6 m-0 text-slate-900 dark:text-white">Genshin's <span class="text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">Redeem Codes!</span></h1>
+		<p class="bg-white rounded-lg p-4 mb-4 leading-relaxed border-solid border-2 border-sky-400 dark:border-violet-900 text-center">
 			To get started, open the directory <code class="bg-indigo-700/90 font-mono text-purple-200 p-1.5 rounded">src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to" message above.
 		</p>
@@ -30,23 +30,6 @@ import HomeButton from '../components/HomeButton.astro';
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 80ch;
-	}
-	h1 {
-		font-weight: 800;
-		margin: 0;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
 	.link-card-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
