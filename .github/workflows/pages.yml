@@ -30,12 +30,50 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+        # Static GH Pages
       - name: Setup Pages
         uses: actions/configure-pages@v2
+
+        # Astro Pages
+      - name: Check lockfiles
+        id: lockfile
+        shell: "bash"
+        env:
+          INPUT_PM: "npm"
+        run: |
+          len=`echo $INPUT_PM | wc -c`
+          if [ $len -gt 1 ]; then
+              echo "::set-output name=PACKAGE_MANAGER::$INPUT_PM"
+              echo "node_pm=$INPUT_PM" >> $GITHUB_ENV
+          elif [ $(find "." -name "yarn.lock") ]; then 
+              echo "::set-output name=PACKAGE_MANAGER::yarn"
+              echo "node_pm=yarn" >> $GITHUB_ENV
+          elif [ $(find "." -name "package-lock.json") ]; then 
+              echo "::set-output name=PACKAGE_MANAGER::npm"
+              echo "node_pm=npm" >> $GITHUB_ENV
+          else
+              echo "No lockfile found.
+          Please specify your preferred \"package-manager\" in the action configuration."
+              exit 1
+          fi
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install and build
+        shell: "bash"
+        run: |
+          cd "03 Genshin-Redeem-Code-UI"
+          npm install
+          npm run build
+          mv dist/* .
+          rmdir dist
+
+      # Upload entire repository
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # Upload entire repository
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
