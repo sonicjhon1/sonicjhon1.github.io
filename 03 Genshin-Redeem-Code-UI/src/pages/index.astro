@@ -26,12 +26,14 @@ import HomeButton from '../components/HomeButton.astro';
 	document.addEventListener("DOMContentLoaded", async () => {
 		try {
 			const response = await fetchGRC();
-			const responseLength = await response.length;
+			const responseLength = await response.codes.length;
 			for (let i=0; i < responseLength ; i++) {
-				const code = response[i].match(/=(.+)/)[1];
-				const link = response[i];
+				const code = response.codes[i].match(/=(.+)/)[1];
+				const link = response.codes[i];
+				const reward = response.rewards[i];
 				console.log(code);
 				console.log(link);
+				console.log(reward);
 
 				// Create a list from ul
 				let ul = document.querySelector("ul")
@@ -45,15 +47,21 @@ import HomeButton from '../components/HomeButton.astro';
 				h2.textContent += code;
 				list.appendChild(h2);
 
+				// Create h3 inside list
+				let h3 = document.createElement("h3");
+				h3.className = "font-Lato-900 mt-2 text-left text-black dark:text-slate-100";
+				h3.textContent += "Rewards:";
+				list.appendChild(h3);
+
 				// Create p inside list
 				let p = document.createElement("p");
 				p.className = "font-Lato-400 text-left text-black dark:text-slate-400";
-				p.textContent += code;
+				p.textContent += reward;
 				list.appendChild(p);
 
 				// Create button inside list
 				let button = document.createElement("button");
-				button.className = "font-Lato-900 text-base rounded-lg px-4 py-3 mt-8 text-center text-black dark:text-white bg-indigo-700/90";
+				button.className = "font-Lato-900 rounded-lg px-4 py-3 mt-2 text-base text-center text-black dark:text-white bg-indigo-700/90";
 				button.textContent += "Redeem";
 				button.onclick = function() {window.location = link}
 				list.appendChild(button);
