@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import Card from '../components/Card.astro';
 import HomeButton from '../components/HomeButton.astro';
 ---
 <Layout title="Genshin Redeems">
@@ -15,19 +14,55 @@ import HomeButton from '../components/HomeButton.astro';
 			<strong>Code Challenge:</strong> Tweak the "Welcome to" message above.
 		</p>
 		<ul role="list" class="link-card-grid">
-			<Card
-			title="Documentation"
-			tldr=""
-			body="Learn how Lorem Ipsum works and explore the official API docs."
-			/>
-			<Card
-			title="Integrations"
-			tldr=""
-			body="Supercharge your project with new frameworks and libraries."
-			/>
 		</ul>
 	</main>
 </Layout>
+
+<script>
+	async function fetchGRC() {
+		return (await fetch('https://genshin-redeem-code.sonicj.workers.dev/')).json();
+	}
+
+	document.addEventListener("DOMContentLoaded", async () => {
+		try {
+			const response = await fetchGRC();
+			const responseLength = await response.length;
+			for (let i=0; i < responseLength ; i++) {
+				const code = response[i].match(/=(.+)/)[1];
+				const link = response[i];
+				console.log(code);
+				console.log(link);
+
+				// Create a list from ul
+				let ul = document.querySelector("ul")
+				let list = document.createElement("li");
+				list.className = "border-solid border-2 border-slate-500/20 rounded-lg p-5 mt-3 bg-white dark:bg-slate-800";
+				ul.appendChild(list);
+
+				// Create h2 inside list
+				let h2 = document.createElement("h2");
+				h2.className = "font-Lato-900 text-lg font-bold text-left pb-2 underline decoration-sky-400 text-blue-900 dark:decoration-violet-900 dark:text-white";
+				h2.textContent += code;
+				list.appendChild(h2);
+
+				// Create p inside list
+				let p = document.createElement("p");
+				p.className = "font-Lato-400 text-left text-black dark:text-slate-400";
+				p.textContent += code;
+				list.appendChild(p);
+
+				// Create button inside list
+				let button = document.createElement("button");
+				button.className = "font-Lato-900 text-base rounded-lg px-4 py-3 mt-8 text-center text-black dark:text-white bg-indigo-700/90";
+				button.textContent += "Redeem";
+				button.onclick = function() {window.location = link}
+				list.appendChild(button);
+			}
+		} catch (e) {
+			console.log(e);
+		}
+	});
+</script>
 
 <style>
 	.link-card-grid {
@@ -37,24 +72,3 @@ import HomeButton from '../components/HomeButton.astro';
 		padding: 0;
 	}
 </style>
-
-<script>
-    async function fetchGRC() {
-        return (await fetch('https://genshin-redeem-code.sonicj.workers.dev/')).json();
-    }
-
-    document.addEventListener("DOMContentLoaded", async () => {
-        try {
-            const response = await fetchGRC();
-			const responseLength = await response.length;
-			for (let i=0; i < responseLength ; i++) {
-				const code = response[i].match(/=(.+)/)[1];
-				const link = response[i];
-				console.log(code);
-				console.log(link);
-			}
-        } catch (e) {
-            console.log(e);
-        }
-    });
-</script>
