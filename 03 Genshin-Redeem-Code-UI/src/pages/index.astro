@@ -9,9 +9,8 @@ import HomeButton from '../components/HomeButton.astro';
 	</Header>
 	<main class="min-h-full max-w-3xl pt-20 m-auto p-6">
 		<h1 class="text-center text-5xl font-Lato-900 py-6 m-0 text-slate-900 dark:text-white">Genshin's <span class="text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">Redeem Codes!</span></h1>
-		<p class="bg-white rounded-lg p-4 mb-4 leading-relaxed border-solid border-2 border-sky-400 dark:border-violet-900 text-center">
-			To get started, open the directory <code class="bg-indigo-700/90 font-mono text-purple-200 p-1.5 rounded">src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to" message above.
+		<p class="bg-white rounded-lg p-4 mb-4 leading-relaxed border-solid border-2 border-sky-400 dark:border-violet-900 text-center" id="current-date">
+			To get started, simply tap on <code class="bg-indigo-700/90 font-mono text-purple-200 p-1.5 rounded">Redeem</code> on any of the code below.<br/>
 		</p>
 		<ul role="list" class="link-card-grid">
 		</ul>
@@ -31,9 +30,6 @@ import HomeButton from '../components/HomeButton.astro';
 				const code = response.codes[i].match(/=(.+)/)[1];
 				const link = response.codes[i];
 				const reward = response.rewards[i];
-				console.log(code);
-				console.log(link);
-				console.log(reward);
 
 				// Create a list from ul
 				let ul = document.querySelector("ul")
@@ -49,7 +45,7 @@ import HomeButton from '../components/HomeButton.astro';
 
 				// Create h3 inside list
 				let h3 = document.createElement("h3");
-				h3.className = "font-Lato-900 mt-2 text-left text-black dark:text-slate-100";
+				h3.className = "font-Lato-900 mt text-left text-black dark:text-slate-100";
 				h3.textContent += "Rewards:";
 				list.appendChild(h3);
 
@@ -61,14 +57,18 @@ import HomeButton from '../components/HomeButton.astro';
 
 				// Create button inside list
 				let button = document.createElement("button");
-				button.className = "font-Lato-900 rounded-lg px-4 py-3 mt-2 text-base text-center text-black dark:text-white bg-indigo-700/90";
+				button.className = "font-Lato-900 rounded-lg px-4 py-3 mt-2 text-base text-center text-white dark:text-white bg-indigo-700/90";
 				button.textContent += "Redeem";
 				button.onclick = function() {window.location = link}
 				list.appendChild(button);
+
+
+				// Get p, assign current date
 			}
 		} catch (e) {
 			console.log(e);
 		}
+		document.querySelector("#current-date").innerHTML += "<strong>Last updated on:</strong> " + new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) + " &nbsp(" + new Date().toLocaleTimeString() + ")";
 	});
 </script>
 
