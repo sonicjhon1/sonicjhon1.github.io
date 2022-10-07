@@ -46,7 +46,13 @@ import HomeButton from '../components/HomeButton.astro';
     document.addEventListener("DOMContentLoaded", async () => {
         try {
             const response = await fetchGRC();
-			console.log(response);
+			const responseLength = await response.length;
+			for (let i=0; i < responseLength ; i++) {
+				const code = response[i].match(/=(.+)/)[1];
+				const link = response[i];
+				console.log(code);
+				console.log(link);
+			}
         } catch (e) {
             console.log(e);
         }
