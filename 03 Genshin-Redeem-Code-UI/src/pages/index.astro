@@ -37,3 +37,18 @@ import HomeButton from '../components/HomeButton.astro';
 		padding: 0;
 	}
 </style>
+
+<script>
+    async function fetchGRC() {
+        return (await fetch('https://genshin-redeem-code.sonicj.workers.dev/')).json();
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const response = await fetchGRC();
+			console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    });
+</script>
