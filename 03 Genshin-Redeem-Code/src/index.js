@@ -31,5 +31,8 @@ async function handleRequest(request) {
   
   // Send the result as JSON
   const result = JSON.stringify(resultArray);
-  return new Response(result, { headers: {"Content-Type":"application/json"}});
+  return new Response(result, { headers: {
+    "Content-Type":"application/json",
+    "Access-Control-Allow-Origin":"*"
+  }});
 }
