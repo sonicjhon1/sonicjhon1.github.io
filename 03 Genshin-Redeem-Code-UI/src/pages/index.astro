@@ -29,6 +29,11 @@ import CardWButton from '../components/CardWButton.astro';
 
 	document.addEventListener("DOMContentLoaded", async () => {
 		try {
+			// Disable all button with the id Redeem
+			document.querySelectorAll("button").forEach(async button => {
+				if(button.id == 'Redeem') button.disabled = true;
+			});
+
 			const response = await fetchGRC();
 			const responseLength = await response.codes.length;
 			for (let i=0; i < responseLength ; i++) {
@@ -51,15 +56,16 @@ import CardWButton from '../components/CardWButton.astro';
 		} catch (e) {
 			console.log(e);
 		}
+
 		// Get all loading element, remove the loading class
 		document.querySelectorAll(".loading").forEach(async element => {
-			await new Promise(r => setTimeout(r, 1000));
+			await new Promise(r => setTimeout(r, 500));
 			element.classList.replace("loading", "loaded");
 		})
 
 		// Get all disabled button, enable them
 		document.querySelectorAll("button").forEach(async button => {
-			await new Promise(r => setTimeout(r, 3000));
+			await new Promise(r => setTimeout(r, 2000));
 			button.disabled = false;
 		})
 
