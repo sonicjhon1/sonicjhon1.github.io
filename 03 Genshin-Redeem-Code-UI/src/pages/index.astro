@@ -51,10 +51,16 @@ import CardWButton from '../components/CardWButton.astro';
 		} catch (e) {
 			console.log(e);
 		}
-		// Get all loading cards, remove the loading class
+		// Get all loading element, remove the loading class
 		document.querySelectorAll(".loading").forEach(async element => {
 			await new Promise(r => setTimeout(r, 1000));
 			element.classList.replace("loading", "loaded");
+		})
+
+		// Get all disabled button, enable them
+		document.querySelectorAll("button").forEach(async button => {
+			await new Promise(r => setTimeout(r, 3000));
+			button.disabled = false;
 		})
 
 		// Get p, assign current date

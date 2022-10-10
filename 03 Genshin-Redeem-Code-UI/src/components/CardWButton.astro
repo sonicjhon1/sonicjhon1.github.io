@@ -1,4 +1,4 @@
-<li class="border-solid border-2 border-slate-500/20 rounded-lg p-5 mt-3 bg-white dark:bg-slate-800">
+<li class="border-solid border-2 border-slate-500/20 rounded-lg p-5 mt-3 drop-shadow-2xl bg-white dark:bg-slate-800">
     <h2 class="loading font-Lato-900 text-lg font-bold text-left pb-2 underline decoration-sky-400 text-blue-900 dark:decoration-violet-900 dark:text-white" id="Title">
         GENSH1NGIFT
     </h2>
@@ -8,7 +8,7 @@
     <p class="loading font-Lato-400 text-left text-black dark:text-slate-400" id="Desc">
         60 Primogems and 5 Adventurer's Experience
     </p>
-    <button class="font-Lato-900 rounded-lg px-4 py-3 mt-2 text-base text-center text-white dark:text-white bg-indigo-700/90" id="Redeem">
+    <button type="button" disabled class="loading font-Lato-900 rounded-lg px-4 py-3 mt-2 drop-shadow-md hover:drop-shadow-xl text-base text-center text-white dark:text-white bg-indigo-700/90" id="Redeem">
         Redeem
     </button>
 </li>
@@ -41,5 +41,15 @@
         100% {
             filter: blur(0px);
         }
+    }
+
+    button#Redeem{
+        transition: all 0.45s;
+    }
+    button#Redeem:hover {
+        background-color: #272073;
+    }
+    button#Redeem:hover:disabled {
+        background-color: #4338ca;
     }
 </style>
