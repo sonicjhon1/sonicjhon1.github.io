@@ -16,3 +16,14 @@
         </button>
     </div>
 </header>
+
+<style is:global>
+    button:not(#Redeem) {
+        filter: brightness(100%);
+        transition: all 0.25s;
+    }
+
+    button:hover:not(#Redeem) {
+        filter: brightness(80%);
+    }
+</style>
