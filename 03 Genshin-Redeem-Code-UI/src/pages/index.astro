@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import HomeButton from '../components/HomeButton.astro';
+import CardWButton from '../components/CardWButton.astro';
 ---
 <Layout title="Genshin Redeems">
 	<Header>
@@ -11,8 +12,12 @@ import HomeButton from '../components/HomeButton.astro';
 		<h1 class="text-center text-5xl font-Lato-900 py-6 m-0 text-slate-900 dark:text-white">Genshin's <span class="text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">Redeem Codes!</span></h1>
 		<p class="bg-white rounded-lg p-4 mb-4 leading-relaxed border-solid border-2 border-sky-400 dark:border-violet-900 text-center" id="current-date">
 			To get started, simply tap on <code class="bg-indigo-700/90 font-mono text-purple-200 p-1.5 rounded">Redeem</code> on any of the code below.<br/>
+			<strong>Last updated on:</strong>
 		</p>
 		<ul role="list" class="link-card-grid">
+			<CardWButton/>
+			<CardWButton/>
+			<CardWButton/>
 		</ul>
 	</main>
 </Layout>
@@ -31,44 +36,23 @@ import HomeButton from '../components/HomeButton.astro';
 				const link = response.codes[i];
 				const reward = response.rewards[i];
 
-				// Create a list from ul
-				let ul = document.querySelector("ul")
-				let list = document.createElement("li");
-				list.className = "border-solid border-2 border-slate-500/20 rounded-lg p-5 mt-3 bg-white dark:bg-slate-800";
-				ul.appendChild(list);
+				// Set redeem code
+				let h2 = document.querySelectorAll("#Title");
+				h2[i].textContent = code;
 
-				// Create h2 inside list
-				let h2 = document.createElement("h2");
-				h2.className = "font-Lato-900 text-lg font-bold text-left pb-2 underline decoration-sky-400 text-blue-900 dark:decoration-violet-900 dark:text-white";
-				h2.textContent += code;
-				list.appendChild(h2);
+				// Set redeem reward
+				let p = document.querySelectorAll("#Desc");
+				p[i].textContent = reward;
 
-				// Create h3 inside list
-				let h3 = document.createElement("h3");
-				h3.className = "font-Lato-900 mt text-left text-black dark:text-slate-100";
-				h3.textContent += "Rewards:";
-				list.appendChild(h3);
-
-				// Create p inside list
-				let p = document.createElement("p");
-				p.className = "font-Lato-400 text-left text-black dark:text-slate-400";
-				p.textContent += reward;
-				list.appendChild(p);
-
-				// Create button inside list
-				let button = document.createElement("button");
-				button.className = "font-Lato-900 rounded-lg px-4 py-3 mt-2 text-base text-center text-white dark:text-white bg-indigo-700/90";
-				button.textContent += "Redeem";
-				button.onclick = function() {window.location = link}
-				list.appendChild(button);
-
-
-				// Get p, assign current date
+				// Set button callback
+				let button = document.querySelectorAll("#Redeem");
+				button[i].addEventListener('click', function() {window.location = link})
 			}
 		} catch (e) {
 			console.log(e);
 		}
-		document.querySelector("#current-date").innerHTML += "<strong>Last updated on:</strong> " + new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) + " &nbsp(" + new Date().toLocaleTimeString() + ")";
+		// Get p, assign current date
+		document.querySelector("#current-date").innerHTML += new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) + " &nbsp(" + new Date().toLocaleTimeString() + ")";
 	});
 </script>
 
