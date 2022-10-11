@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://sonicj.pages.dev',
   base: '/03 Genshin-Redeem-Code-UI',
   build: {
-    // Example: Generate `page.html` instead of `page/index.html` during build.
+    // Generate `page.html` instead of `page/index.html` during build.
     format: 'file'
   },
   integrations: [sitemap(), tailwind()],
