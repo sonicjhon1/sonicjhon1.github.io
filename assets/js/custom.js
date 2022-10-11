@@ -70,34 +70,6 @@ function LoadThis() {
     innerElement.style.visibility = "visible";
     outerElement.style.visibility = "visible";
   }
-
-  // Carousel
-  //const friendCarousel = new Carousel(document.querySelector("#friends.carousel"), {
-  //  center: true,
-  //  Autoplay: {
-  //    timeout: 500,
-  //    hoverPause: false
-  //  },
-  //});
-  //
-  //// Carousel autoplay
-  //friendCarousel.plugins.Autoplay.start()
-  //friendCarousel.updatePage();
-
-  // Fancybox autoplay fix
-  Fancybox.bind('[data-fancybox="gallery"]', {
-    Carousel: {
-      Autoplay: {
-        timeout: 9999999,
-        hoverPause: true
-      }
-    },
-    on: {
-      init: Carousel.Plugins.Autoplay.stop,
-      initLayout: Carousel.Plugins.Autoplay.stop,
-      destroy: Carousel.Plugins.Autoplay.stop
-    }
-  });
   
   // Copyright year
   document.getElementById("current-year").textContent = new Date().getFullYear();
