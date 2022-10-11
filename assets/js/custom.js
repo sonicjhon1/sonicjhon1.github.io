@@ -122,13 +122,8 @@ fancybox_items.forEach(item => {
   
   // Set attribute
   item.setAttribute("data-fancybox", "gallery");
-  if (item.parentNode.classList.contains("gfx")) {
-    item.setAttribute("data-type", "image");
-    item.setAttribute("data-thumb", getImg(item.href, "webp"));
-   } else { 
-    item.setAttribute("data-type", "iframe");
-    item.setAttribute("data-preload", "false");
-   }
+  item.setAttribute("data-type", "image");
+  item.setAttribute("data-thumb", getImg(item.href, "webp"));
 
   let currentImg = document.createElement("img");
   (item.parentNode.classList.contains("gfx")) ? currentImg.src = getImg(item.href, "webp") : currentImg.src = getImg(item.dataset.thumb, "webp");
@@ -156,7 +151,7 @@ fancybox_items.forEach(item => {
 
     let currentButton = document.createElement("span");
     currentButton.className = "post";
-    currentButton.onclick = function() {window.location = item.href}
+    currentButton.onclick = function() {window.location = item.dataset.caption}
     currentButton.textContent += "Link";
     currentA.appendChild(currentButton);
   }
