@@ -17,6 +17,17 @@
 			document.documentElement.classList.toggle('dark');
 			localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 		});
+
+		const mouse = document.querySelector('.mouse');
+		window.addEventListener("mousemove", async data => {
+			mouse.style.top = data.pageY + "px";
+			mouse.style.left = data.pageX + "px";
+		});
+		window.addEventListener("click", async () => {
+			mouse.classList.add("mouseClick");
+			setTimeout( () => mouse.classList.replace("mouseClick", "mouseFadeIn"), 1500)
+			setTimeout( () => mouse.classList.remove("mouseFadeIn"), 1750)
+		});
 	};
 </script>
 <script is:inline>

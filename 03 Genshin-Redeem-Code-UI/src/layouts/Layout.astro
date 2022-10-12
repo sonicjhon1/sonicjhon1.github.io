@@ -44,6 +44,7 @@ import '../components/Fonts.astro';
 		  <link itemprop="url" href="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/03%20Genshin-Redeem-Code-UI/public/thumb.webp"> 
 		</span>
 		<div class="z-0 fixed" id="particles-js"></div>
+		<div class="mouse" id="mouse"></div>
 		<slot />
 		<Footer/>
 	</body>
@@ -132,4 +133,87 @@ import '../components/Fonts.astro';
         -ms-user-select: none;
         user-select: none;
     }
+
+	div.mouse {
+		position: absolute;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		border: 3px solid #0ea5e9;
+		z-index: 40;
+		pointer-events: none;
+		transition: all 200ms ease-out;
+		transition-property: top, left;
+		transform-origin: 50% 50%;
+		translate: -50% -50%;
+		animation: pulse 0.75s infinite alternate;
+	}
+
+	div.mouse::before {
+		content: "";
+		position: absolute;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		border: 20px solid rgba(190, 190, 190, 0.201);
+		z-index: 30;
+		pointer-events: none;
+		transform-origin: 50% 50%;
+		translate: -17.5% -17.5%;
+		animation: pulse 2.5s infinite alternate;
+	}
+
+	div.mouse::after {
+		content: "";
+		position: absolute;
+		width: 0.15rem;
+		height: 0.15rem;
+		border-radius: 50%;
+		border: 2px solid #1696d1;
+		z-index: 30;
+		pointer-events: none;
+		transform-origin: 50% 50%;
+		translate: 275% 275%;
+		animation: pulse 5s infinite alternate;
+	}
+
+	div.mouse#mouse.mouseClick {
+		border: 3px solid rgb(255, 255, 255);
+		animation: mouseClick 0.75s forwards;
+	}
+
+	div.mouse#mouse.mouseFadeIn {
+		animation: fadeIn 0.25s forwards;
+	}
+
+	@keyframes pulse {
+    	from {
+    	    transform: scale(1);
+    	}
+    	to {
+    	    transform: scale(.7);
+    	}
+	}
+
+	@keyframes mouseClick {
+    	0% {
+    	    transform: scale(1);
+    	}
+    	50% {
+    	    transform: scale(2);
+    	}
+    	100% {
+    	    transform: scale(1);
+    	    opacity: 0;
+    	}
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
 </style>
