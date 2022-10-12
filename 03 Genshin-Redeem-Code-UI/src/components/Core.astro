@@ -1,28 +1,32 @@
 <script is:inline>
+	// If dark theme doesn't exist in local storage, or it is dark, turn on dark mode
 	if (localStorage.theme === 'dark' || !('theme' in localStorage)) {
 		document.documentElement.classList.add('dark');
 	} else {
 		document.documentElement.classList.remove('dark');
 	}
-	function attachEvent(selector, event, fn) {
-		const matches = document.querySelectorAll(selector);
-		if (matches && matches.length) {
-			matches.forEach((elem) => {
-				elem.addEventListener(event, () => fn(elem), false);
-			});
-		}
-	}
-	window.onload = function () {
-		attachEvent('[data-toggle-color-scheme]', 'click', function () {
+
+	// On loaded
+	window.onload = async () => {
+		// Dark mode toggle
+		const toggle = document.querySelector('#toggle')
+	
+		// Mouse cursor
+		const mouse = document.querySelector('.mouse');
+
+		// Event for toggling dark mode
+		toggle.addEventListener('click', async () => {
 			document.documentElement.classList.toggle('dark');
 			localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 		});
 
-		const mouse = document.querySelector('.mouse');
+		// Event for moving mouse to window location
 		window.addEventListener("mousemove", async data => {
 			mouse.style.top = data.pageY + "px";
 			mouse.style.left = data.pageX + "px";
 		});
+
+		// Event for mouse click animation
 		window.addEventListener("click", async () => {
 			mouse.classList.add("mouseClick");
 			setTimeout( () => mouse.classList.replace("mouseClick", "mouseFadeIn"), 1500)
