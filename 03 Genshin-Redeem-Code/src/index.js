@@ -3,38 +3,45 @@ addEventListener('fetch', event => {
 });
 
 async function getCode() {
-  // Get Redeem Code from a Reddit post
-  const res = await fetch(`https://api.reddit.com/api/info/?id=t3_wndcai`, {
+  // Scrape a website containing redeem codes
+  const res = await fetch(`https://web.scraper.workers.dev/?url=https%3A%2F%2Fgame8.co%2Fgames%2FGenshin-Impact%2Farchives%2F304759&selector=tr&scrape=text&pretty=true`, {
     method: "GET",
     headers: {
       "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0",
     },
   });
 
-  // Convert to JSON, grab the description and match all text inside of []
+  // Convert to JSON, grab the code that starts with ',"' and end with ' '.
   const data = await res.json();
-  const text = JSON.stringify(data.data.children[0].data.selftext);
-  const coderegex = [ ...text.matchAll("\\[(.*?)\\]") ];
+  const text = JSON.stringify(data);
 
-  const result = [ coderegex[0][1], coderegex[1][1], coderegex[2][1] ]
+  const coderegex = [ ...text.matchAll(/,"(.*?)\ /g) ];
+  
+  const result = 
+  [ coderegex[0][1], coderegex[1][1], coderegex[2][1],
+    coderegex[4][1], coderegex[5][1], coderegex[6][1],
+    coderegex[8][1], coderegex[9][1] ]
   return result;
 }
 
 async function getReward() {
-  // Get Redeem Code from a Reddit post
-  const res = await fetch(`https://api.reddit.com/api/info/?id=t3_wndcai`, {
+  // Scrape a website containing redeem codes
+  const res = await fetch(`https://web.scraper.workers.dev/?url=https%3A%2F%2Fgame8.co%2Fgames%2FGenshin-Impact%2Farchives%2F304759&selector=tr&scrape=text&pretty=true`, {
     method: "GET",
     headers: {
       "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0",
     },
   });
 
-  // Convert to JSON, grab the description and match all text inside of )| and \n|
+  // Convert to JSON, grab the rewards between ' ' and "
   const data = await res.json();
-  const text = JSON.stringify(data.data.children[0].data.selftext);
-  const rewardregex = [ ...text.matchAll("\\)\\|(.*?)\\|\\\\n") ];
+  const text = JSON.stringify(data);
+  const rewardregex = [ ...text.matchAll(/\ (.*?)"/g) ];
 
-  const result = [ rewardregex[0][1], rewardregex[1][1], rewardregex[2][1] ]
+  const result = 
+  [ rewardregex[1][1], rewardregex[2][1], rewardregex[3][1],
+    rewardregex[5][1], rewardregex[6][1], rewardregex[7][1],
+    rewardregex[9][1], rewardregex[10][1] ]
   return result;
 }
 
@@ -44,14 +51,15 @@ async function handleRequest(request) {
   const url = `https://genshin.hoyoverse.com/gift?code=`
   var resultCodeArray = [];
   var resultRewardArray = [];
-  // Only grab 3, because last element is [Undefined]
+  
+  // Only grab as much as redeem code lenght
   for (let i=0; i < (n=redeemCodeArray.length); i++) {
     resultCodeArray.push(url + redeemCodeArray[i]);
     resultRewardArray.push(rewardArray[i]);
   }
   
   // Send the result as JSON
-  //const result = JSON.stringify(resultCodeArray);
+  // const result = JSON.stringify(resultCodeArray);
   const result = {
     "codes": resultCodeArray,
     "rewards": resultRewardArray
