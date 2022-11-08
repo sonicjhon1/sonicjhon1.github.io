@@ -18,9 +18,7 @@ async function getCode() {
   const coderegex = [ ...text.matchAll(/,"(.*?)\ /g) ];
   
   const result = 
-  [ coderegex[0][1], coderegex[1][1], coderegex[2][1],
-    coderegex[4][1], coderegex[5][1], coderegex[6][1],
-    coderegex[8][1], coderegex[9][1] ]
+  [ coderegex[0][1], coderegex[1][1], coderegex[2][1] ]
   return result;
 }
 
@@ -39,9 +37,7 @@ async function getReward() {
   const rewardregex = [ ...text.matchAll(/\ (.*?)"/g) ];
 
   const result = 
-  [ rewardregex[1][1], rewardregex[2][1], rewardregex[3][1],
-    rewardregex[5][1], rewardregex[6][1], rewardregex[7][1],
-    rewardregex[9][1], rewardregex[10][1] ]
+  [ rewardregex[1][1], rewardregex[2][1], rewardregex[3][1] ]
   return result;
 }
 
