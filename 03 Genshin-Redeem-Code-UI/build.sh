@@ -3,8 +3,7 @@
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 
 # Setup NodeJS
-nvm install node
-nvm use node
+# nvm install node && nvm use node
 
 # Install NPM deps
 npm install
