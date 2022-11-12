@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "{{ project-name }}",
+  "name": "@sonicjhon1/cloudflare-static-proxy",
   "version": "1.0.0",
   "description": "A template for kick starting a Cloudflare Workers project",
   "main": "index.js",
