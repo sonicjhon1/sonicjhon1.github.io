@@ -64,11 +64,7 @@ jobs:
       - name: Install and build
         shell: "bash"
         run: |
-          cd "03 Genshin-Redeem-Code-UI"
-          npm install
-          npm run build
-          mv dist/* .
-          rmdir dist
+          chmod +x build.sh && ./build.sh
 
       # Upload entire repository
       - name: Upload artifact
