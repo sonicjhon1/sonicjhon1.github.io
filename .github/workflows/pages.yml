@@ -31,9 +31,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-        # Static GH Pages
+      # Static GH Pages
       - name: Setup Pages
         uses: actions/configure-pages@v2
+
+      # Setup NodeJS
+       - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.17.1"
 
       # Run build.sh script to install dependencies and build pages
       - name: Install and build
