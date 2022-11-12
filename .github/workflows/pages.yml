@@ -36,7 +36,7 @@ jobs:
         uses: actions/configure-pages@v2
 
       # Setup NodeJS
-       - name: Setup Node
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: "16.17.1"
