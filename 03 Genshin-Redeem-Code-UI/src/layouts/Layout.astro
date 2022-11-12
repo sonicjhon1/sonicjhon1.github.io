@@ -9,7 +9,7 @@ import Footer from '../components/Footer.astro';
 import '../components/Fonts.astro';
 ---
 <!DOCTYPE html>
-<html lang="en" class="font-Lato-400 dark h-full">
+<html lang="en" class="font-Lato-400 dark h-full bg-slate-100 dark:bg-black">
 	<head>
 		<title>{title}</title>
 		<meta name="description" content="A website to make redeeming latest, up-to-date Genshin Impact codes easier!">
@@ -38,7 +38,7 @@ import '../components/Fonts.astro';
 		<link rel="manifest" href="./favicon/site.webmanifest">
 		<Core/>
 	</head>
-	<body class="h-full m-0 bg-slate-100 dark:bg-slate-900">
+	<body class="h-full m-0">
 		<link itemprop="thumbnailUrl" href="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/03%20Genshin-Redeem-Code-UI/public/thumb.webp"> 
 		<span itemprop="thumbnail" itemscope itemtype="image/webp"> 
 		  <link itemprop="url" href="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/03%20Genshin-Redeem-Code-UI/public/thumb.webp"> 
@@ -124,6 +124,7 @@ import '../components/Fonts.astro';
 		width: 100%;
 	}
 </style>
+
 <style is:global>
 	.not-selectable {
         -webkit-touch-callout: none;
@@ -215,5 +216,10 @@ import '../components/Fonts.astro';
 		100% {
 			opacity: 1;
 		}
+	}
+
+	/* Workaround a bug in Astro that prevents the body's background colour being changed. */
+	html.dark {
+		background-color: #0f172a;
 	}
 </style>
