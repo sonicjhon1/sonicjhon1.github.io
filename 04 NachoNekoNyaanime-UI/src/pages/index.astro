@@ -4,11 +4,11 @@ import Header from '../components/Header.astro';
 import Banner from '../components/Banner.astro';
 import Section from '../components/Section.astro';
 
-const fetchAnime = await fetch('https://api.consumet.org/meta/anilist/spy%20x%20family').then(r => r.json());
+const fetchAnime = await fetch('https://api.consumet.org/meta/anilist/info/140960').then(r => r.json());
 ---
 <script>
       async function fetchAnime() {
-		return (await fetch('https://api.consumet.org/meta/anilist/spy%20x%20family')).json();
+		return (await fetch('https://api.consumet.org/meta/anilist/info/140960')).json();
 	}
       const response = await fetchAnime();
       console.log( response.results );
@@ -17,10 +17,7 @@ const fetchAnime = await fetch('https://api.consumet.org/meta/anilist/spy%20x%20
 <Layout>
 	<Header/>
       <Banner 
-            anime={fetchAnime.results[0].description}
-            description={fetchAnime.results[0].description}
-            bannerImage={fetchAnime.results[0].cover}
-            title={fetchAnime.results[0].title}
+            anime={fetchAnime}
       />
       <Section title="Trending Now" animeList="{trending.media}"/>
       <Section title="Popular" animeList="{popular.media}"/>

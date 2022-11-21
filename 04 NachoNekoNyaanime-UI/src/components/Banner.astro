@@ -1,16 +1,69 @@
 ---
-export interface Props {
-	anime: JSON
-    title: {
-        english: string,
-        romanji: string
-    }
-    bannerImage: string
-    description: HTMLBodyElement
-}
+import Icon from './Icon.astro'
+import Genre from './Genre.astro'
 
-const { anime, title, bannerImage, description }  = Astro.props;
+export interface Props {
+	anime: {
+        title: {
+            english: string,
+            romanji: string
+        }
+        cover: string
+        description: string
+        type: string
+        duration: string
+        rating: string
+        genres: Array<String>
+        id: string
+    }
+}
+const { anime }  = Astro.props;
+
+async function stripHtml(data) {
+    data.replace(/<\/?\w*\\?>/gm, '');  
+} 
 ---
-<h1> {`Banner for ${title.english || title.romanji}`} </h1>
-<p> {description} </p>
-<img src={bannerImage}/>
+<div class="relative h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] 2xl:h-[450px]">
+    {/* The image behind the banner */}
+    {anime.cover && (
+      <img src={anime.cover} alt={`Banner for ${anime.title.english || anime.title.romanji}`} class="opacity-60"/>
+    )}
+
+    {/* The container that lies on top of the image */}
+    <div class="absolute ml-4 mt-4 space-y-2 text-white sm:ml-8 sm:mt-6 md:space-y-3 lg:mt-8 xl:mt-10 2xl:mt-12">
+      {/* the title */}
+      <p class="text-xl font-extrabold line-clamp-1 sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+        {anime.title.romanji || anime.title.english}
+      </p>
+      <p class="text-sm font-normal text-gray-300 line-clamp-1 sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
+        {anime.title.english ?? anime.title.romanji}
+      </p>
+
+      {/* Icons showing the info about the anime */}
+      <div class="flex space-x-2">
+        <Icon icon="/PlayIcon.svg" text={anime.type} />
+        <Icon icon="/ClockIcon.svg" text={`${anime.duration} Min/Ep`} />
+        <Icon icon="/LikeIcon.svg" text={`${anime.rating}%`} />
+      </div>
+
+      {/* Array of the genres */}
+      <div class="mr-2 flex flex-wrap gap-x-2 gap-y-1 sm:gap-x-3 md:gap-x-4">
+        {anime.genres.map((genre) => (
+          <Genre genre={genre} />
+        ))}
+      </div>
+
+      <p class="hidden max-w-3xl md:block md:line-clamp-3 lg:line-clamp-4 xl:line-clamp-5 2xl:line-clamp-6">
+        {stripHtml(anime.description)}
+      </p>
+
+      {/* the button at the bottom */}
+        <a href={`/${typeof window !== "undefined" && window.location.pathname === '/' ? 'anime' : 'watch'}/${anime.id}`}>
+          <button class="mt-2 flex transform items-center rounded-lg bg-[#C3073F] px-2 py-1 text-xs text-white transition duration-300 ease-in active:scale-90 sm:text-sm md:text-base">
+            <img src="/PlayIcon.svg" class="mr-1 w-5" />
+            {typeof window !== "undefined" && window.location.pathname === '/' ? 'Read More' : 'Watch Now'}
+          </button>
+        </a>
+    </div>
+  </div>
+
