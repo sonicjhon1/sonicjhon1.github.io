@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Banner from '../components/Banner.astro';
+import Section from '../components/Section.astro';
+
+const fetchAnime = await fetch('https://api.consumet.org/meta/anilist/spy%20x%20family').then(r => r.json());
+---
+<script>
+      async function fetchAnime() {
+		return (await fetch('https://api.consumet.org/meta/anilist/spy%20x%20family')).json();
+	}
+      const response = await fetchAnime();
+      console.log( response.results );
+</script>
+
+<Layout>
+	<Header/>
+      <Banner 
+            anime={fetchAnime.results[0].description}
+            description={fetchAnime.results[0].description}
+            bannerImage={fetchAnime.results[0].cover}
+            title={fetchAnime.results[0].title}
+      />
+      <Section title="Trending Now" animeList="{trending.media}"/>
+      <Section title="Popular" animeList="{popular.media}"/>
+      <Section title="Top Rated (All time)" animeList="{topRated.media}"/>
+</Layout>
+

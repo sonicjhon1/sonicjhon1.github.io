@@ -1,0 +1,16 @@
+---
+export interface Props {
+	anime: JSON
+    title: {
+        english: string,
+        romanji: string
+    }
+    bannerImage: string
+    description: HTMLBodyElement
+}
+
+const { anime, title, bannerImage, description }  = Astro.props;
+---
+<h1> {`Banner for ${title.english || title.romanji}`} </h1>
+<p> {description} </p>
+<img src={bannerImage}/>

@@ -1,0 +1,29 @@
+---
+import Icon from "../Icon.astro";
+---
+<a href={`/watch/$"{anime.id}"`} class="ml-2 mr-4 flex transform space-x-4 py-2 text-white transition duration-300 ease-out hover:scale-105">
+
+	<div class="aspect-h-1 aspect-w-3 relative w-24 flex-shrink-0">
+		<img
+		  alt="{anime.title.english || anime.title.romaji}"
+		  src="{anime.coverImage.large || anime.coverImage.medium}"
+		  class="rounded-md"
+		/>
+  	</div>
+
+	<div class="flex flex-col">
+	<p class="line-clamp-1">
+	  	{"anime.title.english || anime.title.romaji"}
+	</p>
+
+	<p class="text-gray-400 line-clamp-2">
+	  	{"anime.description.replace(/<\w*\\?>/g, '')"}
+	</p>
+
+	<div class="m-4 flex justify-end space-x-2 text-xs text-white">
+	  	<Icon icon="/PlayIcon.svg" text="{anime.format}" className="hidden sm:flex"/>
+	  	<Icon icon="/ClockIcon.svg" text="{`${anime.duration} Min`}"/>
+	  	<Icon icon="/LikeIcon.svg" text="{`${anime.meanScore}%`}"/>
+	</div>
+  </div>
+</a>

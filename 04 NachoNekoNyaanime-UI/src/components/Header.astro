@@ -1,0 +1,16 @@
+---
+import NNNIcon from "./NNNIcon.astro";
+import SearchIcon from "./SearchIcon.astro";
+---
+<header class="sticky top-0 z-51 flex h-12 w-full items-center bg-gray-900 shadow-md">
+    <a href="./">
+        <NNNIcon class="cursor-pointer sm:ml-6" />
+    </a>
+    <div class="ml-4 flex items-center rounded bg-gray-50 py-[1px] px-3 sm:ml-6">
+        <SearchIcon/>
+        <input
+            class="w-44 bg-transparent p-1 text-sm text-black placeholder-gray-400 outline-none sm:w-56 md:w-64 lg:w-72"
+            placeholder="Search for Anime to watch"
+        />
+    </div>
+</header>

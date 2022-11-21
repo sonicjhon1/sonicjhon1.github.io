@@ -1,0 +1,12 @@
+---
+export interface Props {
+    icon: string;
+    text: string;
+    className?: string;
+}
+    const { icon, text, className } = Astro.props;
+---
+<div class={`flex items-center space-x-1 ${className || ''}`}>
+    <img class="h-4 w-4" src={icon}/>
+    <p class="text-xs sm:text-sm">{text}</p>
+</div>
