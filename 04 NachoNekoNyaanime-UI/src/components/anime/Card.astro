@@ -19,7 +19,7 @@ export interface Props {
 
 const { anime, key } = Astro.props;
 ---
-<a href={`/anime/${key}`} class="w-46 transform p-2 transition duration-300 ease-out hover:scale-105 sm:w-56">
+<a href={`https://anilist.co/anime/${key}`} class="w-46 transform p-2 transition duration-300 ease-out hover:scale-105 sm:w-56">
   <div class="aspect-w-7 aspect-h-9 relative w-40 sm:w-52">
     <img alt="Cover Image" src={anime.image}/>
   </div>

@@ -5,6 +5,6 @@ export interface Props {
 
 const { genre } = Astro.props;
 ---
-<a href={`/genre/${genre}`} class="transform rounded bg-black p-1 text-xs text-white transition duration-300 ease-out hover:scale-105 sm:text-sm">
+<a href={`https://anilist.co/search/anime?genres=${genre}`} class="transform rounded bg-black p-1 text-xs text-white transition duration-300 ease-out hover:scale-105 sm:text-sm">
     {genre}
 </a>
