@@ -22,7 +22,9 @@ const { anime }  = Astro.props;
 <div class="relative h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] 2xl:h-[450px]">
     {/* The image behind the banner */}
     {anime.cover && (
-      <img src={anime.cover} alt={`Banner for ${anime.title.english || anime.title.romanji}`} class="opacity-60"/>
+      <span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+        <img src={anime.cover} alt={`Banner for ${anime.title.english || anime.title.romanji}`} class="opacity-60 min-w-full min-h-full object-cover"/>
+      </span>
     )}
 
     {/* The container that lies on top of the image */}
