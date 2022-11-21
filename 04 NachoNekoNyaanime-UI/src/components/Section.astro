@@ -4,7 +4,10 @@ import AnimeCard from './anime/Card.astro';
 export interface Props {
 	title: string
     animeList: Array<{
-        title: string
+        title: {
+            english: string,
+            romaji: string
+        }
         id: string
         type: string
         duration: string

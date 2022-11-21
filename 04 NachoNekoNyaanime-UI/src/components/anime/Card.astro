@@ -3,7 +3,10 @@ import Icon from '../Icon.astro'
 
 export interface Props {
 	anime: {
-    title: string
+    title: {
+      english: string,
+      romaji: string
+    }
     id: string
     type: string
     duration: string
@@ -22,7 +25,7 @@ const { anime, key } = Astro.props;
   </div>
   <div>
     <p class="mt-2 h-9 text-sm font-bold text-white line-clamp-2">
-      {anime.title}
+      {anime.title.english}
     </p>
 
     <div class="mt-3 flex space-x-2 text-xs text-white">
