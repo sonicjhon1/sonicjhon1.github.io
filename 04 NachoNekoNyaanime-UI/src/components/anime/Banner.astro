@@ -18,10 +18,6 @@ export interface Props {
     }
 }
 const { anime }  = Astro.props;
-
-async function stripHtml(data) {
-    data.replace(/<\/?\w*\\?>/gm, '');  
-} 
 ---
 <div class="relative h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] 2xl:h-[450px]">
     {/* The image behind the banner */}
@@ -53,8 +49,8 @@ async function stripHtml(data) {
         ))}
       </div>
 
-      <p class="hidden max-w-3xl md:block md:line-clamp-3 lg:line-clamp-4 xl:line-clamp-5 2xl:line-clamp-6">
-        {stripHtml(anime.description)}
+      <p id="desc-here" class="hidden max-w-3xl md:block md:line-clamp-3 lg:line-clamp-4 xl:line-clamp-5 2xl:line-clamp-6">
+        {(anime.description).replace(/<\/?\w*\\?>/gm, '')}
       </p>
 
       {/* the button at the bottom */}
