@@ -39,9 +39,9 @@ const { anime }  = Astro.props;
 
       {/* Icons showing the info about the anime */}
       <div class="flex space-x-2">
-        <Icon icon="/PlayIcon.svg" text={anime.type} />
-        <Icon icon="/ClockIcon.svg" text={`${anime.duration} Min/Ep`} />
-        <Icon icon="/LikeIcon.svg" text={`${anime.rating}%`} />
+        <Icon icon="./PlayIcon.svg" text={anime.type} />
+        <Icon icon="./ClockIcon.svg" text={`${anime.duration} Min/Ep`} />
+        <Icon icon="./LikeIcon.svg" text={`${anime.rating}%`} />
       </div>
 
       {/* Array of the genres */}
@@ -58,7 +58,7 @@ const { anime }  = Astro.props;
       {/* the button at the bottom */}
         <a href="https://www.youtube.com/watch?v=ofXigq9aIpo">
           <button class="mt-2 flex transform items-center rounded-lg bg-[#C3073F] px-2 py-1 text-xs text-white transition duration-300 ease-in active:scale-90 sm:text-sm md:text-base">
-            <img src="/PlayIcon.svg" class="mr-1 w-5" />
+            <img src="./PlayIcon.svg" class="mr-1 w-5" />
             Watch Now
           </button>
         </a>
