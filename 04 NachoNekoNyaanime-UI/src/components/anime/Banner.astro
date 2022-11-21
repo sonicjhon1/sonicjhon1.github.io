@@ -1,6 +1,6 @@
 ---
-import Icon from './Icon.astro'
-import Genre from './Genre.astro'
+import Icon from '../Icon.astro'
+import Genre from '../Genre.astro'
 
 export interface Props {
 	anime: {
@@ -58,10 +58,10 @@ async function stripHtml(data) {
       </p>
 
       {/* the button at the bottom */}
-        <a href={`/${typeof window !== "undefined" && window.location.pathname === '/' ? 'anime' : 'watch'}/${anime.id}`}>
+        <a href={`watch/${anime.id}`}>
           <button class="mt-2 flex transform items-center rounded-lg bg-[#C3073F] px-2 py-1 text-xs text-white transition duration-300 ease-in active:scale-90 sm:text-sm md:text-base">
             <img src="/PlayIcon.svg" class="mr-1 w-5" />
-            {typeof window !== "undefined" && window.location.pathname === '/' ? 'Read More' : 'Watch Now'}
+            Watch Now
           </button>
         </a>
     </div>

@@ -1,8 +1,29 @@
 ---
+import AnimeCard from './anime/Card.astro';
+
 export interface Props {
 	title: string
-    animeList: string
+    animeList: Array<{
+        title: string
+        id: string
+        type: string
+        duration: string
+        rating: string
+        cover: string
+        image: string
+    }>
 }
 
 const { title, animeList } = Astro.props;
 ---
+<div>
+    <p class="mt-4 ml-3 text-base font-semibold text-white sm:ml-6 sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+      {title}
+    </p>
+
+    <div class="mt-2 mb-8 ml-2 flex space-x-4 overflow-y-hidden overflow-x-scroll p-1 outline-none scrollbar-hide sm:ml-6">
+      {animeList.map((anime) => (
+        <AnimeCard key={anime.id} anime={anime}/>
+      ))}
+    </div>
+  </div>

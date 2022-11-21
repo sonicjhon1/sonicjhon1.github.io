@@ -1,0 +1,34 @@
+---
+import Icon from '../Icon.astro'
+
+export interface Props {
+	anime: {
+    title: string
+    id: string
+    type: string
+    duration: string
+    rating: string
+    cover: string
+    image: string
+  }
+  key: string
+}
+
+const { anime, key } = Astro.props;
+---
+<a href={`/anime/${key}`} class="w-46 transform p-2 transition duration-300 ease-out hover:scale-105 sm:w-56">
+  <div class="aspect-w-7 aspect-h-9 relative w-40 sm:w-52">
+    <img alt="Cover Image" src={anime.image}/>
+  </div>
+  <div>
+    <p class="mt-2 h-9 text-sm font-bold text-white line-clamp-2">
+      {anime.title}
+    </p>
+
+    <div class="mt-3 flex space-x-2 text-xs text-white">
+      <Icon icon="/PlayIcon.svg" text={anime.type} className="hidden sm:flex"/>
+      <Icon icon="ClockIcon.svg" text={`${anime.duration} Min`}/>
+      <Icon icon="LikeIcon.svg" text={`${anime.rating}%`}/>
+    </div>
+  </div>
+</a>
