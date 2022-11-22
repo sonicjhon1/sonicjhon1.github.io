@@ -26,7 +26,7 @@ import SearchIcon from "./SearchIcon.astro";
         // Make sure the input value is null on load
         document.querySelector("input").value = null;
 
-        // Execute a function when the user presses Enter on the keyboard
+        // Add an EventListener on keypresses
         input.addEventListener("keypress", function(event) {
             // If the user presses the "Enter" key on the keyboard and Cancel if the input is null
             if (event.key === "Enter" && document.querySelector("input").value != "") {
