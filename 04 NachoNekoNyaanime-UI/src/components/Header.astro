@@ -28,10 +28,8 @@ import SearchIcon from "./SearchIcon.astro";
 
         // Execute a function when the user presses Enter on the keyboard
         input.addEventListener("keypress", function(event) {
-            // If the user presses the "Enter" key on the keyboard
-            if (event.key === "Enter") {
-                // Cancel the default action, if needed
-                event.preventDefault();
+            // If the user presses the "Enter" key on the keyboard and Cancel if the input is null
+            if (event.key === "Enter" && document.querySelector("input").value != "") {
                 // Trigger the button element with a click
                 window.location.href = "https://anilist.co/search/anime?search=" + document.querySelector("input").value;
             }
