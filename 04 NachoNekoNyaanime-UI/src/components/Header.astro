@@ -9,8 +9,26 @@ import SearchIcon from "./SearchIcon.astro";
     <div class="ml-4 flex items-center rounded bg-gray-50 py-[1px] px-3 sm:ml-6">
         <SearchIcon/>
         <input
+            id="search-input"
             class="w-44 bg-transparent p-1 text-sm text-black placeholder-gray-400 outline-none sm:w-56 md:w-64 lg:w-72"
             placeholder="Search for Nyaanime to watch"
         />
     </div>
 </header>
+
+<script>
+    // Get the input field
+    var input = document.getElementById("search-input");
+
+    // Execute a function when the user presses a key on the keyboard
+    input.addEventListener("keypress", function(event) {
+    
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        window.location.href = "https://anilist.co/search/anime?search=" + document.querySelector("input").value;
+    }
+}); 
+</script>
