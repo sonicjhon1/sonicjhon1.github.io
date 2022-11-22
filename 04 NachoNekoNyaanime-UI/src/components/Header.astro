@@ -16,7 +16,7 @@ import SearchIcon from "./SearchIcon.astro";
     </div>
 </header>
 
-<script>
+<script is:raw>
     // On document loaded call the handle search function
     document.addEventListener('DOMContentLoaded', HandleSearch, false);
     function HandleSearch() {
