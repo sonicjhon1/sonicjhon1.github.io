@@ -15,10 +15,24 @@ import SearchIcon from "./SearchIcon.astro";
             placeholder="Search for Nyaanime to watch"
         />
     </div>
-    <button class="absolute right-6" onclick="">
+    <button class="absolute right-6" onclick="HandleAbout()">
         <QuestionIcon class="cursor-pointer"/>
     </button>
 </header>
+
+<script is:raw>
+    // Handle the about button
+    function HandleAbout() {
+        // If the url doesn't contain "/about"
+        if (window.location.href.indexOf("/about") == -1) {
+            // Redirect to about page
+            window.location.href = "./about"
+        } else {
+            // Else go back to home page
+            window.location.href = "./.."
+        }
+    }
+</script>
 
 <script is:raw>
     // On document loaded call the handle search function
