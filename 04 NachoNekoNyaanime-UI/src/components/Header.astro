@@ -21,34 +21,34 @@ import SearchIcon from "./SearchIcon.astro";
 </header>
 
 <script is:raw>
-    // Handle the about button
+    // Handle the about button.
     function HandleAbout() {
-        // If the url doesn't contain "/about"
+        // If the url doesn't contain "/about".
         if (window.location.href.indexOf("/about") == -1) {
-            // Redirect to about page
+            // Redirect to about page.
             window.location.href = "./about"
         } else {
-            // Else go back to home page
+            // Else go back to home page.
             window.location.href = "./.."
         }
     }
 </script>
 
 <script is:raw>
-    // On document loaded call the handle search function
+    // On document loaded call the handle search function.
     document.addEventListener('DOMContentLoaded', HandleSearch, false);
     function HandleSearch() {
-        // Get the input field
+        // Get the input field.
         var input = document.getElementById("search-input");
 
-        // Make sure the input value is null on load
+        // Make sure the input value is null on load.
         document.querySelector("input").value = null;
 
-        // Add an EventListener on keypresses
+        // Add an EventListener on keypresses.
         input.addEventListener("keypress", function(event) {
-            // If the user presses the "Enter" key on the keyboard and Cancel if the input is null
+            // If the user presses the "Enter" key on the keyboard and Cancel if the input is null.
             if (event.key === "Enter" && document.querySelector("input").value != "") {
-                // Trigger the button element with a click
+                // Trigger the button element with a click.
                 window.location.href = "https://anilist.co/search/anime?search=" + document.querySelector("input").value;
             }
         })
