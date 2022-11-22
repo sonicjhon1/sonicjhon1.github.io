@@ -1,0 +1,22 @@
+---
+export interface Props {
+	title: string;
+	tldr: string;
+	body: string;
+}
+
+const { title, tldr, body } = Astro.props;
+---
+
+<li class="border-solid border-2 border-slate-500/20 rounded-lg p-5 mt-3 bg-slate-800">
+	<h2 class="font-Lato-900 text-lg font-bold text-left pb-2 underline decoration-violet-900 text-white">
+		{title.toUpperCase()}
+	</h2>
+	<h3 class="font-Lato-900 font-bold text-left text-slate-100">
+		{tldr}
+	</h3>
+	<p class="font-Lato-400 text-left text-slate-400">
+		{body}
+		<slot/>
+	</p>
+</li>
