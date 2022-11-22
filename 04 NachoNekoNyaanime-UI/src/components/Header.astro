@@ -1,5 +1,6 @@
 ---
 import NNNIcon from "./NNNIcon.astro";
+import QuestionIcon from "./QuestionIcon.astro";
 import SearchIcon from "./SearchIcon.astro";
 ---
 <header class="sticky top-0 z-[51] flex h-12 w-full items-center bg-gray-900 shadow-md">
@@ -14,6 +15,9 @@ import SearchIcon from "./SearchIcon.astro";
             placeholder="Search for Nyaanime to watch"
         />
     </div>
+    <button class="absolute right-6" onclick="">
+        <QuestionIcon class="cursor-pointer"/>
+    </button>
 </header>
 
 <script is:raw>
