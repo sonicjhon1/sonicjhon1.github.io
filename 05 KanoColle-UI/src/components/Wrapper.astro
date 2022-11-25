@@ -1,3 +1,8 @@
+---
+import Main from "./Main.astro";
+
+---
+
 <div class="wrapper">
     <div>
         <div class="header">
@@ -23,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <main></main>
+        <Main/>
     </div>
 </div>
 
@@ -31,7 +36,8 @@
     .wrapper {
         display: block;
         inset: 0;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: visible !important;
         color: #fff;
     }
 
@@ -110,7 +116,6 @@
         padding-bottom: 1rem;
         padding-top: 20%;
         text-shadow: rgba(0,0,0,.171) .2rem -.12rem .5rem;
-
     }
     @media (min-width: 320px) and (max-width: 499px) {
         .name {
