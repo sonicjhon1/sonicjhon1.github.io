@@ -1,0 +1,167 @@
+<div class="wrapper">
+    <div>
+        <div class="header">
+            <div class="gradient"/>
+            <img class="banner gradient" src="./images/banner.jpg" alt="Channel Bannner">
+            <div class="paragraph">
+                <div class="content">
+                    <div class="name font-700">
+                        Kano
+                    </div>
+                    <div class="font-400">
+                        <div class="description" id="description">
+                            Kano is a Japanese musician and virtual YouTuber who is signed to Imperial Records. She began her artist activities as a doujin artist, uploading songs on the video-sharing website Nicovideo, before making her major debut in 2015 with the release of her single "Stella-rium". Her songs have been featured in anime series such as Wish Upon the Pleiades, Heavy Object, Azur Lane, and Uzaki-chan Wants to Hang Out!.
+                        </div>
+                        <div class="show-more">
+                            <span id="show-more">SHOW MORE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main></main>
+    </div>
+</div>
+
+<style>
+    .wrapper {
+        display: block;
+        inset: 0;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    .header {
+        display: block;
+        position: absolute;
+        margin-top: 3.5rem;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        overflow: hidden;
+    }
+
+    img.banner {
+        border-radius: 0;
+        width: auto;
+        height: 27.5rem;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%);
+        transition: opacity .75s linear;
+        z-index: -1;
+        position: absolute;
+        display: block;
+    }
+
+    .gradient {
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+        position: absolute;
+        background-image: -webkit-linear-gradient(top, 
+            rgba(0, 0, 0, 0.2) 0%, 
+            rgba(0, 0, 0, 0.5) 40%,
+            rgb(0, 0, 0.9) 80%,
+            rgb(0, 0, 0) 100%
+        );
+        transition: cubic-bezier(0.6, -0.28, 0.74, 0.05) background 120ms
+    }
+
+    .paragraph {
+        z-index: 10;
+        padding-bottom: 0 !important;
+        position: relative;
+        z-index: 1;
+        margin: 0 auto;
+        max-width: calc(100vw - 14.5rem);
+        padding: 4vh 2rem .8rem;
+    }
+
+    .content {
+        align-items: flex-start;
+        display: inline-flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 80%;
+    }
+
+    .name {
+        font-size: 2.5rem;
+        display: inline-block;
+        letter-spacing: -.02em;
+        padding-bottom: 1rem;
+        padding-top: 20%;
+        text-shadow: rgba(0,0,0,.171) .2rem -.12rem .5rem;
+
+    }
+    @media (min-width: 320px) and (max-width: 499px) {
+        .name {
+            font-size: 2rem;
+        }
+	}
+	@media (min-width: 500px) and (max-width: 640px) {
+        .name {
+            font-size: 2rem;
+        }
+	}
+    @media screen and (min-width: 642px) and (max-width: 839px) {
+        .name {
+            font-size: 2.5rem;
+        }
+    }
+    @media screen and (min-width: 840px) {
+        .name {
+            font-size: 3.5rem;
+        }
+    }
+
+    .description {
+        font-size: 1rem;
+        letter-spacing: -.0125rem;
+        line-height: 1.4;
+        max-height: calc(3*1rem*1.4);
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        overflow: hidden;
+        visibility: visible;
+        margin-bottom: .8rem;
+    }
+
+    .description.expanded {
+        --lines: 12;
+        --max-lines: var(--lines);
+        -webkit-line-clamp: var(--max-lines);
+        max-height: calc(var(--max-lines)*1rem*var(--line-height));
+    }
+
+    .show-more {
+        align-items: center;
+        color: #afafaf;
+        cursor: pointer;
+        display: inline-flex;
+        font-family: system-ui;
+        font-size: 1em;
+        font-variant: all-small-caps;
+        font-weight: 600;
+        line-height: 1;
+        margin-bottom: 1.7rem;
+    }
+
+    main {
+        position: absolute;
+        display: block;
+    }
+</style>
+
+<script is:raw>
+    const showMore = document.getElementById("show-more");
+    showMore.addEventListener("click", () => {
+        document.getElementById("description").classList.toggle("expanded");
+        if (showMore.innerText == "SHOW MORE") {
+            showMore.innerText = "SHOW LESS"
+        } else showMore.innerText = "SHOW MORE";
+    }); 
+</script>

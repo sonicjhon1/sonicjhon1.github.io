@@ -8,8 +8,14 @@ import Fonts from "../components/Fonts.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+		<!-- Favicons -->
+		<link rel="icon" type="image/x-icon" href="./favicons/favicon.ico">
+		<link rel="icon" type="image/png" sizes="16x16" href="./favicons/favicon-16x16.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png">
+    	<link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="./favicons/android-chrome-192x192.png">
+		<link rel="icon" type="image/png" sizes="512x512" href="./favicons/android-chrome-512x512.png">
+		<link rel="manifest" href="./favicons/site.webmanifest">
 		<title>KanoColle - 鹿乃's Collection</title>
 		<Fonts/>
 	</head>
@@ -20,10 +26,16 @@ import Fonts from "../components/Fonts.astro";
 <style is:global>
 	html {
 		font-family: 'Commissioner', system-ui, sans-serif;
-		background-color: #4e4e4e;
+		background-color: #000000;
 	}
 
 	* {
 		margin: 0px;
+	}
+
+	:root * {
+		scrollbar-color: #c7c7c7 rgba(94,94,94,.184);
+		scrollbar-gutter: .833333rem;
+		scrollbar-width: thin;
 	}
 </style>
