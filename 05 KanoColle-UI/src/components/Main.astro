@@ -1,14 +1,20 @@
 <main class="font-700">
     <div style="display: flex; flex-direction: column;">
-        <a href="./songs">
-            <div class="title underline">Songs</div>
-            <div class="see-all font-400">SEE ALL</div>
-        </a>
-        <div class="title underline">Albums</div>
-        <a href="./songs">
-            <div class="title underline">Singles</div>
-            <div class="see-all font-400">SEE ALL</div>
-        </a>
+        <div class="header">
+            <a href="./songs">
+                <div class="title underline">Songs</div>
+                <div class="see-all font-400">SEE ALL</div>
+            </a>
+        </div>
+        <div class="header">
+            <div class="title underline">Albums</div>
+        </div>
+        <div class="header">
+            <a href="./songs">
+                <div class="title underline">Singles</div>
+                <div class="see-all font-400">SEE ALL</div>
+            </a>
+        </div>
     </div>
 </main>
 
@@ -46,6 +52,10 @@
         }
     }
 
+    .header {
+        margin-top: 20%;
+    }
+
     a, a:visited {
         color: #FFFFFF;
         text-decoration: none;
@@ -59,7 +69,6 @@
         font-size: 2.5rem;
         display: inline-block;
         letter-spacing: -.02em;
-        margin-top: 20%;
         text-shadow: rgba(0,0,0,.171) .2rem -.12rem .5rem;
     }
     @media (min-width: 320px) and (max-width: 499px) {
