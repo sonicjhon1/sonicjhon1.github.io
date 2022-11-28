@@ -68,9 +68,9 @@ async function showSplashScreen() {
     logo2.classList.toggle('hide');
     logo3.classList.toggle('hide');
     toggleLogo3();
-    await sleep(2000);
+    await sleep(4000);
     toggleLogo3();
-    await sleep(1000);
+    await sleep(3000);
     logo3.classList.toggle('hide');
     launcher.classList.toggle('hide');
     toggleLauncher();
