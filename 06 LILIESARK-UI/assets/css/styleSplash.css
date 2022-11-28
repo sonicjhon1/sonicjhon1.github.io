@@ -9,5 +9,24 @@
 }
 
 .splash-logo {
+    min-width: 100%;
+    min-height: 100%;
+    width: 20rem;
+    height: 20rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
+#logo-1 {
+    background-image: url("../images/splash/1.png");
+}
+
+#logo-2 {
+    background-image: url("../images/splash/2.png");
+    filter: invert(100%);
+}
+
+#logo-3 {
+    background-image: url("../images/splash/3.png");
 }
