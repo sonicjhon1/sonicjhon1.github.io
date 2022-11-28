@@ -48,7 +48,9 @@ function toggleLogo3() {
 // Show splash screens
 async function showSplashScreen() {
     toggleLauncher();
-    await sleep(2000);
+    await sleep(1000);
+    launcher.classList.toggle('hide');
+    await sleep(1000);
     logo1.classList.toggle('hide');
     toggleLogo1();
     await sleep(1000);
@@ -67,6 +69,7 @@ async function showSplashScreen() {
     toggleLogo3();
     await sleep(1000);
     logo3.classList.toggle('hide');
+    launcher.classList.toggle('hide');
     toggleLauncher();
 }
 
