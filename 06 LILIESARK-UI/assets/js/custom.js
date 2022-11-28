@@ -47,6 +47,25 @@ function toggleLogo3() {
     logo3.classList.toggle('fadeIn');
 }
 
+// Play main menu audio
+function playAudio(path) {
+    var sound = new Howl({
+        src: [path],
+        autoplay: true,
+        loop: true,
+        volume: 1,
+        html5: true,
+        onend: function() {
+            console.log('Finished!');
+        }
+    });
+    
+    // Clear listener after first call.
+    sound.once('load', function(){
+        sound.play();
+    });
+}
+
 // Show splash screens
 async function showSplashScreen() {
     toggleLauncher();
@@ -72,8 +91,13 @@ async function showSplashScreen() {
     toggleLogo3();
     await sleep(3000);
     logo3.classList.toggle('hide');
+    
+    // Todo: menu screen
     launcher.classList.toggle('hide');
     toggleLauncher();
+
+    // Start audio
+    playAudio('./assets/audios/Music-Pak-01/001_BGM_Title_01_Lilie.wav')
 }
 
 // On ready
