@@ -1,3 +1,35 @@
+div#launch {
+    transition-timing-function: ease-out;
+    transition: all 0.5s;
+}
+
+button.w-launch-button:hover {
+    animation: buttonHover 0.25s forwards;
+}
+
+button.w-launch-button {
+    animation-timing-function: ease-in-out;
+    animation: buttonUnHover 0.25s forwards;
+}
+
+@keyframes buttonHover{
+    from {
+        background-color: #ffffffdb;
+    }
+    to {
+        background-color : #ffffff70;
+    }
+}
+
+@keyframes buttonUnHover{
+    from {
+        background-color : #ffffff70;
+    }
+    to {
+        background-color: #ffffffdb;
+    }
+}
+
 .fadeIn {
     animation: fadeIn 0.5s forwards;
 }

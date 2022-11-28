@@ -38,8 +38,6 @@ div#launch {
     padding: 3.5rem 10rem;
     min-height: 80%;
     min-width: 75%;
-    transition-timing-function: ease-out;
-    transition: all 0.5s;
 }
 
 @media screen and (max-width: 1000px) {
