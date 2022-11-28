@@ -1,10 +1,12 @@
 // Init variables
+var app;
 var launcher;
 var launch_button;
 var logo1, logo2, logo3;
 
 // Fill in variables
 async function init() {
+    app = document.querySelector('#app');
     launcher = document.querySelector('#launch');
     launch_button = document.querySelector('#launch-button');
     logo1 = document.querySelector('#logo-1');
@@ -48,6 +50,7 @@ function toggleLogo3() {
 // Show splash screens
 async function showSplashScreen() {
     toggleLauncher();
+    requestFullscreen(app);
     await sleep(1000);
     launcher.classList.toggle('hide');
     await sleep(1000);

@@ -13,3 +13,14 @@ async function docReady(fn) {
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+// Request fullscreen
+async function requestFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen({ navigationUI: "hide" });
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen({ navigationUI: "hide" });
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen({ navigationUI: "hide" });
+    }
+}
