@@ -1,3 +1,4 @@
+// On document ready, callbacks are called.
 async function docReady(fn) {
     // see if DOM is already available
     if (document.readyState === "complete" || document.readyState === "interactive") {
@@ -6,4 +7,9 @@ async function docReady(fn) {
     } else {
         document.addEventListener("DOMContentLoaded", fn);
     }
+}
+
+// Sleep for a certain amount of time
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
