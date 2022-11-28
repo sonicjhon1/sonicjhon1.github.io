@@ -47,7 +47,6 @@ function toggleLogo3() {
 
 // Show splash screens
 async function showSplashScreen() {
-    console.log("a")
     toggleLauncher();
     await sleep(2000);
     logo1.classList.toggle('hide');
