@@ -19,7 +19,7 @@ body {
     font-size: 16px;
     font-weight: 300;
     color: rgb(216, 216, 216);
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 div#app {
@@ -37,11 +37,13 @@ div#launch {
     justify-content: center;
     padding: 3.5rem 10rem;
     min-height: 80%;
+    min-width: 75%;
 }
 
 @media screen and (max-width: 1000px) {
     div#launch {
         padding: 3.5rem 1rem;
+        min-width: 80%;
     }
     body {
         font-size: 12px;
