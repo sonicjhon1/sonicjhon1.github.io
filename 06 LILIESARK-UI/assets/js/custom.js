@@ -13,7 +13,7 @@ async function attach() {
     await init();
 
     launch_button.addEventListener('click', () => {
-        toggleLauncher()
+        toggleLauncher();
     });
 }
 
