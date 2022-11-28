@@ -20,6 +20,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet"> 
 
         <!-- CSS and JS -->
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleAnimation.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/styleLaunch.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/styleSplash.css">
         <script type="text/javascript" src="./assets/js/util.js"></script>
@@ -27,7 +28,7 @@
     </head>
     <body>
         <div id="app">
-            <div id="launch">
+            <div class="fadeIn" id="launch">
                 <div class="window">
                     <div class="w-header">
                         <div class="w-header-left">
@@ -54,16 +55,16 @@
                                 <h6>Unreal Engine, Copyright 1998-2021, Epic Games Inc. All rights reserved.</h6>
                             </div>
                             <div class="w-button">
-                                <button class="w-launch-button">Launch</button>
+                                <button class="w-launch-button" id="launch-button">Launch</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="splash">
-                <div class="splash-logo logo-1">Logo 1</div>
-                <div class="splash-logo logo-2">Logo 2</div>
-                <div class="splash-logo logo-3">Logo 3</div>
+                <div class="splash-logo logo-1 none">Logo 1</div>
+                <div class="splash-logo logo-2 none">Logo 2</div>
+                <div class="splash-logo logo-3 none">Logo 3</div>
             </div>
             <div id="menu"></div>
         </div>
