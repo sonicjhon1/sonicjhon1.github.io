@@ -5,10 +5,10 @@ var startButton, settingsButton, quitButton, loginButton;
 // Fill in variables
 async function initMenu() {
     menu = document.querySelector('#menu');
+    login = document.querySelector('#login');
     startButton = menu.querySelector('#button-1');
     settingsButton = menu.querySelector('#button-2');
     quitButton = menu.querySelector('#button-3');
-    login = document.querySelector('#login');
     loginButton = login.querySelector('#l-login-button');
 }
 
@@ -86,8 +86,8 @@ async function attachMenu() {
             await sleep(500);
 
             login.classList.toggle('hide');
+        }
     }
-}
 }
 
 // Show Main menu
