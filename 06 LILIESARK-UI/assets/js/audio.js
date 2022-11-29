@@ -1,11 +1,20 @@
 // Init variables
 var MenuBGM, MenuBGMID = undefined;
+var MenuMoveSE;
 
 MenuBGM = new Howl({
     src: ['./assets/audios/Music-Pak-01/001_BGM_Title_01_Lilie.mp3'],
     autoplay: true,
     loop: true,
-    volume: 1,
+    volume: 0.8,
+    html5: true
+});
+
+MenuMoveSE = new Howl({
+    src: ['./assets/audios/SE/system-move-01.mp3'],
+    autoplay: true,
+    loop: false,
+    volume: 0.9,
     html5: true
 });
 
@@ -21,4 +30,8 @@ function audioMenuBGM(e) {
         MenuBGMID = MenuBGM.play();
         console.log(MenuBGMID);
     }
+}
+
+function audioMenuMoveSE() {
+    MenuMoveSE.play();
 }

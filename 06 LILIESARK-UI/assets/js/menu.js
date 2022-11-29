@@ -13,6 +13,18 @@ async function initMenu() {
 // Event handlers
 async function attachMenu() {
     await initMenu();
+
+    startButton.addEventListener('mouseover', () => {
+        audioMenuMoveSE();
+    });
+
+    settingsButton.addEventListener('mouseover', () => {
+        audioMenuMoveSE();
+    });
+
+    quitButton.addEventListener('mouseover', () => {
+        audioMenuMoveSE();
+    });
 }
 
 // Show Main menu
