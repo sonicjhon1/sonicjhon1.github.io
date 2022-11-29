@@ -17,7 +17,7 @@ input[type=text], input[type=password] {
     color: white;
     padding: 14px 20px;
     margin: 0;
-    margin-top: 2%;
+    margin-top: 7.5%;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -51,6 +51,7 @@ img.l-avatar {
 
 .l-container {
     padding: 16px;
+    margin: 2.5% 10%;
 }
 
 /* The Modal (background) */
@@ -76,7 +77,7 @@ img.l-avatar {
     background-color: #272727;
     margin: 5%; /* 5% from the top, 15% from the bottom and centered */
     border: 2px solid #93939390;
-    width: 60%; /* Could be more or less, depending on screen size */
+    width: 40%; /* Could be more or less, depending on screen size */
     height: max-content;
     border-radius: 10px;
 }

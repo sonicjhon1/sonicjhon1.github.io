@@ -1,5 +1,5 @@
 // Init variables
-var menu;
+var menu, login;
 var startButton, settingsButton, quitButton;
 
 // Fill in variables
@@ -8,6 +8,7 @@ async function initMenu() {
     startButton = menu.querySelector('#button-1');
     settingsButton = menu.querySelector('#button-2');
     quitButton = menu.querySelector('#button-3');
+    login = document.querySelector('#login');
 }
 
 // Event handlers
@@ -29,11 +30,11 @@ async function attachMenu() {
     startButton.addEventListener('click', async () => {
         audioMenuDecide01SE();
 
-        // Hide menu
-        hideMenu();
+        // Show login screen
         await sleep(500);
-        menu.classList.add('hide');
-
+        login.classList.toggle('hide');
+        login.classList.toggle('fadeOut');
+        login.classList.toggle('fadeIn');
     });
 
     settingsButton.addEventListener('click', async () => {
