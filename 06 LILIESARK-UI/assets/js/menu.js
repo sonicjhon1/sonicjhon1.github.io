@@ -1,6 +1,6 @@
 // Init variables
 var menu, login;
-var startButton, settingsButton, quitButton;
+var startButton, settingsButton, quitButton, loginButton;
 
 // Fill in variables
 async function initMenu() {
@@ -9,6 +9,7 @@ async function initMenu() {
     settingsButton = menu.querySelector('#button-2');
     quitButton = menu.querySelector('#button-3');
     login = document.querySelector('#login');
+    loginButton = login.querySelector('#l-login-button');
 }
 
 // Event handlers
@@ -63,6 +64,19 @@ async function attachMenu() {
         launcher.classList.toggle('hide');
         toggleLauncher();
     });
+
+    loginButton.addEventListener('click', async () => {
+        audioMenuDecide02SE();
+
+        // Hide menu and login screen
+        hideMenu();
+        login.classList.toggle('fadeOut');
+        login.classList.toggle('fadeIn');
+        await sleep(500);
+
+        menu.classList.add('hide');
+        login.classList.toggle('hide');
+    })
 }
 
 // Show Main menu

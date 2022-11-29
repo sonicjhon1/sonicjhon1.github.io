@@ -1,6 +1,6 @@
 // Init variables
 var MenuBGM, MenuBGMID = undefined;
-var MenuMoveSE;
+var MenuMoveSE, MenuDecide01SE, MenuDecide02SE;
 
 MenuBGM = new Howl({
     src: ['./assets/audios/Music-Pak-01/001_BGM_Title_01_Lilie.mp3'],
@@ -18,6 +18,13 @@ MenuMoveSE = new Howl({
 
 MenuDecide01SE = new Howl({
     src: ['./assets/audios/SE/system-decide-01.mp3'],
+    loop: false,
+    volume: 1,
+    html5: true
+});
+
+MenuDecide02SE = new Howl({
+    src: ['./assets/audios/SE/system-decide-02.mp3'],
     loop: false,
     volume: 1,
     html5: true
@@ -43,4 +50,8 @@ function audioMenuMoveSE() {
 
 function audioMenuDecide01SE() {
     MenuDecide01SE.play();
+}
+
+function audioMenuDecide02SE() {
+    MenuDecide02SE.play();
 }
