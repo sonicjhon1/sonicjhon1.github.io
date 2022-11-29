@@ -48,24 +48,6 @@ function toggleLogo3() {
     logo3.classList.toggle('fadeIn');
 }
 
-// Play main menu audio
-function playMenuBGM() {
-    var MenuBGM = new Howl({
-        src: ['./assets/audios/Music-Pak-01/001_BGM_Title_01_Lilie.mp3'],
-        autoplay: true,
-        loop: true,
-        volume: 1,
-        html5: true,
-        onend: function() {
-            console.log('Finished!');
-        }
-    });
-    
-    // Clear listener after first call.
-    MenuBGMID = MenuBGM.play();
-    console.log(MenuBGMID);
-}
-
 // Show splash screens
 async function showSplashScreen() {
     toggleLauncher();
@@ -93,11 +75,9 @@ async function showSplashScreen() {
     logo3.classList.toggle('hide');
     
     // Todo: menu screen
-    launcher.classList.toggle('hide');
-    toggleLauncher();
-
-    // Start audio
-    playMenuBGM();
+    //launcher.classList.toggle('hide');
+    //toggleLauncher();
+    toggleMenu();
 }
 
 // On ready
