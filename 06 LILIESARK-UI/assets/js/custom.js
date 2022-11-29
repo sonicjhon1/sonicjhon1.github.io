@@ -77,7 +77,7 @@ async function showSplashScreen() {
     // Todo: menu screen
     //launcher.classList.toggle('hide');
     //toggleLauncher();
-    toggleMenu();
+    showMenu();
 }
 
 // On ready

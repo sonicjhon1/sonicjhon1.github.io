@@ -12,13 +12,20 @@ async function attachMenu() {
     await initMenu();
 }
 
-// Toggle Main menu
-function toggleMenu() {
+// Show Main menu
+function showMenu() {
     audioMenuBGM("play");
 
-    menu.classList.toggle('hide');
-    menu.classList.toggle('fadeOut');
-    menu.classList.toggle('fadeIn');
+    menu.classList.remove('hide');
+    menu.classList.remove('fadeOut');
+    menu.classList.add('fadeIn');
+}
+
+// Hide Main menu
+function hideMenu() {
+    menu.classList.add('hide');
+    menu.classList.add('fadeOut');
+    menu.classList.remove('fadeIn');
 }
 
 // On ready
