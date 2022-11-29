@@ -18,6 +18,14 @@ MenuMoveSE = new Howl({
     html5: true
 });
 
+MenuDecide01SE = new Howl({
+    src: ['./assets/audios/SE/system-decide-01.mp3'],
+    autoplay: true,
+    loop: false,
+    volume: 1,
+    html5: true
+});
+
 // Main menu audio
 function audioMenuBGM(e) {
     // Stop audio if MenuBGMID is undefined and e == "stop".
@@ -34,4 +42,8 @@ function audioMenuBGM(e) {
 
 function audioMenuMoveSE() {
     MenuMoveSE.play();
+}
+
+function audioMenuDecide01SE() {
+    MenuDecide01SE.play();
 }

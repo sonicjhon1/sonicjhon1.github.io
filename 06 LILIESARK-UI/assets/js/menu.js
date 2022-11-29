@@ -25,6 +25,18 @@ async function attachMenu() {
     quitButton.addEventListener('mouseover', () => {
         audioMenuMoveSE();
     });
+
+    startButton.addEventListener('click', () => {
+        audioMenuDecide01SE();
+    });
+
+    settingsButton.addEventListener('click', () => {
+        audioMenuDecide01SE();
+    });
+
+    quitButton.addEventListener('click', () => {
+        audioMenuDecide01SE();
+    });
 }
 
 // Show Main menu
