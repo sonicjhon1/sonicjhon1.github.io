@@ -77,6 +77,17 @@ async function attachMenu() {
         menu.classList.add('hide');
         login.classList.toggle('hide');
     })
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = async function(event) {
+        if (event.target == login) {
+            login.classList.toggle('fadeOut');
+            login.classList.toggle('fadeIn');
+            await sleep(500);
+
+            login.classList.toggle('hide');
+    }
+}
 }
 
 // Show Main menu
