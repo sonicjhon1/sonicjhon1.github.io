@@ -3,6 +3,7 @@ var app;
 var launcher;
 var launch_button;
 var logo1, logo2, logo3;
+var MenuBGMID;
 
 // Fill in variables
 async function init() {
@@ -48,9 +49,9 @@ function toggleLogo3() {
 }
 
 // Play main menu audio
-function playAudio(path) {
-    var sound = new Howl({
-        src: [path],
+function playMenuBGM() {
+    var MenuBGM = new Howl({
+        src: ['./assets/audios/Music-Pak-01/001_BGM_Title_01_Lilie.mp3'],
         autoplay: true,
         loop: true,
         volume: 1,
@@ -61,9 +62,8 @@ function playAudio(path) {
     });
     
     // Clear listener after first call.
-    sound.once('load', function(){
-        sound.play();
-    });
+    MenuBGMID = MenuBGM.play();
+    console.log(MenuBGMID);
 }
 
 // Show splash screens
@@ -97,7 +97,7 @@ async function showSplashScreen() {
     toggleLauncher();
 
     // Start audio
-    playAudio('./assets/audios/Music-Pak-01/001_BGM_Title_01_Lilie.wav')
+    playMenuBGM();
 }
 
 // On ready
