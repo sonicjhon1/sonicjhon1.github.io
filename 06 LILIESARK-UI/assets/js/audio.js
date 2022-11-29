@@ -47,7 +47,6 @@ function audioMenuBGM(e) {
     } else if (MenuBGMID == undefined && e == "play") {
         // Clear listener after first call.
         MenuBGMID = MenuBGM.play();
-        console.log(MenuBGMID);
     }
 }
 
