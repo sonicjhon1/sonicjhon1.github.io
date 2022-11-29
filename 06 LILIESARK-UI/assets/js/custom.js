@@ -82,7 +82,6 @@ async function showSplashScreen() {
     logo3.classList.toggle('hide');
     toggleSplash();
     
-    // Todo: menu screen
     //launcher.classList.toggle('hide');
     //toggleLauncher();
     showMenu();

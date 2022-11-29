@@ -70,3 +70,7 @@ div#menu {
         padding: 1rem 5rem;
     }
 }
+
+.m-footer>h6 {
+    text-align: center;
+}

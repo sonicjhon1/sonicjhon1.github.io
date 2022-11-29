@@ -34,8 +34,16 @@ async function attachMenu() {
         audioMenuDecide01SE();
     });
 
-    quitButton.addEventListener('click', () => {
+    quitButton.addEventListener('click', async () => {
         audioMenuDecide01SE();
+        
+        hideMenu();
+        await sleep(1000);
+        audioMenuBGM('stop');
+        await sleep(1000);
+        menu.classList.add('hide');
+        launcher.classList.toggle('hide');
+        toggleLauncher();
     });
 }
 
@@ -50,7 +58,6 @@ function showMenu() {
 
 // Hide Main menu
 function hideMenu() {
-    menu.classList.add('hide');
     menu.classList.add('fadeOut');
     menu.classList.remove('fadeIn');
 }
