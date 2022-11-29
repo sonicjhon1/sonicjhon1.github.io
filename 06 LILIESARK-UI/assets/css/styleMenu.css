@@ -1,0 +1,31 @@
+div#menu {
+    background-image: url("../images/bg1.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.m-header {
+    height: 40%;
+    width: 100%;
+    display: flex;
+}
+
+.m-logo {
+    background-image: url("../images/title.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-self: center;
+}

@@ -2,7 +2,7 @@
 var app;
 var launcher;
 var launch_button;
-var logo1, logo2, logo3;
+var splash, logo1, logo2, logo3;
 var MenuBGMID;
 
 // Fill in variables
@@ -10,6 +10,7 @@ async function init() {
     app = document.querySelector('#app');
     launcher = document.querySelector('#launch');
     launch_button = document.querySelector('#launch-button');
+    splash = document.querySelector('#splash');
     logo1 = document.querySelector('#logo-1');
     logo2 = document.querySelector('#logo-2');
     logo3 = document.querySelector('#logo-3');
@@ -28,6 +29,11 @@ async function attach() {
 function toggleLauncher() {
     launcher.classList.toggle('fadeOut');
     launcher.classList.toggle('fadeIn');
+}
+
+// Toggle Splash
+function toggleSplash() {
+    splash.classList.toggle('hide')
 }
 
 // Toggle logo 1
@@ -51,6 +57,7 @@ function toggleLogo3() {
 // Show splash screens
 async function showSplashScreen() {
     toggleLauncher();
+    toggleSplash();
     requestFullscreen(app);
     await sleep(1000);
     launcher.classList.toggle('hide');
@@ -73,6 +80,7 @@ async function showSplashScreen() {
     toggleLogo3();
     await sleep(3000);
     logo3.classList.toggle('hide');
+    toggleSplash();
     
     // Todo: menu screen
     //launcher.classList.toggle('hide');
