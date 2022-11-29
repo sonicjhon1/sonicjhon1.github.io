@@ -1,8 +1,8 @@
-// Init variables
+// Init variables.
 var menu, login;
 var startButton, settingsButton, quitButton, loginButton;
 
-// Fill in variables
+// Fill in variables.
 async function initMenu() {
     menu = document.querySelector('#menu');
     login = document.querySelector('#login');
@@ -12,7 +12,7 @@ async function initMenu() {
     loginButton = login.querySelector('#l-login-button');
 }
 
-// Event handlers
+// Event handlers.
 async function attachMenu() {
     await initMenu();
 
@@ -31,7 +31,7 @@ async function attachMenu() {
     startButton.addEventListener('click', async () => {
         audioMenuDecide01SE();
 
-        // Show login screen
+        // Show login screen.
         await sleep(500);
         login.classList.toggle('hide');
         login.classList.toggle('fadeOut');
@@ -41,7 +41,7 @@ async function attachMenu() {
     settingsButton.addEventListener('click', async () => {
         audioMenuDecide01SE();
 
-        // Hide menu
+        // Hide menu.
         hideMenu();
         await sleep(500);
         menu.classList.add('hide');
@@ -50,22 +50,23 @@ async function attachMenu() {
     quitButton.addEventListener('click', async () => {
         audioMenuDecide01SE();
         
-        // Hide menu
+        // Hide menu.
         hideMenu();
         await sleep(500);
         menu.classList.add('hide');
 
-        // Stop audio and exit fullscreen
+        // Stop audio and exit fullscreen.
         audioMenuBGM('stop');
         document.exitFullscreen()
         await sleep(1000);
         
-        // Show the launcher
+        // Show the launcher.
         launcher.classList.toggle('hide');
         toggleLauncher();
     });
 
     loginButton.addEventListener('click', async () => {
+        // TODO: Implement prevent default form.
         audioMenuDecide02SE();
 
         // Hide menu and login screen.
@@ -99,7 +100,7 @@ async function attachMenu() {
     }
 }
 
-// Show Main menu
+// Show Main menu.
 function showMenu() {
     audioMenuBGM("play");
 
@@ -108,12 +109,12 @@ function showMenu() {
     menu.classList.add('fadeIn');
 }
 
-// Hide Main menu
+// Hide Main menu.
 function hideMenu() {
     menu.classList.add('fadeOut');
     menu.classList.remove('fadeIn');
 }
 
-// On ready
+// On ready.
 docReady(initMenu);
 docReady(attachMenu);

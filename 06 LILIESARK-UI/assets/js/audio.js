@@ -1,4 +1,4 @@
-// Init variables
+// Init variables.
 var MenuBGM, MenuBGMID = undefined;
 var MenuMoveSE, MenuDecide01SE, MenuDecide02SE, MenuCancel01SE;
 

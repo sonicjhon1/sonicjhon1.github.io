@@ -1,11 +1,11 @@
-// Init variables
+// Init variables.
 var app;
 var launcher;
 var launch_button;
 var splash, logo1, logo2, logo3;
 var MenuBGMID;
 
-// Fill in variables
+// Fill in variables.
 async function init() {
     app = document.querySelector('#app');
     launcher = document.querySelector('#launch');
@@ -16,7 +16,7 @@ async function init() {
     logo3 = document.querySelector('#logo-3');
 }
 
-// Event handlers
+// Event handlers.
 async function attach() {
     await init();
 
@@ -25,36 +25,36 @@ async function attach() {
     });
 }
 
-// Toggle launcher
+// Toggle launcher.
 function toggleLauncher() {
     launcher.classList.toggle('fadeOut');
     launcher.classList.toggle('fadeIn');
 }
 
-// Toggle Splash
+// Toggle Splash.
 function toggleSplash() {
     splash.classList.toggle('hide')
 }
 
-// Toggle logo 1
+// Toggle logo 1.
 function toggleLogo1() {
     logo1.classList.toggle('fadeOut');
     logo1.classList.toggle('fadeIn');
 }
 
-// Toggle logo 2
+// Toggle logo 2.
 function toggleLogo2() {
     logo2.classList.toggle('fadeOut');
     logo2.classList.toggle('fadeIn');
 }
 
-// Toggle logo 3
+// Toggle logo 3.
 function toggleLogo3() {
     logo3.classList.toggle('fadeOut');
     logo3.classList.toggle('fadeIn');
 }
 
-// Show splash screens
+// Show splash screens.
 async function showSplashScreen() {
     toggleLauncher();
     toggleSplash();
@@ -82,11 +82,9 @@ async function showSplashScreen() {
     logo3.classList.toggle('hide');
     toggleSplash();
     
-    //launcher.classList.toggle('hide');
-    //toggleLauncher();
     showMenu();
 }
 
-// On ready
+// On ready.
 docReady(init);
 docReady(attach);
