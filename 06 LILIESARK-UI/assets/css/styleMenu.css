@@ -42,5 +42,5 @@ div#menu {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    filter: drop-shadow(0 0 3px #000092a5);
+    filter: drop-shadow(0 0 3px #000065a5);
 }
