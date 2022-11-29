@@ -44,3 +44,29 @@ div#menu {
     flex-direction: column;
     filter: drop-shadow(0 0 3px #000065a5);
 }
+
+.m-button {
+    margin: 0.5rem 0;
+    padding: 1rem 3rem;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #00000010;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.m-button:hover {
+    background-color: #00000050;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+@media screen and (max-width: 1000px) {
+    .m-logo {
+        margin-top: 2rem;
+    }
+    .m-button {
+        padding: 1rem 5rem;
+    }
+}
