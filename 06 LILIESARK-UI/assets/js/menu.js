@@ -68,23 +68,32 @@ async function attachMenu() {
     loginButton.addEventListener('click', async () => {
         audioMenuDecide02SE();
 
-        // Hide menu and login screen
+        // Hide menu and login screen.
         hideMenu();
         login.classList.toggle('fadeOut');
         login.classList.toggle('fadeIn');
         await sleep(500);
 
+        // Hide menu and login screen.
         menu.classList.add('hide');
         login.classList.toggle('hide');
+        await sleep(500);
+
+        // Show the loading screen.
+        showLoading();
     })
 
-    // When the user clicks anywhere outside of the modal, close it
+    // When the user clicks anywhere outside of the modal, close it.
     window.onclick = async function(event) {
         if (event.target == login) {
+            audioMenuCancel01SE();
+
+            // Hide the login screen.
             login.classList.toggle('fadeOut');
             login.classList.toggle('fadeIn');
             await sleep(500);
 
+            // Hide the login screen.
             login.classList.toggle('hide');
         }
     }
