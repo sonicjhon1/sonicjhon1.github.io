@@ -39,8 +39,11 @@ async function attachMenu() {
         
         hideMenu();
         await sleep(1000);
+
         audioMenuBGM('stop');
+        document.exitFullscreen()
         await sleep(1000);
+        
         menu.classList.add('hide');
         launcher.classList.toggle('hide');
         toggleLauncher();
