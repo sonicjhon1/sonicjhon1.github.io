@@ -1,10 +1,11 @@
 div#menu {
-    background-image: url("../images/bg1.webp");
+    background-image: url("../images/bg1.png");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     padding: 0;
     margin: 0;
@@ -13,19 +14,33 @@ div#menu {
 }
 
 .m-header {
-    height: 40%;
     width: 100%;
     display: flex;
 }
 
 .m-logo {
-    background-image: url("../images/title.png");
-    background-repeat: no-repeat;
-    background-size: contain;
     width: 100%;
-    min-height: 100%;
     margin: 0;
     padding: 0;
     display: flex;
-    align-self: center;
+}
+
+.m-body {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    filter: drop-shadow(0 0 5px #000000);
+}
+
+.m-footer {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    filter: drop-shadow(0 0 3px #000092a5);
 }
