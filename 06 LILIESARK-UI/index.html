@@ -24,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="./assets/css/styleLaunch.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/styleSplash.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/styleMenu.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleLogin.css">
         <script type="text/javascript" src="./assets/js/howler.min.js"></script>
         <script type="text/javascript" src="./assets/js/util.js"></script>
         <script type="text/javascript" src="./assets/js/custom.js"></script>
@@ -85,7 +86,23 @@
                     <h6>The names of companies and products mentioned on this page are the trademarks or registered trademarks of their respective owners.</h6>
                 </div>
             </div>
-            <div class="fadeOut hide" id="m-login"></div>
+            <div class="fadeOut hide" id="login">
+                <form class="l-modal-content">
+                    <div class="l-avatar-container">
+                        <img src="./assets/images/cover.png" alt="Avatar" class="l-avatar">
+                    </div>
+
+                    <div class="l-container">
+                        <label for="name"><b> Username </b></label>
+                        <input type="text" placeholder="Enter Username" name="name" required>
+
+                        <label for="password"><b> Password </b></label>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+
+                        <button id="l-login-button" type="button"> Login </button>
+                    </div>
+                </form>
+            </div>
             <div class="fadeOut hide" id="loading"></div>
             <div class="fadeOut hide" id="trailer"></div>
             <div class="fadeOut hide" id="setting"></div>
