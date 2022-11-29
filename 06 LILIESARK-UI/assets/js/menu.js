@@ -1,10 +1,13 @@
 // Init variables
 var menu;
-var MenuBGM, MenuBGMID;
+var startButton, settingsButton, quitButton;
 
 // Fill in variables
 async function initMenu() {
     menu = document.querySelector('#menu');
+    startButton = menu.querySelector('#button-1');
+    settingsButton = menu.querySelector('#button-2');
+    quitButton = menu.querySelector('#button-3');
 }
 
 // Event handlers
