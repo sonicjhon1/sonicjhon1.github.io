@@ -62,6 +62,10 @@ div#menu {
     border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
+.m-button:focus {
+    background-color: #a4a4a453;
+}
+
 @media screen and (max-width: 1000px) {
     .m-logo {
         margin-top: 2rem;

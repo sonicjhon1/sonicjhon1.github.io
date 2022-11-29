@@ -12,6 +12,10 @@ button.w-launch-button {
     animation: buttonUnHover 0.25s forwards;
 }
 
+.m-button {
+    transition: all 0.25s;
+}
+
 .l-container>button {
     transition: all 0.5s;
     animation-timing-function: ease-in-out;
