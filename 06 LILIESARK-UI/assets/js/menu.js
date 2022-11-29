@@ -1,9 +1,10 @@
 // Init variables
 var menu;
+var MenuBGM, MenuBGMID;
 
 // Fill in variables
 async function initMenu() {
-
+    menu = document.querySelector('#menu');
 }
 
 // Event handlers
@@ -12,9 +13,10 @@ async function attachMenu() {
 }
 
 
+
 // Play main menu audio
 function playMenuBGM() {
-    var MenuBGM = new Howl({
+    MenuBGM = new Howl({
         src: ['./assets/audios/Music-Pak-01/001_BGM_Title_01_Lilie.mp3'],
         autoplay: true,
         loop: true,
@@ -32,8 +34,17 @@ function playMenuBGM() {
 
 // Toggle Main menu
 function toggleMenu() {
-    // Start audio
-    playMenuBGM();
+    // Start audio if MenuBGMID is not undefined.
+    if (MenuBGMID !== undefined) {
+        MenuBGM.stop();
+        MenuBGMID = undefined;
+    } else {
+        playMenuBGM();
+    }
+
+    menu.classList.toggle('hide');
+    menu.classList.toggle('fadeOut');
+    menu.classList.toggle('fadeIn');
 }
 
 // On ready
