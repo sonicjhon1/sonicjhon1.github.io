@@ -11,6 +11,10 @@ input[type=text], input[type=password] {
     background-color: #dedede;
 }
 
+input:focus-visible, button:focus-visible {
+    outline: none;
+}
+
 /* Set a style for all buttons */
 .l-container>button {
     background-color: #c1a122;
