@@ -1,6 +1,7 @@
 // Init variables.
 var MenuBGM, MenuBGMID = undefined;
 var MenuMoveSE, MenuDecide01SE, MenuDecide02SE, MenuCancel01SE;
+var TrailerAudio;
 
 MenuBGM = new Howl({
     src: ['./assets/audios/Music-Pak-01/001_BGM_Title_01_Lilie.mp3'],
@@ -37,6 +38,13 @@ MenuCancel01SE = new Howl({
     html5: true
 });
 
+TrailerAudio = new Howl({
+    src: ['./assets/video/Trailer.mp3'],
+    loop: false,
+    volume: 1,
+    html5: true
+});
+
 // Main menu audio
 function audioMenuBGM(e) {
     // Stop audio if MenuBGMID is undefined and e == "stop".
@@ -64,4 +72,8 @@ function audioMenuDecide02SE() {
 
 function audioMenuCancel01SE() {
     MenuCancel01SE.play();
+}
+
+function audioTrailer() {
+    TrailerAudio.play();
 }

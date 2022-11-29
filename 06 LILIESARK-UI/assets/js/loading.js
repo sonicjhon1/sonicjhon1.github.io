@@ -18,7 +18,7 @@ async function showLoading() {
     await sleep(1000)
     loader.classList.toggle('hide');
 
-    //startTrailer();
+    startTrailer();
 }
 
 function hideLoading() {

@@ -26,16 +26,19 @@
         <link rel="stylesheet" type="text/css" href="./assets/css/styleMenu.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/styleLogin.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/styleLoading.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleTrailer.css">
         <script type="text/javascript" src="./assets/js/howler.min.js"></script>
         <script type="text/javascript" src="./assets/js/audio.js"></script>
         <script type="text/javascript" src="./assets/js/util.js"></script>
         <script type="text/javascript" src="./assets/js/custom.js"></script>
         <script type="text/javascript" src="./assets/js/menu.js"></script>
         <script type="text/javascript" src="./assets/js/loading.js"></script>
+        <script type="text/javascript" src="./assets/js/trailer.js"></script>
 
         <!-- Preloads -->
         <link rel="preload" as="image" href="./assets/images/FanKit_001/gamelogo_003.png">
         <link rel="preload" as="image" href="./assets/images/bg1.png">
+        <link rel="preload" as="image" href="./assets/images/bg3.png">
     </head>
     <body>
         <div id="app">
@@ -119,7 +122,10 @@
                     </div>
                 </div>
             </div>
-            <div class="fadeOut hide" id="trailer"></div>
+            <div class="fadeOut hide" id="trailer">
+                <video id="trailer-video" preload="auto" autoplay muted>
+                </video>
+            </div>
             <div class="fadeOut hide" id="setting"></div>
         </div>
     </body>
