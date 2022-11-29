@@ -26,25 +26,39 @@ async function attachMenu() {
         audioMenuMoveSE();
     });
 
-    startButton.addEventListener('click', () => {
+    startButton.addEventListener('click', async () => {
         audioMenuDecide01SE();
+
+        // Hide menu
+        hideMenu();
+        await sleep(500);
+        menu.classList.add('hide');
+
     });
 
-    settingsButton.addEventListener('click', () => {
+    settingsButton.addEventListener('click', async () => {
         audioMenuDecide01SE();
+
+        // Hide menu
+        hideMenu();
+        await sleep(500);
+        menu.classList.add('hide');
     });
 
     quitButton.addEventListener('click', async () => {
         audioMenuDecide01SE();
         
+        // Hide menu
         hideMenu();
-        await sleep(1000);
+        await sleep(500);
+        menu.classList.add('hide');
 
+        // Stop audio and exit fullscreen
         audioMenuBGM('stop');
         document.exitFullscreen()
         await sleep(1000);
         
-        menu.classList.add('hide');
+        // Show the launcher
         launcher.classList.toggle('hide');
         toggleLauncher();
     });
