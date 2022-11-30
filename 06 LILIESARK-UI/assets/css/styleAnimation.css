@@ -21,6 +21,9 @@ button.w-launch-button {
     animation-timing-function: ease-in-out;
 }
 
+.s-apply-button {
+    transition: all 0.25s;
+}
 
 @keyframes buttonHover{
     from {

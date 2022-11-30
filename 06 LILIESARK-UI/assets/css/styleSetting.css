@@ -1,0 +1,84 @@
+#setting {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: start;
+}
+
+.s-bg {
+    background-image: url("../images/bg4.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.5) blur(0.25rem);
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+    position: fixed;
+    z-index: 1;
+}
+
+.s-body {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10;
+    margin: 2rem;
+    min-width: 80%;
+}
+
+.s-title {
+    display: flex;
+    align-self: center;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 2px 5px #00000075);
+    text-decoration: underline;
+}
+
+.s-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.s-checkbox-label {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.s-checkbox {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    background-color: #00000075;
+}
+
+.s-apply-button {
+    margin: 3rem 0;
+    padding: 1rem 3rem;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    border-radius: 5px;
+    background-color: #00000010;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.s-apply-button:hover {
+    background-color: #00000050;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.s-apply-button:focus {
+    background-color: #a4a4a453;
+}

@@ -27,6 +27,7 @@
         <link rel="stylesheet" type="text/css" href="./assets/css/styleLogin.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/styleLoading.css">
         <link rel="stylesheet" type="text/css" href="./assets/css/styleTrailer.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleSetting.css">
         <script type="text/javascript" src="./assets/js/howler.min.js"></script>
         <script type="text/javascript" src="./assets/js/audio.js"></script>
         <script type="text/javascript" src="./assets/js/util.js"></script>
@@ -34,6 +35,7 @@
         <script type="text/javascript" src="./assets/js/menu.js"></script>
         <script type="text/javascript" src="./assets/js/loading.js"></script>
         <script type="text/javascript" src="./assets/js/trailer.js"></script>
+        <script type="text/javascript" src="./assets/js/setting.js"></script>
 
         <!-- Preloads -->
         <link rel="preload" as="image" href="./assets/images/FanKit_001/gamelogo_003.png">
@@ -126,7 +128,30 @@
                 <video id="trailer-video" preload="auto" autoplay muted>
                 </video>
             </div>
-            <div class="fadeOut hide" id="setting"></div>
+            <div class="fadeOut hide" id="setting">
+                <div class="s-bg"></div>
+                <div class="s-body">
+                    <h1 class="s-title">GENERAL</h1>
+                    <div class="s-container">
+                        <h2 class="s-checkbox-label">Fullscreen</h2>
+                        <input class="s-checkbox" type="checkbox" id="Fullscreen" checked>
+                    </div>
+                    <div class="s-container">
+                        <h2 class="s-checkbox-label">Allow blank login</h2>
+                        <input class="s-checkbox" type="checkbox" id="Blank-Login">
+                    </div>
+                    <h1 class="s-title">AUDIO</h1>
+                    <div class="s-container">
+                        <h2 class="s-checkbox-label">Music</h2>
+                        <input class="s-checkbox" type="checkbox" id="Music" checked>
+                    </div>
+                    <div class="s-container">
+                        <h2 class="s-checkbox-label">SFX</h2>
+                        <input class="s-checkbox" type="checkbox" id="SFX" checked>
+                    </div>
+                    <button class="s-apply-button">Apply Settings</button>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -45,6 +45,11 @@ async function attachMenu() {
         hideMenu();
         await sleep(500);
         menu.classList.add('hide');
+
+        // Show setting screen.
+        await sleep(1000);
+        setting.classList.toggle('hide');
+        toggleSetting();
     });
 
     quitButton.addEventListener('click', async () => {
