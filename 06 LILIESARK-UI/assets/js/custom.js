@@ -4,6 +4,7 @@ var launcher;
 var launch_button;
 var splash, logo1, logo2, logo3;
 var MenuBGMID;
+var Fullscreen, FullscreenTMP, BlankLogin, BlankLoginTMP, Music, MusicTMP, SFX, SFXTMP;
 
 // Fill in variables.
 async function init() {
@@ -91,3 +92,27 @@ async function showSplashScreen() {
 // On ready.
 docReady(init);
 docReady(attach);
+docReady(loadSavedData);
+
+// Load saved data or create new.
+function loadSavedData() {
+    try {
+        Fullscreen = localStorage.getItem('Fullscreen') || true;
+        BlankLogin = localStorage.getItem('BlankLogin') || false;
+        Music = localStorage.getItem('Music') || true;
+        SFX = localStorage.getItem('SFX') || true;
+    } catch (e) {
+        console.log(e);
+        Fullscreen = true;
+        BlankLogin = false;
+        Music = true;
+        SFX = true;
+    } finally {
+        FullscreenTMP = Fullscreen;
+        BlankLoginTMP = BlankLogin;
+        MusicTMP = Music;
+        SFXTMP = SFX;
+
+        console.log(FullscreenTMP, BlankLoginTMP, MusicTMP, SFXTMP)
+    }
+}

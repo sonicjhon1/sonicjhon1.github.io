@@ -18,8 +18,22 @@ async function attachSetting() {
             audioMenuMoveSE();
         });
 
-        settingCheckbox.addEventListener('click', () => {
+        settingCheckbox.addEventListener('click', (e) => {
             audioMenuDecide01SE();
+            switch(e.currentTarget.id) {
+                case "Fullscreen":
+                    FullscreenTMP = !FullscreenTMP;
+                    break;
+                case "BlankLogin":
+                    BlankLoginTMP = !BlankLoginTMP;
+                    break;
+                case "Music":
+                    MusicTMP = !MusicTMP;
+                    break;
+                case "SFX":
+                    SFXTMP = !SFXTMP;
+                    break;
+            }
         });
     });
 
@@ -30,6 +44,10 @@ async function attachSetting() {
     applyButton.addEventListener('click', async () => {
         audioMenuDecide02SE();
         // TODO: Save the settings to local storage.
+        localStorage.setItem('Fullscreen', FullscreenTMP);
+        localStorage.setItem('BlankLogin', BlankLoginTMP);
+        localStorage.setItem('Music', MusicTMP);
+        localStorage.setItem('SFX', SFXTMP);
         
         // Hide setting.
         toggleSetting();
