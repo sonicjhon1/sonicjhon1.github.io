@@ -61,6 +61,7 @@ function toggleLogo3() {
 // Show splash screens.
 async function showSplashScreen() {
     loadSavedData();
+    syncSetting();
     toggleLauncher();
     toggleSplash();
     requestFullscreen(app);

@@ -92,6 +92,30 @@ function toggleSetting() {
     setting.classList.toggle("fadeIn");
 }
 
+// Sync setting.
+function syncSetting() {
+    if (localStorage.getItem("Fullscreen") ==  "true") {
+        document.querySelector("#Fullscreen").checked = true;
+    } else {
+        document.querySelector("#Fullscreen").checked = false;
+    }
+    if (localStorage.getItem("BlankLogin") ==  "true") {
+        document.querySelector("#BlankLogin").checked = true;
+    } else {
+        document.querySelector("#BlankLogin").checked = false;
+    }
+    if (localStorage.getItem("Music") ==  "true") {
+        document.querySelector("#Music").checked = true;
+    } else {
+        document.querySelector("#Music").checked = false;
+    }
+    if (localStorage.getItem("SFX") ==  "true") {
+        document.querySelector("#SFX").checked = true;
+    } else {
+        document.querySelector("#SFX").checked = false;
+    }
+}
+
 // On ready.
 docReady(initSetting);
 docReady(attachSetting);
