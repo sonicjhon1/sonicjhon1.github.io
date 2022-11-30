@@ -1,11 +1,10 @@
 // Init variables.
 var setting;
-var settingContainers, settingCheckboxes, applyButton;
+var settingCheckboxes, applyButton;
 
 // Fill in variables.
 async function initSetting() {
     setting = document.querySelector("#setting");
-    settingContainers = document.querySelectorAll(".s-container");
     settingCheckboxes = document.querySelectorAll(".s-checkbox");
     applyButton = document.querySelector("#s-apply-button");
 }
@@ -13,12 +12,6 @@ async function initSetting() {
 // Event handlers.
 async function attachSetting() {
     await initSetting();
-
-    settingContainers.forEach((settingContainer) => {
-        settingContainer.addEventListener('mouseover', () => {
-            audioMenuMoveSE();
-        });
-    });
 
     settingCheckboxes.forEach((settingCheckbox) => {
         settingCheckbox.addEventListener('mouseover', () => {
