@@ -4,7 +4,7 @@ var launcher;
 var launch_button;
 var splash, logo1, logo2, logo3;
 var MenuBGMID;
-var Fullscreen, FullscreenTMP, BlankLogin, BlankLoginTMP, Music, MusicTMP, SFX, SFXTMP;
+var Fullscreen = "true", FullscreenTMP, BlankLogin = "false", BlankLoginTMP, Music = "true", MusicTMP, SFX = "true", SFXTMP;
 
 // Fill in variables.
 async function init() {
@@ -60,6 +60,7 @@ function toggleLogo3() {
 
 // Show splash screens.
 async function showSplashScreen() {
+    loadSavedData();
     toggleLauncher();
     toggleSplash();
     requestFullscreen(app);
@@ -97,22 +98,36 @@ docReady(loadSavedData);
 // Load saved data or create new.
 function loadSavedData() {
     try {
-        Fullscreen = localStorage.getItem('Fullscreen') || true;
-        BlankLogin = localStorage.getItem('BlankLogin') || false;
-        Music = localStorage.getItem('Music') || true;
-        SFX = localStorage.getItem('SFX') || true;
+        Fullscreen = localStorage.getItem('Fullscreen');
+        BlankLogin = localStorage.getItem('BlankLogin');
+        Music = localStorage.getItem('Music');
+        SFX = localStorage.getItem('SFX');
     } catch (e) {
         console.log(e);
-        Fullscreen = true;
-        BlankLogin = false;
-        Music = true;
-        SFX = true;
+        Fullscreen = "true";
+        BlankLogin = "false";
+        Music = "true";
+        SFX = "true";
     } finally {
+        if (Fullscreen == null) {
+            Fullscreen = "true";
+            localStorage.setItem("Fullscreen", "true")
+        }
+        if (BlankLogin == null) {
+            BlankLogin = "false";
+            localStorage.setItem("BlankLogin", "false")
+        }
+        if (Music == null) {
+            Music = "true";
+            localStorage.setItem("Music", "true")
+        }
+        if (SFX == null) {
+            SFX = "true";
+            localStorage.setItem("SFX", "true")
+        }
         FullscreenTMP = Fullscreen;
         BlankLoginTMP = BlankLogin;
         MusicTMP = Music;
         SFXTMP = SFX;
-
-        console.log(FullscreenTMP, BlankLoginTMP, MusicTMP, SFXTMP)
     }
 }

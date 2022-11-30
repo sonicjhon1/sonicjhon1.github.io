@@ -22,16 +22,32 @@ async function attachSetting() {
             audioMenuDecide01SE();
             switch(e.currentTarget.id) {
                 case "Fullscreen":
-                    FullscreenTMP = !FullscreenTMP;
+                    if (Fullscreen == "false") {
+                        Fullscreen = "true";
+                    } else {
+                        Fullscreen = "false";
+                    }
                     break;
                 case "BlankLogin":
-                    BlankLoginTMP = !BlankLoginTMP;
+                    if (BlankLogin == "false") {
+                        BlankLogin = "true";
+                    } else {
+                        BlankLogin = "false";
+                    }
                     break;
                 case "Music":
-                    MusicTMP = !MusicTMP;
+                    if (Music == "false") {
+                        Music = "true";
+                    } else {
+                        Music = "false";
+                    }
                     break;
                 case "SFX":
-                    SFXTMP = !SFXTMP;
+                    if (SFX == "false") {
+                        SFX = "true";
+                    } else {
+                        SFX = "false";
+                    }
                     break;
             }
         });
@@ -43,20 +59,22 @@ async function attachSetting() {
 
     applyButton.addEventListener('click', async () => {
         audioMenuDecide02SE();
-        // TODO: Save the settings to local storage.
-        localStorage.setItem('Fullscreen', FullscreenTMP);
-        localStorage.setItem('BlankLogin', BlankLoginTMP);
-        localStorage.setItem('Music', MusicTMP);
-        localStorage.setItem('SFX', SFXTMP);
+        // Save the settings to local storage.
+        localStorage.setItem('Fullscreen', Fullscreen);
+        localStorage.setItem('BlankLogin', BlankLogin);
+        localStorage.setItem('Music', Music);
+        localStorage.setItem('SFX', SFX);
         
         // Hide setting.
         toggleSetting();
         await sleep(500);
         setting.classList.add('hide');
 
-        // Stop audio and exit fullscreen.
+        // Stop audio and exit fullscreen if needed.
         audioMenuBGM('stop');
         await sleep(1000);
+        document.exitFullscreen()
+        .catch(err=> console.log("ERROR OCCURRED"));
         
         // Show the launcher.
         launcher.classList.toggle('hide');

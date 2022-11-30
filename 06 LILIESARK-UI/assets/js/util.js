@@ -16,6 +16,7 @@ async function sleep(ms) {
 
 // Request fullscreen
 async function requestFullscreen(element) {
+    if (localStorage.getItem('Fullscreen') == "false") return;
     if (element.requestFullscreen) {
         element.requestFullscreen({ navigationUI: "hide" });
     } else if (element.mozRequestFullScreen) {

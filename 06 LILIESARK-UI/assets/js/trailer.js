@@ -18,6 +18,7 @@ async function attachTrailer() {
         await sleep(1000)
         trailer.classList.toggle('hide');
         document.exitFullscreen()
+        .catch(err=> console.log("ERROR OCCURRED"));
 
         // Show the launcher.
         launcher.classList.toggle('hide');
