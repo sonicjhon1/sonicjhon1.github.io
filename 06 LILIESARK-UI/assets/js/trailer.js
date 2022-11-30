@@ -28,9 +28,11 @@ async function attachTrailer() {
 // Start trailer.
 function startTrailer() {
     trailer.classList.toggle('hide');
+    trailerVideo.oncanplay = async function() {
+        audioTrailer();
+        trailerVideo.play();
+    }
     trailerVideo.src = './assets/video/Trailer.mp4';
-    audioTrailer();
-
     toggleTrailer();
     requestFullscreen(trailerVideo);
 }
