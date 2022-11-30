@@ -51,29 +51,35 @@ function audioMenuBGM(e) {
     if (MenuBGMID !== undefined && e == "stop") {
         MenuBGM.stop();
         MenuBGMID = undefined;
-    // else, play audio if MenuBGMID is not undefined and e == "play".
+        // else, play audio if MenuBGMID is not undefined and e == "play".
     } else if (MenuBGMID == undefined && e == "play") {
+        if (localStorage.getItem('Music') == "false") return;
         // Clear listener after first call.
         MenuBGMID = MenuBGM.play();
     }
 }
 
 function audioMenuMoveSE() {
+    if (localStorage.getItem('SFX') == "false") return;
     MenuMoveSE.play();
 }
 
 function audioMenuDecide01SE() {
+    if (localStorage.getItem('SFX') == "false") return;
     MenuDecide01SE.play();
 }
 
 function audioMenuDecide02SE() {
+    if (localStorage.getItem('SFX') == "false") return;
     MenuDecide02SE.play();
 }
 
 function audioMenuCancel01SE() {
+    if (localStorage.getItem('SFX') == "false") return;
     MenuCancel01SE.play();
 }
 
 function audioTrailer() {
+    if (localStorage.getItem('Music') == "false") return;
     TrailerAudio.play();
 }
