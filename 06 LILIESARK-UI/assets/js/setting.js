@@ -36,6 +36,7 @@ async function attachSetting() {
 
     applyButton.addEventListener('click', async () => {
         audioMenuDecide02SE();
+        // TODO: Save the settings to local storage.
         
         // Hide setting.
         toggleSetting();
@@ -44,12 +45,15 @@ async function attachSetting() {
 
         // Stop audio and exit fullscreen.
         audioMenuBGM('stop');
-        document.exitFullscreen()
         await sleep(1000);
         
         // Show the launcher.
         launcher.classList.toggle('hide');
         toggleLauncher();
+        await sleep(500);
+
+        // Click on the Launch button
+        launch_button.click();
     });
 }
 

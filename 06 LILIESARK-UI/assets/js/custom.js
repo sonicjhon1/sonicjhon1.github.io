@@ -21,6 +21,9 @@ async function attach() {
     await init();
 
     launch_button.addEventListener('click', () => {
+        // TODO: Load the settings from local storage
+
+        // Show splash screen.
         showSplashScreen();
     });
 }
