@@ -1,6 +1,7 @@
 // Init variables.
 var menu, login;
 var startButton, settingsButton, quitButton, loginButton;
+var nameInput, passwordInput;
 
 // Fill in variables.
 async function initMenu() {
@@ -10,6 +11,8 @@ async function initMenu() {
     settingsButton = menu.querySelector('#button-2');
     quitButton = menu.querySelector('#button-3');
     loginButton = login.querySelector('#l-login-button');
+    nameInput = login.querySelector('#name');
+    passwordInput = login.querySelector('#password');
 }
 
 // Event handlers.
@@ -72,21 +75,23 @@ async function attachMenu() {
 
     loginButton.addEventListener('click', async () => {
         // TODO: Implement prevent default form.
-        audioMenuDecide02SE();
-
-        // Hide menu and login screen.
-        hideMenu();
-        login.classList.toggle('fadeOut');
-        login.classList.toggle('fadeIn');
-        await sleep(500);
-
-        // Hide menu and login screen.
-        menu.classList.add('hide');
-        login.classList.toggle('hide');
-        await sleep(500);
-
-        // Show the loading screen.
-        showLoading();
+        if ( localStorage.getItem('BlankLogin') == "true" || (nameInput.value != "" && passwordInput.value != "")) {
+            audioMenuDecide02SE();
+    
+            // Hide menu and login screen.
+            hideMenu();
+            login.classList.toggle('fadeOut');
+            login.classList.toggle('fadeIn');
+            await sleep(500);
+    
+            // Hide menu and login screen.
+            menu.classList.add('hide');
+            login.classList.toggle('hide');
+            await sleep(500);
+    
+            // Show the loading screen.
+            showLoading();
+        } else return;
     })
 
     // When the user clicks anywhere outside of the modal, close it.
