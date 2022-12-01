@@ -30,6 +30,7 @@ header {
     color: white;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.170);
 }
 
 .header-bg {
@@ -84,14 +85,24 @@ header {
     padding: 0 2.5%;
     min-height: 2rem;
     border-radius: 10px;
-    border-style: none;
+    border: 1px solid rgba(255, 255, 255, 0.170);
     font-family: 'Poppins', sans-serif;
+    background-color: rgb(23 28 33);
+    color: white;
+    outline: none;
+    transition: all 0.5s;
 }
 
 @media (max-width: 500px) {
     .header-content-middle-search {
         display: none;
     }
+}
+
+.header-content-middle-search:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background-color: rgb(20 20 20);
 }
 
 .header-right {
