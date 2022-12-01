@@ -129,3 +129,53 @@ header {
     height: 2rem;
     border-radius: 50%;
 }
+
+.main-body {
+    position: relative;
+    margin: 10rem;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width:0px) and (max-width: 400px) {
+    .main-body {
+        margin: 1rem !important;
+        margin-top: 5rem !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .main-body {
+        margin: 2.5rem;
+        margin-top: 5rem;
+    }
+}
+
+.ask {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    height: 10rem;
+    padding: 2rem 2rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    border-radius: 10px;
+    background-color: rgb(31, 40, 45);
+}
+
+.ask-profile {
+    display: flex;
+    align-items: center;
+}
+
+.ask-profile > img {
+    height: 5rem;
+    border-radius: 5px;
+    margin-right: 1.5rem;
+}
+
+strong {
+    font-weight: 600;
+}
