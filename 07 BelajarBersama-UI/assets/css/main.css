@@ -140,6 +140,7 @@ header {
     position: relative;
     margin: 10rem;
     margin-top: 5rem;
+    margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
 }
