@@ -192,3 +192,71 @@ strong {
 .content {
     margin-top: 3rem;
 }
+
+ /* Dropdown Button */
+.dropbtn, .dropbtn:focus {
+    background-color: #41A294;
+    color: white;
+    padding: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+    flex: 1;
+}
+
+  /* Dropdown button on hover & focus */
+.dropbtn:hover {
+    background-color: #2e7369;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: flex;
+    flex: 1;
+    margin-bottom: 1rem;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    border-radius: 20px;
+    background-color: rgb(65, 162, 148);
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    transition: all 0.5s;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: rgb(47, 117, 106);
+    border-radius: 20px;
+}
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display:block;
+    animation: fadein 0.25s forwards ease-in-out;
+} 
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
