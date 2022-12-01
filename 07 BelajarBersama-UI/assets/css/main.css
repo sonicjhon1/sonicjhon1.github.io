@@ -16,6 +16,9 @@ body {
 
 main {
     background-color: rgb(46, 56, 63);
+    display: flex;
+    flex: 1;
+    justify-content: center;
 }
 
 header {
