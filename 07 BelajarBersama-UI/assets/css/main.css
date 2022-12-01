@@ -170,6 +170,7 @@ header {
     margin-top: 2rem;
     border-radius: 10px;
     background-color: rgb(31, 40, 45);
+    box-shadow: rgba(21, 27, 31, 0.5) 0 0 1rem;
 }
 
 .ask-profile {
@@ -262,4 +263,49 @@ strong {
     to {
         opacity: 1;
     }
+}
+
+.section {
+    margin-top: 3rem;
+}
+
+.section-title {
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: x-large;
+    text-align: center;
+}
+
+.section-body {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(31, 40, 45);
+    border-radius: 10px;
+    box-shadow: rgba(21, 27, 31, 0.5) 0 0 1rem;
+}
+
+.video-thumbnail {
+    display: flex;
+    justify-content: center;
+}
+
+.video-thumbnail > img {
+    margin: 5%;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgb(18, 42, 38);
+}
+
+.video-metadata {
+    width: 90%;
+    margin-bottom: 5%;
+}
+
+.video-title {
+    text-transform: capitalize;
+    font-weight: 800;
+    font-size: medium;
 }
