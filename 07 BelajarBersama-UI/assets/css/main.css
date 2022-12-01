@@ -162,7 +162,6 @@ header {
     height: 10rem;
     padding: 2rem 2rem;
     margin-top: 2rem;
-    margin-bottom: 3rem;
     border-radius: 10px;
     background-color: rgb(31, 40, 45);
 }
@@ -174,10 +173,19 @@ header {
 
 .ask-profile > img {
     height: 5rem;
+    width: 5rem;
     border-radius: 5px;
     margin-right: 1.5rem;
 }
 
 strong {
     font-weight: 600;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.content {
+    margin-top: 3rem;
 }
