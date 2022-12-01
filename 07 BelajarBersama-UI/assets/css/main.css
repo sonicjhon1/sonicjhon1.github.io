@@ -142,6 +142,7 @@ header {
     .main-body {
         margin: 1rem !important;
         margin-top: 5rem !important;
+        font-size: small !important;
     }
 }
 
@@ -149,6 +150,7 @@ header {
     .main-body {
         margin: 2.5rem;
         margin-top: 5rem;
+        font-size: medium;
     }
 }
 
