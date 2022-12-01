@@ -121,6 +121,9 @@ header {
 
 .header-content-right-profile-name {
     font-weight: 600;
+}
+
+#name {
     text-transform: capitalize;
 }
 
