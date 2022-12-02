@@ -278,6 +278,24 @@ strong {
     text-align: center;
 }
 
+@media (max-width: 900px) {
+    .section-container {
+        flex-direction: column !important;
+    }
+    
+}
+
+.section-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-left, .section-right {
+    margin: 5px;
+}
+
 .section-body {
     margin-top: 1rem;
     display: flex;
@@ -286,6 +304,7 @@ strong {
     background-color: rgb(31, 40, 45);
     border-radius: 10px;
     box-shadow: rgba(21, 27, 31, 0.5) 0 0 1rem;
+    max-width: 22rem;
 }
 
 .video-thumbnail {
