@@ -1,4 +1,4 @@
-if ( localStorage.getItem("username") == null || localStorage.getItem("username") == "" ) window.location.href = 'login.html';
+if ( localStorage.getItem("uname") == null || localStorage.getItem("uname") == "" ) window.location.href = 'login.html';
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -24,6 +24,6 @@ window.onclick = function(event) {
 document.addEventListener("DOMContentLoaded", function() {
     const nameElements = document.querySelectorAll('#name');
     nameElements.forEach(element => {
-        element.innerHTML = localStorage.getItem("username");
+        element.innerText = localStorage.getItem("uname");
     });
 })
