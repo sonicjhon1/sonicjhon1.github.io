@@ -321,3 +321,55 @@ a {
     font-weight: 800;
     font-size: medium;
 }
+
+.main-body > .section {
+    margin-top: 1rem;
+}
+
+.login-profile > img {
+    border-radius: 10px;
+    width: 25%;
+    border: 1px solid rgb(18, 42, 38);
+    box-shadow: 0 0 20px rgb(18, 42, 38);
+    margin: 2rem 0;
+}
+
+.login-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-input {
+    flex: 1;
+    margin: 2%;
+    padding: 2.5% 3%;
+    min-height: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.170);
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(23 28 33);
+    color: white;
+    outline: none;
+    transition: all 0.5s;
+}
+
+.login-input:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background-color: rgb(20 20 20);
+}
+
+.login-title {
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: x-large;
+    text-align: center;
+    margin-top: 10%
+}

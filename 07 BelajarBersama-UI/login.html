@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+        <title>BB | Belajar Bersama</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;800&display=swap" rel="stylesheet"> 
+
+        <link rel="stylesheet" href="./assets/css/main.css">
+        <script type="text/javascript" src="./assets/js/login.js"></script>
+
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicons/favicon-16x16.png">
+        <link rel="manifest" href="./assets/favicons/site.webmanifest">
+
+    </head>
+    <body>
+        <main>
+            <header class="header">
+                <div class="header-bg"></div>
+                <div class="header-content">
+                    <div class="header-body header-left" onclick="window.location.href='index.html'">
+                        <img src="./assets/images/bb.png" alt="BB">
+                    </div>
+                    <div class="header-body header-right">
+                        <div class="header-content-right-profile-name" id="name" onclick="window.location.href='profile.html'">
+                            Guest
+                        </div>
+                        <div class="header-content-right-profile-picture">
+                            <img src="./assets/images/pp-none.webp" alt="Profile" onclick="window.location.href='profile.html'">
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="main-body">
+                    <div class="section">
+                        <div class="section-container">
+                            <div class="section-left">
+                                <div class="section-body">
+                                        <div class="login-title">Login~</div>
+                                        <div class="login-profile">
+                                            <img src="./assets/images/profile.png">
+                                        </div>
+                                        <div class="video-metadata login-input-container">
+                                            <input class="login-input" id="uname" placeholder="Username"></input>
+                                            <input class="login-input" id="passw" placeholder="Password"></input>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button onclick="login()" class="dropbtn">Login Sekarang</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </main>
+    </body>
+</html>
