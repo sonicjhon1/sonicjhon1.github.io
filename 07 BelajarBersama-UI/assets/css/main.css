@@ -118,6 +118,7 @@ header {
     margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 @media (min-width:0px) and (max-width: 400px) {
