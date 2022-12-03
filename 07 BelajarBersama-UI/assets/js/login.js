@@ -15,3 +15,8 @@ function login() {
         window.location.href = 'index.html'
     }
 }
+
+function logout() {
+    localStorage.removeItem("uname");
+    window.location.href = 'index.html'
+}
