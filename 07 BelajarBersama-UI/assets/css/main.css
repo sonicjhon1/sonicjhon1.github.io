@@ -67,6 +67,7 @@ header {
     justify-content: flex-start;
     min-width: 10%;
     padding-left: 1rem;
+    flex: 1;
 }
 
 .header-left > img {
