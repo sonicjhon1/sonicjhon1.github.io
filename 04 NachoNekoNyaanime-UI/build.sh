@@ -10,5 +10,6 @@ npm install
 
 # Build and deploy the page
 npm run build
-mv dist/* .
-rmdir dist
+cp -R dist/* .
+rm -rfd node_modules
+rm -rfd dist
