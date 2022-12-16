@@ -1,2 +1,2 @@
 #!/bin/bash
-cd "03 Genshin-Redeem-Code-UI" && chmod +x build.sh && ./build.sh && cd "../04 NachoNekoNyaanime-UI" && chmod +x build.sh && ./build.sh
+cd "03 Genshin-Redeem-Code-UI" && chmod +x build.sh && ./build.sh && cd "../04 NachoNekoNyaanime-UI" && chmod +x build.sh && ./build.sh && cd "../05 KanoColle-UI" && chmod +x build.sh && ./build.sh
