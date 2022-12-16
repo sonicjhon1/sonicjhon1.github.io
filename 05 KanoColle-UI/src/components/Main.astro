@@ -1,6 +1,5 @@
 ---
 import Song from "./Song.astro";
-import ThreeDotsIcon from "./ThreeDotsIcon.astro";
 ---
 
 <main class="font-700">
@@ -52,15 +51,9 @@ import ThreeDotsIcon from "./ThreeDotsIcon.astro";
         }
     }
 
-    @media screen and (min-width:381px) and (max-width: 580px) {
+    @media screen and (min-width:381px) and (max-width: 800px) {
         main {
             padding-left: 2rem;
-        }
-    }
-
-    @media screen and (min-width:581px) and (max-width:800px) {
-        main {
-            padding-left: 7rem;
         }
     }
 
@@ -90,17 +83,13 @@ import ThreeDotsIcon from "./ThreeDotsIcon.astro";
         letter-spacing: -.02em;
         text-shadow: rgba(0,0,0,.171) .2rem -.12rem .5rem;
     }
-    @media (min-width: 320px) and (max-width: 499px) {
+
+    @media (min-width: 320px) and (max-width: 640px) {
         .title {
             font-size: 2rem;
         }
 	}
-	@media (min-width: 500px) and (max-width: 640px) {
-        .title {
-            font-size: 2rem;
-        }
-	}
-    @media screen and (min-width: 642px) and (max-width: 839px) {
+    @media screen and (min-width: 641px) and (max-width: 839px) {
         .title {
             font-size: 2.5rem;
         }
@@ -118,5 +107,11 @@ import ThreeDotsIcon from "./ThreeDotsIcon.astro";
 
     section {
         width: calc(100vw - 14rem);
+    }
+
+    @media screen and (max-width: 800px) {
+        section {
+            width: calc(100vw - 5rem);
+        }
     }
 </style>
