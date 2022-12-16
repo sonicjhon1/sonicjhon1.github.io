@@ -12,7 +12,7 @@ export interface Props {
 const { songThumbnail, songTitle, songArtist, songLink }  = Astro.props;
 ---
 
-<article>
+<article onclick="redirect(this)" data-link={`https://music.youtube.com/watch?v=${songLink}`}>
     <div class="song-container">
         <div class="thumbnail">
             <img src={"https://lh3.googleusercontent.com/" + songThumbnail} alt={songTitle}>
@@ -158,3 +158,9 @@ const { songThumbnail, songTitle, songArtist, songLink }  = Astro.props;
         display: flex;
     }    
 </style>
+
+<script is:inline>
+    function redirect(obj) {
+        window.location.href = obj.dataset.link
+    }
+</script>
