@@ -1,0 +1,160 @@
+---
+import ThreeDotsIcon from "./ThreeDotsIcon.astro";
+
+
+export interface Props {
+    songThumbnail: string;
+    songTitle: string;
+    songArtist: string;
+    songLink: string;
+}
+
+const { songThumbnail, songTitle, songArtist, songLink }  = Astro.props;
+---
+
+<article>
+    <div class="song-container">
+        <div class="thumbnail">
+            <img src={songThumbnail} alt={songTitle}>
+        </div>
+        <div class="song-metadata">
+            <a href={"https://music.youtube.com/watch?v=" + songLink}>
+                <span class="song-title font-500">{songTitle}</span>
+            </a>
+            <div>
+                <a href="https://music.youtube.com/channel/UCzWhKfNG1tyJ3ECQWwpLeWA" class="song-artist font-400">{songArtist}</a>
+            </div>
+        </div>
+    </div>
+    <div class="three-dots-container">
+        <div class="three-dots">
+            <a href="">
+                <ThreeDotsIcon/>
+            </a>
+        </div>
+    </div>
+</article>
+
+<style>
+    a, a:visited {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    article {
+        align-content: center;
+        cursor: pointer;
+        display: flex;
+        height: 5.25em;
+        justify-content: space-between;
+        line-height: 1.5;
+        padding: 0 1em;
+        touch-action: auto;
+        background-color: transparent;
+        position: relative;
+        margin-top: 1rem;
+        transition: background-color 0.25s ease-in-out;
+        border-radius: 10px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        user-select: none;
+    }
+
+    article:hover {
+        background-color: #2c2c2c;
+    }
+
+    .song-container {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        flex-direction: row;
+        gap: .875em;
+        max-width: calc(100% - 3em);
+    }
+
+    .thumbnail>img {
+        aspect-ratio: 1/1;
+        border-radius: 20%;
+        max-height: 4.25em;
+        max-width: 4.25em;
+        min-height: 4.25em;
+        min-width: 4.25em;
+    }
+
+    .thumbnail {
+        aspect-ratio: 1/1;
+        border-radius: 20%;
+        max-height: 4.25em;
+        max-width: 4.25em;
+        min-height: 4.25em;
+        min-width: 4.25em;
+        position: relative;
+    }
+
+    img::before {
+        content: "";
+        display: block;
+        padding-top: 66.7%;
+    }
+
+    img {
+        position: absolute;
+        -webkit-text-size-adjust: none;
+        border-radius: 20%;
+        margin: 0;
+        max-width: 100%;
+        user-select: none;
+        vertical-align: middle;
+        border-style: none;
+    }
+
+    .song-metadata {
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        max-width: calc(100% - 4.45em);
+        display: flex;
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .song-title {
+        user-select: none;
+    }
+
+    .song-title:hover {
+        text-decoration: underline;
+    }
+
+    .song-artist {
+        color: gray !important;
+    }
+
+    .song-artist:hover {
+        text-decoration: underline;
+    }
+
+    .three-dots-container {
+        display: flex;
+        align-self: center;
+        align-items: center;
+        width: 2.45em;
+        cursor: pointer;
+    }
+
+    .three-dots {
+        display: flex;
+        cursor: pointer;
+        isolation: isolate;
+        padding: .4rem;
+        position: relative;
+        touch-action: none;
+        user-select: none;
+        align-self: center;
+    }
+
+    .three-dots>a {
+        display: flex;
+    }    
+</style>
