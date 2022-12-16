@@ -15,7 +15,7 @@ const { songThumbnail, songTitle, songArtist, songLink }  = Astro.props;
 <article>
     <div class="song-container">
         <div class="thumbnail">
-            <img src={songThumbnail} alt={songTitle}>
+            <img src={"https://lh3.googleusercontent.com/" + songThumbnail} alt={songTitle}>
         </div>
         <div class="song-metadata">
             <a href={"https://music.youtube.com/watch?v=" + songLink}>
