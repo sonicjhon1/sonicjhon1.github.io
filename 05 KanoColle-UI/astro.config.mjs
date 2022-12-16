@@ -4,7 +4,7 @@ import compress from "astro-compress";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sonicj.pages.dev',
-  base: '.',
+  base: '/05 KanoColle-UI',
   build: {
     // Generate `page.html` instead of `page/index.html` during build.
     format: 'file'
