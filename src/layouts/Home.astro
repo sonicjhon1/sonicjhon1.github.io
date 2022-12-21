@@ -65,3 +65,36 @@
 		</div>
 	</div>
 </section>
+
+<script>
+	const sections = document.querySelectorAll(".section");
+	const navLists = document.querySelector(".nav").querySelectorAll("li");
+
+	async function buttonToggleSection(i) {
+		navLists.forEach( async list => {
+			list.querySelector("a").classList.remove("active");
+			list.classList.remove("active");
+			if (i.getAttribute("href") === list.querySelector("a").getAttribute("href")) {
+				list.classList.add("active");
+			}
+		});
+		document.querySelector(i.getAttribute("href")).querySelector("a").classList.add("active");
+	}
+	
+	// Toggle section
+	function toggleSection(obj) {
+		sections.forEach( async section => {
+			section.classList.remove("active");
+		});
+		document.querySelector(obj.getAttribute("href")).classList.add("active");
+	}
+
+	// Add EventListener to buttons
+	document.querySelector(".my-project").addEventListener("click", async function () {
+		toggleSection(this), buttonToggleSection(this);
+	});
+	document.querySelector(".about-me").addEventListener("click", async function () {
+		toggleSection(this), buttonToggleSection(this);
+	});
+
+</script>

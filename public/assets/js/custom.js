@@ -1,25 +1,4 @@
 function LoadThis() {
-  const navLists = document.querySelector(".nav").querySelectorAll("li");
-
-  async function buttonToggleSection(i) {
-    navLists.forEach( async list => {
-      list.querySelector("a").classList.remove("active");
-      list.classList.remove("active");
-      if (i.getAttribute("href") === list.querySelector("a").getAttribute("href")) {
-        list.classList.add("active");
-      }
-    });
-    document.querySelector(i.getAttribute("href")).querySelector("a").classList.add("active");
-  }
-
-  // Add EventListener to buttons
-  document.querySelector(".my-project").addEventListener("click", async function () {
-    toggleSection(this), buttonToggleSection(this);
-  }),
-  document.querySelector(".about-me").addEventListener("click", async function () {
-    toggleSection(this), buttonToggleSection(this);
-  })
-
   // Init cursor
   var Cursor = document.querySelectorAll(".mouse-cursor");
   if (Cursor.length) {
