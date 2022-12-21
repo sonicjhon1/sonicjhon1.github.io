@@ -1,35 +1,5 @@
 function LoadThis() {
-  
-  document.querySelectorAll(".list").forEach( list => {
-    list.addEventListener("click", function() {
-      list.classList.remove("active");
-      this.classList.add("active");
-    });
-  })
-
   const navLists = document.querySelector(".nav").querySelectorAll("li");
-  const sections = document.querySelectorAll(".section");
-  navLists.forEach( nav => {
-    nav.querySelector("a").addEventListener("click", function () {
-      toggleNav(this);
-    });
-  });
-
-  async function toggleNav(i) {
-    navLists.forEach( nav => {
-      nav.querySelector("a").classList.remove("active");
-      nav.classList.remove("active");
-      i.classList.add("active");
-      toggleSection(i);
-    })
-  }
-
-  async function toggleSection(i) {    
-    sections.forEach( async section => {
-      section.classList.remove("active");
-    });
-    document.querySelector(i.getAttribute("href")).classList.add("active");
-  }
 
   async function buttonToggleSection(i) {
     navLists.forEach( async list => {

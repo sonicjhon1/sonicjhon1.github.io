@@ -20,9 +20,12 @@ import NavList from "./NavList.astro";
 	const lists = document.querySelectorAll(".list");
 
 	// Adds a click event listener to each element in the "lists" selection. 
-	// When clicked, the "active" class is added to the clicked element.
+	// When clicked, remove all active elements and adds the "active" class is added to the clicked element.
 	lists.forEach( list => {
 		list.addEventListener("click", function() {
+			lists.forEach(list => {
+				list.classList.remove("active");
+			})
 			this.classList.add("active");
 		});
 	})
