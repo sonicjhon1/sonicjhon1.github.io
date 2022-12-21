@@ -67,9 +67,12 @@
 </section>
 
 <script>
+	// Constants
 	const sections = document.querySelectorAll(".section");
 	const navLists = document.querySelector(".nav").querySelectorAll("li");
 
+	// Takes in a parameter "i" and adds the "active" class to the list element and
+	// its anchor element inside the "navLists" selection that has an href attribute that matches the href of the "i" element.
 	async function buttonToggleSection(i) {
 		navLists.forEach( async list => {
 			list.querySelector("a").classList.remove("active");
@@ -81,7 +84,8 @@
 		document.querySelector(i.getAttribute("href")).querySelector("a").classList.add("active");
 	}
 	
-	// Toggle section
+	// Removes the "active" class from all elements in the "sections" selection and
+	// adds the "active" class to the element targeted by the href attribute of the "obj" element.
 	function toggleSection(obj) {
 		sections.forEach( async section => {
 			section.classList.remove("active");
@@ -89,7 +93,9 @@
 		document.querySelector(obj.getAttribute("href")).classList.add("active");
 	}
 
-	// Add EventListener to buttons
+	// Adds clicks event listener to the buttons. 
+	// When clicked, functions are called and the "this" keyword is passed as an argument,
+	// which refers to the element that was clicked.
 	document.querySelector(".my-project").addEventListener("click", async function () {
 		toggleSection(this), buttonToggleSection(this);
 	});
