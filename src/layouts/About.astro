@@ -3,6 +3,7 @@ import FindMe from "../components/FindMe.astro";
 import AboutInfo from "../components/AboutInfo.astro";
 import AboutResume from "../components/AboutResume.astro";
 import AboutSkill from "../components/AboutSkill.astro";
+import AboutSkillBar from "../components/AboutSkillBar.astro";
 ---
 <section id="about" class="section">
 	<div class="homecolor-box"></div>
@@ -126,88 +127,18 @@ import AboutSkill from "../components/AboutSkill.astro";
 							</div>
 						</div>
 						<AboutSkill title="UI / UX">
-							<div class="bar">
-								<div class="info">
-									<span>CSS</span>
-								</div>
-								<div class="progress-line CSS">
-									<span></span>
-								</div>
-							</div>
-							<div class="bar">
-								<div class="info">
-									<span>HTML</span>
-								</div>
-								<div class="progress-line HTML">
-									<span></span>
-								</div>
-							</div>
-							<div class="bar">
-								<div class="info">
-									<span>Javascript</span>
-								</div>
-								<div class="progress-line JS">
-									<span></span>
-								</div>
-							</div>
-							<div class="bar">
-								<div class="info">
-									<span>UXML</span>
-								</div>
-								<div class="progress-line UXML">
-									<span></span>
-								</div>
-							</div>
-							<div class="bar">
-								<div class="info">
-									<span>MarkDown</span>
-								</div>
-								<div class="progress-line MD">
-									<span></span>
-								</div>
-							</div>
+							<AboutSkillBar title="CSS" percent="96%"></AboutSkillBar>
+							<AboutSkillBar title="HTML" percent="100%"></AboutSkillBar>
+							<AboutSkillBar title="Javascript" percent="88%"></AboutSkillBar>
+							<AboutSkillBar title="UXML" percent="76%"></AboutSkillBar>
+							<AboutSkillBar title="MarkDown" percent="85%"></AboutSkillBar>
 						</AboutSkill>
 						<AboutSkill title="Coding">
-							<div class="bar">
-								<div class="info">
-									<span>C#</span>
-								</div>
-								<div class="progress-line CSharp">
-									<span></span>
-								</div>
-							</div>
-							<div class="bar">
-								<div class="info">
-									<span>Python</span>
-								</div>
-								<div class="progress-line Python">
-									<span></span>
-								</div>
-							</div>
-							<div class="bar">
-								<div class="info">
-									<span>GDScript</span>
-								</div>
-								<div class="progress-line GDScript">
-									<span></span>
-								</div>
-							</div>
-							<div class="bar">
-								<div class="info">
-									<span>Bash/Batch</span>
-								</div>
-								<div class="progress-line Bash">
-									<span></span>
-								</div>
-							</div>
-							<div class="bar">
-								<div class="info">
-									<span>Kotlin</span>
-								</div>
-								<div class="progress-line Kotlin">
-									<span></span>
-								</div>
-							</div>
+							<AboutSkillBar title="C#" percent="90%" CSharp=true></AboutSkillBar>
+							<AboutSkillBar title="Python" percent="37%"></AboutSkillBar>
+							<AboutSkillBar title="GDScript" percent="78%"></AboutSkillBar>
+							<AboutSkillBar title="Bash"	percent="86%"></AboutSkillBar>
+							<AboutSkillBar title="Kotlin" percent="21%"></AboutSkillBar>
 						</AboutSkill>
 					</div>
 				</div>

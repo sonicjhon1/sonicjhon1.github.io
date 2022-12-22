@@ -1,0 +1,51 @@
+---
+export interface Props {
+	title: string;
+	percent: string;
+    CSharp: boolean;
+}
+
+const { title, percent, CSharp } = Astro.props;
+---
+
+<div class="bar">
+	<div class="info">
+		<span>{title}</span>
+	</div>
+	<div class={`progress-line ${CSharp ? "CSharp" : title}`}>
+		<span style={`width: ${percent}`}></span>
+	</div>
+</div>
+
+<style>
+	.progress-line.CSS span::after {
+		content: "96%";
+	}
+	.progress-line.HTML span::after {
+		content: "100%";
+	}
+	.progress-line.Javascript span::after {
+		content: "88%";
+	}
+	.progress-line.UXML span::after {
+		content: "76%";
+	}
+	.progress-line.MarkDown span::after {
+		content: "85%";
+	}
+	.progress-line.CSharp span::after {
+		content: "90%";
+	}
+	.progress-line.Python span::after {
+		content: "37%";
+	}
+	.progress-line.GDScript span::after {
+		content: "78%";
+	}
+	.progress-line.Bash span::after {
+		content: "86%";
+	}
+	.progress-line.Kotlin span::after {
+		content: "21%";
+	}
+</style>

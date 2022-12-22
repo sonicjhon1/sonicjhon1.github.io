@@ -815,66 +815,6 @@ section.active {
   background: #ff651c;
   animation: animate 4s 1s cubic-bezier(1, 0, 0.5, 1) forwards;
 }
-.bar .progress-line.CSS span {
-  width: 96%;
-}
-.bar .progress-line.HTML span {
-  width: 100%;
-}
-.bar .progress-line.JS span {
-  width: 88%;
-}
-.bar .progress-line.UXML span {
-  width: 76%;
-}
-.bar .progress-line.MD span {
-  width: 85%;
-}
-.bar .progress-line.CSharp span {
-  width: 90%;
-}
-.bar .progress-line.Python span {
-  width: 37%;
-}
-.bar .progress-line.GDScript span {
-  width: 78%;
-}
-.bar .progress-line.Bash span {
-  width: 86%;
-}
-.bar .progress-line.Kotlin span {
-  width: 21%;
-}
-.progress-line.CSS span::after {
-  content: "96%";
-}
-.progress-line.HTML span::after {
-  content: "100%";
-}
-.progress-line.JS span::after {
-  content: "88%";
-}
-.progress-line.UXML span::after {
-  content: "76%";
-}
-.progress-line.MD span::after {
-  content: "85%";
-}
-.progress-line.CSharp span::after {
-  content: "90%";
-}
-.progress-line.Python span::after {
-  content: "37%";
-}
-.progress-line.GDScript span::after {
-  content: "78%";
-}
-.progress-line.Bash span::after {
-  content: "86%";
-}
-.progress-line.Kotlin span::after {
-  content: "21%";
-}
 .progress-line span::before {
   position: absolute;
   content: "";
