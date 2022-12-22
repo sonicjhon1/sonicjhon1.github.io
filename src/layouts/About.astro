@@ -4,6 +4,7 @@ import AboutInfo from "../components/AboutInfo.astro";
 import AboutResume from "../components/AboutResume.astro";
 import AboutSkill from "../components/AboutSkill.astro";
 import AboutSkillBar from "../components/AboutSkillBar.astro";
+import AboutFunFact from "../components/AboutFunFact.astro";
 ---
 <section id="about" class="section">
 	<div class="homecolor-box"></div>
@@ -154,24 +155,9 @@ import AboutSkillBar from "../components/AboutSkillBar.astro";
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-3 col-md-6">
-							<div class="funfacts-box">
-								<h3 class="counter" data-to="3" data-time="10000">2</h3>
-								<p class="fun-text">Years Of <span>Experience</span></p>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6">
-							<div class="funfacts-box">
-								<h3 class="counter" data-to="50" data-time="500">0</h3>
-								<p class="fun-text">Happy Clients</p>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6">
-							<div class="funfacts-box">
-								<h3 class="counter" data-to="20" data-time="1500">0</h3>
-								<p class="fun-text">Completed Projects</p>
-							</div>
-						</div>
+						<AboutFunFact value="3" time="10000" text="Years Of "><span>Experience</span></AboutFunFact>
+						<AboutFunFact value="50" time="500" text="Happy Clients"/>
+						<AboutFunFact value="20" time="1500" text="Completed Projects"/>
 					</div>
 				</div>
 			</div>
