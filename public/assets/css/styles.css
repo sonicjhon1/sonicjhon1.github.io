@@ -842,6 +842,14 @@ section.active {
   opacity: 0;
   animation: showText2 1s 3s linear forwards;
 }
+.funfacts-section .funfacts-box {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ff651c;
+  box-shadow: 0 0 10px rgb(0 0 0 / 85%);
+  width: 100%;
+}
 div.funfacts-box {
   margin-top: 10px;
   height: 90%;
