@@ -2,17 +2,17 @@
 export interface Props {
 	title: string;
 	percent: string;
-    CSharp: boolean;
+    addClass: string;
 }
 
-const { title, percent, CSharp } = Astro.props;
+const { title, percent, addClass } = Astro.props;
 ---
 
 <div class="bar">
 	<div class="info">
 		<span>{title}</span>
 	</div>
-	<div class={`progress-line ${CSharp ? "CSharp" : title}`}>
+	<div class={`progress-line ${title} ${addClass}`}>
 		<span style={`width: ${percent}`}></span>
 	</div>
 </div>
