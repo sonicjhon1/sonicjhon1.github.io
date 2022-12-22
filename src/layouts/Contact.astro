@@ -1,5 +1,6 @@
 ---
 import FindMe from "../components/FindMe.astro";
+import ContactInfo from "../components/ContactInfo.astro";
 ---
 <section id="contact" class="section">
 	<div class="homecolor-box"></div>
@@ -40,30 +41,9 @@ import FindMe from "../components/FindMe.astro";
 								<h4 class="content-title">Contact Info</h4>
 								<p class="info-description">Available for freelance work if the right project comes along, Feel free to contact me!</p>
 								<ul class="list-unstyled list-info" style="display: inline-grid">
-									<li>
-										<div class="media d-flex align-items-center">
-											<span class="info-icon"><i class="fas fa-user-alt"></i></span>
-											<div class="media-body info-details">
-												<h6 class="info-type">Name</h6><span class="info-value">Sonicj</span>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="media d-flex align-items-center">
-											<span class="info-icon"><i class="fas fa-phone-alt"></i></span>
-											<div class="media-body info-details">
-												<h6 class="info-type">Find me on instagram</h6><span class="info-value"><a href="https://www.instagram.com/sonic_jhon/">@sonic_jhon</a></span>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="media d-flex align-items-center">
-											<span class="info-icon"><i class="fas fa-envelope"></i></span>
-											<div class="media-body info-details">
-												<h6 class="info-type">Email Me</h6><span class="info-value"><a href="mailto:sonicjhon1@gmail.com">sonicjhon1@gmail.com</a></span>
-											</div>
-										</div>
-									</li>
+									<ContactInfo icon="fa-user-alt" type="Name">Sonicj</ContactInfo>
+									<ContactInfo icon="fa-phone-alt" type="Find me on instagram"><a href="https://www.instagram.com/sonicjhon1">@sonicjhon1</a></ContactInfo>
+									<ContactInfo icon="fa-envelope" type="Email Me"><a href="mailto:sonicjhon1@gmail.com">sonicjhon1@gmail.com</a></ContactInfo>
 								</ul>
 							</div>
 							<!-- Social Media Icons-->

@@ -1,0 +1,16 @@
+---
+export interface Props {
+	icon: string;
+	type: string;
+}
+
+const { icon, type } = Astro.props;
+---
+<li>
+    <div class="media d-flex align-items-center">
+        <span class="info-icon"><i class={`fas ${icon}`}></i></span>
+        <div class="media-body info-details">
+            <h6 class="info-type">{type}</h6><span class="info-value"><slot></slot></span>
+        </div>
+    </div>
+</li>
