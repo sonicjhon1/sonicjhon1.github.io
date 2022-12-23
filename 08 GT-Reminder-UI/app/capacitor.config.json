@@ -1,0 +1,11 @@
+{
+  "appId": "com.sonicjhon1.gtreminderui",
+  "appName": "GT-Reminder",
+  "bundledWebRuntime": false,
+  "webDir": "../dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}
