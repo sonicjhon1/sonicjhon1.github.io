@@ -11,6 +11,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@capacitor/android": "^4.6.1",
+    "@capacitor/core": "^4.6.1",
     "astro": "^1.7.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^4.6.1"
   }
 }
