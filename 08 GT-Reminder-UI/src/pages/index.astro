@@ -8,6 +8,20 @@ import Card from "../components/Card.astro";
 	<p>Welcome to our page!</p>
 	<button id="btn-login" disabled="true" onclick="login()">Log in</button>
 	<button id="btn-logout" disabled="true" onclick="logout()">Log out</button>
+	<div class="hidden" id="gated-content">
+		<p>
+			You're seeing this content because you're currently
+			<strong>logged in</strong>.
+		</p>
+		<label>
+			Access token:
+			<pre id="ipt-access-token"></pre>
+		</label>
+		<label>
+			User profile:
+			<pre id="ipt-user-profile"></pre>
+		</label>
+	</div>
 </Layout>
 
 <style>
@@ -66,6 +80,14 @@ import Card from "../components/Card.astro";
 
 		document.getElementById("btn-logout").disabled = !isAuthenticated;
 		document.getElementById("btn-login").disabled = isAuthenticated;
+
+		if (isAuthenticated) {
+			document.getElementById("gated-content").classList.remove("hidden");
+			document.getElementById("ipt-access-token").innerHTML = await auth0Client.getTokenSilently();
+			document.getElementById("ipt-user-profile").textContent = JSON.stringify(await auth0Client.getUser());
+		} else {
+			document.getElementById("gated-content").classList.add("hidden");
+		}
 	};
 
 	const login = async () => {
