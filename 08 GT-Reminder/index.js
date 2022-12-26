@@ -12,29 +12,29 @@ async function handleRequest(request) {
   try {
     let isValid = await auth.isValidJwt(request)
     if (!isValid) {
-      return new Response('Invalid JWT', { 
-        status: 403,
+      return new Response("false", { 
         headers: {
           "Access-Control-Allow-Origin":"*"
-        }
+        },
+        status: 200
       })
     }
   
     console.log('JWT is valid')
-    return new Response('Hello worker with a valid JWT!', { 
-      status: 200,
+    return new Response("true", { 
       headers: {
         "Access-Control-Allow-Origin":"*"
-      }
+      },
+      status: 200
     })
   } 
   catch (error) {
     console.log(error)
-    return new Response('Invalid JWT', { 
-      status: 403,
+    return new Response("false", { 
       headers: {
         "Access-Control-Allow-Origin":"*"
-      }
+      },
+      status: 200
     })
   }
 }

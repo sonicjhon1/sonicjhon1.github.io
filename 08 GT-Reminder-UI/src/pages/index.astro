@@ -21,6 +21,7 @@ import Card from "../components/Card.astro";
 			User profile:
 			<pre id="ipt-user-profile"></pre>
 		</label>
+		<button onclick="pingWorker()">Test</button>
 	</div>
 </Layout>
 
@@ -105,4 +106,15 @@ import Card from "../components/Card.astro";
 			},
 		});
 	};
+
+	function pingWorker() {
+		const myRequest = new Request("https://gt-reminder.sonicj.workers.dev", {
+			method: "GET",
+		});
+		fetch(myRequest)
+			.then((response) => response.blob())
+			.then((data) => {
+				console.log(data);
+			});
+	}
 </script>
