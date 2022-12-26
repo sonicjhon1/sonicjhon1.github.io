@@ -107,9 +107,12 @@ import Card from "../components/Card.astro";
 		});
 	};
 
-	function pingWorker() {
+	async function pingWorker() {
 		const myRequest = new Request("https://gt-reminder.sonicj.workers.dev", {
 			method: "GET",
+			headers: {
+				"Bearer": await auth0Client.getTokenSilently()
+			},
 		});
 		fetch(myRequest)
 			.then((response) => response.blob())

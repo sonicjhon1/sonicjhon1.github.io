@@ -14,7 +14,8 @@ async function handleRequest(request) {
     if (!isValid) {
       return new Response("false", { 
         headers: {
-          "Access-Control-Allow-Origin":"*"
+          "Access-Control-Allow-Origin":"*",
+          "Access-Control-Allow-Headers": "*"
         },
         status: 200
       })
@@ -23,7 +24,8 @@ async function handleRequest(request) {
     console.log('JWT is valid')
     return new Response("true", { 
       headers: {
-        "Access-Control-Allow-Origin":"*"
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers": "*"
       },
       status: 200
     })
@@ -32,7 +34,8 @@ async function handleRequest(request) {
     console.log(error)
     return new Response("false", { 
       headers: {
-        "Access-Control-Allow-Origin":"*"
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers": "*"
       },
       status: 200
     })
