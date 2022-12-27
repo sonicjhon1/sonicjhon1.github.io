@@ -34,10 +34,7 @@ async function isValidJwt(request) {
  */
 function getJwt(request) {
   const authHeader = request.headers.get('Authorization');
-  if (!authHeader || authHeader.substring(0, 6) !== 'Bearer') {
-    return null
-  }
-  return authHeader.substring(6).trim()
+  return authHeader
 }
 
 /**
@@ -88,11 +85,11 @@ async function isValidJwtSignature(token) {
     kty: "RSA",
     key_ops: ['verify'],
     use: "sig",
-    x5c: ["MIIDCzCCAfOgAwIBAgIJXs0oPWThI8kPMA0GCSqGSIb3DQEBCwUAMCMxITAfBgNVBAMTGHdvbGZ0cmFja2VyLmF1LmF1dGgwLmNvbTAeFw0xNzExMjkwNzQ5MjNaFw0zMTA4MDgwNzQ5MjNaMCMxITAfBgNVBAMTGHdvbGZ0cmFja2VyLmF1LmF1dGgwLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANdgF6PPBcEjHcw/ULja/NDZPcVU/8D3k5TY7+pTrM51z6lE0C81xMJwOTKq9IF9dy5TGkA5Wfyr1B+yOxGiUeWk8gdDL1Ub6iNzrQ33FY1mbYVL3cWIM4tfqZ8IxVMgHZMGHfRGvPFcL3iBfrevx5aJbHUAVCecwLQpaGIC+UFtUSEbPoIp1BTyW2ElULiksGBuPGuSjfnGLtuJE1sprj8obyb+dbz3vHvNIZi1g2OA4aFZuyBH6v/Lhp0mIHTtmJgde8gM9mbgR7AZap+mGhUerQsnAB5P8XGpmiZslBrBdv6FlwnL4OfCUx7NItjaSC204O/I5jCIMVrqoThbiH0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUAr4kHf0TYR1teaBpAGtjPXH/xZ8wDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQA6NsyUvjnbUeAgnAZpKfUzDviJDYrkvcVeCXqy3yB8oJ6nTBDKXnIjQ9/5NvCpqVABxflvAfvUxG7APyBDAHOnvoiUUPE4GOFTNuqCAcwXT1fFETdZdozdpfA2835rVT5wvoo6Rt03vDpSYJH8h9O+EFfrpH/w+J4MIkRdy5DDCve0eUdICKZJEUccIkni9p5p23KdPjhHU+lztKzz6oUUsmSzJQLwGJ7p1dl25nKbobr+btCqLD8Ln/U9iryTK371JMg/XPh+CsBD+ofSEF0cKcrkhr5TLzA8R+ua4NxH6t5D6AFdNUyE1Pv8GfRjcuSBdI87d1Clne9m8JlBi8xZ"],
-    n: "12AXo88FwSMdzD9QuNr80Nk9xVT_wPeTlNjv6lOsznXPqUTQLzXEwnA5Mqr0gX13LlMaQDlZ_KvUH7I7EaJR5aTyB0MvVRvqI3OtDfcVjWZthUvdxYgzi1-pnwjFUyAdkwYd9Ea88VwveIF-t6_HlolsdQBUJ5zAtCloYgL5QW1RIRs-ginUFPJbYSVQuKSwYG48a5KN-cYu24kTWymuPyhvJv51vPe8e80hmLWDY4DhoVm7IEfq_8uGnSYgdO2YmB17yAz2ZuBHsBlqn6YaFR6tCycAHk_xcamaJmyUGsF2_oWXCcvg58JTHs0i2NpILbTg78jmMIgxWuqhOFuIfQ",
+    x5c: ["MIIDHTCCAgWgAwIBAgIJRmlkgSgOKFesMA0GCSqGSIb3DQEBCwUAMCwxKjAoBgNVBAMTIWRldi10ZXN4eGk1MXhyODhnY2djLnVzLmF1dGgwLmNvbTAeFw0yMjEyMjYwNTQwNTVaFw0zNjA5MDMwNTQwNTVaMCwxKjAoBgNVBAMTIWRldi10ZXN4eGk1MXhyODhnY2djLnVzLmF1dGgwLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMmYXU4WqytaVzZi012hdy7Ol4JLj1xsXZNsWiVOEyGRoI9a1L9witf6t9CF51b9FlK60m7bh3y5tf6dw8LStwz6N4sl3PKm8j5EvJrQm9eD2BVue481KqUqYHVrBYaptRz6MUzoeFPSaNnRwA5aLO3haICSJARuJIiNaeu/5XopgEQ2/m3ew8qGk3p90Vn/LywCpoqBGdJenuT+n+TGQJKIUNz7OMggTpecX9GBNUpyhiGvAGIIGD2sFMYJM+A1mnPzBAe7SgGiByI5uGB4lOUwMezsX+NPp//ldWmp8U76ba/mKfI4dBDZJwbBE6B+90V8xr2Xqy3nhk9i0aj4TSkCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQU5lTzOrYvsh2pS6DFqkzfRPKetNcwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQBtdiXqbEn5Aw6/Ujq3KiR2Lfy85wvlQbKxzNg/R7KPF6AohOdqgLP68JA0SjhkK0QakIEprK14lzCWpy1ADTBiGhAEFAsYoWE0HW1F0rKe7Zo9ubQOH7woLh/FqsZrDqRHmN1ORFw5DfYf+hOAPZqycipAKl8pawbadlVedeKIViycga0cxovqqmsP2aXQ3GWjOuR+/+ddasMKpHQfkPBdpsrImbHC9Edsa7P/fzCj+/0HDRdPScrCxZdoFDtTx82rBNJn1K7cjV+vUd5zIzTX4MFQIBG89NgKahJq0bi0tpsy7JIAuB2HCYgVw7FI6X7eWGbFcgHG/Y6Iv40PeKRQ"],
+    n: "yZhdTharK1pXNmLTXaF3Ls6XgkuPXGxdk2xaJU4TIZGgj1rUv3CK1_q30IXnVv0WUrrSbtuHfLm1_p3DwtK3DPo3iyXc8qbyPkS8mtCb14PYFW57jzUqpSpgdWsFhqm1HPoxTOh4U9Jo2dHADlos7eFogJIkBG4kiI1p67_leimARDb-bd7DyoaTen3RWf8vLAKmioEZ0l6e5P6f5MZAkohQ3Ps4yCBOl5xf0YE1SnKGIa8AYggYPawUxgkz4DWac_MEB7tKAaIHIjm4YHiU5TAx7Oxf40-n_-V1aanxTvptr-Yp8jh0ENknBsEToH73RXzGvZerLeeGT2LRqPhNKQ",
     e: "AQAB",
-    kid: "MTQ0NjMxOTBCNEJDMjEyM0ZDMkMwQTRGRTRCRTkzRkU0NkY2NTU0RQ",
-    x5t: "MTQ0NjMxOTBCNEJDMjEyM0ZDMkMwQTRGRTRCRTkzRkU0NkY2NTU0RQ"
+    kid: "OfiusNg3G7MOWAwTKN1vo",
+    x5t: "XzJDiyVwDnPp7N8i6ljtK_ymCRo"
     }
   const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
   return crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, signature, data)

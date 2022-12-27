@@ -111,7 +111,7 @@ import Card from "../components/Card.astro";
 		const myRequest = new Request("https://gt-reminder.sonicj.workers.dev", {
 			method: "GET",
 			headers: {
-				"Bearer": await auth0Client.getTokenSilently()
+				"Authorization": await auth0Client.getTokenSilently()
 			},
 		});
 		fetch(myRequest)
