@@ -36,6 +36,18 @@ import Layout from "../layouts/Layout.astro";
 </style>
 
 <script is:inline>
+	function setCookie(name, value, days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "") + expires + "; path=/";
+	}
+</script>
+
+<script is:inline>
 	let auth0Client = null;
 
 	const fetchAuthConfig = () => fetch("/auth_config.json");
@@ -107,16 +119,22 @@ import Layout from "../layouts/Layout.astro";
 	};
 
 	async function pingWorker() {
+		let token = await auth0Client.getTokenSilently();
+		let cookieTokenName = "uw" + "u12" + '3' + "sj";
 		const myRequest = new Request("https://gt-reminder.sonicj.workers.dev", {
 			method: "GET",
 			headers: {
-				"Authorization": await auth0Client.getTokenSilently()
+				Authorization: token,
 			},
 		});
 		fetch(myRequest)
-			.then((response) => response.blob())
+			.then((response) => {
+				return response.json();
+			})
 			.then((data) => {
-				console.log(data);
+				if (data) {
+					setCookie(cookieTokenName, token, 31);
+				}
 			});
 	}
 </script>
