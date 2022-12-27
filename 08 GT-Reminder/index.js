@@ -3,10 +3,12 @@ addEventListener("fetch", event => {
 });
 
 async function parseJwt(str) {
-	if (str.startsWith("eyJ")) {
-		return true;
-	}
-	return false;
+  if (str == null && str == undefined) {
+    return false;
+  }
+  if (str.startsWith("eyJ")) {
+    return true;
+  }
 }
 
 async function handleRequest(request) {
@@ -14,7 +16,7 @@ async function handleRequest(request) {
 	const result = await parseJwt(jwt);
 
 	try {
-		if (result) {
+		if (!result) {
 			return new Response("false", {
 				headers: {
 					"Access-Control-Allow-Origin": "*",
