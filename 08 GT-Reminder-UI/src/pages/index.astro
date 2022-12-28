@@ -12,7 +12,7 @@ import { Icon } from "astro-icon";
 				id="login"
 				disabled="true"
 				onclick="login()"
-				class="max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse disabled:opacity-10 disabled:hover:animate-none"
+				class="max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse hover:cursor-pointer disabled:opacity-10 disabled:hover:animate-none disabled:hover:cursor-not-allowed"
 				>Login</button
 			>
 		</div>
@@ -87,8 +87,8 @@ import { Icon } from "astro-icon";
 	};
 
 	const updateUI = async () => {
-		const isAuthenticated = await auth0Client.isAuthenticated();
 		document.getElementById("gated-content").classList.add("hidden");
+		const isAuthenticated = await auth0Client.isAuthenticated();
 
 		if (isAuthenticated && pingWorker && uHide()) {
 			document.getElementById("login").onclick = logout;
