@@ -5,17 +5,14 @@ import { Icon } from "astro-icon";
 
 <Layout>
 	<h2 class="Neohellenic-700 text-4xl font-bold underline text-center mt-4 drop-shadow-lg">Growtopia Reminder</h2>
-	<h1 class="text-center text-sm max-w-[60%] self-center text-slate-300 mb-6 mx-6 drop-shadow-md">Before you could access this page, please log in using your account and license key.</h1>
-	<div class="w-full flex justify-center">
-		<div class="max-w-[60%] flex flex-1 flex-col">
-			<button id="login" disabled="true" onclick="login()" class="m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse disabled:opacity-10 disabled:hover:animate-none">Login</button>
+	<h1 class="text-center text-sm max-w-[60%] self-center text-slate-300 mx-6 drop-shadow-md">Before you could access this page, please log in using your account and license key.</h1>
+	<div class="w-full h-full flex justify-center mb-4">
+		<div class="max-w-[60%] flex flex-1 flex-col justify-center">
+			<button id="login" disabled="true" onclick="login()" class="max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse disabled:opacity-10 disabled:hover:animate-none">Login</button>
 		</div>
 	</div>
 	<div class="hidden" id="gated-content">
-		<p>
-			You're seeing this content because you're currently
-			<strong>logged in</strong>.
-		</p>
+		<p>You're seeing this content because you're currently <strong>Logged in</strong>.</p>
 		<label>
 			Access token:
 			<pre id="ipt-access-token"></pre>
