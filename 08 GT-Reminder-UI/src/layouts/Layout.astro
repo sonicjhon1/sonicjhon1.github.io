@@ -1,3 +1,7 @@
+---
+import Font from "../contents/Font.astro";
+---
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -5,8 +9,9 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>GT-Reminder</title>
+		<Font/>
 	</head>
-	<body>
+	<body class="Neohellenic-400 bg-gray-800 text-gray-100 flex flex-1 flex-col justify-center">
 		<slot />
 	</body>
 </html>

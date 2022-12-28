@@ -1,12 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon";
 ---
 
 <Layout>
-	<h2>SPA Authentication Sample</h2>
-	<p>Welcome to our page!</p>
-	<button id="btn-login" disabled="true" onclick="login()">Log in</button>
-	<button id="btn-logout" disabled="true" onclick="logout()">Log out</button>
+	<h2 class="Neohellenic-700 text-4xl font-bold underline text-center mt-4 drop-shadow-lg">Growtopia Reminder</h2>
+	<h1 class="text-center text-sm max-w-[60%] self-center text-slate-300 mb-6 mx-6 drop-shadow-md">Before you could access this page, please log in using your account and license key.</h1>
+	<div class="w-full flex justify-center">
+		<div class="max-w-[60%] flex flex-1 flex-col">
+			<button id="login" disabled="true" onclick="login()" class="m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse disabled:opacity-10 disabled:hover:animate-none">Login</button>
+		</div>
+	</div>
 	<div class="hidden" id="gated-content">
 		<p>
 			You're seeing this content because you're currently
@@ -23,17 +27,6 @@ import Layout from "../layouts/Layout.astro";
 		<button onclick="pingWorker()">Test</button>
 	</div>
 </Layout>
-
-<style>
-	.hidden {
-		display: none;
-	}
-
-	label {
-		margin-bottom: 10px;
-		display: block;
-	}
-</style>
 
 <script is:inline>
 	function setCookie(name, value, days) {
@@ -90,14 +83,17 @@ import Layout from "../layouts/Layout.astro";
 	const updateUI = async () => {
 		const isAuthenticated = await auth0Client.isAuthenticated();
 
-		document.getElementById("btn-logout").disabled = !isAuthenticated;
-		document.getElementById("btn-login").disabled = isAuthenticated;
-
 		if (isAuthenticated) {
+			document.getElementById("login").onclick = logout;
+			document.getElementById("login").innerText = "Logout";
+			document.getElementById("login").disabled = false;
 			document.getElementById("gated-content").classList.remove("hidden");
 			document.getElementById("ipt-access-token").innerHTML = await auth0Client.getTokenSilently();
 			document.getElementById("ipt-user-profile").textContent = JSON.stringify(await auth0Client.getUser());
 		} else {
+			document.getElementById("login").onclick = login;
+			document.getElementById("login").innerText = "Login";
+			document.getElementById("login").disabled = false;
 			document.getElementById("gated-content").classList.add("hidden");
 		}
 	};
@@ -120,7 +116,7 @@ import Layout from "../layouts/Layout.astro";
 
 	async function pingWorker() {
 		let token = await auth0Client.getTokenSilently();
-		let cookieTokenName = "uw" + "u12" + '3' + "sj";
+		let cookieTokenName = "uw" + "u12" + "3" + "sj";
 		const myRequest = new Request("https://gt-reminder.sonicj.workers.dev", {
 			method: "GET",
 			headers: {
