@@ -6,22 +6,31 @@ import { Icon } from "astro-icon";
 <Layout>
 	<h2 class="Neohellenic-700 text-4xl font-bold underline text-center mt-4 drop-shadow-lg">Growtopia Reminder</h2>
 	<h1 class="text-center text-sm max-w-[60%] self-center text-slate-300 mx-6 drop-shadow-md">Before you could access this page, please log in using your account and license key.</h1>
-	<div class="w-full h-full flex justify-center mb-4">
+	<div class="w-full h-full flex justify-center">
 		<div class="max-w-[60%] flex flex-1 flex-col justify-center">
-			<button id="login" disabled="true" onclick="login()" class="max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse disabled:opacity-10 disabled:hover:animate-none">Login</button>
+			<button
+				id="login"
+				disabled="true"
+				onclick="login()"
+				class="max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse disabled:opacity-10 disabled:hover:animate-none"
+				>Login</button
+			>
 		</div>
 	</div>
-	<div class="hidden" id="gated-content">
-		<p>You're seeing this content because you're currently <strong>Logged in</strong>.</p>
-		<label>
-			Access token:
-			<pre id="ipt-access-token"></pre>
-		</label>
-		<label>
-			User profile:
-			<pre id="ipt-user-profile"></pre>
-		</label>
-		<button onclick="pingWorker()">Test</button>
+	<div class="w-full mb-4">
+		<div class="hidden" id="gated-content">
+			<div class="w-full flex flex-1 justify-center flex-col">
+				<label class="text-center text-md">
+					Access token:
+					<p class="text-center text-[40%] max-w-full m-2 break-all" id="ipt-access-token"></p>
+				</label>
+				<label class="text-center text-md flex flex-col">
+					User profile:
+					<p class="text-center text-[40%] max-w-full m-2 break-all" id="ipt-user-profile"></p>
+					<img class="flex self-center" id="ipt-user-profile-img" src="" alt="profile">
+				</label>
+			</div>
+		</div>
 	</div>
 </Layout>
 
@@ -79,19 +88,16 @@ import { Icon } from "astro-icon";
 
 	const updateUI = async () => {
 		const isAuthenticated = await auth0Client.isAuthenticated();
+		document.getElementById("gated-content").classList.add("hidden");
 
-		if (isAuthenticated) {
+		if (isAuthenticated && pingWorker && uHide()) {
 			document.getElementById("login").onclick = logout;
 			document.getElementById("login").innerText = "Logout";
 			document.getElementById("login").disabled = false;
-			document.getElementById("gated-content").classList.remove("hidden");
-			document.getElementById("ipt-access-token").innerHTML = await auth0Client.getTokenSilently();
-			document.getElementById("ipt-user-profile").textContent = JSON.stringify(await auth0Client.getUser());
 		} else {
 			document.getElementById("login").onclick = login;
 			document.getElementById("login").innerText = "Login";
 			document.getElementById("login").disabled = false;
-			document.getElementById("gated-content").classList.add("hidden");
 		}
 	};
 
@@ -127,7 +133,16 @@ import { Icon } from "astro-icon";
 			.then((data) => {
 				if (data) {
 					setCookie(cookieTokenName, token, 31);
+					return data;
 				}
 			});
+	}
+
+	async function uHide() {
+		document.getElementById("gated-content").classList.remove("hidden");
+		document.getElementById("ipt-access-token").innerHTML = await auth0Client.getTokenSilently();
+		document.getElementById("ipt-user-profile").textContent = JSON.stringify(await auth0Client.getUser());
+		document.getElementById("ipt-user-profile-img").src = JSON.parse(JSON.stringify(await auth0Client.getUser())).picture;
+		return 1;
 	}
 </script>
