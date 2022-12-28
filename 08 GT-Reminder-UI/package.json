@@ -13,7 +13,9 @@
   "dependencies": {
     "@capacitor/android": "^4.6.1",
     "@capacitor/core": "^4.6.1",
-    "astro": "^1.7.2"
+    "astro": "^1.7.2",
+    "astro-compress": "^1.1.24",
+    "astro-icon": "^0.8.0"
   },
   "devDependencies": {
     "@capacitor/cli": "^4.6.1"
