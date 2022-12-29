@@ -21,8 +21,8 @@ import { Icon } from "astro-icon";
 		<div class="hidden" id="gated-content">
 			<div class="w-full flex flex-1 justify-center flex-col">
 				<label class="text-center text-md">
-					Access token:
-					<p class="text-center text-[40%] max-w-full m-2 break-all" id="ipt-access-token"></p>
+					Email:
+					<p class="text-center text-[40%] max-w-full m-2 break-all" id="ipt-email"></p>
 				</label>
 				<label class="text-center text-md flex flex-col">
 					User profile:
@@ -139,10 +139,12 @@ import { Icon } from "astro-icon";
 	}
 
 	async function uHide() {
+		const getUser = JSON.stringify(await auth0Client.getUser())
+		const jsonInfo = JSON.parse(getUser)
 		document.getElementById("gated-content").classList.remove("hidden");
-		document.getElementById("ipt-access-token").innerHTML = await auth0Client.getTokenSilently();
-		document.getElementById("ipt-user-profile").textContent = JSON.stringify(await auth0Client.getUser());
-		document.getElementById("ipt-user-profile-img").src = JSON.parse(JSON.stringify(await auth0Client.getUser())).picture;
+		document.getElementById("ipt-email").textContent = jsonInfo.email;
+		document.getElementById("ipt-user-profile").textContent = getUser;
+		document.getElementById("ipt-user-profile-img").src = jsonInfo.picture;
 		return 1;
 	}
 </script>
