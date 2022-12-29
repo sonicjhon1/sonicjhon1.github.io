@@ -5,16 +5,25 @@ import { Icon } from "astro-icon";
 
 <Layout>
 	<h2 class="Neohellenic-700 text-4xl font-bold underline text-center mt-4 drop-shadow-lg">Growtopia Reminder</h2>
-	<h1 class="text-center text-sm max-w-[80%] md:max-w-[60%] lg:max-w-[40%] self-center text-slate-300 mx-6 drop-shadow-md mb-2">Before you could access this page, you need to login using your google account and license key. To obtain the license key, you could contact me at my <a href="https://discord.com/"><span class="underline hover:cursor-pointer">Discord.</span></a></h1>
+	<h1 class="text-center text-sm max-w-[80%] md:max-w-[60%] lg:max-w-[40%] self-center text-slate-300 mx-6 drop-shadow-md mb-2">
+		Before you could access this page, you need to login using your google account and license key. To obtain the license key, you could contact me at my <a href="https://discord.com/"
+			><span class="underline hover:cursor-pointer">Discord.</span>
+		</a>
+	</h1>
 	<div class="w-full h-full flex flex-col items-center">
 		<div class="w-full max-w-[60%]">
 			<div class="hidden" id="gated-content">
 				<div class="flex flex-1 items-start flex-col p-4">
 					<label class="text-left text-md my-2 flex items-center">
-						Email:&nbsp;<span class="text-left max-w-full rounded-lg border-solid border-2 border-slate-700 text-slate-400 p-1 px-2 cursor-not-allowed" id="ipt-email"></span>
+						Email:&nbsp;<span
+							class="text-left max-w-full rounded-lg border-solid border-2 border-slate-700 text-slate-400 p-1 px-2 cursor-not-allowed transition-all duration-300 hover:border-slate-500 hover:text-slate-600"
+							id="ipt-email"></span>
 					</label>
 					<label class="text-left text-md my-2 flex items-center min-w-[90%]">
-						Key:&nbsp;<span class="text-left max-w-full min-w-full flex-1 rounded-lg border-solid border-2 border-slate-700 text-slate-100 p-1 px-2 cursor-text"><input class="bg-transparent min-w-full focus:outline-none" placeholder="License key here..." id="LKey"></span>
+						Key:&nbsp;<span
+							class="text-left max-w-full min-w-full flex-1 rounded-lg border-solid border-2 border-slate-700 text-slate-300 p-1 px-2 cursor-text transition-all duration-300 hover:border-slate-500 hover:text-white"
+							><input class="bg-transparent min-w-full focus:outline-none" placeholder="License key here..." id="LKey" onkeyup="updateButton()" />
+						</span>
 					</label>
 					<!-- <label class="text-center text-md flex flex-col">
 						User profile:
@@ -35,7 +44,7 @@ import { Icon } from "astro-icon";
 			<button
 				id="continue"
 				disabled="true"
-				onclick="login()"
+				onclick="verify()"
 				class="hidden max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse cursor-pointer disabled:opacity-10 disabled:hover:animate-none disabled:cursor-not-allowed"
 				>Continue</button
 			>
@@ -148,14 +157,26 @@ import { Icon } from "astro-icon";
 	}
 
 	async function uHide() {
-		const getUser = JSON.stringify(await auth0Client.getUser())
-		const jsonInfo = JSON.parse(getUser)
-		
+		const getUser = JSON.stringify(await auth0Client.getUser());
+		const jsonInfo = JSON.parse(getUser);
+
 		document.getElementById("gated-content").classList.remove("hidden");
 		document.getElementById("continue").classList.remove("hidden");
 		document.getElementById("ipt-email").textContent = jsonInfo.email;
-		document.getElementById("ipt-user-profile").textContent = getUser;
-		document.getElementById("ipt-user-profile-img").src = jsonInfo.picture;
+		//document.getElementById("ipt-user-profile").textContent = getUser;
+		//document.getElementById("ipt-user-profile-img").src = jsonInfo.picture;
 		return 1;
+	}
+
+	async function updateButton() {
+		if (document.getElementById("LKey").value === "") {
+			document.getElementById("continue").disabled = true;
+		} else {
+			document.getElementById("continue").disabled = false;
+		}
+	}
+
+	async function verify() {
+		console.log("Verifying...")
 	}
 </script>
