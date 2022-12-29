@@ -7,13 +7,20 @@ import { Icon } from "astro-icon";
 	<h2 class="Neohellenic-700 text-4xl font-bold underline text-center mt-4 drop-shadow-lg">Growtopia Reminder</h2>
 	<h1 class="text-center text-sm max-w-[80%] md:max-w-[60%] lg:max-w-[40%] self-center text-slate-300 mx-6 drop-shadow-md">Before you could access this page, you need to login using your google account and license key. To obtain the license, you could contact me at my <a href="https://discord.com/"><span class="underline hover:cursor-pointer">Discord.</span></a></h1>
 	<div class="w-full h-full flex justify-center">
-		<div class="max-w-[60%] flex flex-1 flex-col justify-center">
+		<div class="max-w-[60%] flex flex-1 justify-center">
 			<button
 				id="login"
 				disabled="true"
 				onclick="login()"
 				class="max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse hover:cursor-pointer disabled:opacity-10 disabled:hover:animate-none disabled:hover:cursor-not-allowed"
 				>Login</button
+			>
+			<button
+				id="continue"
+				disabled="true"
+				onclick="login()"
+				class="hidden max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse hover:cursor-pointer disabled:opacity-10 disabled:hover:animate-none disabled:hover:cursor-not-allowed"
+				>Continue</button
 			>
 		</div>
 	</div>
@@ -27,7 +34,7 @@ import { Icon } from "astro-icon";
 				<label class="text-center text-md flex flex-col">
 					User profile:
 					<p class="text-center text-[40%] max-w-full m-2 break-all" id="ipt-user-profile"></p>
-					<img class="flex self-center" id="ipt-user-profile-img" src="" alt="profile">
+					<img class="flex self-center" id="ipt-user-profile-img" src="" alt="profile" referrerpolicy="no-referrer">
 				</label>
 			</div>
 		</div>
@@ -92,7 +99,7 @@ import { Icon } from "astro-icon";
 
 		if (isAuthenticated && pingWorker && uHide()) {
 			document.getElementById("login").onclick = logout;
-			document.getElementById("login").innerText = "Logout";
+			document.getElementById("login").innerText = "Cancel";
 			document.getElementById("login").disabled = false;
 		} else {
 			document.getElementById("login").onclick = login;
@@ -141,7 +148,9 @@ import { Icon } from "astro-icon";
 	async function uHide() {
 		const getUser = JSON.stringify(await auth0Client.getUser())
 		const jsonInfo = JSON.parse(getUser)
+		
 		document.getElementById("gated-content").classList.remove("hidden");
+		document.getElementById("continue").classList.remove("hidden");
 		document.getElementById("ipt-email").textContent = jsonInfo.email;
 		document.getElementById("ipt-user-profile").textContent = getUser;
 		document.getElementById("ipt-user-profile-img").src = jsonInfo.picture;
