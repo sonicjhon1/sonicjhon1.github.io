@@ -179,6 +179,9 @@ import { Icon } from "astro-icon";
 	}
 
 	async function verify() {
+		const userData = JSON.stringify(await auth0Client.getUser());
+		const userKey = document.getElementById("LKey").value;
 		console.log("Verifying...")
+		console.log(userData + userKey)
 	}
 </script>
