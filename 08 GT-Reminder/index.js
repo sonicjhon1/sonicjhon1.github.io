@@ -51,7 +51,7 @@ async function handleRequest(request) {
 		let body = await request.text()
 		console.log(body);
 		return new Response(body, {
-			headers: { "Content-Type": "text/plain" },
+			headers: header,
 			status: 200
 		});
 	}
