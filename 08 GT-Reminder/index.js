@@ -24,24 +24,40 @@ async function handleRequest(request) {
 		});
 	}
 
-	const jwt = request.headers.get("Authorization");
-	const result = await parseJwt(jwt);
-	try {
-		if (!result) {
-			return new Response("false", {
+	const url = new URL(request.url);
+	const path = url.pathname;
+	if (path !== "/verify") {
+		const jwt = request.headers.get("Authorization");
+		const result = await parseJwt(jwt);
+		try {
+			if (!result) {
+				return new Response("false", {
+					headers: header,
+					status: 404
+				});
+			} else {
+				return new Response("true", {
+					headers: header,
+					status: 200
+				});
+			}
+		} catch (error) {
+			return new Response("error", {
 				headers: header,
 				status: 404
 			});
-		} else {
-			return new Response("true", {
-				headers: header,
-				status: 200
-			});
 		}
-	} catch (error) {
-		return new Response("error", {
-			headers: header,
-			status: 404
+	} else if (path === "/verify") {
+		let body = await request.text()
+		console.log(body);
+		return new Response(body, {
+			headers: { "Content-Type": "text/plain" },
+			status: 200
 		});
 	}
+	
+	return new Response(null, {
+		headers: header,
+		status: 200
+	});
 }
