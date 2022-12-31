@@ -179,9 +179,10 @@ import { Icon } from "astro-icon";
 	}
 
 	async function verify() {
-		const userData = JSON.stringify(await auth0Client.getUser());
+		const userData = JSON.parse(JSON.stringify(await auth0Client.getUser()));
 		const userKey = document.getElementById("LKey").value;
-		console.log("Verifying...")
-		console.log(userData + userKey)
+		const today = new Date();
+		const dateString = today.toLocaleDateString();
+		let data = [userData, userKey, dateString]
 	}
 </script>
