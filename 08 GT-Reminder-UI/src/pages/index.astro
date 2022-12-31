@@ -183,6 +183,21 @@ import { Icon } from "astro-icon";
 		const userKey = document.getElementById("LKey").value;
 		const today = new Date();
 		const dateString = today.toLocaleDateString();
-		let data = [userData, userKey, dateString]
+		let data = [await auth0Client.getTokenSilently(), userData, userKey, dateString]
+
+		const myRequest = new Request('https' + "" + `://` + 'gt-remi' + 'nder.sonicj.' + "w" + 'orkers.dev' + "/" + 'verify', {
+			method: "GET",
+			headers: {
+				Authorization: await auth0Client.getTokenSilently(),
+				data: JSON.stringify(data)
+			},
+		});
+		fetch(myRequest)
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				console.log(data)
+			});
 	}
 </script>
