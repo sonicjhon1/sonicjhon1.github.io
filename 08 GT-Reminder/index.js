@@ -62,7 +62,8 @@ async function handleRequest(request) {
 			}
 
 			const data = request.headers.get("data");
-			return new Response('{"' + "1" + `":` + data + '}', {
+			response = '{"1":' + data + '}'
+			return new Response(response, {
 				headers: header,
 				status: 200
 			});
