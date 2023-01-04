@@ -68,6 +68,7 @@ import { Icon } from "astro-icon";
 <script is:inline>
 	let auth0Client = null;
 	const cookieTokenName = "authTokenCookie";
+	const workerAPILink = "https://gt-reminder.sonicj.workers.dev";
 
 	const fetchAuthConfig = () => fetch("/auth_config.json");
 
@@ -138,7 +139,7 @@ import { Icon } from "astro-icon";
 
 	async function workerValidateJWT() {
 		const authToken = await auth0Client.getTokenSilently();
-		const validateJWT = new Request("https://gt-reminder.sonicj.workers.dev", {
+		const validateJWT = new Request(workerAPILink, {
 			method: "GET",
 			headers: {
 				Authorization: authToken,
@@ -181,7 +182,7 @@ import { Icon } from "astro-icon";
 
 		let data = [await auth0Client.getTokenSilently(), userInfoJSON, userLicenseKey, dateString];
 
-		const workerValidateLicense = new Request("https://gt-reminder.sonicj.workers.dev/verify", {
+		const workerValidateLicense = new Request(workerAPILink + "/verify", {
 			method: "GET",
 			headers: {
 				Authorization: await auth0Client.getTokenSilently(),
