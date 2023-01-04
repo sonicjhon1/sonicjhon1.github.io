@@ -61,8 +61,7 @@ async function handleRequest(request) {
 				});
 			}
 
-			const data = '{"1": ' + request.headers.get("data") + '}';
-			jsonData = JSON.parse(data)['1'];
+			const jsonData = JSON.parse(request.headers.get("data"));
 			authToken = jsonData[0];
 			userInfoJSON = jsonData[1]
 			userLicenseKey = jsonData[2]
@@ -75,6 +74,7 @@ async function handleRequest(request) {
 				});
 			}
 			
+			const data = '{"1": ' + request.headers.get("data") + '}';
 			response = data;
 
 			return new Response(response, {
