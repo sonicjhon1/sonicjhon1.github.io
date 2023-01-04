@@ -175,10 +175,10 @@ import { Icon } from "astro-icon";
 
 	async function verify() {
 		const userInfoJSON = JSON.parse(getUserInfo);
-		const userKey = document.getElementById("LKey").value;
+		const userLicenseKey = document.getElementById("LKey").value;
 		const dateString = new Date().toLocaleDateString();
 
-		let data = [await auth0Client.getTokenSilently(), userInfoJSON, userKey, dateString];
+		let data = [await auth0Client.getTokenSilently(), userInfoJSON, userLicenseKey, dateString];
 
 		const workerValidateLicense = new Request("https://gt-reminder.sonicj.workers.dev/verify", {
 			method: "GET",
