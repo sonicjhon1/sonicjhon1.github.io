@@ -5,6 +5,16 @@ import AboutResume from "../components/AboutResume.astro";
 import AboutSkill from "../components/AboutSkill.astro";
 import AboutSkillBar from "../components/AboutSkillBar.astro";
 import AboutFunFact from "../components/AboutFunFact.astro";
+
+var today = new Date();
+var birthDate = new Date("21 October 2005")
+var age = today.getFullYear() - birthDate.getFullYear();
+var m = today.getMonth() - birthDate.getMonth();
+if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+{
+    age--;
+}
+var currentAge = age + " Years old"
 ---
 <section id="about" class="section">
 	<div class="homecolor-box"></div>
@@ -62,7 +72,7 @@ import AboutFunFact from "../components/AboutFunFact.astro";
 									<ul class="about-you">
 										<AboutInfo title="E-mail 	:" value=""><a href='mailto:sonicjhon1@gmail.com'>sonicjhon1@gmail.com</a></AboutInfo>
 										<AboutInfo title="Github 	:" value=""><a href='https://github.com/sonicjhon1'>https://github.com/sonicjhon1</a></AboutInfo>
-										<AboutInfo title="Age 		:" value="17 years old"/>
+										<AboutInfo title="Age 		:" value={currentAge}/>
 										<AboutInfo title="Freelance	:" value="Available"/>
 									</ul>
 								</div>
