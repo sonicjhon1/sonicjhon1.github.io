@@ -1,0 +1,57 @@
+---
+import MixGFX from "../components/MixGFX.astro";
+import MixWEB from "../components/MixWEB.astro";
+---
+<section id="project" class="section">
+	<div class="homecolor-box"></div>
+	<div class="common_bg animate__animated animate__fadeInLeft">
+		<div class="container">
+			<div class="text-center">
+				<!-- Project Title -->
+				<div class="row">
+					<div class="col-12">
+						<div class="section-title animate__animated animate__fadeInDown animate__delay-1s">
+							<p class="common-desctiption">Showcasing some of my work</p>
+							<h1 class="common-title">My <span>Projects</span></h1>
+							<div class="animated-bar"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Project Tag Buttons -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="portfolio-menu animate__animated animate__fadeInUp animate__delay-2s">
+							<nav class="controls">
+								<button type="button" class="control clickbtn" data-filter="all">All</button>
+								<button type="button" class="control clickbtn" data-filter=".webdesign">WEBSITES</button>
+								<button type="button" class="control clickbtn" data-filter=".gfx">GFXs</button>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<!-- Project Mix Content -->
+				<div class="row portfolio-list animate__zoomIn animate__animated animate__delay-3s">
+					<div class="container">
+						<ul class="row ps-0">
+							<!-- Project Mix Contents -->
+							<MixGFX href="assets/images/GFX/1.png" 	caption="20 April 2021" 						size="2160x2160"						/>
+							<MixGFX href="assets/images/GFX/2.png" 	caption="13 May 2021" 							size="2160x2160"						/>
+							<MixGFX href="assets/images/GFX/3.png" 	caption="13 May 2021" 							size="2160x2160"						/>
+							<MixGFX href="assets/images/GFX/4.png" 	caption="1 June 2021" 							size="2160x2160"						/>
+							<MixGFX href="assets/images/GFX/5.png" 	caption="11 June 2021" 							size="3840x2160"						/>
+							<MixGFX href="assets/images/GFX/6.png" 	caption="26 June 2021" 							size="3240x1080"						/>
+							<MixGFX href="assets/images/GFX/7.png" 	caption="7 July 2021" 							size="1080x1080"						/>
+							<MixGFX href="assets/images/GFX/8.png" 	caption="11 August 2021" 						size="1440x1440"						/>
+							<MixGFX href="assets/images/GFX/9.png" 	caption="20 August 2021" 						size="2160x2160"						/>
+							<MixGFX href="assets/images/GFX/10.png"	caption="16 February 2022"						size="1080x1080"						/>
+							<MixGFX href="assets/images/GFX/11.png"	caption="3 March 2022"							size="2160x2160"						/>
+							<MixGFX href="assets/images/GFX/12.png"	caption="21 June 2022"							size="1080x1920"						/>
+							<MixWEB href="assets/images/WEB/01.jpg" caption="01 Redirect-UI/index.html"				thumbnail="assets/images/WEB/01.webp" 	/>
+							<MixWEB href="assets/images/WEB/03.jpg" caption="03 Genshin-Redeem-Code-UI/index.html"	thumbnail="assets/images/WEB/03.webp" 	/>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

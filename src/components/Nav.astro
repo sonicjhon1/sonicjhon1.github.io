@@ -1,0 +1,50 @@
+---
+import NavList from "./NavList.astro";
+---
+
+<div class="header-holder services-section text-center animate__animated animate__zoomIn">
+	<div class="navigation">
+		<ul class="nav">
+			<NavList href="#home" 		icon="fa-home" 			title="Home"		></NavList>
+			<NavList href="#project" 	icon="fa-folder-open" 	title="Projects"	></NavList>
+			<NavList href="#contact" 	icon="fa-address-card" 	title="Contact"		></NavList>
+			<NavList href="#about" 		icon="fa-info" 			title="About"		></NavList>
+		</ul>
+	</div>
+</div>
+
+<script>
+	// Constants
+	const navLists = document.querySelector(".nav").querySelectorAll("li");
+	const sections = document.querySelectorAll(".section");
+	const lists = document.querySelectorAll(".list");
+
+	// Adds a click event listener to each element in the "lists" selection. 
+	// When clicked, remove all active elements and adds the "active" class is added to the clicked element.
+	lists.forEach( list => {
+		list.addEventListener("click", function() {
+			lists.forEach(list => {
+				list.classList.remove("active");
+			})
+			this.classList.add("active");
+		});
+	})
+
+	// Adds a click event listener to the anchor element inside each element in the "navLists" selection.
+	// When clicked, the "active" class is removed from all "sections" and the anchor element inside the "navLists" element.
+	// The "active" class is also added to the clicked anchor element and the element targeted by the href attribute of the anchor element.
+	navLists.forEach( nav => {
+		nav.querySelector("a").addEventListener("click", function () {
+			sections.forEach( async section => {
+				section.classList.remove("active");
+			});
+			nav.querySelector("a").classList.remove("active");
+			nav.classList.remove("active");
+			this.classList.add("active");
+			document.querySelector(this.getAttribute("href")).classList.add("active");
+		});
+	});
+
+	// Add the "active" class to the first element in the "lists".
+	lists[0].classList.add("active");
+</script>

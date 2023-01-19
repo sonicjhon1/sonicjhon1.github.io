@@ -1,0 +1,71 @@
+---
+import FindMe from "../components/FindMe.astro";
+import ContactInfo from "../components/ContactInfo.astro";
+---
+<section id="contact" class="section">
+	<div class="homecolor-box"></div>
+	<div class="common_bg animate__animated animate__zoomIn">
+		<div class="container">
+			<!-- Contact -->
+			<div class="contact-section">
+				<!-- Contact Title -->
+				<div class="row">
+					<div class="col-12">
+						<div class="section-title animate__animated animate__fadeInDown animate__delay-1s">
+							<p class="common-desctiption">Feel free to contact me anytime</p>
+							<h1 class="common-title">My <span>Contact</span></h1>
+							<div class="animated-bar"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Contact Form -->
+				<div class="contact-section">
+					<div class="row">
+						<div class="col-lg-7 col-12">
+							<form class="contact-form animate__animated animate__fadeInLeft animate__delay-2s" id="contact-form">
+								<h4 class="content-title">Contact Me</h4>
+								<div class="row">
+									<div class="col-12 col-md-6 form-group"><input class="form-control" id="contact-name" type="text" name="name" placeholder="Name" required="" /></div>
+									<div class="col-12 col-md-6 form-group"><input class="form-control" id="contact-email" type="email" name="email" placeholder="Email" required="" /></div>
+									<div class="col-12 form-group"><input class="form-control" id="contact-subject" type="text" name="subject" placeholder="Subject" required="" /></div>
+									<div class="col-12 form-group form-message">
+										<textarea class="form-control" id="contact-message" name="message" placeholder="Message" rows="5" required=""></textarea>
+									</div>
+									<div class="col-12 mb-4 form-submit"><button class="clickbtn button-main button-scheme" id="contact-submit" type="button">Send Message</button></div>
+								</div>
+							</form>
+						</div>
+						<!-- Contact Info -->
+						<div class="col-lg-5 col-12">
+							<div class="contact-info animate__animated animate__fadeInRight animate__delay-3s">
+								<h4 class="content-title">Contact Info</h4>
+								<p class="info-description">Available for freelance work if the right project comes along, Feel free to contact me!</p>
+								<ul class="list-unstyled list-info" style="display: inline-grid">
+									<ContactInfo icon="fa-user-alt" type="Name">Sonicj</ContactInfo>
+									<ContactInfo icon="fa-phone-alt" type="Find me on instagram"><a href="https://www.instagram.com/sonicjhon1">@sonicjhon1</a></ContactInfo>
+									<ContactInfo icon="fa-envelope" type="Email Me"><a href="mailto:sonicjhon1@gmail.com">sonicjhon1@gmail.com</a></ContactInfo>
+								</ul>
+							</div>
+							<!-- Social Media Icons-->
+							<div class="fixed-block d-flex animate__animated animate__jackInTheBox animate__delay-3s">
+								<ul class="list-unstyled social-icons p-3">
+									<FindMe/>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Contact Footer -->
+				<div class="row justify-content-center animate__animated animate__fadeInUp animate__delay-5s">
+					<div class="col-lg-6 text-center">
+						<h5 class="footer">
+							Copyright&nbsp;&copy; <span id="current-year"></span> Sonicj&nbsp;
+							<i class="fas fa-heart animate__animated animate__pulse animate__faster animate__infinite infinite"></i>
+							&nbsp;All rights reserved.
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,19 @@
+---
+export interface Props {
+	href: string;
+	icon: string;
+	title: string;
+	active?: string;
+}
+
+const { href, icon, title, active } = Astro.props;
+---
+
+<li class="list">
+	<a href={href}>
+		<span class="icon">
+			<i class={`fas ${icon}`}></i>
+		</span>
+		<div class="social__tooltip social__tooltip-bottom">{title}</div>
+	</a>
+</li>

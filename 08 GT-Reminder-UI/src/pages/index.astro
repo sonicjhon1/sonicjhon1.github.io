@@ -1,0 +1,200 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon";
+---
+
+<Layout>
+	<h2 class="Neohellenic-700 text-4xl font-bold underline text-center mt-4 drop-shadow-lg">Growtopia Reminder</h2>
+	<h1 class="text-center text-sm max-w-[80%] md:max-w-[60%] lg:max-w-[40%] self-center text-slate-300 mx-6 drop-shadow-md mb-2">
+		Before you could access this page, you need to login using your google account and license key. To obtain the license key, you could contact me at my <a href="https://discord.com/"
+			><span class="underline hover:cursor-pointer">Discord.</span>
+		</a>
+	</h1>
+	<div class="w-full h-full flex flex-col items-center">
+		<div class="w-full max-w-[70%]">
+			<div class="hidden" id="gated-content">
+				<div class="flex flex-1 flex-col justify-items-stretch p-4">
+					<label class="text-left text-md my-2 flex items-center flex-1">
+						<span>Email:&nbsp;</span>
+						<span
+							class="text-left flex-1 rounded-lg border-solid border-2 border-slate-700 text-slate-400 p-1 px-2 cursor-not-allowed transition-all duration-300 hover:border-slate-500 hover:text-slate-600"
+							id="ipt-email"
+						>
+							Placeholder@gmail.com
+						</span>
+					</label>
+					<label class="text-left text-md my-2 flex items-center flex-1">
+						<span>Key:&nbsp;</span>
+						<span
+							class="text-left flex-1 rounded-lg border-solid border-2 flex border-slate-700 text-slate-300 p-1 px-2 cursor-text transition-all duration-300 hover:border-slate-500 hover:text-white"
+						>
+							<input class="bg-transparent focus:outline-none flex flex-1" placeholder="License key here..." id="LKey" onkeyup="updateButton()" />
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="w-full max-w-[60%] flex justify-center items-center my-12">
+			<button
+				id="login"
+				disabled="true"
+				onclick="login()"
+				class="max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse cursor-pointer disabled:opacity-10 disabled:hover:animate-none disabled:cursor-not-allowed"
+				>Login</button
+			>
+			<button
+				id="continue"
+				disabled="true"
+				onclick="verify()"
+				class="hidden max-h-16 m-2 p-4 border-white border-solid border-2 rounded-md flex-1 mx-4 bg-slate-700 shadow-md transition-all duration-200 hover:animate-pulse cursor-pointer disabled:opacity-10 disabled:hover:animate-none disabled:cursor-not-allowed"
+				>Continue</button
+			>
+		</div>
+	</div>
+</Layout>
+
+<script is:inline>
+	function setCookie(name, value, days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "") + expires + "; path=/";
+	}
+</script>
+
+<script is:inline>
+	let auth0Client = null;
+	const cookieTokenName = "authTokenCookie";
+	const workerAPILink = "https://gt-reminder.sonicj.workers.dev";
+
+	const fetchAuthConfig = () => fetch("/auth_config.json");
+
+	const configureClient = async () => {
+		const response = await fetchAuthConfig();
+		const config = await response.json();
+
+		auth0Client = await auth0.createAuth0Client({
+			domain: config.domain,
+			clientId: config.clientId,
+		});
+	};
+
+	window.onload = async () => {
+		await configureClient();
+
+		updateUI();
+
+		const isAuthenticated = await auth0Client.isAuthenticated();
+
+		if (isAuthenticated) {
+			// Show the gated content
+			return;
+		}
+
+		// Check for the code and state parameters
+		const query = window.location.search;
+		if (query.includes("code=") && query.includes("state=")) {
+			// Process the login state
+			await auth0Client.handleRedirectCallback();
+
+			updateUI();
+
+			window.history.replaceState({}, document.title, "/");
+		}
+	};
+
+	const updateUI = async () => {
+		document.getElementById("gated-content").classList.add("hidden");
+		const isAuthenticated = await auth0Client.isAuthenticated();
+
+		if (isAuthenticated && workerValidateJWT && unhide()) {
+			document.getElementById("login").onclick = logout;
+			document.getElementById("login").innerText = "Cancel";
+			document.getElementById("login").disabled = false;
+		} else {
+			document.getElementById("login").onclick = login;
+			document.getElementById("login").innerText = "Login";
+			document.getElementById("login").disabled = false;
+		}
+	};
+
+	const login = async () => {
+		await auth0Client.loginWithRedirect({
+			authorizationParams: {
+				redirect_uri: window.location.origin,
+			},
+		});
+	};
+
+	const logout = () => {
+		auth0Client.logout({
+			logoutParams: {
+				returnTo: window.location.origin,
+			},
+		});
+	};
+
+	async function workerValidateJWT() {
+		const authToken = await auth0Client.getTokenSilently();
+		const validateJWT = new Request(workerAPILink, {
+			method: "GET",
+			headers: {
+				Authorization: authToken,
+			},
+		});
+		fetch(validateJWT)
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				if (data) {
+					setCookie(cookieTokenName, authToken, 31);
+					return data;
+				}
+			});
+	}
+
+	async function unhide() {
+		const getUserInfo = JSON.stringify(await auth0Client.getUser());
+		const userInfoJSON = JSON.parse(getUserInfo);
+		document.getElementById("gated-content").classList.remove("hidden");
+		document.getElementById("continue").classList.remove("hidden");
+		document.getElementById("ipt-email").textContent = userInfoJSON.email;
+		return 1;
+	}
+
+	async function updateButton() {
+		if (document.getElementById("LKey").value === "") {
+			document.getElementById("continue").disabled = true;
+		} else {
+			document.getElementById("continue").disabled = false;
+		}
+	}
+
+	async function verify() {
+		const getUserInfo = JSON.stringify(await auth0Client.getUser());
+		const userInfoJSON = JSON.parse(getUserInfo);
+		const userLicenseKey = document.getElementById("LKey").value;
+		const dateString = new Date().toLocaleDateString();
+
+		let data = [await auth0Client.getTokenSilently(), userInfoJSON, userLicenseKey, dateString];
+
+		const workerValidateLicense = new Request(workerAPILink + "/verify", {
+			method: "GET",
+			headers: {
+				Authorization: await auth0Client.getTokenSilently(),
+				data: JSON.stringify(data),
+			},
+		});
+		fetch(workerValidateLicense)
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				console.log(data);
+			});
+	}
+</script>

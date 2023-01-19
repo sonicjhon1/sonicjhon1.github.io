@@ -1,0 +1,12 @@
+---
+export interface Props {
+	href: string;
+	caption: string;
+	size: string;
+}
+
+const { href, caption, size } = Astro.props;
+---
+<li class="mix gfx col-xl-3 col-lg-4 col-md-6">
+    <a title="click to zoom-in" href={href} data-caption={caption} data-size={size}> </a>
+</li>

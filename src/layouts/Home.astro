@@ -1,0 +1,87 @@
+---
+import FindMe from "../components/FindMe.astro";
+---
+<section id="home" class="section active">
+	<div class="homecolor-box"></div>
+	<div class="common_bg animate__animated animate__zoomIn">
+		<div class="container m-auto">
+			<div class="row align-items-center">
+				<!-- Profile-Pic -->
+				<div class="col-xl-5 col-lg-6 col-md-6 col-12">
+					<div class="home-profile animate__animated animate__fadeInLeft animate__delay-1s">
+						<img src="assets/images/1.webp" alt="home-profile" width="1300" height="1450"/>
+					</div>
+				</div>
+				<!-- Profile-Information -->
+				<div class="col-xl-7 col-lg-6 col-md-6 col-12">
+					<div class="home-content">
+						<p class="common-desctiption animate__animated animate__fadeInDown animate__delay-1s">Welcome to</p>
+						<h1 class="common-title animate__animated animate__fadeInDown animate__delay-1s"> Sonicj's home </h1>
+						<div class="animated-bar animate__animated animate__fadeInDown animate__delay-2s"></div>
+						<div class="animated-text animate__animated animate__fadeInDown animate__delay-2s">
+							<h3>Web Design	</h3>
+							<h3>Modding		</h3>
+							<h3>3D Art		</h3>
+							<h3>GFX			</h3>
+							<h3>AND MORE	</h3>
+						</div>
+						<!-- Social Media Icons-->
+						<div class="fixed-block animate__animated animate__jackInTheBox animate__delay-2-5s">
+							<ul class="list-unstyled social-icons">
+								<FindMe/>
+							</ul>
+						</div>
+						<p class="lorem-text animate__animated animate__zoomIn animate__delay-2-5s">
+							I'm currently learning about programming and 3D art. I have been
+							making GFXs for <b>quite some times now</b>, I also knew some of
+							<b>HTML, CSS, Javascript</b> (web), <b>C#, GDScript</b> (games), and
+							<b>Python (data & AI).</b>
+						</p>
+						<div class="home-btn">
+							<a href="#about" data-section-index="1" class="clickbtn about-me animate__animated animate__fadeInTopRight animate__delay-3s">About Me</a>
+							<a href="#project" data-section-index="1" class="clickbtn my-project animate__animated animate__fadeInTopLeft animate__delay-3s">My Projects</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	// Constants
+	const sections = document.querySelectorAll(".section");
+	const navLists = document.querySelector(".nav").querySelectorAll("li");
+
+	// Takes in a parameter "i" and adds the "active" class to the list element and
+	// its anchor element inside the "navLists" selection that has an href attribute that matches the href of the "i" element.
+	async function buttonToggleSection(i) {
+		navLists.forEach( async list => {
+			list.querySelector("a").classList.remove("active");
+			list.classList.remove("active");
+			if (i.getAttribute("href") === list.querySelector("a").getAttribute("href")) {
+				list.classList.add("active");
+			}
+		});
+		document.querySelector(i.getAttribute("href")).querySelector("a").classList.add("active");
+	}
+	
+	// Removes the "active" class from all elements in the "sections" selection and
+	// adds the "active" class to the element targeted by the href attribute of the "obj" element.
+	function toggleSection(obj) {
+		sections.forEach( async section => {
+			section.classList.remove("active");
+		});
+		document.querySelector(obj.getAttribute("href")).classList.add("active");
+	}
+
+	// Adds clicks event listener to the buttons. 
+	// When clicked, functions are called and the "this" keyword is passed as an argument,
+	// which refers to the element that was clicked.
+	document.querySelector(".my-project").addEventListener("click", async function () {
+		toggleSection(this), buttonToggleSection(this);
+	});
+	document.querySelector(".about-me").addEventListener("click", async function () {
+		toggleSection(this), buttonToggleSection(this);
+	});
+</script>
