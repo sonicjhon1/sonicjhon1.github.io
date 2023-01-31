@@ -13,3 +13,4 @@ rm -rfd dist
 cd "03 Genshin-Redeem-Code-UI" && chmod +x build.sh && ./build.sh && \
 cd "../04 NachoNekoNyaanime-UI" && chmod +x build.sh && ./build.sh && \
 cd "../05 KanoColle-UI" && chmod +x build.sh && ./build.sh
+cd "../09 SchoolworkListMDX-UI" && chmod +x build.sh && ./build.sh
