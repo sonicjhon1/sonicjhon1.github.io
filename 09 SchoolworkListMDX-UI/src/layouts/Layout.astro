@@ -18,14 +18,6 @@
 </html>
 <style is:global>
 	/** Credits to https://github.com/AnubisNekhet/AnuPpuccin */
-	html {
-		background-color: rgb(var(--ctp-base));
-		border-radius: var(--border-radius);
-		font-family: 'Rubik', sans-serif;
-		font-size: 1.25rem;
-		padding: 1.25rem;
-		margin: 1rem;
-	}
 	.theme-dark.anp-theme-ext-dark.ctp-kanagawa-dark {
 		--ctp-rosewater: 255, 200, 148;
 		--ctp-flamingo: 210, 126, 129;
@@ -58,6 +50,7 @@
 		--border-radius: 0.5rem;
 	}
 	.flamingo {
+		--accent: var(--ctp-flamingo);
 		--h1-color: rgb(var(--ctp-flamingo));
 		--h2-color: rgb(var(--ctp-flamingo));
 		--h3-color: rgb(var(--ctp-flamingo));
@@ -66,6 +59,7 @@
 		--h6-color: rgb(var(--ctp-flamingo));
 	}
 	.pink {
+		--accent: var(--ctp-pink); 
 		--h1-color: rgb(var(--ctp-pink));
 		--h2-color: rgb(var(--ctp-pink));
 		--h3-color: rgb(var(--ctp-pink));
@@ -74,6 +68,7 @@
 		--h6-color: rgb(var(--ctp-pink));
 	}
 	.rosewater {
+		--accent: var(--ctp-rosewater);
 		--h1-color: rgb(var(--ctp-rosewater));
 		--h2-color: rgb(var(--ctp-rosewater));
 		--h3-color: rgb(var(--ctp-rosewater));
@@ -82,6 +77,7 @@
 		--h6-color: rgb(var(--ctp-rosewater));
 	}
 	.mauve {
+		--accent: var(--ctp-mauve);
 		--h1-color: rgb(var(--ctp-mauve));
 		--h2-color: rgb(var(--ctp-mauve));
 		--h3-color: rgb(var(--ctp-mauve));
@@ -90,6 +86,7 @@
 		--h6-color: rgb(var(--ctp-mauve));
 	}
 	.red {
+		--accent: var(--ctp-red);
 		--h1-color: rgb(var(--ctp-red));
 		--h2-color: rgb(var(--ctp-red));
 		--h3-color: rgb(var(--ctp-red));
@@ -98,6 +95,7 @@
 		--h6-color: rgb(var(--ctp-red));
 	}
 	.maroon {
+		--accent: var(--ctp-maroon);
 		--h1-color: rgb(var(--ctp-maroon));
 		--h2-color: rgb(var(--ctp-maroon));
 		--h3-color: rgb(var(--ctp-maroon));
@@ -106,6 +104,7 @@
 		--h6-color: rgb(var(--ctp-maroon));
 	}
 	.peach {
+		--accent: var(--ctp-peach);
 		--h1-color: rgb(var(--ctp-peach));
 		--h2-color: rgb(var(--ctp-peach));
 		--h3-color: rgb(var(--ctp-peach));
@@ -114,6 +113,7 @@
 		--h6-color: rgb(var(--ctp-peach));
 	}
 	.yellow {
+		--accent: var(--ctp-yellow);
 		--h1-color: rgb(var(--ctp-yellow));
 		--h2-color: rgb(var(--ctp-yellow));
 		--h3-color: rgb(var(--ctp-yellow));
@@ -122,6 +122,7 @@
 		--h6-color: rgb(var(--ctp-yellow));
 	}
 	.green {
+		--accent: var(--ctp-green);
 		--h1-color: rgb(var(--ctp-green));
 		--h2-color: rgb(var(--ctp-green));
 		--h3-color: rgb(var(--ctp-green));
@@ -130,6 +131,7 @@
 		--h6-color: rgb(var(--ctp-green));
 	}
 	.teal {
+		--accent: var(--ctp-teal);
 		--h1-color: rgb(var(--ctp-teal));
 		--h2-color: rgb(var(--ctp-teal));
 		--h3-color: rgb(var(--ctp-teal));
@@ -138,6 +140,7 @@
 		--h6-color: rgb(var(--ctp-teal));
 	}
 	.sky {
+		--accent: var(--ctp-sky);
 		--h1-color: rgb(var(--ctp-sky));
 		--h2-color: rgb(var(--ctp-sky));
 		--h3-color: rgb(var(--ctp-sky));
@@ -146,6 +149,7 @@
 		--h6-color: rgb(var(--ctp-sky));
 	}
 	.blue {
+		--accent: var(--ctp-blue);
 		--h1-color: rgb(var(--ctp-blue));
 		--h2-color: rgb(var(--ctp-blue));
 		--h3-color: rgb(var(--ctp-blue));
@@ -154,6 +158,7 @@
 		--h6-color: rgb(var(--ctp-blue));
 	}
 	.h1-sappire {
+		--accent: var(--ctp-sappire);
 		--h1-color: rgb(var(--ctp-sapphire));
 		--h2-color: rgb(var(--ctp-sapphire));
 		--h3-color: rgb(var(--ctp-sapphire));
@@ -162,6 +167,7 @@
 		--h6-color: rgb(var(--ctp-sapphire));
 	}
 	.h1-lavender {
+		--accent: var(--ctp-laveder);
 		--h1-color: rgb(var(--ctp-lavender));
 		--h2-color: rgb(var(--ctp-lavender));
 		--h3-color: rgb(var(--ctp-lavender));
@@ -259,7 +265,7 @@
 		}
 	}
 </style>
-<style>
+<style is:global>
 	.center {
 		width: 100%;
 		display: flex;
@@ -278,8 +284,9 @@
 		justify-content: right;
 		text-align: right;
 	}
+	.
 </style>
-<style>
+<style is:global>
 	@media only screen and (max-width: 700px) {
 	html {
 			font-size: 1rem;
@@ -287,7 +294,16 @@
 		}
 	}
 </style>
-<style>
+<style is:global>
+	html {
+		background-color: rgb(var(--ctp-base));
+		border-radius: var(--border-radius);
+		font-family: 'Rubik', sans-serif;
+		font-size: 1.25rem;
+		line-height: 1.5rem;
+		padding: 1.25rem;
+		margin: 1rem;
+	}
 	h1 {
 		color: var(--h1-color);
 	}
@@ -322,6 +338,15 @@
 	img {
 		width: 100%;
 		border-radius: var(--border-radius);
+	}
+	.hastag {
+		color: var(--h1-color);
+		background-color: rgba(var(--accent), 0.1);
+		border-radius: calc(var(--border-radius) + (var(--border-radius) * 0.25));
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		padding-top: 0.1rem;
+		padding-bottom: 0.1rem;
 	}
 </style>
 <script>
