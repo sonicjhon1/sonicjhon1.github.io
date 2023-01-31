@@ -1,32 +1,33 @@
 ---
 export interface Props {
 	title: string;
-	body: string;
-	href: string;
+	type: string;
 }
 
-const { href, title, body } = Astro.props;
+const { title, type } = Astro.props;
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
+<li class={`link-card ${type}`}>
+	<h2>
+		{title}
+		<span>&rarr;</span>
+	</h2>
+	<slot></slot>
 </li>
+
 <style>
+	.info {
+		background-color: rgba(255, 160, 102, 0.2);
+	}
+
 	.link-card {
+		margin: 1rem;
 		list-style: none;
 		display: flex;
+		flex-direction: column;
 		padding: 0.15rem;
-		background-color: white;
 		background-image: var(--accent-gradient);
-		background-size: 400%;
+		background-size: 100%;
 		border-radius: 0.5rem;
 		background-position: 100%;
 		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -39,24 +40,20 @@ const { href, title, body } = Astro.props;
 		line-height: 1.4;
 		padding: 1rem 1.3rem;
 		border-radius: 0.35rem;
-		color: #111;
+		color: var(--h1-color);
 		background-color: white;
 		opacity: 0.8;
 	}
 	h2 {
 		margin: 0;
 		font-size: 1.25rem;
+		color: white;
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-		color: #444;
 	}
 	.link-card:is(:hover, :focus-within) {
 		background-position: 0;
 	}
 	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent));
+		color: var(--h1-color);
 	}
 </style>
