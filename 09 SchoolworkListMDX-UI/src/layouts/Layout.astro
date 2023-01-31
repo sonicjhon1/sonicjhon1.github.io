@@ -26,12 +26,6 @@
 		padding: 1.25rem;
 		margin: 1rem;
 	}
-	@media only screen and (max-width: 700px) {
-		html {
-			font-size: 1rem;
-			padding: 0rem;
-		}
-}
 	.theme-dark.anp-theme-ext-dark.ctp-kanagawa-dark {
 		--ctp-rosewater: 255, 200, 148;
 		--ctp-flamingo: 210, 126, 129;
@@ -175,41 +169,6 @@
 		--h5-color: rgb(var(--ctp-lavender));
 		--h6-color: rgb(var(--ctp-lavender));
 	}
-	h1 {
-		color: var(--h1-color);
-	}
-	h2 {
-		color: var(--h2-color);
-	}
-	h3 {
-		color: var(--h3-color);
-	}
-	h4 {
-		color: var(--h4-color);
-	}
-	h5 {
-		color: var(--h5-color);
-	}
-	h6 {
-		color: var(--h6-color);
-	}
-	a {
-		color: var(--h1-color)
-	}
-	input[type="checkbox"] {
-		accent-color: var(--h1-color);
-	}
-	input[type="checkbox"][aria-disabled="true"] {
-		background-color: var(--h1-color);
-		pointer-events: none;
-	}
-	code {
-		color: rgb(var(--ctp-text));
-	}
-	img {
-		width: 100%;
-		border-radius: var(--border-radius);
-	}
 	.theme-dark {
 		--mono-rgb-0: var(--ctp-crust);
 		--mono-rgb-100: var(--ctp-text);
@@ -299,6 +258,8 @@
 			--canvas-color: var(--ctp-overlay0);
 		}
 	}
+</style>
+<style>
 	.center {
 		width: 100%;
 		display: flex;
@@ -316,6 +277,51 @@
 		display: flex;
 		justify-content: right;
 		text-align: right;
+	}
+</style>
+<style>
+	@media only screen and (max-width: 700px) {
+	html {
+			font-size: 1rem;
+			padding: 0rem;
+		}
+	}
+</style>
+<style>
+	h1 {
+		color: var(--h1-color);
+	}
+	h2 {
+		color: var(--h2-color);
+	}
+	h3 {
+		color: var(--h3-color);
+	}
+	h4 {
+		color: var(--h4-color);
+	}
+	h5 {
+		color: var(--h5-color);
+	}
+	h6 {
+		color: var(--h6-color);
+	}
+	a {
+		color: var(--h1-color)
+	}
+	input[type="checkbox"] {
+		accent-color: var(--h1-color);
+	}
+	input[type="checkbox"][aria-disabled="true"] {
+		background-color: var(--h1-color);
+		pointer-events: none;
+	}
+	code {
+		color: rgb(var(--ctp-text));
+	}
+	img {
+		width: 100%;
+		border-radius: var(--border-radius);
 	}
 </style>
 <script>
