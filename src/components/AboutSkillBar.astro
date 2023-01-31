@@ -2,7 +2,7 @@
 export interface Props {
 	title: string;
 	percent: string;
-    addClass: string;
+    addClass?: string;
 }
 
 const { title, percent, addClass } = Astro.props;
@@ -27,9 +27,6 @@ const { title, percent, addClass } = Astro.props;
 	.progress-line.Javascript span::after {
 		content: "88%";
 	}
-	.progress-line.UXML span::after {
-		content: "76%";
-	}
 	.progress-line.MarkDown span::after {
 		content: "85%";
 	}
@@ -40,12 +37,9 @@ const { title, percent, addClass } = Astro.props;
 		content: "37%";
 	}
 	.progress-line.GDScript span::after {
-		content: "78%";
+		content: "95%";
 	}
 	.progress-line.Bash span::after {
-		content: "86%";
-	}
-	.progress-line.Kotlin span::after {
-		content: "21%";
+		content: "90%";
 	}
 </style>
