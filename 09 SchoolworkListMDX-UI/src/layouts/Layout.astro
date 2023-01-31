@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en" class="theme-dark anp-theme-ext-dark ctp-kanagawa-dark peach">
 	<head>
@@ -317,6 +319,8 @@
 	}
 </style>
 <script>
+	console.log(document.body.innerText.match(/\B(\#[a-zA-Z0-9]+\b)/g))
+
 	var inputs = document.querySelectorAll("input[type=checkbox]");
 	inputs.forEach(input => {
 		input.removeAttribute("disabled");
