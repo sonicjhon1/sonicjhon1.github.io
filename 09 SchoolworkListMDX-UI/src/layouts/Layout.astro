@@ -319,7 +319,10 @@
 	}
 </style>
 <script>
-	console.log(document.body.innerText.match(/\B(\#[a-zA-Z0-9]+\b)/g))
+	const hashtags = document.body.innerText.match(/\B(\#[a-zA-Z0-9]+\b)/g);
+	hashtags.forEach(hashtag => {
+		document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<span class="hastag">${hashtag}</span>`);
+	});
 
 	var inputs = document.querySelectorAll("input[type=checkbox]");
 	inputs.forEach(input => {
