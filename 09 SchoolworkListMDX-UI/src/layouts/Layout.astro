@@ -11,6 +11,9 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">		
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -20,14 +23,11 @@ const { title } = Astro.props;
 	</body>
 </html>
 <style is:global>
+	/** Credits to https://github.com/AnubisNekhet/AnuPpuccin */
 	html {
-		font-family: system-ui, sans-serif;
+		font-family: 'Rubik', sans-serif;
 		background-color: rgb(var(--ctp-base));
 	}
-	code {
-		color: var(--anp-code-text-color);
-	}
-	/** Credits to https://github.com/AnubisNekhet/AnuPpuccin */
 	.theme-dark.anp-theme-ext-dark.ctp-kanagawa-dark {
 		--ctp-rosewater: 255, 200, 148;
 		--ctp-flamingo: 210, 126, 129;
@@ -188,6 +188,19 @@ const { title } = Astro.props;
 	h6 {
 		color: var(--h6-color);
 	}
+	a {
+		color: var(--h1-color)
+	}
+	input[type="checkbox"] {
+		accent-color: var(--h1-color);
+	}
+	input[type="checkbox"][aria-disabled="true"] {
+		background-color: var(--h1-color);
+		pointer-events: none;
+	}
+	code {
+		color: rgb(var(--ctp-text));
+	}
 	.theme-dark {
 		--mono-rgb-0: var(--ctp-crust);
 		--mono-rgb-100: var(--ctp-text);
@@ -278,3 +291,10 @@ const { title } = Astro.props;
 		}
 	}
 </style>
+<script>
+	var inputs = document.querySelectorAll("input[type=checkbox]");
+	inputs.forEach(input => {
+		input.removeAttribute("disabled");
+		input.setAttribute("aria-disabled", "true");
+	});
+</script>
