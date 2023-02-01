@@ -6,7 +6,7 @@ import compress from "astro-compress";
 
 export default defineConfig({
   site: 'https://sonicj.pages.dev',
-  base: '/',
+  base: '/09 SchoolworkList-UI',
   build: {
     // Generate `page.html` instead of `page/index.html` during build.
     format: 'file'
