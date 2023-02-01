@@ -10,9 +10,31 @@ rm -rfd node_modules
 rm -rfd dist
 
 # Build subfolders
-cd "03 Genshin-Redeem-Code-UI" && chmod +x build.sh && ./build.sh && \
-cd "../04 NachoNekoNyaanime-UI" && chmod +x build.sh && ./build.sh && \
-cd "../05 KanoColle-UI" && chmod +x build.sh && ./build.sh && \
-cd "../09 SchoolworkList-UI" && chmod +x build.sh && ./build.sh && \
-cd "../09 SchoolworkListMDX-UI" && chmod +x build.sh && ./build.sh && \
+build03UI() {
+    cd "03 Genshin-Redeem-Code-UI"
+    chmod +x build.sh
+    ./build.sh
+}
+build04UI() {
+    cd "04 NachoNekoNyaanime-UI"
+    chmod +x build.sh
+    ./build.sh
+}
+build05UI() {
+    cd "05 KanoColle-UI"
+    chmod +x build.sh
+    ./build.sh
+}
+build09UI() {
+    cd "09 SchoolworkList-UI"
+    chmod +x build.sh
+    ./build.sh
+}
+build09MDXUI() {
+    cd "09 SchoolworkListMDX-UI"
+    chmod +x build.sh
+    ./build.sh
+}
+
+build03UI & build04UI & build05UI & build09UI & build09MDXUI
 echo "Done!"
