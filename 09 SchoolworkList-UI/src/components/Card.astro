@@ -9,16 +9,18 @@ export interface Props {
 const { title, body, tag, href } = Astro.props;
 ---
 
-<div class="card bg-base-100 w-full max-w-full shadow-xl">
-	<figure><img src="https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg" alt="Shoes" /></figure>
-	<div class="card-body">
-		<h2 class="card-title">
-			{title}
-			<div class="badge badge-secondary">NEW</div>
-		</h2>
-		<p>{body}</p>
-		<div class="card-actions justify-end">
-			<div class="badge badge-outline">{tag}</div>
+<a href={href}>
+	<div class="card bg-base-100 w-full max-w-full shadow-xl">
+		<figure><img src="https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg" alt="Shoes" /></figure>
+		<div class="card-body">
+			<h2 class="card-title">
+				{title}
+				<div class="badge badge-secondary">NEW</div>
+			</h2>
+			<p>{body}</p>
+			<div class="card-actions justify-end">
+				<div class="badge badge-outline">{tag}</div>
+			</div>
 		</div>
 	</div>
-</div>
+</a>
