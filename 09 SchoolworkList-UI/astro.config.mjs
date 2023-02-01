@@ -11,7 +11,7 @@ export default defineConfig({
     // Generate `page.html` instead of `page/index.html` during build.
     format: 'file'
   },
-  integrations: [tailwind(), compress()],
+  integrations: [tailwind(), compress({html: false})],
   output: 'static',
   server: {
     port: 3000,
