@@ -2,15 +2,15 @@
 export interface Props {
 	title: string;
 	body: string;
-	tag: string
+	tag: string;
 	href: string;
 }
 
 const { title, body, tag, href } = Astro.props;
 ---
 
-<a href={href}>
-	<div class="card bg-base-100 w-full max-w-full shadow-xl">
+<a href={href} class="card">
+	<div class="card bg-base-100 border-secondary/50 w-full max-w-full border-2 border-solid shadow-xl">
 		<figure><img src="https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg" alt="Shoes" /></figure>
 		<div class="card-body">
 			<h2 class="card-title">
@@ -24,3 +24,26 @@ const { title, body, tag, href } = Astro.props;
 		</div>
 	</div>
 </a>
+
+<style>
+	.card {
+		transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+		transition-duration: 200ms;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		animation: button-pop var(--animation-btn, 0.25s) ease-out;
+	}
+	.card:active:hover,
+	.card:active:focus {
+		animation: none;
+		transform: scale(var(--btn-focus-scale, 0.95));
+	}
+	.card:hover,
+	.card-active {
+		border-color: hsl(var(--nf, var(--n)) / var(--tw-border-opacity));
+		background-color: hsl(var(--nf, var(--n)) / var(--tw-bg-opacity));
+	}
+	.card:focus-visible {
+		outline: 2px solid hsl(var(--nf));
+		outline-offset: 2px;
+	}
+</style>
