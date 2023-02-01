@@ -1,7 +1,7 @@
 ---
-import IconGithub from '../components/icons/IconGithub.astro';
-import IconInstagram from '../components/icons/IconInstagram.astro';
-import IconYoutube from '../components/icons/IconYoutube.astro';
+import IconGithub from "../components/icons/IconGithub.astro";
+import IconInstagram from "../components/icons/IconInstagram.astro";
+import IconYoutube from "../components/icons/IconYoutube.astro";
 
 export interface Props {
 	title: string;
@@ -15,50 +15,72 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
+	<div class="navbar bg-base-100">
+		<div class="flex-1">
+			<a class="btn btn-ghost text-xl normal-case">daisyUI</a>
+		</div>
+		<div class="flex-none gap-2">
+			<div class="form-control">
+				<input type="text" placeholder="Search" class="input input-bordered transition-all ease-in-out duration-700 focus:outline-none focus:border-slate-400" />
+			</div>
+			<div class="dropdown dropdown-end">
+				<label tabindex="0" class="btn btn-ghost btn-circle avatar">
+					<div class="w-10 rounded-full">
+						<img src="https://img-os-static.hoyolab.com/avatar/avatar30038.png" />
+					</div>
+				</label>
+				<ul tabindex="0" class="menu menu-compact dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow">
+					<li><a>Settings</a></li>
+					<li><a>Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 	<body>
 		<slot />
 	</body>
-	<footer class="footer items-center p-4 bg-neutral text-neutral-content">
-		<div class="items-center grid-flow-col">
-			<a href="https://github.com/sonicjhon1" class="h-8 shadow-lg"><img class="h-full rounded-full" id="github-profile" alt="sonicjhon1" src="https://avatars.githubusercontent.com/u/41381685?v=4"/></a>
+	<footer class="footer bg-neutral text-neutral-content items-center p-4">
+		<div class="grid-flow-col items-center">
+			<a href="https://github.com/sonicjhon1" class="h-8 shadow-lg"><img class="h-full rounded-full" id="github-profile" alt="sonicjhon1" src="https://avatars.githubusercontent.com/u/41381685?v=4" /></a>
 			<p>Copyright © 2023 - All right reserved</p>
-		</div> 
+		</div>
 		<div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-			<a href="https://github.com/sonicjhon1/sonicjhon1.github.io" class="h-5"><IconGithub/></a> 
-			<a href="https://www.instagram.com/sonicjhon1" class="h-5"><IconInstagram/></a>
-			<a href="https://www.youtube.com/@sonicjhon1" class="h-5"><IconYoutube/></a>
+			<a href="https://github.com/sonicjhon1/sonicjhon1.github.io" class="h-5"><IconGithub /></a>
+			<a href="https://www.instagram.com/sonicjhon1" class="h-5"><IconInstagram /></a>
+			<a href="https://www.youtube.com/@sonicjhon1" class="h-5"><IconYoutube /></a>
 		</div>
 	</footer>
+
+	<script>
+		const githubProfiles = document.querySelectorAll("#github-profile");
+		githubProfiles.forEach((profile) => {
+			let username = profile.getAttribute("alt");
+			if (!username) return;
+			fetch(`https://api.github.com/users/${username}`).then((response) =>
+				response.json().then((data) => {
+					profile.setAttribute("src", data.avatar_url);
+				})
+			);
+		});
+	</script>
+	<style is:global>
+		:root {
+			--accent: 124, 58, 237;
+			--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+		}
+		html {
+			font-family: "Rubik", sans-serif;
+			background-color: #f6f6f6;
+		}
+		code {
+			font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+		}
+	</style>
 </html>
-<script>
-	const githubProfiles = document.querySelectorAll("#github-profile");
-	githubProfiles.forEach(profile => {
-		let username = profile.getAttribute("alt");
-		if (!username) return;
-		fetch(`https://api.github.com/users/${username}`)
-		.then(response => response.json().then(data=>{
-			profile.setAttribute("src", data.avatar_url)
-		}));
-	});
-</script>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: 'Rubik', sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>
