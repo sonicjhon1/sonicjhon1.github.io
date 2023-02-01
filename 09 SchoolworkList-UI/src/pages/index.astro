@@ -4,9 +4,9 @@ import Card from '../components/Card.astro';
 ---
 
 <Layout title="SWL - Home">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions prose">
+	<main class="m-auto p-6 max-md:max-w-full max-w-[80%]">
+		<h1 class="prose-2xl font-bold">Welcome to <span class="text-gradient">Astro</span></h1>
+		<p class="instructions prose mb-4">
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
@@ -36,16 +36,6 @@ import Card from '../components/Card.astro';
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
 	.text-gradient {
 		background-image: var(--accent-gradient);
 		-webkit-background-clip: text;
