@@ -1,36 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
 ---
 
 <Layout title="SWL - Home">
-	<main class="m-auto p-6 max-md:max-w-full max-w-[80%]">
+	<main class="m-auto max-w-[80%] p-6 max-md:max-w-full">
 		<h1 class="prose-2xl font-bold">Welcome to <span class="text-gradient">Astro</span></h1>
 		<p class="instructions prose mb-4">
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
 		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
+			<Card title="Tugas Proposal" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus." href="google.com" tag="B.INDO"/>
+			<Card title="Tugas Proposal" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus." href="google.com" tag="B.INDO"/>
+			<Card title="Tugas Proposal" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus." href="google.com" tag="B.INDO"/>
+			<Card title="Tugas Proposal" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus." href="google.com" tag="B.INDO"/>
+			<Card title="Tugas Proposal" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus." href="google.com" tag="B.INDO"/>
 		</ul>
 	</main>
 </Layout>
@@ -45,8 +30,26 @@ import Card from '../components/Card.astro';
 	}
 	.link-card-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(15vw, 1fr));
 		gap: 1rem;
 		padding: 0;
+	}
+	@media (min-width: 1401px) and (max-width: 1920px) {
+		.link-card-grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(15vw, 1fr));
+			gap: 1rem;
+			padding: 0;
+		}
+	}
+	@media (min-width: 601px) and (max-width: 1400px) {
+		.link-card-grid {
+			grid-template-columns: repeat(2, minmax(1vw, 1fr));
+		}
+	}
+	@media (max-width: 600px) {
+		.link-card-grid {
+			grid-template-columns: repeat(auto-fit, minmax(100%, 2fr)) !important;
+		}
 	}
 </style>
