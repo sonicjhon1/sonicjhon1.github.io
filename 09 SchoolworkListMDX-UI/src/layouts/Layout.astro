@@ -370,7 +370,7 @@
 					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${frontendURL + hashtag}"><span class="hashtag">${hashtag}</span></a>`);
 					break
 				default: 
-					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${searchEngineURL + hashtag}"><span class="hashtag">${hashtag}</span>`);
+					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${searchEngineURL + hashtag.slice(1)}"><span class="hashtag">${hashtag}</span>`);
 					break
 			}
 		});
