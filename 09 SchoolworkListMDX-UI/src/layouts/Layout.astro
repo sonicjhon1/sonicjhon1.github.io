@@ -336,7 +336,7 @@
 		width: 100%;
 		border-radius: var(--border-radius);
 	}
-	.hastag {
+	.hashtag {
 		color: var(--h1-color);
 		background-color: rgba(var(--accent), 0.1);
 		border-radius: calc(var(--border-radius) + (var(--border-radius) * 0.25));
@@ -347,10 +347,32 @@
 	}
 </style>
 <script>
+	const frontendURL = "https://sonicj.pages.dev/09 SchoolworkList-UI"
+	const searchEngineURL = "https://google.com/search?q="
 	const hashtags = document.body.innerText.match(/\B(\#[a-zA-Z0-9]+\b)/g);
 	if (hashtags) {
 		hashtags.forEach(hashtag => {
-			document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<span class="hastag">${hashtag}</span>`);
+			switch (hashtag) {
+				case "#KIMIA":
+				case "#FISIKA":
+				case "#BIO":
+				case "#MATEMINAT":
+				case "#MATEWAJIB":
+				case "#SEJARAHWAJIB":
+				case "#BINDO":
+				case "#ENG":
+				case "#MAND":
+				case "#SBK":
+				case "#AGAMA":
+				case "#PPKN":
+				case "#TIK":
+				case "#PJOK":
+					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${frontendURL + hashtag}"><span class="hashtag">${hashtag}</span></a>`);
+					break
+				default: 
+					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${searchEngineURL + hashtag}"><span class="hashtag">${hashtag}</span>`);
+					break
+			}
 		});
 	}
 

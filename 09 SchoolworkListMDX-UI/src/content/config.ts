@@ -10,7 +10,8 @@ const xicmiaCollection = defineCollection({
                 "#KIMIA", "#FISIKA", "#BIO", "#MATEMINAT", // Minat di MIA
                 "#MATEWAJIB", "#SEJARAHWAJIB", // Wajib di MIA
                 "#BINDO", "#ENG", "#MAND", // Bahasa
-                "#SBK", "#AGAMA", "#PPKN", "#TIK", "#PJOK" // Lainnya
+                "#SBK", "#AGAMA", "#PPKN", "#TIK", "#PJOK", // Lainnya
+                "#EXAMPLE", // Example
         ]),
         dalam: z.string(),
 	}),
