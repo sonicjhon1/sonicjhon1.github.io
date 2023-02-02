@@ -12,6 +12,7 @@ const metaTitle = "SWL - SchoolWork Lists"
 const metaThumbnail = "https://api.apiflash.com/v1/urltoimage?access_key=79b0e7c367b84a8387c8041566437096&url=https%3A%2F%2Fsonicj.pages.dev%2F09%2520SchoolworkList-UI%2F&format=jpeg&quality=60&response_type=image&thumbnail_width=800"
 const metaDescription = "Track all of your school's homework with this website, free and open-source!"
 const metaUrl = "https://sonicj.pages.dev/09%20SchoolworkList-UI/"
+const backendURL = "https://sonicj.pages.dev/09 SchoolworkListMDX-UI/query"
 ---
 
 <!DOCTYPE html>
@@ -50,6 +51,7 @@ const metaUrl = "https://sonicj.pages.dev/09%20SchoolworkList-UI/"
 		<link rel="manifest" href="./site.webmanifest">
 	</head>
 	<body>
+		<link id="backendURL" data-backendurl={backendURL}>
 		<div class="navbar bg-base-100">
 			<div class="flex-1">
 				<a class="btn btn-ghost text-xl normal-case">SWL<span class="text-xs mt-1 max-sm:hidden">&nbsp&nbsp&nbsp(SchoolWork Lists)</span></a>
