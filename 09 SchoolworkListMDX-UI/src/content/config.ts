@@ -4,7 +4,8 @@ import { z, defineCollection } from "astro:content";
 const xicmiaCollection = defineCollection({
 	schema: z.object({
         judul: z.string(),
-        tanggal: z.string().transform(str => new Date(str)),
+        tanggalKasih: z.string().transform(str => new Date(str)),
+        tanggalKumpul: z.string().transform(str => new Date(str)),
         mataPelajaran: z.enum([
                 "#KIMIA", "#FISIKA", "#BIO", "#MATEMINAT", // Minat di MIA
                 "#MATEWAJIB", "#SEJARAHWAJIB", // Wajib di MIA
