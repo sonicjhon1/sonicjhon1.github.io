@@ -3,12 +3,12 @@ judul: "Examples #1"
 tanggalKasih: "30 Januari 2023"
 tanggalKumpul: "30 Januari 2023"
 mataPelajaran: "#EXAMPLE"
-dalam: "Template"
+dalam: "Example 1"
 ---
-import Callout from '../components/Callout.astro';
+import Callout from '../../components/Callout.astro';
 
-Date: {tanggalKasih}  
-Tag: {mataPelajaran}  
+Date: {frontmatter.tanggalKasih}  
+Tag: {frontmatter.mataPelajaran}  
 \<\< **[D 2022-12-28](D%202023-01-30) | [D 2023-01-31](D%202023-01-30)** \>\>  
 **[D 2022 MOC](D%202023-01-30)**  
 
