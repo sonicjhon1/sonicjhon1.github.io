@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+// Get all entries from a collection. Requires the name of the collection as an argument.
+const xicmiaEntries = await getCollection("xicmia");
+---
+
+{
+	xicmiaEntries.map((xicmiaEntry) => (
+        <div id="xicmiaEntry">
+            <div id="judul">{xicmiaEntry.data.judul}</div>
+            <div id="tanggal">{xicmiaEntry.data.tanggal.toDateString()}</div>
+            <div id="mataPelajaran">{xicmiaEntry.data.mataPelajaran}</div>
+            <div id="dalam">{xicmiaEntry.data.dalam}</div>
+            <div id="slug">{xicmiaEntry.slug}</div>
+        </div>
+	))
+}
