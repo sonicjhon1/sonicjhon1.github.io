@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "astro": "^2.0.4",
-    "astro-compress": "^1.1.24"
+    "astro-compress": "^1.1.24",
+    "npm-recursive-commands": "^1.1.0"
   },
   "devDependencies": {
     "prettier": "^2.8.3",
