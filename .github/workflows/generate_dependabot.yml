@@ -2,7 +2,6 @@ name: Generate dependabot.yml
 
 on:
   push:
-  repository_dispatch:
   workflow_dispatch:
 
 jobs:
