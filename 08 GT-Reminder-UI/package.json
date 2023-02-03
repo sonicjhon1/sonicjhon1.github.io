@@ -20,6 +20,6 @@
     "tailwindcss": "^3.2.4"
   },
   "devDependencies": {
-    "@capacitor/cli": "^4.6.1"
+    "@capacitor/cli": "^4.6.2"
   }
 }
