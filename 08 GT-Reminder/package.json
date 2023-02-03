@@ -10,7 +10,7 @@
 	"author": "Ben Chartrand <ben@spottersystems.com>",
 	"license": "MIT",
 	"devDependencies": {
-		"husky": "^2.1.0",
+		"husky": "^8.0.3",
 		"prettier": "^2.8.3"
 	},
 	"husky": {
