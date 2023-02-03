@@ -1,16 +1,15 @@
 #!/bin/bash
 
-# Build folders
-build01UI() {
-    # Install NPM deps
-    npm install
+# Install NPM deps
+npm install
 
-    # Build and deploy the page
-    npm run build
-    cp -R dist/* .
-    rm -rfd node_modules
-    rm -rfd dist
-}
+# Build and deploy the page
+npm run build
+cp -R dist/* .
+rm -rfd node_modules
+rm -rfd dist
+
+# Build folders 
 build03UI() {
     cd "03 Genshin-Redeem-Code-UI"
     chmod +x build.sh
@@ -37,5 +36,5 @@ build09MDXUI() {
     ./build.sh
 }
 
-build01UI & build03UI & build04UI & build05UI & build09UI & build09MDXUI
+build03UI & build04UI & build05UI & build09UI & build09MDXUI
 echo "Done!"
