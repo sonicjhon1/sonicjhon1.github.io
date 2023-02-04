@@ -2,7 +2,6 @@
 import IconGithub from "../components/icons/IconGithub.astro";
 import IconInstagram from "../components/icons/IconInstagram.astro";
 import IconYoutube from "../components/icons/IconYoutube.astro";
-
 export interface Props {
 	title: string;
 }
@@ -49,6 +48,7 @@ const backendURL = "https://sonicj.pages.dev/09 SchoolworkListMDX-UI/query"
 		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
 		<link rel="manifest" href="./site.webmanifest">
+		<script src="./turbo.js" defer/>
 	</head>
 	<body>
 		<link id="backendURL" data-backendurl={backendURL}>
@@ -80,7 +80,7 @@ const backendURL = "https://sonicj.pages.dev/09 SchoolworkListMDX-UI/query"
 			<a href="https://github.com/sonicjhon1" class="h-8 shadow-lg transition-all ease-in-out duration-500 hover:brightness-150">
 				<img class="h-full rounded-full" id="github-profile" alt="sonicjhon1" src="https://avatars.githubusercontent.com/u/41381685?v=4" />
 			</a>
-			<p class="select-none">Copyright © 2023 - All right reserved</p>
+			<p class="select-none">Copyright &copy; 2023 - All right reserved</p>
 		</div>
 		<div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
 			<a href="https://github.com/sonicjhon1/sonicjhon1.github.io" class="h-5 transition-all ease-in-out duration-500 hover:brightness-200"><IconGithub /></a>
