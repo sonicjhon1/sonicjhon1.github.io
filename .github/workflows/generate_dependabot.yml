@@ -17,7 +17,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: "[WF] Update dependabot YAML"
+          commit-message: "[WF] Update dependabot YAML [CF-Pages-Skip]"
           title: "WF - Update Dependabot YAML"
           body: "A new directory for dependency has been detected, requesting an update to Dependabot's YAML file."
           labels: "dependencies"
