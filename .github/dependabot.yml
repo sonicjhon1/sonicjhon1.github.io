@@ -7,6 +7,10 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: npm
+    directory: /02 Cloudflare-Static-Proxy
+    schedule:
+      interval: daily
+  - package-ecosystem: npm
     directory: /03 Genshin-Redeem-Code-UI
     schedule:
       interval: daily
