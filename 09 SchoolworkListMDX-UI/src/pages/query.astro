@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import moment from "moment";
+
 // Get all entries from a collection. Requires the name of the collection as an argument.
 const exampleEntries = await getCollection("example");
 const xicmiaEntries = await getCollection("xicmia");
@@ -8,8 +10,8 @@ const xicmiaEntries = await getCollection("xicmia");
 	exampleEntries.map((exampleEntry) => (
         <div id="exampleEntry">
             <div id="judul">{exampleEntry.data.judul}</div>
-            <div id="tanggal">{exampleEntry.data.tanggalKasih.toDateString()}</div>
-            <div id="tanggalKumpul">{exampleEntry.data.tanggalKumpul.toDateString()}</div>
+            <div id="tanggal">{moment(exampleEntry.data.tanggalKasih).format("ddd, DD MMM YYYY")}</div>
+            <div id="tanggalKumpul">{moment(exampleEntry.data.tanggalKumpul).format("ddd, DD MMM YYYY")}</div>
             <div id="mataPelajaran">{exampleEntry.data.mataPelajaran}</div>
             <div id="dalam">{exampleEntry.data.dalam}</div>
             <div id="slug">{exampleEntry.slug}</div>
@@ -20,8 +22,8 @@ const xicmiaEntries = await getCollection("xicmia");
 	xicmiaEntries.map((xicmiaEntry) => (
         <div id="xicmiaEntry">
             <div id="judul">{xicmiaEntry.data.judul}</div>
-            <div id="tanggal">{xicmiaEntry.data.tanggalKasih.toDateString().slice(0, 3) + ", " + xicmiaEntry.data.tanggalKasih.getDate() + " " + xicmiaEntry.data.tanggalKasih.toDateString().slice(4, 7) + " " + xicmiaEntry.data.tanggalKasih.getFullYear()}</div>
-            <div id="tanggalKumpul">{xicmiaEntry.data.tanggalKumpul.toDateString().slice(0, 3) + ", " + xicmiaEntry.data.tanggalKumpul.getDate() + " " + xicmiaEntry.data.tanggalKumpul.toDateString().slice(4, 7) + " " + xicmiaEntry.data.tanggalKumpul.getFullYear()}</div>
+            <div id="tanggal">{moment(xicmiaEntry.data.tanggalKasih).format("ddd, DD MMM YYYY")}</div>
+            <div id="tanggalKumpul">{moment(xicmiaEntry.data.tanggalKumpul).format("ddd, DD MMM YYYY")}</div>
             <div id="mataPelajaran">{xicmiaEntry.data.mataPelajaran}</div>
             <div id="dalam">{xicmiaEntry.data.dalam}</div>
             <div id="slug">{xicmiaEntry.slug}</div>
