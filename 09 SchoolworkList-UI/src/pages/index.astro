@@ -3,73 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 ---
 
-<head>
-	<script data-turbo-eval="false">
-		var cardListBackup;
-		
-		async function init() {
-			// Quick check if the Card List element is null, then just return
-			if (!document.querySelector("#card-list")) return;
-			
-			// If the card list backup is not empty,
-			if (cardListBackup) {
-				// Clear the Card List by overwriting it.
-				document.querySelector("#card-list").outerHTML = cardListBackup;
-			} // Else save it to the variable.
-			cardListBackup = document.querySelector("#card-list").outerHTML;
-
-			// Fetch work lists from Backend
-			const backendURL = document.getElementById("backendURL").dataset.backendurl;
-			var responseHTML = document.createElement("doc");
-			async function fetchData() {
-				try {
-					const response = await fetch(backendURL);
-					const html = await response.text();
-					responseHTML.innerHTML = html;
-					responseHTML.outerHTML = responseHTML.innerHTML;
-				} catch (err) {
-					console.warn("Something went wrong when fetching the data needed.", err);
-				}
-			}
-
-			// Cards variables
-			const cardList = document.querySelector("#card-list");
-			const cardTemplates = cardList.querySelector("#card-template");
-
-			// Classwork Entries
-			async function generateCards() {
-				var classWorks = responseHTML.querySelectorAll("#xicmiaEntry");
-				classWorks.forEach((classWork) => {
-					var cardTemplate = cardTemplates.children[0].outerHTML;
-					var href = "post?=" + classWork.querySelector("#slug").innerHTML;
-					var judul = classWork.querySelector("#judul").innerHTML;
-					let tanggal = "<owo class='text-primary text-sm underline'>" + classWork.querySelector("#tanggal").innerHTML + "</owo>";
-					let tanggalKumpul = "Deadline: " + classWork.querySelector("#tanggalKumpul").innerHTML;
-					let dikumpul = "Dikumpul dalam bentuk: " + classWork.querySelector("#dalam").innerHTML;
-					var body = tanggalKumpul + "\n" + dikumpul + "\n" + tanggal;
-					var tag = classWork.querySelector("#mataPelajaran").innerHTML;
-
-					// Add templated card
-					var card = document.createElement("card");
-					card.innerHTML = cardTemplate;
-					// Regex it with informations
-					card.innerHTML = card.innerHTML.replace(/{href}/g, href);
-					card.innerHTML = card.innerHTML.replace(/{title}/g, judul);
-					card.innerHTML = card.innerHTML.replace(/{body}/g, body);
-					card.innerHTML = card.innerHTML.replace(/{tag}/g, tag);
-					// Append and remove the extra "card" HTMLelement on the outerHTML
-					cardList.appendChild(card);
-					card.outerHTML = card.innerHTML;
-				});
-			}
-
-			await fetchData();
-			await generateCards();
-		}
-
-		addEventListener("turbo:load", init);
-	</script>
-</head>
 <Layout title="SWL - Home">
 	<main class="m-auto min-h-[85.75vh] max-w-[80%] p-6 max-md:max-w-full">
 		<h1 class="prose-2xl font-bold">Welcome to <span class="text-gradient">Astro</span></h1>
@@ -90,7 +23,71 @@ import Card from "../components/Card.astro";
 		</ul>
 	</main>
 </Layout>
+<script>
+	var cardListBackup;
+	
+	async function init() {
+		// Quick check if the Card List element is null, then just return
+		if (!document.querySelector("#card-list")) return;
+		
+		// If the card list backup is not empty,
+		if (cardListBackup) {
+			// Clear the Card List by overwriting it.
+			document.querySelector("#card-list").outerHTML = cardListBackup;
+		} // Else save it to the variable.
+		cardListBackup = document.querySelector("#card-list").outerHTML;
 
+		// Fetch work lists from Backend
+		const backendURL = document.getElementById("backendURL").dataset.backendurl;
+		var responseHTML = document.createElement("doc");
+		async function fetchData() {
+			try {
+				const response = await fetch(backendURL);
+				const html = await response.text();
+				responseHTML.innerHTML = html;
+				responseHTML.outerHTML = responseHTML.innerHTML;
+			} catch (err) {
+				console.warn("Something went wrong when fetching the data needed.", err);
+			}
+		}
+
+		// Cards variables
+		const cardList = document.querySelector("#card-list");
+		const cardTemplates = cardList.querySelector("#card-template");
+
+		// Classwork Entries
+		async function generateCards() {
+			var classWorks = responseHTML.querySelectorAll("#xicmiaEntry");
+			classWorks.forEach((classWork) => {
+				var cardTemplate = cardTemplates.children[0].outerHTML;
+				var href = "post?=" + classWork.querySelector("#slug").innerHTML;
+				var judul = classWork.querySelector("#judul").innerHTML;
+				let tanggal = "<owo class='text-primary text-sm underline'>" + classWork.querySelector("#tanggal").innerHTML + "</owo>";
+				let tanggalKumpul = "Deadline: " + classWork.querySelector("#tanggalKumpul").innerHTML;
+				let dikumpul = "Dikumpul dalam bentuk: " + classWork.querySelector("#dalam").innerHTML;
+				var body = tanggalKumpul + "\n" + dikumpul + "\n" + tanggal;
+				var tag = classWork.querySelector("#mataPelajaran").innerHTML;
+
+				// Add templated card
+				var card = document.createElement("card");
+				card.innerHTML = cardTemplate;
+				// Regex it with informations
+				card.innerHTML = card.innerHTML.replace(/{href}/g, href);
+				card.innerHTML = card.innerHTML.replace(/{title}/g, judul);
+				card.innerHTML = card.innerHTML.replace(/{body}/g, body);
+				card.innerHTML = card.innerHTML.replace(/{tag}/g, tag);
+				// Append and remove the extra "card" HTMLelement on the outerHTML
+				cardList.appendChild(card);
+				card.outerHTML = card.innerHTML;
+			});
+		}
+
+		await fetchData();
+		await generateCards();
+	}
+
+	addEventListener("turbo:load", init);
+</script>
 <style>
 	.text-gradient {
 		background-image: var(--accent-gradient);
