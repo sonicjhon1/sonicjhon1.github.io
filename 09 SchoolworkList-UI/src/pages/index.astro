@@ -12,6 +12,7 @@ import Card from "../components/Card.astro";
 		</p>
 		<ul id="card-list" role="list" class="link-card-grid">
 			<div id="card-template" class="hidden">
+				<Card title="{title}" href="{href}" tag="{tag}" body="{body}" />
 				<Card
 					title="Tugas Proposal"
 					href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -75,11 +76,16 @@ import Card from "../components/Card.astro";
 		});
 
 	// Cards adding
-	const cardList =  document.querySelector("#card-list");
+	const cardList = document.querySelector("#card-list");
 	const cardTemplate = cardList.querySelector("#card-template").innerHTML;
 	// Add templated card
-	var card = document.createElement('card');
+	var card = document.createElement("card");
 	card.innerHTML = cardTemplate;
+	// Regex it with informations
+	card.innerHTML = card.innerHTML.replace(/{href}/g, "href here")
+	card.innerHTML = card.innerHTML.replace(/{title}/g, "title here")
+	card.innerHTML = card.innerHTML.replace(/{body}/g, "body here")
+	card.innerHTML = card.innerHTML.replace(/{tag}/g, "tag here")
 	// Append and remove the extra "card" HTMLelement
 	cardList.appendChild(card);
 	card.outerHTML = card.innerHTML;
