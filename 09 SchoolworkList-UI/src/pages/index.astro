@@ -5,10 +5,19 @@ import Card from "../components/Card.astro";
 
 <head>
 	<script data-turbo-eval="false">
+		var cardListBackup;
+		
 		async function init() {
 			// Quick check if the Card List element is null, then just return
 			if (!document.querySelector("#card-list")) return;
 			
+			// If the card list backup is not empty,
+			if (cardListBackup) {
+				// Clear the Card List by overwriting it.
+				document.querySelector("#card-list").outerHTML = cardListBackup;
+			} // Else save it to the variable.
+			cardListBackup = document.querySelector("#card-list").outerHTML;
+
 			// Fetch work lists from Backend
 			const backendURL = document.getElementById("backendURL").dataset.backendurl;
 			var responseHTML = document.createElement("doc");
@@ -22,6 +31,7 @@ import Card from "../components/Card.astro";
 					console.warn("Something went wrong when fetching the data needed.", err);
 				}
 			}
+
 			// Cards variables
 			const cardList = document.querySelector("#card-list");
 			const cardTemplates = cardList.querySelector("#card-template");
@@ -52,9 +62,11 @@ import Card from "../components/Card.astro";
 					card.outerHTML = card.innerHTML;
 				});
 			}
+
 			await fetchData();
 			await generateCards();
 		}
+
 		addEventListener("turbo:load", init);
 	</script>
 </head>
