@@ -86,7 +86,7 @@ import Card from "../components/Card.astro";
 	card.innerHTML = card.innerHTML.replace(/{title}/g, "title here")
 	card.innerHTML = card.innerHTML.replace(/{body}/g, "body here")
 	card.innerHTML = card.innerHTML.replace(/{tag}/g, "tag here")
-	// Append and remove the extra "card" HTMLelement
+	// Append and remove the extra "card" HTMLelement on the outerHTML
 	cardList.appendChild(card);
 	card.outerHTML = card.innerHTML;
 </script>
