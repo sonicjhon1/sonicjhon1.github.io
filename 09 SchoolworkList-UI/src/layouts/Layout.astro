@@ -54,7 +54,7 @@ const backendURL = "https://sonicj.pages.dev/09 SchoolworkListMDX-UI/query"
 		<link id="backendURL" data-backendurl={backendURL}>
 		<div class="navbar bg-base-100">
 			<div class="flex-1">
-				<a href="https://sonicj.pages.dev/" class="btn btn-ghost text-xl normal-case" data-turbo-preload>SWL<span class="text-xs mt-1 max-sm:hidden">&nbsp&nbsp&nbsp(SchoolWork Lists)</span></a>
+				<a href={import.meta.env.PUBLIC_URL ? import.meta.env.PUBLIC_URL : import.meta.env.SITE + import.meta.env.BASE_URL} class="btn btn-ghost text-xl normal-case" data-turbo-preload>SWL<span class="text-xs mt-1 max-sm:hidden">&nbsp&nbsp&nbsp(SchoolWork Lists)</span></a>
 			</div>
 			<div class="flex-none gap-2">
 				<div class="form-control">
