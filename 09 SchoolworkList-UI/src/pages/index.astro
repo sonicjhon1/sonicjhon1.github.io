@@ -61,18 +61,20 @@ import Card from "../components/Card.astro";
 <script>
 	// Fetch work lists from Backend
 	const backendURL = document.getElementById("backendURL").dataset.backendurl;
+	var responseHTML = document.createElement("doc");
 	fetch(backendURL)
 		.then(function (response) {
 			// The API call was successful!
 			return response.text();
 		})
 		.then(function (html) {
-			// This is the HTML from our response as a text string
-			console.log(html);
+			// Convert the HTML into a HTMLElement
+			responseHTML.innerHTML = html;
+			responseHTML.outerHTML = responseHTML.innerHTML;
 		})
 		.catch(function (err) {
-			// There was an error
-			console.warn("Something went wrong.", err);
+			// There was an error calling the API.
+			console.warn("Something went wrong when fetching the data needed.", err);
 		});
 
 	// Cards adding
