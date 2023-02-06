@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import compress from "astro-compress";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default defineConfig({
 	site: "https://sonicj.pages.dev/",
@@ -23,4 +24,9 @@ export default defineConfig({
 		port: 3005,
 		host: true,
 	},
+	vite: {
+		plugins: [
+			basicSsl(),
+		],
+	}
 });
