@@ -84,10 +84,10 @@ import Card from "../components/Card.astro";
 		var cardTemplate = cardTemplates.children[0].outerHTML;
 		var href = classWork.querySelector("#slug").innerHTML;
 		var judul = classWork.querySelector("#judul").innerHTML;
-		let tanggal = "<owo class='text-primary underline'>" + classWork.querySelectorAll("#tanggal")[0].innerHTML + "</owo>";
+		let tanggal = "<owo class='text-primary text-sm underline'>" + classWork.querySelectorAll("#tanggal")[0].innerHTML + "</owo>";
 		let tanggalKumpul = "Deadline: " + classWork.querySelectorAll("#tanggal")[1].innerHTML;
 		let dikumpul = "Dikumpul dalam bentuk: " + classWork.querySelector("#dalam").innerHTML;
-		var body = tanggal + "\n" + tanggalKumpul + "\n" + dikumpul
+		var body = tanggalKumpul + "\n" + dikumpul + "\n" + tanggal 
 		var tag = classWork.querySelector("#mataPelajaran").innerHTML;
 
 		// Add templated card
