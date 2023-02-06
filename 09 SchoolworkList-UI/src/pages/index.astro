@@ -62,33 +62,47 @@ import Card from "../components/Card.astro";
 	// Fetch work lists from Backend
 	const backendURL = document.getElementById("backendURL").dataset.backendurl;
 	var responseHTML = document.createElement("doc");
-	fetch(backendURL)
-		.then(function (response) {
-			// The API call was successful!
-			return response.text();
-		})
-		.then(function (html) {
-			// Convert the HTML into a HTMLElement
+	async function fetchData() {
+		try {
+			const response = await fetch(backendURL);
+			const html = await response.text();
 			responseHTML.innerHTML = html;
 			responseHTML.outerHTML = responseHTML.innerHTML;
-		})
-		.catch(function (err) {
-			// There was an error calling the API.
+		} catch (err) {
 			console.warn("Something went wrong when fetching the data needed.", err);
-		});
-
-	// Cards adding
+		}
+	}
+	await fetchData();
+	
+	// Cards variables
 	const cardList = document.querySelector("#card-list");
-	const cardTemplate = cardList.querySelector("#card-template").innerHTML;
-	// Add templated card
-	var card = document.createElement("card");
-	card.innerHTML = cardTemplate;
-	// Regex it with informations
-	card.innerHTML = card.innerHTML.replace(/{href}/g, "href here")
-	card.innerHTML = card.innerHTML.replace(/{title}/g, "title here")
-	card.innerHTML = card.innerHTML.replace(/{body}/g, "body here")
-	card.innerHTML = card.innerHTML.replace(/{tag}/g, "tag here")
-	// Append and remove the extra "card" HTMLelement on the outerHTML
-	cardList.appendChild(card);
-	card.outerHTML = card.innerHTML;
+	const cardTemplates = cardList.querySelector("#card-template");
+
+	// Classwork Entries
+	var classWorks = responseHTML.querySelectorAll("#xicmiaEntry")
+	classWorks.forEach(classWork => {
+		var cardTemplate = cardTemplates.children[0].outerHTML;
+		var href = classWork.querySelector("#slug").innerHTML;
+		var judul = classWork.querySelector("#judul").innerHTML;
+		let tanggal = "<owo class='text-primary underline'>" + classWork.querySelectorAll("#tanggal")[0].innerHTML + "</owo>";
+		let tanggalKumpul = "Deadline: " + classWork.querySelectorAll("#tanggal")[1].innerHTML;
+		let dikumpul = "Dikumpul dalam bentuk: " + classWork.querySelector("#dalam").innerHTML;
+		var body = tanggal + "\n" + tanggalKumpul + "\n" + dikumpul
+		var tag = classWork.querySelector("#mataPelajaran").innerHTML;
+
+		// Add templated card
+		var card = document.createElement("card");
+		card.innerHTML = cardTemplate;
+		// Regex it with informations
+		card.innerHTML = card.innerHTML.replace(/{href}/g, href);
+		card.innerHTML = card.innerHTML.replace(/{title}/g, judul);
+		card.innerHTML = card.innerHTML.replace(/{body}/g, body);
+		card.innerHTML = card.innerHTML.replace(/{tag}/g, tag);
+		// Append and remove the extra "card" HTMLelement on the outerHTML
+		cardList.appendChild(card);
+		card.outerHTML = card.innerHTML;
+	})
+
+	// TMP - For debugging purposes
+	// document.body.appendChild(responseHTML);
 </script>
