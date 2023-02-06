@@ -4,7 +4,6 @@ import { getCollection } from "astro:content";
 const exampleEntries = await getCollection("example");
 const xicmiaEntries = await getCollection("xicmia");
 ---
-
 {
 	exampleEntries.map((exampleEntry) => (
         <div id="exampleEntry">
@@ -21,8 +20,8 @@ const xicmiaEntries = await getCollection("xicmia");
 	xicmiaEntries.map((xicmiaEntry) => (
         <div id="xicmiaEntry">
             <div id="judul">{xicmiaEntry.data.judul}</div>
-            <div id="tanggal">{xicmiaEntry.data.tanggalKasih.toDateString()}</div>
-            <div id="tanggalKumpul">{xicmiaEntry.data.tanggalKumpul.toDateString()}</div>
+            <div id="tanggal">{xicmiaEntry.data.tanggalKasih.toDateString().slice(0, 3) + ", " + xicmiaEntry.data.tanggalKasih.getDate() + " " + xicmiaEntry.data.tanggalKasih.toDateString().slice(4, 7) + " " + xicmiaEntry.data.tanggalKasih.getFullYear()}</div>
+            <div id="tanggalKumpul">{xicmiaEntry.data.tanggalKumpul.toDateString().slice(0, 3) + ", " + xicmiaEntry.data.tanggalKumpul.getDate() + " " + xicmiaEntry.data.tanggalKumpul.toDateString().slice(4, 7) + " " + xicmiaEntry.data.tanggalKumpul.getFullYear()}</div>
             <div id="mataPelajaran">{xicmiaEntry.data.mataPelajaran}</div>
             <div id="dalam">{xicmiaEntry.data.dalam}</div>
             <div id="slug">{xicmiaEntry.slug}</div>
