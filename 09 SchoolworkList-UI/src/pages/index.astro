@@ -10,37 +10,15 @@ import Card from "../components/Card.astro";
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				title="Tugas Proposal"
-				href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-				tag="B.INDO"
-				body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
-			/>
-			<Card
-				title="Tugas Proposal"
-				href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-				tag="B.INDO"
-				body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
-			/>
-			<Card
-				title="Tugas Proposal"
-				href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-				tag="B.INDO"
-				body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
-			/>
-			<Card
-				title="Tugas Proposal"
-				href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-				tag="B.INDO"
-				body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
-			/>
-			<Card
-				title="Tugas Proposal"
-				href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-				tag="B.INDO"
-				body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
-			/>
+		<ul id="card-list" role="list" class="link-card-grid">
+			<div id="card-template" class="hidden">
+				<Card
+					title="Tugas Proposal"
+					href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+					tag="B.INDO"
+					body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
+				/>
+			</div>
 		</ul>
 	</main>
 </Layout>
@@ -80,6 +58,7 @@ import Card from "../components/Card.astro";
 </style>
 
 <script>
+	// Fetch work lists from Backend
 	const backendURL = document.getElementById("backendURL").dataset.backendurl;
 	fetch(backendURL)
 		.then(function (response) {
@@ -94,4 +73,14 @@ import Card from "../components/Card.astro";
 			// There was an error
 			console.warn("Something went wrong.", err);
 		});
+
+	// Cards adding
+	const cardList =  document.querySelector("#card-list");
+	const cardTemplate = cardList.querySelector("#card-template").innerHTML;
+	// Add templated card
+	var card = document.createElement('card');
+	card.innerHTML = cardTemplate;
+	// Append and remove the extra "card" HTMLelement
+	cardList.appendChild(card);
+	card.outerHTML = card.innerHTML;
 </script>
