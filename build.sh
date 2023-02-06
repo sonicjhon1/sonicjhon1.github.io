@@ -12,8 +12,7 @@ build() {
 }
 postBuild() {
     # Copy all the content of "dist" and removes the "dist" and "node_modules" folder
-    sleep 3
-    cp -R dist/* .
+    cp -R dist/** .
     rm -rfd node_modules
     rm -rfd dist
 }
