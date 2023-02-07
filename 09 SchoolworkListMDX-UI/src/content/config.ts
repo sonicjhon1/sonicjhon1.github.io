@@ -10,6 +10,7 @@ const exampleCollection = defineCollection({
 			"#EXAMPLE", // Example
 		]),
 		dalam: z.string(),
+		thumbnail: z.string().optional(),
 	}),
 });
 const xicmiaCollection = defineCollection({
@@ -34,6 +35,7 @@ const xicmiaCollection = defineCollection({
 			"#PJOK", // Lainnya
 		]),
 		dalam: z.string(),
+		thumbnail: z.string().optional(),
 	}),
 });
 // 3. Export a single `collections` object to register your collection(s)
