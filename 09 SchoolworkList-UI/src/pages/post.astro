@@ -1,11 +1,45 @@
 ---
-import Layout from "../layouts/Layout.astro"
-
+import Layout from "../layouts/Layout.astro";
+const backendURL = "../../09%20SchoolworkListMDX-UI";
 ---
 
+<head>
+</head>
 <Layout title="SWL - Viewing Post">
-    <main class="m-auto min-h-[85.75vh] max-w-[80%] p-6 max-md:max-w-full flex items-center flex-col">
-        <img class="w-[45vh]" src="./404.jpg"/>
-        <strong>To be Implemented...</strong>
-    </main>
+    <!-- IFrame Manager Stuff -->
+    <script src="./iframemanager.js" is:inline/>
+    <link rel="stylesheet" href="./iframemanager.css" />
+	<main class="m-auto min-h-[85.75vh] max-w-[80%] px-6 max-md:max-w-full">
+        <div data-service="mdxui" data-autoscale>
+            <div data-placeholder data-visible class="flex-col">
+                <img class="w-[20%]" src="./404.jpg" />
+                <p>An error occoured while loading the data.</p>
+            </div>
+        </div>
+	</main>
 </Layout>
+<script is:inline>
+    const im = iframemanager();
+    im.run({
+    currLang: 'en',
+    services: {
+        mdxui: {
+            embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+
+            thumbnailUrl: 'https://i3.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+
+            iframe: {
+                allow: 'encrypted-media; fullscreen;',
+            },
+
+            languages: {
+                en: {
+                    notice: 'This content is hosted by a third party. By showing the external content you accept the <a rel="noreferrer noopener" href="https://www.youtube.com/t/terms" target="_blank">terms and conditions</a> of youtube.com.',
+                    loadBtn: 'Load once',
+                    loadAllBtn: "Load and Don't ask again"
+                }
+            }
+        }
+    }
+});
+</script>
