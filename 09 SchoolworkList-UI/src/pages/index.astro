@@ -12,12 +12,13 @@ import Card from "../components/Card.astro";
 		</p>
 		<ul id="card-list" role="list" class="link-card-grid">
 			<div id="card-template" class="hidden">
-				<Card title="{title}" href="{href}" tag="{tag}" body="{body}" />
+				<Card title="{title}" href="{href}" tag="{tag}" body="{body}" image="https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg" />
 				<Card
 					title="Tugas Proposal"
 					href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 					tag="B.INDO"
 					body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
+					image="https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg"
 				/>
 			</div>
 		</ul>
@@ -28,7 +29,7 @@ import Card from "../components/Card.astro";
 	function clearCards() {
 		// Quick check if the Card List element is null, then just return
 		if (!document.querySelector("#card-list")) return;
-		
+
 		// If the card list backup is not empty,
 		if (cardListBackup) {
 			// Clear the Card List by overwriting it.
@@ -36,11 +37,11 @@ import Card from "../components/Card.astro";
 		} // Else save it to the variable.
 		cardListBackup = document.querySelector("#card-list").outerHTML;
 	}
-	
+
 	async function init() {
 		// Quick check if the Card List element is null, then just return
 		if (!document.querySelector("#card-list")) return;
-		
+
 		clearCards();
 
 		// Fetch work lists from Backend
@@ -56,26 +57,39 @@ import Card from "../components/Card.astro";
 				console.warn("Something went wrong when fetching the data needed.", err);
 			}
 		}
-		
+
 		// Cards variables
 		const cardList = document.querySelector("#card-list");
 		const cardTemplates = cardList.querySelector("#card-template");
 		var cardClass = "xicmia";
-		
+
 		// Classwork Entries
 		async function generateCards() {
-			var currentClassEntry = "#" + cardClass + "Entry"
+			var currentClassEntry = "#" + cardClass + "Entry";
 			var classWorks = responseHTML.querySelectorAll(currentClassEntry);
 			classWorks.forEach((classWork) => {
 				var cardTemplate = cardTemplates.children[0].outerHTML;
+
 				let postSlugParam = "post?post=" + classWork.querySelector("#slug").innerHTML;
 				let cardClassParam = "class=" + cardClass;
-				var href = postSlugParam + "&" + cardClassParam
+				var href = postSlugParam + "&" + cardClassParam;
+
+				var thumbnailURL = "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg";
+				try {
+					thumbnailURL = backendURL + classWork.querySelector("#thumbnail").innerHTML;
+					thumbnailParam = "t=" + classWork.querySelector("#thumbnail").innerHTML;
+					href = href + "&" + thumbnailParam;
+				} catch (e) {
+					thumbnailURL = "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg";
+				}
+
 				var judul = classWork.querySelector("#judul").innerHTML;
+
 				let tanggal = "<owo class='text-primary text-sm underline'>" + classWork.querySelector("#tanggal").innerHTML + "</owo>";
 				let tanggalKumpul = "Deadline: " + classWork.querySelector("#tanggalKumpul").innerHTML;
 				let dikumpul = "Dikumpul dalam bentuk: " + classWork.querySelector("#dalam").innerHTML;
 				var body = tanggalKumpul + "\n" + dikumpul + "\n" + tanggal;
+
 				var tag = classWork.querySelector("#mataPelajaran").innerHTML;
 
 				// Add templated card
@@ -86,6 +100,7 @@ import Card from "../components/Card.astro";
 				card.innerHTML = card.innerHTML.replace(/{title}/g, judul);
 				card.innerHTML = card.innerHTML.replace(/{body}/g, body);
 				card.innerHTML = card.innerHTML.replace(/{tag}/g, tag);
+				card.innerHTML = card.innerHTML.replace("https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg", thumbnailURL);
 				// Append and remove the extra "card" HTMLelement on the outerHTML
 				cardList.appendChild(card);
 				card.outerHTML = card.innerHTML;
@@ -97,7 +112,7 @@ import Card from "../components/Card.astro";
 	}
 
 	addEventListener("turbo:load", init);
-	addEventListener("turbo:before-cache", clearCards)
+	addEventListener("turbo:before-cache", clearCards);
 </script>
 <style>
 	.text-gradient {

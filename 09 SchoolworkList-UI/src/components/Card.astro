@@ -4,14 +4,15 @@ export interface Props {
 	body: string;
 	tag: string;
 	href: string;
+	image: string;
 }
 
-const { title, body, tag, href } = Astro.props;
+const { title, body, tag, href, image } = Astro.props;
 ---
 
 <a href={href} class="card">
 	<div class="card bg-base-100 border-base-content/20 w-full max-w-full border-2 border-solid shadow-xl">
-		<figure><img src="https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg" alt="Shoes" /></figure>
+		<figure><img src={image} alt="owo" /></figure>
 		<div class="card-body">
 			<h2 class="card-title">
 				{title}
