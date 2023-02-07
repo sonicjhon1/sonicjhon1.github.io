@@ -56,17 +56,21 @@ import Card from "../components/Card.astro";
 				console.warn("Something went wrong when fetching the data needed.", err);
 			}
 		}
-
+		
 		// Cards variables
 		const cardList = document.querySelector("#card-list");
 		const cardTemplates = cardList.querySelector("#card-template");
-
+		var cardClass = "xicmia";
+		
 		// Classwork Entries
 		async function generateCards() {
-			var classWorks = responseHTML.querySelectorAll("#xicmiaEntry");
+			var currentClassEntry = "#" + cardClass + "Entry"
+			var classWorks = responseHTML.querySelectorAll(currentClassEntry);
 			classWorks.forEach((classWork) => {
 				var cardTemplate = cardTemplates.children[0].outerHTML;
-				var href = "post?p=" + classWork.querySelector("#slug").innerHTML;
+				let postSlugParam = "post?post=" + classWork.querySelector("#slug").innerHTML;
+				let cardClassParam = "class=" + cardClass;
+				var href = postSlugParam + "&" + cardClassParam
 				var judul = classWork.querySelector("#judul").innerHTML;
 				let tanggal = "<owo class='text-primary text-sm underline'>" + classWork.querySelector("#tanggal").innerHTML + "</owo>";
 				let tanggalKumpul = "Deadline: " + classWork.querySelector("#tanggalKumpul").innerHTML;

@@ -13,14 +13,16 @@ import Layout from "../layouts/Layout.astro";
 	</main>
 </Layout>
 <script is:inline>
-	const backendURL = document.getElementById("backendURL").dataset.backendurl;
-	var postURL = new URL(window.location.href).searchParams.get("p");
+	var backendURL = document.getElementById("backendURL").dataset.backendurl;
+	var postParam = new URL(window.location.href).searchParams.get("post");
+	var classParam = new URL(window.location.href).searchParams.get("class");
+	var postURL = backendURL + classParam + "/" + postParam;
 	var im = iframemanager();
 	im.run({
 		currLang: "en",
 		services: {
 			mdxui: {
-				embedUrl: backendURL,
+				embedUrl: postURL,
 
 				thumbnailUrl: "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg",
 
