@@ -23,10 +23,9 @@ import Card from "../components/Card.astro";
 		</ul>
 	</main>
 </Layout>
-<script>
+<script is:inline>
 	var cardListBackup;
-	
-	async function init() {
+	function clearCards() {
 		// Quick check if the Card List element is null, then just return
 		if (!document.querySelector("#card-list")) return;
 		
@@ -36,6 +35,13 @@ import Card from "../components/Card.astro";
 			document.querySelector("#card-list").outerHTML = cardListBackup;
 		} // Else save it to the variable.
 		cardListBackup = document.querySelector("#card-list").outerHTML;
+	}
+	
+	async function init() {
+		// Quick check if the Card List element is null, then just return
+		if (!document.querySelector("#card-list")) return;
+		
+		clearCards();
 
 		// Fetch work lists from Backend
 		const backendURL = document.getElementById("backendURL").dataset.backendurl;
@@ -87,6 +93,7 @@ import Card from "../components/Card.astro";
 	}
 
 	addEventListener("turbo:load", init);
+	addEventListener("turbo:before-cache", clearCards)
 </script>
 <style>
 	.text-gradient {

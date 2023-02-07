@@ -3,10 +3,6 @@ import Layout from "../layouts/Layout.astro";
 const backendURL = "../../09%20SchoolworkListMDX-UI";
 ---
 <Layout title="SWL - Viewing Post">
-    <!-- IFrame Manager Stuff -->
-    <script src="./iframemanager.js" is:inline/>
-    <link rel="stylesheet" href="./iframemanager.css" />
-    
 	<main class="m-auto min-h-[85.75vh] max-w-[80%] px-6 max-md:max-w-full">
         <div data-service="mdxui" data-autoscale>
             <div data-placeholder data-visible class="flex-col">
@@ -17,7 +13,7 @@ const backendURL = "../../09%20SchoolworkListMDX-UI";
 	</main>
 </Layout>
 <script is:inline>
-    const im = iframemanager();
+    var im = iframemanager();
     im.run({
     currLang: 'en',
     services: {

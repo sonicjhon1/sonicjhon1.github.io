@@ -49,12 +49,14 @@ const backendURL = "https://sonicj.pages.dev/09 SchoolworkListMDX-UI/query"
 		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
 		<link rel="manifest" href="./site.webmanifest">
 		<script src="./turbo.js" defer/>
+		<script src="./iframemanager.js" is:raw/>
+		<link rel="stylesheet" href="./iframemanager.css" />
 	</head>
 	<body>
 		<link id="backendURL" data-backendurl={backendURL}>
 		<div class="navbar bg-base-100">
 			<div class="flex-1">
-				<a href={import.meta.env.PUBLIC_URL ? import.meta.env.PUBLIC_URL : "index"} class="btn btn-ghost text-xl normal-case" data-turbo-preload>SWL<span class="text-xs mt-1 max-sm:hidden">&nbsp&nbsp&nbsp(SchoolWork Lists)</span></a>
+				<a href={import.meta.env.PUBLIC_URL ? import.meta.env.PUBLIC_URL + "/index.html" : "index.html"} class="btn btn-ghost text-xl normal-case" data-turbo-preload>SWL<span class="text-xs mt-1 max-sm:hidden">&nbsp&nbsp&nbsp(SchoolWork Lists)</span></a>
 			</div>
 			<div class="flex-none gap-2">
 				<div class="form-control">
