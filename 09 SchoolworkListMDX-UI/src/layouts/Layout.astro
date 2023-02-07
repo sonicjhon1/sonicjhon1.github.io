@@ -376,9 +376,12 @@
 		});
 	}
 
-	var inputs = document.querySelectorAll("input[type=checkbox]");
-	inputs.forEach(input => {
+	document.querySelectorAll("input[type=checkbox]").forEach(input => {
 		input.removeAttribute("disabled");
 		input.setAttribute("aria-disabled", "true");
+	});
+
+	document.querySelectorAll("a").forEach(a => {
+		a.setAttribute("target", "_parent");
 	});
 </script>
