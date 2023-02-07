@@ -44,7 +44,7 @@ import Card from "../components/Card.astro";
 		clearCards();
 
 		// Fetch work lists from Backend
-		const backendURL = document.getElementById("backendURL").dataset.backendurl;
+		const backendURL = document.getElementById("backendURL").dataset.backendurl + "query";
 		var responseHTML = document.createElement("doc");
 		async function fetchData() {
 			try {
