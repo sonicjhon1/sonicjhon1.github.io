@@ -44,7 +44,7 @@ import Card from "../components/Card.astro";
 		clearCards();
 
 		// Fetch work lists from Backend
-		const backendURL = document.getElementById("backendURL").dataset.backendurl + "query";
+		var backendURL = document.getElementById("backendURL").dataset.backendurl + "query";
 		var responseHTML = document.createElement("doc");
 		async function fetchData() {
 			try {
@@ -66,7 +66,7 @@ import Card from "../components/Card.astro";
 			var classWorks = responseHTML.querySelectorAll("#xicmiaEntry");
 			classWorks.forEach((classWork) => {
 				var cardTemplate = cardTemplates.children[0].outerHTML;
-				var href = "post?=" + classWork.querySelector("#slug").innerHTML;
+				var href = "post?p=" + classWork.querySelector("#slug").innerHTML;
 				var judul = classWork.querySelector("#judul").innerHTML;
 				let tanggal = "<owo class='text-primary text-sm underline'>" + classWork.querySelector("#tanggal").innerHTML + "</owo>";
 				let tanggalKumpul = "Deadline: " + classWork.querySelector("#tanggalKumpul").innerHTML;

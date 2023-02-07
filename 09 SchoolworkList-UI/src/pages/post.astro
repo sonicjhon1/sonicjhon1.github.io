@@ -13,7 +13,8 @@ import Layout from "../layouts/Layout.astro";
 	</main>
 </Layout>
 <script is:inline>
-    const backendURL = document.getElementById("backendURL").dataset.backendurl;
+	const backendURL = document.getElementById("backendURL").dataset.backendurl;
+	var postURL = new URL(window.location.href).searchParams.get("p");
 	var im = iframemanager();
 	im.run({
 		currLang: "en",
