@@ -52,7 +52,6 @@ import Card from "../components/Card.astro";
 				const response = await fetch(backendURL);
 				const html = await response.text();
 				responseHTML.innerHTML = html;
-				responseHTML.outerHTML = responseHTML.innerHTML;
 			} catch (err) {
 				console.warn("Something went wrong when fetching the data needed.", err);
 			}
@@ -83,9 +82,9 @@ import Card from "../components/Card.astro";
 						// Set the thumbnail variable from the innerHTML
 						let thumbnailFile = classWork.querySelector("#thumbnail").innerHTML;
 						thumbnailURL = backendURL + thumbnailFile;
+						thumbnailParam = "t=" + classWork.querySelector("#thumbnail").innerHTML;
+						href = href + "&" + thumbnailParam;
 					}
-					thumbnailParam = "t=" + classWork.querySelector("#thumbnail").innerHTML;
-					href = href + "&" + thumbnailParam;
 				} catch (e) {
 					thumbnailURL = "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg";
 				}
