@@ -10,7 +10,7 @@ export interface Props {
 const { title, body, tag, href, image } = Astro.props;
 ---
 
-<a href={href} class="card">
+<a href={href} class="card h-min select-none">
 	<div class="card bg-base-100 border-base-content/20 w-full max-w-full border-2 border-solid shadow-xl">
 		<figure><img src={image} alt="owo" /></figure>
 		<div class="card-body">
