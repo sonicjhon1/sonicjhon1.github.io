@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^0.16.0",
-    "astro": "^2.0.6",
+    "astro": "^2.0.10",
     "astro-compress": "^1.1.29",
     "moment": "^2.29.4"
   }
