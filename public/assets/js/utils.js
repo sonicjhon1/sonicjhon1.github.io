@@ -34,7 +34,7 @@ function getImg(input, ext) {
 function downloadPDF() {
   var fileName = "Resume.pdf";
   var mime = "application/pdf";
-  var fileUrl= "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/assets/Resume.pdf";
+  var fileUrl= "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/public/assets/Resume.pdf";
 
   try {
     var save = document.createElement.bind(document, "a")();
