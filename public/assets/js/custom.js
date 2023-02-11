@@ -44,10 +44,10 @@ fancybox_items.forEach(item => {
   // Set attribute
   item.setAttribute("data-fancybox", "gallery");
   item.setAttribute("data-type", "image");
-  item.setAttribute("data-thumb", getImg(item.href, "webp"));
+  item.setAttribute("data-thumb", item.href, "webp");
 
   let currentImg = document.createElement("img");
-  (item.parentNode.classList.contains("gfx")) ? currentImg.src = getImg(item.href, "webp") : currentImg.src = getImg(item.dataset.thumb, "webp");
+  (item.parentNode.classList.contains("gfx")) ? currentImg.src = getImg(item.href, "webp") : currentImg.src = item.dataset.thumb, "webp";
   currentImg.alt = item.dataset.caption;
   item.appendChild(currentImg);
 
