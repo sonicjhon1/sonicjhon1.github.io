@@ -44,7 +44,7 @@ fancybox_items.forEach(item => {
   // Set attribute
   item.setAttribute("data-fancybox", "gallery");
   item.setAttribute("data-type", "image");
-  item.setAttribute("data-thumb", item.href, "webp");
+  item.setAttribute("data-thumb", item.href);
 
   let currentImg = document.createElement("img");
   (item.parentNode.classList.contains("gfx")) ? currentImg.src = getImg(item.href, "webp") : currentImg.src = item.dataset.thumb, "webp";
