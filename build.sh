@@ -35,6 +35,10 @@ build05UI() {
     cd "05 KanoColle-UI"
     postBuild
 }
+build08UI() {
+    cd "08 GT-Reminder-UI"
+    postBuild
+}
 build09UI() {
     cd "09 SchoolworkList-UI"
     postBuild
@@ -44,4 +48,4 @@ build09MDXUI() {
     postBuild
 }
 
-build03UI & build04UI & build05UI & build09UI & build09MDXUI
+build03UI & build04UI & build05UI & build08UI & build09UI & build09MDXUI
