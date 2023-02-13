@@ -1,0 +1,6 @@
+{
+  "name": "Sonicj's Codespace",
+  "context": "..",
+  "dockerFile": ".Dockerfile",
+  "postCreateCommand": "npm install"
+}
