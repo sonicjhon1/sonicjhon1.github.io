@@ -8,12 +8,12 @@ import Layout from "../layouts/Layout.astro";
 		<p class="instructions prose mb-4">
 			Settings are saved to the browser's localstorage, it won't sync to other devices.<br />
 		</p>
-		<div id="setting-tabs" class="tabs tabs-boxed">
+		<div id="setting-tabs" class="tabs tabs-boxed border border-base-content/10 font-semibold">
 			<a id="general" class="tab tab-active">General</a>
 			<a id="personalization" class="tab">Personalization</a>
 			<a id="backup" class="tab">Backup</a>
 		</div>
-		<div id="setting-container">
+		<div id="setting-container" class="p-6 my-4 border border-base-content/10 rounded-lg bg-primary-content/80">
 			<div id="general">
 				<button class="btn">General</button>
 				<button class="btn btn-primary">Button</button>
