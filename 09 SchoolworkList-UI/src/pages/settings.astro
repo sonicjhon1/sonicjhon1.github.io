@@ -17,10 +17,10 @@ import Layout from "../layouts/Layout.astro";
 		</div>
 		<div id="setting-container" class="border-base-content/10 bg-primary-content/80 my-4 rounded-lg border p-6">
 			<div id="general">
-				<div class="flex flex-col font-bold px-8">
-                    <Toggle text="Enable Turbo JS" checked=""/>
-                    <Toggle text="Use custom Backend server URL" />
-                    <input id="backend-url" type="text" placeholder="Paste custom backend URL here!" class="input input-bordered input-primary w-full max-w-xs font-normal" disabled/>
+				<div class="flex flex-col px-8 font-bold">
+					<Toggle text="Enable Turbo JS" checked="" />
+					<Toggle text="Use custom Backend server URL" />
+					<input id="backend-url" type="text" placeholder="Paste custom backend URL here!" class="input input-bordered input-primary w-full max-w-xs font-normal" disabled />
 				</div>
 				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
 					<TBI />
@@ -33,7 +33,7 @@ import Layout from "../layouts/Layout.astro";
 				<button class="btn btn-accent">Button</button>
 				<button class="btn btn-ghost">Button</button>
 				<button class="btn btn-link">Button</button>
-                <main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
+				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
 					<TBI />
 				</main>
 			</div>
@@ -44,14 +44,14 @@ import Layout from "../layouts/Layout.astro";
 				<button class="btn btn-accent">Button</button>
 				<button class="btn btn-ghost">Button</button>
 				<button class="btn btn-link">Button</button>
-                <main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
+				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
 					<TBI />
 				</main>
 			</div>
-            <div id="setting-button">
-                <button class="btn btn-error mx-1">Reset defaults</button>
-                <button class="btn btn-primary mx-1">Save and Apply</button>
-            </div>
+			<div id="setting-button" class="flex justify-end max-md:flex-col">
+				<button class="btn btn-error m-1">Reset defaults</button>
+				<button class="btn btn-primary m-1">Save and Apply</button>
+			</div>
 		</div>
 	</main>
 </Layout>
@@ -68,7 +68,7 @@ import Layout from "../layouts/Layout.astro";
 
 	function switchSettingsContainer(obj) {
 		Array.from(settingsContainer.children).forEach((container) => {
-            if (container.id == "setting-button") return;
+			if (container.id == "setting-button") return;
 			container.classList.add("hidden");
 		});
 		settingsContainer.querySelector("#" + obj.id).classList.remove("hidden");
