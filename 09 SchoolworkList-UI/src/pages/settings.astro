@@ -1,4 +1,5 @@
 ---
+import TBI from "../components/TBI.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -8,12 +9,12 @@ import Layout from "../layouts/Layout.astro";
 		<p class="instructions prose mb-4">
 			Settings are saved to the browser's localstorage, it won't sync to other devices.<br />
 		</p>
-		<div id="setting-tabs" class="tabs tabs-boxed border border-base-content/10 font-semibold">
+		<div id="setting-tabs" class="tabs tabs-boxed border-base-content/10 border font-semibold">
 			<a id="general" class="tab tab-active">General</a>
 			<a id="personalization" class="tab">Personalization</a>
 			<a id="backup" class="tab">Backup</a>
 		</div>
-		<div id="setting-container" class="p-6 my-4 border border-base-content/10 rounded-lg bg-primary-content/80">
+		<div id="setting-container" class="border-base-content/10 bg-primary-content/80 my-4 rounded-lg border p-6">
 			<div id="general">
 				<button class="btn">General</button>
 				<button class="btn btn-primary">Button</button>
@@ -41,6 +42,9 @@ import Layout from "../layouts/Layout.astro";
 						</label>
 					</div>
 				</div>
+				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
+					<TBI />
+				</main>
 			</div>
 			<div id="personalization" class="hidden">
 				<button class="btn">Personalization</button>
@@ -49,6 +53,9 @@ import Layout from "../layouts/Layout.astro";
 				<button class="btn btn-accent">Button</button>
 				<button class="btn btn-ghost">Button</button>
 				<button class="btn btn-link">Button</button>
+                <main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
+					<TBI />
+				</main>
 			</div>
 			<div id="backup" class="hidden">
 				<button class="btn">Backup</button>
@@ -57,6 +64,9 @@ import Layout from "../layouts/Layout.astro";
 				<button class="btn btn-accent">Button</button>
 				<button class="btn btn-ghost">Button</button>
 				<button class="btn btn-link">Button</button>
+                <main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
+					<TBI />
+				</main>
 			</div>
 		</div>
 	</main>
@@ -72,19 +82,19 @@ import Layout from "../layouts/Layout.astro";
 		activeTab = obj;
 	}
 
-    function switchSettingsContainer(obj) {
-        Array.from(settingsContainer.children).forEach(container => {
-            container.classList.add("hidden");
-        })
-        settingsContainer.querySelector("#" + obj.id).classList.remove("hidden");
-    }
+	function switchSettingsContainer(obj) {
+		Array.from(settingsContainer.children).forEach((container) => {
+			container.classList.add("hidden");
+		});
+		settingsContainer.querySelector("#" + obj.id).classList.remove("hidden");
+	}
 
 	Array.from(settingsTab.children).forEach((tab) => {
 		tab.addEventListener("click", () => {
-            if (tab.classList.contains("tab-active")) return;
-            switchSettingsTab(tab)
-            switchSettingsContainer(tab)
-        });
+			if (tab.classList.contains("tab-active")) return;
+			switchSettingsTab(tab);
+			switchSettingsContainer(tab);
+		});
 	});
 </script>
 <style>
