@@ -1,0 +1,14 @@
+---
+export interface Props {
+	text: string;
+    checked?: string;
+}
+
+const { text, checked } = Astro.props;
+---
+<div class="form-control w-52">
+    <label class="label cursor-pointer">
+        <span class="label-text">{text}</span>
+        <input type="checkbox" class="toggle toggle-primary" {checked}/>
+    </label>
+</div>

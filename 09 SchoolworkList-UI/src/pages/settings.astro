@@ -1,5 +1,6 @@
 ---
 import TBI from "../components/TBI.astro";
+import Toggle from "../components/Toggle.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -16,31 +17,10 @@ import Layout from "../layouts/Layout.astro";
 		</div>
 		<div id="setting-container" class="border-base-content/10 bg-primary-content/80 my-4 rounded-lg border p-6">
 			<div id="general">
-				<button class="btn">General</button>
-				<button class="btn btn-primary">Button</button>
-				<button class="btn btn-secondary">Button</button>
-				<button class="btn btn-accent">Button</button>
-				<button class="btn btn-ghost">Button</button>
-				<button class="btn btn-link">Button</button>
-				<div class="flex flex-col">
-					<div class="form-control w-52">
-						<label class="label cursor-pointer">
-							<span class="label-text">Remember me</span>
-							<input type="checkbox" class="toggle toggle-primary" checked />
-						</label>
-					</div>
-					<div class="form-control w-52">
-						<label class="label cursor-pointer">
-							<span class="label-text">Remember me</span>
-							<input type="checkbox" class="toggle toggle-secondary" checked />
-						</label>
-					</div>
-					<div class="form-control w-52">
-						<label class="label cursor-pointer">
-							<span class="label-text">Remember me</span>
-							<input type="checkbox" class="toggle toggle-accent" checked />
-						</label>
-					</div>
+				<div class="flex flex-col font-bold px-8">
+                    <Toggle text="Enable Turbo JS" checked=""/>
+                    <Toggle text="Use custom Backend server URL" />
+                    <input id="backend-url" type="text" placeholder="Paste custom backend URL here!" class="input input-bordered input-primary w-full max-w-xs font-normal" disabled/>
 				</div>
 				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
 					<TBI />
@@ -68,6 +48,10 @@ import Layout from "../layouts/Layout.astro";
 					<TBI />
 				</main>
 			</div>
+            <div id="setting-button">
+                <button class="btn btn-error mx-1">Reset defaults</button>
+                <button class="btn btn-primary mx-1">Save and Apply</button>
+            </div>
 		</div>
 	</main>
 </Layout>
@@ -84,6 +68,7 @@ import Layout from "../layouts/Layout.astro";
 
 	function switchSettingsContainer(obj) {
 		Array.from(settingsContainer.children).forEach((container) => {
+            if (container.id == "setting-button") return;
 			container.classList.add("hidden");
 		});
 		settingsContainer.querySelector("#" + obj.id).classList.remove("hidden");
