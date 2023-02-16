@@ -6,7 +6,7 @@ export interface Props {
 
 const { text, checked } = Astro.props;
 ---
-<div class="form-control w-52">
+<div class="form-control max-md:w-[100%] w-[45%]">
     <label class="label cursor-pointer">
         <span class="label-text">{text}</span>
         <input type="checkbox" class="toggle toggle-primary" {checked}/>
