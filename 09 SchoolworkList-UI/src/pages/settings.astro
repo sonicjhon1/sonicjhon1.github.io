@@ -8,14 +8,85 @@ import Layout from "../layouts/Layout.astro";
 		<p class="instructions prose mb-4">
 			Settings are saved to the browser's localstorage, it won't sync to other devices.<br />
 		</p>
-		<div class="tabs tabs-boxed">
-			<a class="tab">Tab 1</a>
-			<a class="tab tab-active">Tab 2</a>
-			<a class="tab">Tab 3</a>
+		<div id="setting-tabs" class="tabs tabs-boxed">
+			<a id="general" class="tab tab-active">General</a>
+			<a id="personalization" class="tab">Personalization</a>
+			<a id="backup" class="tab">Backup</a>
+		</div>
+		<div id="setting-container">
+			<div id="general">
+				<button class="btn">General</button>
+				<button class="btn btn-primary">Button</button>
+				<button class="btn btn-secondary">Button</button>
+				<button class="btn btn-accent">Button</button>
+				<button class="btn btn-ghost">Button</button>
+				<button class="btn btn-link">Button</button>
+				<div class="flex flex-col">
+					<div class="form-control w-52">
+						<label class="label cursor-pointer">
+							<span class="label-text">Remember me</span>
+							<input type="checkbox" class="toggle toggle-primary" checked />
+						</label>
+					</div>
+					<div class="form-control w-52">
+						<label class="label cursor-pointer">
+							<span class="label-text">Remember me</span>
+							<input type="checkbox" class="toggle toggle-secondary" checked />
+						</label>
+					</div>
+					<div class="form-control w-52">
+						<label class="label cursor-pointer">
+							<span class="label-text">Remember me</span>
+							<input type="checkbox" class="toggle toggle-accent" checked />
+						</label>
+					</div>
+				</div>
+			</div>
+			<div id="personalization" class="hidden">
+				<button class="btn">Personalization</button>
+				<button class="btn btn-primary">Button</button>
+				<button class="btn btn-secondary">Button</button>
+				<button class="btn btn-accent">Button</button>
+				<button class="btn btn-ghost">Button</button>
+				<button class="btn btn-link">Button</button>
+			</div>
+			<div id="backup" class="hidden">
+				<button class="btn">Backup</button>
+				<button class="btn btn-primary">Button</button>
+				<button class="btn btn-secondary">Button</button>
+				<button class="btn btn-accent">Button</button>
+				<button class="btn btn-ghost">Button</button>
+				<button class="btn btn-link">Button</button>
+			</div>
 		</div>
 	</main>
 </Layout>
+<script is:inline>
+	var settingsTab = document.getElementById("setting-tabs");
+	var activeTab = document.getElementById("setting-tabs").querySelector(".tab-active");
+	var settingsContainer = document.getElementById("setting-container");
 
+	function switchSettingsTab(obj) {
+		activeTab.classList.toggle("tab-active");
+		obj.classList.toggle("tab-active");
+		activeTab = obj;
+	}
+
+    function switchSettingsContainer(obj) {
+        Array.from(settingsContainer.children).forEach(container => {
+            container.classList.add("hidden");
+        })
+        settingsContainer.querySelector("#" + obj.id).classList.remove("hidden");
+    }
+
+	Array.from(settingsTab.children).forEach((tab) => {
+		tab.addEventListener("click", () => {
+            if (tab.classList.contains("tab-active")) return;
+            switchSettingsTab(tab)
+            switchSettingsContainer(tab)
+        });
+	});
+</script>
 <style>
 	.text-gradient {
 		background-image: var(--accent-gradient);
