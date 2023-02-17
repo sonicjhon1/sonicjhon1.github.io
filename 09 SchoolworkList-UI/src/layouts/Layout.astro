@@ -100,11 +100,16 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		githubProfiles.forEach((profile) => {
 			let username = profile.getAttribute("alt");
 			if (!username) return;
-			fetch(`https://api.github.com/users/${username}`).then((response) =>
-				response.json().then((data) => {
-					profile.setAttribute("src", data.avatar_url);
-				})
-			);
+			switch (username) {
+				case "sonicjhon1":
+					profile.setAttribute("src", "https://avatars.githubusercontent.com/u/41381685");
+				default:
+					fetch(`https://api.github.com/users/${username}`).then((response) =>
+						response.json().then((data) => {
+							profile.setAttribute("src", data.avatar_url);
+						})
+					);
+			}
 		});
 	</script>
 	<script is:inline>
