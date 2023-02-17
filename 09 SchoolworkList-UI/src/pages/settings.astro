@@ -15,12 +15,18 @@ import Layout from "../layouts/Layout.astro";
 			<a id="personalization" class="tab">Personalization</a>
 			<a id="backup" class="tab">Backup</a>
 		</div>
-		<div id="setting-container" class="border-base-content/10 bg-primary-content/80 my-4 rounded-lg border py-6 max-lg:px-6 px-40">
+		<div id="setting-container" class="border-base-content/10 bg-primary-content/80 my-4 rounded-lg border py-6 px-40 max-lg:px-6">
 			<div id="general">
-				<div class="flex flex-col font-bold items-center">
-					<Toggle text="Enable Turbo JS" checked="" />
-                    <Toggle text="Use custom Backend server URL" />
-					<input id="backend-url" type="text" placeholder="Paste custom backend URL here!" class="input input-bordered input-primary w-[60%] max-lg:w-[100%] max-w-4xl font-normal" disabled />
+				<div class="flex flex-col items-center font-bold">
+					<Toggle text="Enable Turbo JS" id="turbo-js" action="handleSettingToggles(this)" checked="" />
+					<Toggle text="Use custom Backend server URL" id="custom-backend-url" action="handleSettingToggles(this)" />
+					<input
+						id="custom-backend-url-text"
+						type="text"
+						placeholder="Paste custom backend URL here!"
+						class="input input-bordered input-primary w-[60%] max-w-4xl font-normal max-lg:w-[100%]"
+						disabled
+					/>
 				</div>
 				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
 					<TBI />
@@ -50,7 +56,7 @@ import Layout from "../layouts/Layout.astro";
 			</div>
 			<div id="setting-button" class="flex justify-end max-md:flex-col">
 				<button class="btn btn-error m-1">Reset defaults</button>
-				<button class="btn btn-primary m-1">Save and Apply</button>
+				<button class="btn btn-primary m-1" onclick="saveSettings()">Save and Apply</button>
 			</div>
 		</div>
 	</main>
@@ -81,6 +87,36 @@ import Layout from "../layouts/Layout.astro";
 			switchSettingsContainer(tab);
 		});
 	});
+</script>
+<script is:inline>
+	function handleSettingToggles(elementToggle) {
+		switch (elementToggle.id) {
+			case "turbo-js":
+				break;
+			case "custom-backend-url":
+				document.getElementById("custom-backend-url-text").disabled = !elementToggle.checked;
+				break;
+			default:
+				console.log("Setting '", elementToggle.id, "' does not exist");
+				break;
+		}
+	}
+
+	function saveSettings() {
+		let settings = {
+			"turbo-js": document.getElementById("turbo-js").checked,
+			"custom-backend-url": document.getElementById("custom-backend-url").checked,
+			"custom-backend-url-text": document.getElementById("custom-backend-url-text").value,
+		};
+		localforage
+			.setItem("settings", settings)
+			.then(function () {
+				return localforage.getItem("settings");
+			})
+			.then(function (value) {
+				console.log(value);
+			});
+	}
 </script>
 <style>
 	.text-gradient {
