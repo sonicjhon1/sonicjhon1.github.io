@@ -115,6 +115,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 	<script is:inline>
 		async function applySettings() {
 			var settings = await localforage.getItem("settings");
+			if (settings == undefined) return;
 			// General
 			Turbo.session.drive = settings["turbo-js"];
 			// Personalization
