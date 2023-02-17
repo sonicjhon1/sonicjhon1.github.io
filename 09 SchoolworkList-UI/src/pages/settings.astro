@@ -117,6 +117,7 @@ import Layout from "../layouts/Layout.astro";
 		var settings = await localforage.getItem("settings");
 		document.getElementById("turbo-js").checked = settings["turbo-js"];
 		document.getElementById("custom-backend-url").checked = settings["custom-backend-url"];
+		document.getElementById("custom-backend-url-text").disabled = !settings["custom-backend-url"];
 		document.getElementById("custom-backend-url-text").value = settings["custom-backend-url-text"];
 	}
 
