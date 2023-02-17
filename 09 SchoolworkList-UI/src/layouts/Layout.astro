@@ -7,61 +7,64 @@ export interface Props {
 }
 
 const { title } = Astro.props;
-const metaTitle = "SWL - SchoolWork Lists"
-const metaThumbnail = "https://api.apiflash.com/v1/urltoimage?access_key=79b0e7c367b84a8387c8041566437096&url=https%3A%2F%2Fsonicj.pages.dev%2F09%2520SchoolworkList-UI%2F&format=jpeg&quality=60&response_type=image&thumbnail_width=800"
-const metaDescription = "Track all of your school's homework with this website, free and open-source!"
-const metaUrl = "https://sonicj.pages.dev/09%20SchoolworkList-UI/"
-const backendURL = "https://schoolworklist.pages.dev/"
+const metaTitle = "SWL - SchoolWork Lists";
+const metaThumbnail =
+	"https://api.apiflash.com/v1/urltoimage?access_key=79b0e7c367b84a8387c8041566437096&url=https%3A%2F%2Fsonicj.pages.dev%2F09%2520SchoolworkList-UI%2F&format=jpeg&quality=60&response_type=image&thumbnail_width=800";
+const metaDescription = "Track all of your school's homework with this website, free and open-source!";
+const metaUrl = "https://sonicj.pages.dev/09%20SchoolworkList-UI/";
+const backendURL = "https://schoolworklist.pages.dev/";
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>{title}</title>
-		<meta itemprop="name" content={metaTitle}>
-		<meta itemprop="url" content={metaThumbnail}>
-		<meta name="title" content={metaTitle}>
-		<meta name="description" content={metaDescription}>
-		<meta itemprop="description" content={metaDescription}>
-		<meta itemprop="image" content={metaThumbnail}>
-		<meta name="image" content={metaThumbnail}>
-		<meta property="og:type" content="website">
-		<meta property="og:url" content={metaUrl}>
-		<meta property="og:title" content={metaTitle}>
-		<meta property="og:description" content={metaDescription}>
-		<meta property="og:image" content={metaThumbnail}>
-		<meta property="og:image:secure_url" itemprop="image" content={metaThumbnail}>
-		<meta property="og:image:type" content="image/jpg">
-		<meta property="og:image:width" content="300">
-		<meta property="og:image:height" content="200">
-		<meta property="twitter:card" content="summary_large_image">
-		<meta property="twitter:url" content={metaUrl}>
-		<meta property="twitter:title" content={metaTitle}>
-		<meta property="twitter:description" content={metaDescription}>
-		<meta property="twitter:image" content={metaThumbnail}>
-		<meta name="viewport" content="width=device-width">
-		<meta name="generator" content={Astro.generator}>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-		<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-		<link rel="manifest" href="./site.webmanifest">
-		<script src="./turbo.js" defer/>
-		<script src="./iframemanager.js" is:raw/>
+		<meta itemprop="name" content={metaTitle} />
+		<meta itemprop="url" content={metaThumbnail} />
+		<meta name="title" content={metaTitle} />
+		<meta name="description" content={metaDescription} />
+		<meta itemprop="description" content={metaDescription} />
+		<meta itemprop="image" content={metaThumbnail} />
+		<meta name="image" content={metaThumbnail} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={metaUrl} />
+		<meta property="og:title" content={metaTitle} />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:image" content={metaThumbnail} />
+		<meta property="og:image:secure_url" itemprop="image" content={metaThumbnail} />
+		<meta property="og:image:type" content="image/jpg" />
+		<meta property="og:image:width" content="300" />
+		<meta property="og:image:height" content="200" />
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={metaUrl} />
+		<meta property="twitter:title" content={metaTitle} />
+		<meta property="twitter:description" content={metaDescription} />
+		<meta property="twitter:image" content={metaThumbnail} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+		<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+		<link rel="manifest" href="./site.webmanifest" />
+		<script src="./turbo.js" defer></script>
+		<script src="./iframemanager.js" is:raw></script>
 		<link rel="stylesheet" href="./iframemanager.css" />
-		<script src="./localforage.min.js" is:raw/>
+		<script src="./localforage.min.js" is:raw></script>
 	</head>
 	<body>
-		<link id="backendURL" data-backendurl={backendURL}>
+		<link id="backendURL" data-backendurl={backendURL} />
 		<div class="navbar bg-base-100">
 			<div class="flex-1">
-				<a href={import.meta.env.PUBLIC_URL ? import.meta.env.PUBLIC_URL + "/index.html" : "index"} class="btn btn-ghost text-xl normal-case" data-turbo-preload>SWL<span class="text-xs mt-1 max-sm:hidden">&nbsp&nbsp&nbsp(SchoolWork Lists)</span></a>
+				<a href={import.meta.env.PUBLIC_URL ? import.meta.env.PUBLIC_URL + "/index.html" : "index"} class="btn btn-ghost text-xl normal-case" data-turbo-preload
+					>SWL<span class="mt-1 text-xs max-sm:hidden">&nbsp&nbsp&nbsp(SchoolWork Lists)</span></a
+				>
 			</div>
 			<div class="flex-none gap-2">
 				<div class="form-control">
-					<input type="text" placeholder="Search" class="input input-bordered transition-all ease-in-out duration-700 focus:outline-none focus:border-base-content focus:bg-base-200" />
+					<input type="text" placeholder="Search" class="input input-bordered focus:border-base-content focus:bg-base-200 transition-all duration-700 ease-in-out focus:outline-none" />
 				</div>
 				<div class="dropdown dropdown-end">
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -80,15 +83,15 @@ const backendURL = "https://schoolworklist.pages.dev/"
 	</body>
 	<footer class="footer bg-neutral text-neutral-content items-center p-4">
 		<div class="grid-flow-col items-center">
-			<a href="https://github.com/sonicjhon1" class="h-8 shadow-lg transition-all ease-in-out duration-500 hover:brightness-150">
+			<a href="https://github.com/sonicjhon1" class="h-8 shadow-lg transition-all duration-500 ease-in-out hover:brightness-150">
 				<img class="h-full rounded-full" id="github-profile" alt="sonicjhon1" src="https://avatars.githubusercontent.com/u/41381685?v=4" />
 			</a>
 			<p class="select-none">Copyright &copy; 2023 - All right reserved</p>
 		</div>
 		<div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-			<a href="https://github.com/sonicjhon1/sonicjhon1.github.io" class="h-5 transition-all ease-in-out duration-500 hover:brightness-200"><IconGithub /></a>
-			<a href="https://www.instagram.com/sonicjhon1" class="h-5 transition-all ease-in-out duration-500 hover:brightness-200"><IconInstagram /></a>
-			<a href="https://www.youtube.com/@sonicjhon1" class="h-5 transition-all ease-in-out duration-500 hover:brightness-200"><IconYoutube /></a>
+			<a href="https://github.com/sonicjhon1/sonicjhon1.github.io" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200"><IconGithub /></a>
+			<a href="https://www.instagram.com/sonicjhon1" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200"><IconInstagram /></a>
+			<a href="https://www.youtube.com/@sonicjhon1" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200"><IconYoutube /></a>
 		</div>
 	</footer>
 
@@ -103,6 +106,19 @@ const backendURL = "https://schoolworklist.pages.dev/"
 				})
 			);
 		});
+	</script>
+	<script is:inline>
+		async function applySettings() {
+			var settings = await localforage.getItem("settings");
+			// General
+			Turbo.session.drive = settings["turbo-js"];
+			// Personalization
+			// TODO
+			// Backup
+			// TODO
+		}
+
+		addEventListener("turbo:load", applySettings);
 	</script>
 	<style is:global>
 		:root {

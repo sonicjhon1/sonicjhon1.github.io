@@ -113,11 +113,18 @@ import Layout from "../layouts/Layout.astro";
 		});
 	}
 
-	// TODO: Move this function to Layout.astro
-	async function applySettings() {
+	async function restoreSettings() {
 		var settings = await localforage.getItem("settings");
-		Turbo.session.drive = settings["turbo-js"];
+		document.getElementById("turbo-js").checked = settings["turbo-js"];
+		document.getElementById("custom-backend-url").checked = settings["custom-backend-url"];
+		document.getElementById("custom-backend-url-text").value = settings["custom-backend-url-text"];
 	}
+
+	addEventListener("turbo:load", () => {
+		if (window.location.href.indexOf("settings") > -1) {
+			restoreSettings();
+		}
+	});
 </script>
 <style>
 	.text-gradient {
