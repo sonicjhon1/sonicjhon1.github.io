@@ -24,7 +24,7 @@ import Layout from "../layouts/Layout.astro";
 						id="custom-backend-url-text"
 						type="text"
 						placeholder="Paste custom backend URL here!"
-						class="input input-bordered input-primary w-[60%] max-w-4xl my-1 font-normal max-lg:w-[100%]"
+						class="input input-bordered input-primary my-1 w-[60%] max-w-4xl font-normal max-lg:w-[100%]"
 						disabled
 					/>
 				</div>
@@ -108,14 +108,15 @@ import Layout from "../layouts/Layout.astro";
 			"custom-backend-url": document.getElementById("custom-backend-url").checked,
 			"custom-backend-url-text": document.getElementById("custom-backend-url-text").value,
 		};
-		localforage
-			.setItem("settings", settings)
-			.then(function () {
-				return localforage.getItem("settings");
-			})
-			.then(function (value) {
-				console.log(value);
-			});
+		localforage.setItem("settings", settings).then(function () {
+			applySettings();
+		});
+	}
+
+	// TODO: Move this function to Layout.astro
+	async function applySettings() {
+		var settings = await localforage.getItem("settings");
+		Turbo.session.drive = settings["turbo-js"];
 	}
 </script>
 <style>
