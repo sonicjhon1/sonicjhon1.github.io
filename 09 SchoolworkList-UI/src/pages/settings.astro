@@ -127,7 +127,7 @@ import Layout from "../layouts/Layout.astro";
 			themeCard.classList.remove("theme-selected");
 		});
 		elementToggle.classList.add("theme-selected");
-		document.querySelector("HTML").dataset.theme = elementToggle.id.slice(6)
+		document.querySelector("body").dataset.theme = elementToggle.id.slice(6)
 	}
 
 	function saveSettings() {

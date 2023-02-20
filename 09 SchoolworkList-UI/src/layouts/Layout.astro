@@ -16,7 +16,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme="halloween">
+<html lang="en">
 	<head>
 		<title>{title}</title>
 		<meta itemprop="name" content={metaTitle} />
@@ -49,19 +49,19 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
 		<link rel="manifest" href="./site.webmanifest" />
-		<script src="./turbo.js" defer></script>
-		<script src="./iframemanager.js" is:raw></script>
+		<script src="./turbo.js" defer />
+		<script src="./iframemanager.js" is:raw />
 		<link rel="stylesheet" href="./iframemanager.css" />
-		<script src="./localforage.min.js" is:raw></script>
+		<script src="./localforage.min.js" is:raw />
+	</head>
+	<body data-theme="halloween">
 		<script is:inline>
 			// Bootstrap to fix flashbangs
 			var settings = localforage.getItem("settings").then(() => {
 				if (settings == undefined) return;
-				document.querySelector("HTML").dataset.theme = settings["theme"] || "halloween";
+				document.querySelector("body").dataset.theme = settings["theme"] || "halloween";
 			})
 		</script>
-	</head>
-	<body>
 		<link id="backendURL" data-backendurl={backendURL} />
 		<div class="navbar bg-base-100">
 			<div class="flex-1">
@@ -108,7 +108,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			// General
 			Turbo.session.drive = settings["turbo-js"];
 			// Personalization
-			document.querySelector("HTML").dataset.theme = settings["theme"] || "halloween";
+			document.querySelector("body").dataset.theme = settings["theme"] || "halloween";
 			// Backup
 		}
 
