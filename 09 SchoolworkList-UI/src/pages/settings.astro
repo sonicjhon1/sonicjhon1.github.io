@@ -113,6 +113,13 @@ import Layout from "../layouts/Layout.astro";
 				document.getElementById("custom-backend-url-text").disabled = !elementToggle.checked;
 				break;
 			default:
+				if (elementToggle.id.includes("theme-")) {
+					Array.from(document.getElementsByClassName("theme-selected")).forEach( themeCard => {
+						themeCard.classList.remove("theme-selected");
+					})
+					elementToggle.classList.add("theme-selected");
+					break;
+				}
 				console.log("Setting '", elementToggle.id, "' does not exist");
 				break;
 		}
