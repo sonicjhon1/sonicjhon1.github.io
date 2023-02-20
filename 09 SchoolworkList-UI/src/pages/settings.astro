@@ -114,10 +114,7 @@ import Layout from "../layouts/Layout.astro";
 				break;
 			default:
 				if (elementToggle.id.includes("theme-")) {
-					Array.from(document.getElementsByClassName("theme-selected")).forEach( themeCard => {
-						themeCard.classList.remove("theme-selected");
-					})
-					elementToggle.classList.add("theme-selected");
+					handleSettingTheme(elementToggle);
 					break;
 				}
 				console.log("Setting '", elementToggle.id, "' does not exist");
@@ -125,12 +122,20 @@ import Layout from "../layouts/Layout.astro";
 		}
 	}
 
+	function handleSettingTheme(elementToggle) {
+		Array.from(document.getElementsByClassName("theme-selected")).forEach((themeCard) => {
+			themeCard.classList.remove("theme-selected");
+		});
+		elementToggle.classList.add("theme-selected");
+	}
+
 	function saveSettings() {
 		let settings = {
 			"turbo-js": document.getElementById("turbo-js").checked,
 			"custom-backend-url": document.getElementById("custom-backend-url").checked,
 			"custom-backend-url-text": document.getElementById("custom-backend-url-text").value,
-			analytic: document.getElementById("analytic").checked,
+			"analytic": document.getElementById("analytic").checked,
+			"theme": document.querySelector(".theme-selected").id.slice(6)
 		};
 		localforage.setItem("settings", settings).then(function () {
 			applySettings();
@@ -145,6 +150,11 @@ import Layout from "../layouts/Layout.astro";
 		document.getElementById("custom-backend-url-text").disabled = !settings["custom-backend-url"];
 		document.getElementById("custom-backend-url-text").value = settings["custom-backend-url-text"];
 		document.getElementById("analytic").checked = settings["analytic"];
+		try {
+			handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
+		} catch (e) {
+			console.log(e);
+		}
 	}
 
 	addEventListener("turbo:load", () => {

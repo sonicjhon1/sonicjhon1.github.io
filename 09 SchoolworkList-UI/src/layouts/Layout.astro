@@ -16,7 +16,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="halloween">
 	<head>
 		<title>{title}</title>
 		<meta itemprop="name" content={metaTitle} />
@@ -119,6 +119,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			// General
 			Turbo.session.drive = settings["turbo-js"];
 			// Personalization
+			document.querySelector("HTML").dataset.theme = settings["theme"];
 			// TODO
 			// Backup
 			// TODO

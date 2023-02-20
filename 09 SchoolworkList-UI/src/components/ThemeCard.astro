@@ -9,7 +9,7 @@ const { theme, action } = Astro.props;
 
 <div
 	id=`theme-${theme}`
-	class="border-base-content/20 hover:border-base-content/40 outline-base-content m-1 flex flex-1 grow-0 flex-col overflow-hidden rounded-lg border outline-2 outline-offset-2 max-md:min-w-[97.5%] custom-basis"
+	class="hover:border-secondary-focus border-primary-content custom-basis m-1 flex flex-1 grow-0 flex-col overflow-hidden rounded-lg border-2 border-solid max-md:min-w-[97.5%]"
 	data-set-theme={theme}
 	data-act-class="outline"
 	onclick={action}
@@ -31,7 +31,13 @@ const { theme, action } = Astro.props;
 	</div>
 </div>
 <style>
-    .custom-basis {
-        flex-basis: calc((100% / 3) - 0.5rem);
-    }
+	.custom-basis {
+		flex-basis: calc((100% / 3) - 0.5rem);
+	}
+	.theme-selected,
+	.theme-selected:hover {
+		border-style: solid !important;
+		border: hsl(var(--p));
+		border-width: 2px;
+	}
 </style>
