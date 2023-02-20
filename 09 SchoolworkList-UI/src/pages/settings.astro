@@ -123,9 +123,13 @@ import Layout from "../layouts/Layout.astro";
 	}
 
 	function handleSettingTheme(elementToggle) {
-		Array.from(document.getElementsByClassName("theme-selected")).forEach((themeCard) => {
-			themeCard.classList.remove("theme-selected");
-		});
+		try {
+			Array.from(document.getElementsByClassName("theme-selected")).forEach((themeCard) => {
+				themeCard.classList.remove("theme-selected");
+			});
+		} catch(e) {
+			console.log(e);
+		}
 		elementToggle.classList.add("theme-selected");
 		document.querySelector("HTML").dataset.theme = elementToggle.id.slice(6)
 	}
@@ -154,7 +158,8 @@ import Layout from "../layouts/Layout.astro";
 		try {
 			handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
 		} catch (e) {
-			handleSettingTheme(document.getElementById("theme-halloween"))
+			handleSettingTheme(document.getElementById("theme-halloween"));
+			console.log(e)
 		}
 	}
 
