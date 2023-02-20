@@ -57,7 +57,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			// Bootstrap to fix flashbangs
 			var settings = localforage.getItem("settings").then(() => {
 				if (settings == undefined) return;
-				document.querySelector("HTML").dataset.theme = settings["theme"];
+				document.querySelector("HTML").dataset.theme = settings["theme"] || "halloween";
 			})
 		</script>
 	</head>
@@ -108,7 +108,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			// General
 			Turbo.session.drive = settings["turbo-js"];
 			// Personalization
-			document.querySelector("HTML").dataset.theme = settings["theme"];
+			document.querySelector("HTML").dataset.theme = settings["theme"] || "halloween";
 			// Backup
 		}
 

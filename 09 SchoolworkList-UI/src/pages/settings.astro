@@ -154,7 +154,7 @@ import Layout from "../layouts/Layout.astro";
 		try {
 			handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
 		} catch (e) {
-			console.log(e);
+			handleSettingTheme(document.getElementById("theme-halloween"))
 		}
 	}
 
