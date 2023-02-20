@@ -1,5 +1,6 @@
 ---
 import TBI from "../components/TBI.astro";
+import ThemeCard from "../components/ThemeCard.astro";
 import Toggle from "../components/Toggle.astro";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -31,15 +32,31 @@ import Layout from "../layouts/Layout.astro";
 				</div>
 			</div>
 			<div id="personalization" class="hidden">
-				<button class="btn">Personalization</button>
-				<button class="btn btn-primary">Button</button>
-				<button class="btn btn-secondary">Button</button>
-				<button class="btn btn-accent">Button</button>
-				<button class="btn btn-ghost">Button</button>
-				<button class="btn btn-link">Button</button>
-				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
-					<TBI />
-				</main>
+				<div class="flex flex-wrap">
+					<ThemeCard action="handleSettingToggles(this)" theme="dark" />
+					<ThemeCard action="handleSettingToggles(this)" theme="halloween" />
+					<ThemeCard action="handleSettingToggles(this)" theme="forest" />
+					<ThemeCard action="handleSettingToggles(this)" theme="black" />
+					<ThemeCard action="handleSettingToggles(this)" theme="luxury" />
+					<ThemeCard action="handleSettingToggles(this)" theme="dracula" />
+					<ThemeCard action="handleSettingToggles(this)" theme="business" />
+					<ThemeCard action="handleSettingToggles(this)" theme="night" />
+					<ThemeCard action="handleSettingToggles(this)" theme="coffee" />
+					<ThemeCard action="handleSettingToggles(this)" theme="light" />
+					<ThemeCard action="handleSettingToggles(this)" theme="emerald" />
+					<ThemeCard action="handleSettingToggles(this)" theme="corporate" />
+					<ThemeCard action="handleSettingToggles(this)" theme="garden" />
+					<ThemeCard action="handleSettingToggles(this)" theme="lofi" />
+					<ThemeCard action="handleSettingToggles(this)" theme="fantasy" />
+					<ThemeCard action="handleSettingToggles(this)" theme="wireframe" />
+					<ThemeCard action="handleSettingToggles(this)" theme="cmyk" />
+					<ThemeCard action="handleSettingToggles(this)" theme="autumn" />
+					<ThemeCard action="handleSettingToggles(this)" theme="acid" />
+					<ThemeCard action="handleSettingToggles(this)" theme="lemonade" />
+					<ThemeCard action="handleSettingToggles(this)" theme="winter" />
+					<ThemeCard action="handleSettingToggles(this)" theme="valentine" />
+					<ThemeCard action="handleSettingToggles(this)" theme="cyberpunk" />
+				</div>
 			</div>
 			<div id="backup" class="hidden">
 				<button class="btn">Backup</button>
@@ -106,7 +123,7 @@ import Layout from "../layouts/Layout.astro";
 			"turbo-js": document.getElementById("turbo-js").checked,
 			"custom-backend-url": document.getElementById("custom-backend-url").checked,
 			"custom-backend-url-text": document.getElementById("custom-backend-url-text").value,
-			"analytic": document.getElementById("analytic").checked
+			analytic: document.getElementById("analytic").checked,
 		};
 		localforage.setItem("settings", settings).then(function () {
 			applySettings();
