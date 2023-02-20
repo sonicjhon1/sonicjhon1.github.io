@@ -54,6 +54,21 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		<link rel="stylesheet" href="./iframemanager.css" />
 		<script src="./localforage.min.js" is:raw></script>
 	</head>
+	<script is:inline>
+		async function applySettings() {
+			var settings = await localforage.getItem("settings");
+			if (settings == undefined) return;
+			// General
+			Turbo.session.drive = settings["turbo-js"];
+			// Personalization
+			document.querySelector("HTML").dataset.theme = settings["theme"];
+			// TODO
+			// Backup
+			// TODO
+		}
+
+		addEventListener("turbo:load", applySettings);
+	</script>
 	<body>
 		<link id="backendURL" data-backendurl={backendURL} />
 		<div class="navbar bg-base-100">
@@ -94,7 +109,6 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			<a href="https://www.youtube.com/@sonicjhon1" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200"><IconYoutube /></a>
 		</div>
 	</footer>
-
 	<script>
 		const githubProfiles = document.querySelectorAll("#github-profile");
 		githubProfiles.forEach((profile) => {
@@ -111,21 +125,6 @@ const backendURL = "https://schoolworklist.pages.dev/";
 					);
 			}
 		});
-	</script>
-	<script is:inline>
-		async function applySettings() {
-			var settings = await localforage.getItem("settings");
-			if (settings == undefined) return;
-			// General
-			Turbo.session.drive = settings["turbo-js"];
-			// Personalization
-			document.querySelector("HTML").dataset.theme = settings["theme"];
-			// TODO
-			// Backup
-			// TODO
-		}
-
-		addEventListener("turbo:load", applySettings);
 	</script>
 	<style is:global>
 		:root {
