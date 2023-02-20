@@ -2,14 +2,15 @@
 export interface Props {
 	theme: string;
 	action: string;
+	active?: string;
 }
 
-const { theme, action } = Astro.props;
+const { theme, action, active = "" } = Astro.props;
 ---
 
 <div
 	id=`theme-${theme}`
-	class="hover:border-secondary-focus border-primary-content custom-basis m-1 flex flex-1 grow-0 flex-col overflow-hidden rounded-lg border-2 border-solid max-md:min-w-[97.5%]"
+	class=`hover:border-secondary-focus border-primary-content custom-basis m-1 flex flex-1 grow-0 flex-col overflow-hidden rounded-lg border-2 border-solid max-md:min-w-[97.5%] ${active}`
 	data-set-theme={theme}
 	data-act-class="outline"
 	onclick={action}

@@ -36,7 +36,7 @@ import Layout from "../layouts/Layout.astro";
 					<ThemeCard action="handleSettingToggles(this)" theme="dark" />
 					<ThemeCard action="handleSettingToggles(this)" theme="dracula" />
 					<ThemeCard action="handleSettingToggles(this)" theme="night" />
-					<ThemeCard action="handleSettingToggles(this)" theme="halloween" />
+					<ThemeCard action="handleSettingToggles(this)" theme="halloween" active="theme-selected"/>
 					<ThemeCard action="handleSettingToggles(this)" theme="business" />
 					<ThemeCard action="handleSettingToggles(this)" theme="forest" />
 					<ThemeCard action="handleSettingToggles(this)" theme="black" />
@@ -123,13 +123,9 @@ import Layout from "../layouts/Layout.astro";
 	}
 
 	function handleSettingTheme(elementToggle) {
-		try {
-			Array.from(document.getElementsByClassName("theme-selected")).forEach((themeCard) => {
-				themeCard.classList.remove("theme-selected");
-			});
-		} catch(e) {
-			console.log(e);
-		}
+		Array.from(document.getElementsByClassName("theme-selected")).forEach((themeCard) => {
+			themeCard.classList.remove("theme-selected");
+		});
 		elementToggle.classList.add("theme-selected");
 		document.querySelector("HTML").dataset.theme = elementToggle.id.slice(6)
 	}
@@ -155,11 +151,10 @@ import Layout from "../layouts/Layout.astro";
 		document.getElementById("custom-backend-url-text").disabled = !settings["custom-backend-url"];
 		document.getElementById("custom-backend-url-text").value = settings["custom-backend-url-text"];
 		document.getElementById("analytic").checked = settings["analytic"];
-		try {
+		if (settings["theme"]) {
 			handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
-		} catch (e) {
+		} else {
 			handleSettingTheme(document.getElementById("theme-halloween"));
-			console.log(e)
 		}
 	}
 
