@@ -55,9 +55,10 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		<script src="./localforage.min.js" is:raw></script>
 		<script is:inline>
 			// Bootstrap to fix flashbangs
-			var settings = await localforage.getItem("settings");
-			if (settings == undefined) return;
-			document.querySelector("HTML").dataset.theme = settings["theme"];
+			var settings = localforage.getItem("settings").then(() => {
+				if (settings == undefined) return;
+				document.querySelector("HTML").dataset.theme = settings["theme"];
+			})
 		</script>
 	</head>
 	<body>
