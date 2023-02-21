@@ -32,6 +32,10 @@ import Layout from "../layouts/Layout.astro";
 				</div>
 			</div>
 			<div id="personalization" class="hidden">
+				<div class="inline-flex w-full items-center mt-4 mb-2">
+					<span class="relative text-2xl font-extrabold mx-4">Website theme</span>
+					<hr class="h-[2px] bg-secondary/80 border-0 mt-1 flex-1 mr-4">
+				</div>
 				<div class="flex flex-wrap">
 					<ThemeCard action="handleSettingToggles(this)" theme="dark" />
 					<ThemeCard action="handleSettingToggles(this)" theme="dracula" />
