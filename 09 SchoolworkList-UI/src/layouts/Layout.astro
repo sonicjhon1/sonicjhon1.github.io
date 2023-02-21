@@ -80,6 +80,8 @@ const backendURL = "https://schoolworklist.pages.dev/";
 						</div>
 					</label>
 					<ul tabindex="0" class="menu menu-compact dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow border-solid border border-primary/10">
+						<li id="username" class="font-bold px-4 py-2 break-all">Anonymous</li>
+						<hr class="h-[2px] max-h-[1px] bg-secondary/80 border-0 w-full mb-2">
 						<li><a href="./settings">Settings</a></li>
 						<li><a href="./about">About</a></li>
 					</ul>
@@ -105,20 +107,23 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		async function applySettings() {
 			var settings = await localforage.getItem("settings");
 			if (settings == undefined) return;
+
 			// General
 			if (settings["turbo-js"] != undefined && typeof settings["turbo-js"] === "boolean") {
 				Turbo.session.drive = settings["turbo-js"];
 			}
+
 			// Personalization
 			if (settings["theme"] != undefined && settings["turbo-js"] != "") {
 				document.querySelector("body").dataset.theme = settings["theme"];
 			}
 			if (settings["username"] != undefined && settings["username"] != "") {
-				// TODO
+				document.getElementById("username").innerHTML = settings["username"];
 			}
 			if (settings["profile"] != undefined && settings["profile"] != "") {
 				document.getElementById("profile-picture").src = settings["profile"]
 			}
+			
 			// Backup
 		}
 
