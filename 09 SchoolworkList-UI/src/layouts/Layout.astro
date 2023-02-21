@@ -106,13 +106,17 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			var settings = await localforage.getItem("settings");
 			if (settings == undefined) return;
 			// General
-			Turbo.session.drive = settings["turbo-js"];
+			if (settings["turbo-js"] != undefined && typeof settings["turbo-js"] === "boolean") {
+				Turbo.session.drive = settings["turbo-js"];
+			}
 			// Personalization
-			document.querySelector("body").dataset.theme = settings["theme"] || "halloween";
-			if (settings["username"] != "") {
+			if (settings["theme"] != undefined && settings["turbo-js"] != "") {
+				document.querySelector("body").dataset.theme = settings["theme"];
+			}
+			if (settings["username"] != undefined && settings["username"] != "") {
 				// TODO
 			}
-			if (settings["profile"] != "") {
+			if (settings["profile"] != undefined && settings["profile"] != "") {
 				document.getElementById("profile-picture").src = settings["profile"]
 			}
 			// Backup
