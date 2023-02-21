@@ -43,6 +43,10 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: npm
+    directory: /10 Portofolio-Astro-UI
+    schedule:
+      interval: daily
+  - package-ecosystem: npm
     directory: /
     schedule:
       interval: daily
