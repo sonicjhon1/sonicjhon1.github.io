@@ -145,8 +145,8 @@ import Input from "../components/Input.astro";
 			"custom-backend-url-text": document.getElementById("setting-custom-backend-url-text").value,
 			analytic: document.getElementById("setting-analytic").checked,
 			theme: document.querySelector(".theme-selected").id.slice(6),
-			username: document.getElementById("setting-username").value,
-			profile: document.getElementById("setting-profile").value
+			username: document.getElementById("setting-username").value || document.getElementById("setting-username").placeholder,
+			profile: document.getElementById("setting-profile").value || document.getElementById("setting-profile").placeholder
 		};
 		localforage.setItem("settings", settings).then(function () {
 			applySettings();
