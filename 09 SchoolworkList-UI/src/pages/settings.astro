@@ -21,6 +21,36 @@ import Input from "../components/Input.astro";
 		<div id="setting-container" class="border-base-content/10 bg-primary-content/80 my-4 rounded-lg border py-6 px-40 max-lg:px-6">
 			<div id="general">
 				<div class="flex flex-col items-center font-bold">
+					<div class="mt-4 text-xl">Kelas</div>
+					<hr class="bg-secondary/80 h-[2px] max-h-[1px] w-full max-w-4xl border-0" />
+					<div class="flex flex-wrap">
+						<div class="form-control mx-2 my-1">
+							<label class="label cursor-pointer">
+								<span class="label-text">XI-C MIA</span>
+								<input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
+							</label>
+						</div>
+						<div class="form-control mx-2 my-1">
+							<label class="label cursor-pointer">
+								<span class="label-text">XI-C MIA</span>
+								<input type="radio" name="radio-10" class="radio checked:bg-blue-500" checked />
+							</label>
+						</div>
+						<div class="form-control mx-2 my-1">
+							<label class="label cursor-pointer">
+								<span class="label-text">XI-C MIA</span>
+								<input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
+							</label>
+						</div>
+						<div class="form-control mx-2 my-1">
+							<label class="label cursor-pointer">
+								<span class="label-text">XI-C MIA</span>
+								<input type="radio" name="radio-10" class="radio checked:bg-blue-500" checked />
+							</label>
+						</div>
+					</div>
+					<div class="mt-10 text-xl">Performance</div>
+					<hr class="bg-secondary/80 h-[2px] max-h-[1px] w-full max-w-4xl border-0" />
 					<Toggle action="handleSettingToggles(this)" text="Enable Turbo JS" id="setting-turbo-js" checked="" />
 					<Toggle action="handleSettingToggles(this)" text="Use custom Backend server URL" id="setting-custom-backend-url" />
 					<input
@@ -30,14 +60,16 @@ import Input from "../components/Input.astro";
 						class="input input-bordered input-primary mt-1 mb-4 w-[60%] max-w-4xl font-normal max-lg:w-[100%]"
 						disabled
 					/>
+					<div class="mt-10 text-xl">Other</div>
+					<hr class="bg-secondary/80 h-[2px] max-h-[1px] w-full max-w-4xl border-0" />
 					<Toggle text="Enable Analytic" id="setting-analytic" action="handleSettingToggles(this)" />
 				</div>
 			</div>
 			<div id="personalization" class="hidden">
 				<Heading>Change Profile</Heading>
 				<div class="mb-4 flex flex-wrap">
-					<Input title="Customize your username" id="setting-username" placeholder="Anonymous"/>
-					<Input title="Customize your profile picture" id="setting-profile" placeholder="https://img-os-static.hoyolab.com/avatar/avatar30038.png"/>
+					<Input title="Customize your username" id="setting-username" placeholder="Anonymous" />
+					<Input title="Customize your profile picture" id="setting-profile" placeholder="https://img-os-static.hoyolab.com/avatar/avatar30038.png" />
 				</div>
 				<Heading>Change Main Theme</Heading>
 				<div class="mb-4 flex flex-wrap">
@@ -83,105 +115,106 @@ import Input from "../components/Input.astro";
 			</div>
 		</div>
 	</main>
-</Layout>
-<script is:inline>
-	var settingsTab = document.getElementById("setting-tabs");
-	var activeTab = document.getElementById("setting-tabs").querySelector(".tab-active");
-	var settingsContainer = document.getElementById("setting-container");
 
-	function switchSettingsTab(obj) {
-		activeTab.classList.toggle("tab-active");
-		obj.classList.toggle("tab-active");
-		activeTab = obj;
-	}
+	<script is:inline>
+		var settingsTab = document.getElementById("setting-tabs");
+		var activeTab = document.getElementById("setting-tabs").querySelector(".tab-active");
+		var settingsContainer = document.getElementById("setting-container");
 
-	function switchSettingsContainer(obj) {
-		Array.from(settingsContainer.children).forEach((container) => {
-			if (container.id == "setting-button") return;
-			container.classList.add("hidden");
+		function switchSettingsTab(obj) {
+			activeTab.classList.toggle("tab-active");
+			obj.classList.toggle("tab-active");
+			activeTab = obj;
+		}
+
+		function switchSettingsContainer(obj) {
+			Array.from(settingsContainer.children).forEach((container) => {
+				if (container.id == "setting-button") return;
+				container.classList.add("hidden");
+			});
+			settingsContainer.querySelector("#" + obj.id).classList.remove("hidden");
+		}
+
+		Array.from(settingsTab.children).forEach((tab) => {
+			tab.addEventListener("click", () => {
+				if (tab.classList.contains("tab-active")) return;
+				switchSettingsTab(tab);
+				switchSettingsContainer(tab);
+			});
 		});
-		settingsContainer.querySelector("#" + obj.id).classList.remove("hidden");
-	}
-
-	Array.from(settingsTab.children).forEach((tab) => {
-		tab.addEventListener("click", () => {
-			if (tab.classList.contains("tab-active")) return;
-			switchSettingsTab(tab);
-			switchSettingsContainer(tab);
-		});
-	});
-</script>
-<script is:inline>
-	function handleSettingToggles(elementToggle) {
-		switch (elementToggle.id) {
-			case "setting-turbo-js":
-			case "setting-analytic":
-				break;
-			case "setting-custom-backend-url":
-				document.getElementById("setting-custom-backend-url-text").disabled = !elementToggle.checked;
-				break;
-			default:
-				if (elementToggle.id.includes("theme-")) {
-					handleSettingTheme(elementToggle);
+	</script>
+	<script is:inline>
+		function handleSettingToggles(elementToggle) {
+			switch (elementToggle.id) {
+				case "setting-turbo-js":
+				case "setting-analytic":
 					break;
-				}
-				console.log("Setting '", elementToggle.id, "' does not exist");
-				break;
+				case "setting-custom-backend-url":
+					document.getElementById("setting-custom-backend-url-text").disabled = !elementToggle.checked;
+					break;
+				default:
+					if (elementToggle.id.includes("theme-")) {
+						handleSettingTheme(elementToggle);
+						break;
+					}
+					console.log("Setting '", elementToggle.id, "' does not exist");
+					break;
+			}
 		}
-	}
 
-	function handleSettingTheme(elementToggle) {
-		Array.from(document.getElementsByClassName("theme-selected")).forEach((themeCard) => {
-			themeCard.classList.remove("theme-selected");
+		function handleSettingTheme(elementToggle) {
+			Array.from(document.getElementsByClassName("theme-selected")).forEach((themeCard) => {
+				themeCard.classList.remove("theme-selected");
+			});
+			elementToggle.classList.add("theme-selected");
+			document.querySelector("body").dataset.theme = elementToggle.id.slice(6);
+		}
+
+		function saveSettings() {
+			let settings = {
+				"turbo-js": document.getElementById("setting-turbo-js").checked,
+				"custom-backend-url": document.getElementById("setting-custom-backend-url").checked,
+				"custom-backend-url-text": document.getElementById("setting-custom-backend-url-text").value,
+				analytic: document.getElementById("setting-analytic").checked,
+				theme: document.querySelector(".theme-selected").id.slice(6),
+				username: document.getElementById("setting-username").value || document.getElementById("setting-username").placeholder,
+				profile: document.getElementById("setting-profile").value || document.getElementById("setting-profile").placeholder,
+			};
+			localforage.setItem("settings", settings).then(function () {
+				applySettings();
+			});
+		}
+
+		async function restoreSettings() {
+			var settings = await localforage.getItem("settings");
+			if (settings == undefined) return;
+			document.getElementById("setting-turbo-js").checked = settings["turbo-js"];
+			document.getElementById("setting-custom-backend-url").checked = settings["custom-backend-url"];
+			document.getElementById("setting-custom-backend-url-text").disabled = !settings["custom-backend-url"];
+			document.getElementById("setting-custom-backend-url-text").value = settings["custom-backend-url-text"];
+			document.getElementById("setting-analytic").checked = settings["analytic"];
+			if (settings["theme"]) {
+				handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
+			} else {
+				handleSettingTheme(document.getElementById("theme-halloween"));
+			}
+			document.getElementById("setting-username").value = settings["username"] || document.getElementById("setting-username").placeholder;
+			document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
+		}
+
+		addEventListener("turbo:load", () => {
+			if (window.location.href.indexOf("settings") > -1) {
+				restoreSettings();
+			}
 		});
-		elementToggle.classList.add("theme-selected");
-		document.querySelector("body").dataset.theme = elementToggle.id.slice(6);
-	}
-
-	function saveSettings() {
-		let settings = {
-			"turbo-js": document.getElementById("setting-turbo-js").checked,
-			"custom-backend-url": document.getElementById("setting-custom-backend-url").checked,
-			"custom-backend-url-text": document.getElementById("setting-custom-backend-url-text").value,
-			analytic: document.getElementById("setting-analytic").checked,
-			theme: document.querySelector(".theme-selected").id.slice(6),
-			username: document.getElementById("setting-username").value || document.getElementById("setting-username").placeholder,
-			profile: document.getElementById("setting-profile").value || document.getElementById("setting-profile").placeholder
-		};
-		localforage.setItem("settings", settings).then(function () {
-			applySettings();
-		});
-	}
-
-	async function restoreSettings() {
-		var settings = await localforage.getItem("settings");
-		if (settings == undefined) return;
-		document.getElementById("setting-turbo-js").checked = settings["turbo-js"];
-		document.getElementById("setting-custom-backend-url").checked = settings["custom-backend-url"];
-		document.getElementById("setting-custom-backend-url-text").disabled = !settings["custom-backend-url"];
-		document.getElementById("setting-custom-backend-url-text").value = settings["custom-backend-url-text"];
-		document.getElementById("setting-analytic").checked = settings["analytic"];
-		if (settings["theme"]) {
-			handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
-		} else {
-			handleSettingTheme(document.getElementById("theme-halloween"));
+	</script>
+	<style>
+		.text-gradient {
+			background-image: var(--accent-gradient);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-size: 400%;
+			background-position: 0%;
 		}
-		document.getElementById("setting-username").value = settings["username"] || document.getElementById("setting-username").placeholder;
-		document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
-	}
-
-	addEventListener("turbo:load", () => {
-		if (window.location.href.indexOf("settings") > -1) {
-			restoreSettings();
-		}
-	});
-</script>
-<style>
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-</style>
+	</style>
+</Layout>
