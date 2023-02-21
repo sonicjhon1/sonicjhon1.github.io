@@ -2,7 +2,9 @@
 import TBI from "../components/TBI.astro";
 import ThemeCard from "../components/ThemeCard.astro";
 import Toggle from "../components/Toggle.astro";
+import Heading from "../components/Heading.astro";
 import Layout from "../layouts/Layout.astro";
+import Input from "../components/Input.astro";
 ---
 
 <Layout title="SWL - Settings">
@@ -32,15 +34,17 @@ import Layout from "../layouts/Layout.astro";
 				</div>
 			</div>
 			<div id="personalization" class="hidden">
-				<div class="inline-flex w-full items-center mt-4 mb-2">
-					<span class="relative text-2xl font-extrabold mx-4">Website theme</span>
-					<hr class="h-[2px] bg-secondary/80 border-0 mt-1 flex-1 mr-4">
+				<Heading>Change Profile</Heading>
+				<div class="mb-4 flex flex-wrap">
+					<Input title="Customize your username" placeholder="Anonymous"/>
+					<Input title="Customize your profile picture" placeholder="https://img-os-static.hoyolab.com/avatar/avatar30038.png"/>
 				</div>
-				<div class="flex flex-wrap">
+				<Heading>Change Main Theme</Heading>
+				<div class="mb-4 flex flex-wrap">
 					<ThemeCard action="handleSettingToggles(this)" theme="dark" />
 					<ThemeCard action="handleSettingToggles(this)" theme="dracula" />
 					<ThemeCard action="handleSettingToggles(this)" theme="night" />
-					<ThemeCard action="handleSettingToggles(this)" theme="halloween" active="theme-selected"/>
+					<ThemeCard action="handleSettingToggles(this)" theme="halloween" active="theme-selected" />
 					<ThemeCard action="handleSettingToggles(this)" theme="business" />
 					<ThemeCard action="handleSettingToggles(this)" theme="forest" />
 					<ThemeCard action="handleSettingToggles(this)" theme="black" />
@@ -131,7 +135,7 @@ import Layout from "../layouts/Layout.astro";
 			themeCard.classList.remove("theme-selected");
 		});
 		elementToggle.classList.add("theme-selected");
-		document.querySelector("body").dataset.theme = elementToggle.id.slice(6)
+		document.querySelector("body").dataset.theme = elementToggle.id.slice(6);
 	}
 
 	function saveSettings() {
@@ -139,8 +143,8 @@ import Layout from "../layouts/Layout.astro";
 			"turbo-js": document.getElementById("turbo-js").checked,
 			"custom-backend-url": document.getElementById("custom-backend-url").checked,
 			"custom-backend-url-text": document.getElementById("custom-backend-url-text").value,
-			"analytic": document.getElementById("analytic").checked,
-			"theme": document.querySelector(".theme-selected").id.slice(6)
+			analytic: document.getElementById("analytic").checked,
+			theme: document.querySelector(".theme-selected").id.slice(6),
 		};
 		localforage.setItem("settings", settings).then(function () {
 			applySettings();

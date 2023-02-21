@@ -1,0 +1,25 @@
+---
+export interface Props {
+	title: string;
+	placeholder: string;
+}
+
+const { title, placeholder } = Astro.props;
+---
+
+<div class="form-control w-full mx-1 custom-basis max-md:min-w-full" id="profile-settings">
+    <label class="label">
+        <span class="label-text">{title}</span>
+    </label>
+    <input type="text" placeholder={placeholder} class="input input-bordered w-full max-w-lg max-md:max-w-full" />
+</div>
+<script>
+    document.querySelectorAll<HTMLInputElement>("#profile-settings>input").forEach( input => {
+        input.value = input.placeholder;
+    })
+</script>
+<style>
+	.custom-basis {
+		flex-basis: calc((100% / 2) - 0.5rem);
+	}
+</style>
