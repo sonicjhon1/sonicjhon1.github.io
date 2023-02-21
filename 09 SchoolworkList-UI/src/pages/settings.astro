@@ -21,23 +21,23 @@ import Input from "../components/Input.astro";
 		<div id="setting-container" class="border-base-content/10 bg-primary-content/80 my-4 rounded-lg border py-6 px-40 max-lg:px-6">
 			<div id="general">
 				<div class="flex flex-col items-center font-bold">
-					<Toggle text="Enable Turbo JS" id="turbo-js" action="handleSettingToggles(this)" checked="" />
-					<Toggle text="Use custom Backend server URL" id="custom-backend-url" action="handleSettingToggles(this)" />
+					<Toggle action="handleSettingToggles(this)" text="Enable Turbo JS" id="setting-turbo-js" checked="" />
+					<Toggle action="handleSettingToggles(this)" text="Use custom Backend server URL" id="setting-custom-backend-url" />
 					<input
-						id="custom-backend-url-text"
+						id="setting-custom-backend-url-text"
 						type="text"
 						placeholder="Paste custom backend URL here!"
 						class="input input-bordered input-primary mt-1 mb-4 w-[60%] max-w-4xl font-normal max-lg:w-[100%]"
 						disabled
 					/>
-					<Toggle text="Enable Analytic" id="analytic" action="handleSettingToggles(this)" />
+					<Toggle text="Enable Analytic" id="setting-analytic" action="handleSettingToggles(this)" />
 				</div>
 			</div>
 			<div id="personalization" class="hidden">
 				<Heading>Change Profile</Heading>
 				<div class="mb-4 flex flex-wrap">
-					<Input title="Customize your username" placeholder="Anonymous"/>
-					<Input title="Customize your profile picture" placeholder="https://img-os-static.hoyolab.com/avatar/avatar30038.png"/>
+					<Input title="Customize your username" id="setting-username" placeholder="Anonymous"/>
+					<Input title="Customize your profile picture" id="setting-profile" placeholder="https://img-os-static.hoyolab.com/avatar/avatar30038.png"/>
 				</div>
 				<Heading>Change Main Theme</Heading>
 				<div class="mb-4 flex flex-wrap">
@@ -114,11 +114,11 @@ import Input from "../components/Input.astro";
 <script is:inline>
 	function handleSettingToggles(elementToggle) {
 		switch (elementToggle.id) {
-			case "turbo-js":
-			case "analytic":
+			case "setting-turbo-js":
+			case "setting-analytic":
 				break;
-			case "custom-backend-url":
-				document.getElementById("custom-backend-url-text").disabled = !elementToggle.checked;
+			case "setting-custom-backend-url":
+				document.getElementById("setting-custom-backend-url-text").disabled = !elementToggle.checked;
 				break;
 			default:
 				if (elementToggle.id.includes("theme-")) {
@@ -140,11 +140,13 @@ import Input from "../components/Input.astro";
 
 	function saveSettings() {
 		let settings = {
-			"turbo-js": document.getElementById("turbo-js").checked,
-			"custom-backend-url": document.getElementById("custom-backend-url").checked,
-			"custom-backend-url-text": document.getElementById("custom-backend-url-text").value,
-			analytic: document.getElementById("analytic").checked,
+			"turbo-js": document.getElementById("setting-turbo-js").checked,
+			"custom-backend-url": document.getElementById("setting-custom-backend-url").checked,
+			"custom-backend-url-text": document.getElementById("setting-custom-backend-url-text").value,
+			analytic: document.getElementById("setting-analytic").checked,
 			theme: document.querySelector(".theme-selected").id.slice(6),
+			username: document.getElementById("setting-username").value,
+			profile: document.getElementById("setting-profile").value
 		};
 		localforage.setItem("settings", settings).then(function () {
 			applySettings();
@@ -154,16 +156,18 @@ import Input from "../components/Input.astro";
 	async function restoreSettings() {
 		var settings = await localforage.getItem("settings");
 		if (settings == undefined) return;
-		document.getElementById("turbo-js").checked = settings["turbo-js"];
-		document.getElementById("custom-backend-url").checked = settings["custom-backend-url"];
-		document.getElementById("custom-backend-url-text").disabled = !settings["custom-backend-url"];
-		document.getElementById("custom-backend-url-text").value = settings["custom-backend-url-text"];
-		document.getElementById("analytic").checked = settings["analytic"];
+		document.getElementById("setting-turbo-js").checked = settings["turbo-js"];
+		document.getElementById("setting-custom-backend-url").checked = settings["custom-backend-url"];
+		document.getElementById("setting-custom-backend-url-text").disabled = !settings["custom-backend-url"];
+		document.getElementById("setting-custom-backend-url-text").value = settings["custom-backend-url-text"];
+		document.getElementById("setting-analytic").checked = settings["analytic"];
 		if (settings["theme"]) {
 			handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
 		} else {
 			handleSettingTheme(document.getElementById("theme-halloween"));
 		}
+		document.getElementById("setting-username").value = settings["username"] || document.getElementById("setting-username").placeholder;
+		document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
 	}
 
 	addEventListener("turbo:load", () => {

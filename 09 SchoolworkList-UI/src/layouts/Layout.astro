@@ -76,7 +76,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 				<div class="dropdown dropdown-end">
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 						<div class="w-10 rounded-full">
-							<img src="https://img-os-static.hoyolab.com/avatar/avatar30038.png" />
+							<img id="profile-picture" src="https://img-os-static.hoyolab.com/avatar/avatar30038.png" />
 						</div>
 					</label>
 					<ul tabindex="0" class="menu menu-compact dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow border-solid border border-primary/10">
@@ -109,6 +109,12 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			Turbo.session.drive = settings["turbo-js"];
 			// Personalization
 			document.querySelector("body").dataset.theme = settings["theme"] || "halloween";
+			if (settings["username"] != "") {
+				// TODO
+			}
+			if (settings["profile"] != "") {
+				document.getElementById("profile-picture").src = settings["profile"]
+			}
 			// Backup
 		}
 
