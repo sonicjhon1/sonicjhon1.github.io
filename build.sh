@@ -20,7 +20,6 @@ postBuild() {
 # Initiate build process and deploy the page
 prebuild
 npx turbo run build
-postBuild
 
 # Build folders 
 build03UI() {
@@ -47,5 +46,11 @@ build09MDXUI() {
     cd "09 SchoolworkListMDX-UI"
     postBuild
 }
+build10UI() {
+    cd "10 Portofolio-Astro-UI"
+    cp -R dist/** ..
+    rm -rfd node_modules
+    rm -rfd dist
+}
 
-build03UI & build04UI & build05UI & build08UI & build09UI & build09MDXUI
+build03UI & build04UI & build05UI & build08UI & build09UI & build09MDXUI & build10UI

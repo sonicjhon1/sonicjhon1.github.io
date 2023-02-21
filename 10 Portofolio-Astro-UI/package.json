@@ -1,0 +1,16 @@
+{
+	"name": "@sonicjhon1/sonicj-portofolio-ui",
+	"type": "module",
+	"version": "0.1.0",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"astro": "^2.0.14",
+		"astro-compress": "^1.1.32"
+	}
+}
