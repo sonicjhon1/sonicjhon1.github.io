@@ -25,26 +25,26 @@ import Radio from "../components/Radio.astro";
 					<Heading>Class</Heading>
 					<div class="mb-4 flex flex-wrap">
 						<div id="setting-classes" class="flex flex-wrap">
-							<Radio action="handleSettingClass(this)" title="XI-A MIA" id="setting-xiamia"/>
-							<Radio action="handleSettingClass(this)" title="XI-B MIA" id="setting-xibmia"/>
-							<Radio action="handleSettingClass(this)" title="XI-C MIA" id="setting-xicmia" checked=""/>
-							<Radio action="handleSettingClass(this)" title="XI-D MIA" id="setting-xidmia"/>
-							<Radio action="handleSettingClass(this)" title="XI-A IIS" id="setting-xiaiis"/>
-							<Radio action="handleSettingClass(this)" title="XI-B IIS" id="setting-xibiis"/>
-							<Radio action="handleSettingClass(this)" title="XI-C IIS" id="setting-xiciis"/>
-							<Radio action="handleSettingClass(this)" title="XI-D IIS" id="setting-xidiis"/>
+							<Radio title="XI-A MIA" id="setting-xiamia"/>
+							<Radio title="XI-B MIA" id="setting-xibmia"/>
+							<Radio title="XI-C MIA" id="setting-xicmia" checked=""/>
+							<Radio title="XI-D MIA" id="setting-xidmia"/>
+							<Radio title="XI-A IIS" id="setting-xiaiis"/>
+							<Radio title="XI-B IIS" id="setting-xibiis"/>
+							<Radio title="XI-C IIS" id="setting-xiciis"/>
+							<Radio title="XI-D IIS" id="setting-xidiis"/>
 						</div>
 					</div>
 					<Heading>Performance</Heading>
 					<div class="mb-4 flex flex-wrap">
-						<Toggle action="handleSettingToggles(this)" text="Enable Turbo JS" id="setting-turbo-js" checked="" />
-						<Toggle action="handleSettingToggles(this)" text="Enable Analytic" id="setting-analytic" checked="" />
-						<Toggle action="handleSettingToggles(this)" text="Enable Ads" id="setting-ads" checked="" />
-						<Toggle action="handleSettingToggles(this)" text="Disable disclaimer on posts" id="setting-disclaimer" />
+						<Toggle text="Enable Turbo JS" id="setting-turbo-js" checked="" />
+						<Toggle text="Enable Analytic" id="setting-analytic" checked="" />
+						<Toggle text="Enable Ads" id="setting-ads" checked="" />
+						<Toggle text="Disable disclaimer on posts" id="setting-disclaimer" />
 					</div>
 					<Heading>Other</Heading>
 					<div class="mb-4 flex flex-wrap">
-						<Toggle action="handleSettingToggles(this)" text="Use custom Backend server URL" id="setting-custom-backend-url" />
+						<Toggle text="Use custom Backend server URL" id="setting-custom-backend-url" />
 						<Input title="Custom Backend URL" id="setting-custom-backend-url-text" placeholder="Paste custom backend URL here!"/>
 					</div>
 				</div>
@@ -57,29 +57,29 @@ import Radio from "../components/Radio.astro";
 				</div>
 				<Heading>Change Main Theme</Heading>
 				<div class="mb-4 flex flex-wrap">
-					<ThemeCard action="handleSettingToggles(this)" theme="dark" />
-					<ThemeCard action="handleSettingToggles(this)" theme="dracula" />
-					<ThemeCard action="handleSettingToggles(this)" theme="night" />
-					<ThemeCard action="handleSettingToggles(this)" theme="halloween" active="theme-selected" />
-					<ThemeCard action="handleSettingToggles(this)" theme="business" />
-					<ThemeCard action="handleSettingToggles(this)" theme="forest" />
-					<ThemeCard action="handleSettingToggles(this)" theme="black" />
-					<ThemeCard action="handleSettingToggles(this)" theme="luxury" />
-					<ThemeCard action="handleSettingToggles(this)" theme="coffee" />
-					<ThemeCard action="handleSettingToggles(this)" theme="light" />
-					<ThemeCard action="handleSettingToggles(this)" theme="emerald" />
-					<ThemeCard action="handleSettingToggles(this)" theme="corporate" />
-					<ThemeCard action="handleSettingToggles(this)" theme="garden" />
-					<ThemeCard action="handleSettingToggles(this)" theme="lofi" />
-					<ThemeCard action="handleSettingToggles(this)" theme="fantasy" />
-					<ThemeCard action="handleSettingToggles(this)" theme="wireframe" />
-					<ThemeCard action="handleSettingToggles(this)" theme="cmyk" />
-					<ThemeCard action="handleSettingToggles(this)" theme="autumn" />
-					<ThemeCard action="handleSettingToggles(this)" theme="acid" />
-					<ThemeCard action="handleSettingToggles(this)" theme="lemonade" />
-					<ThemeCard action="handleSettingToggles(this)" theme="winter" />
-					<ThemeCard action="handleSettingToggles(this)" theme="valentine" />
-					<ThemeCard action="handleSettingToggles(this)" theme="cyberpunk" />
+					<ThemeCard theme="dark" />
+					<ThemeCard theme="dracula" />
+					<ThemeCard theme="night" />
+					<ThemeCard theme="halloween" active="theme-selected" />
+					<ThemeCard theme="business" />
+					<ThemeCard theme="forest" />
+					<ThemeCard theme="black" />
+					<ThemeCard theme="luxury" />
+					<ThemeCard theme="coffee" />
+					<ThemeCard theme="light" />
+					<ThemeCard theme="emerald" />
+					<ThemeCard theme="corporate" />
+					<ThemeCard theme="garden" />
+					<ThemeCard theme="lofi" />
+					<ThemeCard theme="fantasy" />
+					<ThemeCard theme="wireframe" />
+					<ThemeCard theme="cmyk" />
+					<ThemeCard theme="autumn" />
+					<ThemeCard theme="acid" />
+					<ThemeCard theme="lemonade" />
+					<ThemeCard theme="winter" />
+					<ThemeCard theme="valentine" />
+					<ThemeCard theme="cyberpunk" />
 				</div>
 			</div>
 			<div id="backup" class="hidden">

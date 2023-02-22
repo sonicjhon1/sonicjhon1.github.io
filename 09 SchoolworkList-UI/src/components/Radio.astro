@@ -1,15 +1,14 @@
 ---
 export interface Props {
 	title: string;
-    action: string;
     id: string;
     checked?: string;
 }
-const { title, action, id, checked } = Astro.props;
+const { title, id, checked } = Astro.props;
 ---
 <div class="form-control mx-4 my-1 custom-basis max-md:min-w-full">
     <label class="label cursor-pointer">
-        <input id={id} type="radio" name="radio-10" class="radio checked:bg-primary" onclick={action} {checked}/>
+        <input id={id} type="radio" name="radio-10" class="radio checked:bg-primary" onclick=handleSettingClass(this) {checked}/>
         <span class="label-text pl-4">{title}</span>
         <div class="flex-1"></div>
     </label>
