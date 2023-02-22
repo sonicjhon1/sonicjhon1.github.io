@@ -30,6 +30,7 @@ import Layout from "../layouts/Layout.astro";
 	var thumbURL = new URL(window.location.href).searchParams.get("t")
 		? backendURL + new URL(window.location.href).searchParams.get("t")
 		: "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg";
+	applyDisclaimer();
 	im.run({
 		currLang: "en",
 		services: {
