@@ -53,8 +53,9 @@ import Input from "../components/Input.astro";
 					<Heading>Performance</Heading>
 					<div class="mb-4 flex flex-wrap">
 						<Toggle action="handleSettingToggles(this)" text="Enable Turbo JS" id="setting-turbo-js" checked="" />
-						<Toggle text="Enable Analytic" id="setting-analytic" action="handleSettingToggles(this)" />
-						<Toggle text="Enable Ads" id="setting-ads" action="handleSettingToggles(this)" />
+						<Toggle action="handleSettingToggles(this)" text="Enable Analytic" id="setting-analytic" checked="" />
+						<Toggle action="handleSettingToggles(this)" text="Enable Ads" id="setting-ads" checked="" />
+						<Toggle action="handleSettingToggles(this)" text="Disable disclaimer on posts" id="setting-disclaimer" />
 					</div>
 					<Heading>Other</Heading>
 					<div class="mb-4 flex flex-wrap">
@@ -146,6 +147,8 @@ import Input from "../components/Input.astro";
 			switch (elementToggle.id) {
 				case "setting-turbo-js":
 				case "setting-analytic":
+				case "setting-ads":
+				case "setting-disclaimer":
 					break;
 				case "setting-custom-backend-url":
 					document.getElementById("setting-custom-backend-url-text").disabled = !elementToggle.checked;
@@ -174,6 +177,8 @@ import Input from "../components/Input.astro";
 				"custom-backend-url": document.getElementById("setting-custom-backend-url").checked,
 				"custom-backend-url-text": document.getElementById("setting-custom-backend-url-text").value,
 				analytic: document.getElementById("setting-analytic").checked,
+				ads: document.getElementById("setting-ads").checked,
+				disclaimer: document.getElementById("setting-disclaimer").checked,
 				theme: document.querySelector(".theme-selected").id.slice(6),
 				username: document.getElementById("setting-username").value || document.getElementById("setting-username").placeholder,
 				profile: document.getElementById("setting-profile").value || document.getElementById("setting-profile").placeholder,
@@ -191,6 +196,8 @@ import Input from "../components/Input.astro";
 			document.getElementById("setting-custom-backend-url-text").disabled = !settings["custom-backend-url"];
 			document.getElementById("setting-custom-backend-url-text").value = settings["custom-backend-url-text"];
 			document.getElementById("setting-analytic").checked = settings["analytic"];
+			document.getElementById("setting-ads").checked = settings["ads"];
+			document.getElementById("setting-disclaimer").checked = settings["disclaimer"];
 			if (settings["theme"]) {
 				handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
 			} else {

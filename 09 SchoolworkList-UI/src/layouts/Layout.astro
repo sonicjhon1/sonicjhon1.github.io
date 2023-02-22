@@ -112,9 +112,20 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			if (settings["turbo-js"] != undefined && typeof settings["turbo-js"] === "boolean") {
 				Turbo.session.drive = settings["turbo-js"];
 			}
+			if (settings["analytic"] != undefined && typeof settings["analytic"] === "boolean" && settings["analytic"] === true) {
+				// TODO: Implement this after adding Lootlocker
+			}
+			if (settings["ads"] != undefined && typeof settings["ads"] === "boolean" && settings["ads"] === true) {
+				// TODO: Implement this after adding Adsense
+			}
+			if (settings["disclaimer"] != undefined && typeof settings["disclaimer"] === "boolean" && settings["disclaimer"] === true) {
+				im.acceptService('all');
+			} else {
+				im.rejectService('all');
+			}
 
 			// Personalization
-			if (settings["theme"] != undefined && settings["turbo-js"] != "") {
+			if (settings["theme"] != undefined && settings["theme"] != "") {
 				document.querySelector("body").dataset.theme = settings["theme"];
 			}
 			if (settings["username"] != undefined && settings["username"] != "") {
