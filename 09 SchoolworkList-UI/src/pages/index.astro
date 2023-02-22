@@ -51,6 +51,8 @@ import Card from "../components/Card.astro";
 			kelas = kelas.replace("E ", "-E ");
 			kelas = kelas.replace("F ", "-F ");
 			document.getElementById("class").innerText = kelas;
+		} else {
+			document.getElementById("class").innerText = "XI-C MIA";
 		}
 		// Fetch work lists from Backend
 		var backendURL = document.getElementById("backendURL").dataset.backendurl + "query";
