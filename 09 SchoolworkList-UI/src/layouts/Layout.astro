@@ -118,11 +118,6 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			if (settings["ads"] != undefined && typeof settings["ads"] === "boolean" && settings["ads"] === true) {
 				// TODO: Implement this after adding Adsense
 			}
-			if (settings["disclaimer"] != undefined && typeof settings["disclaimer"] === "boolean" && settings["disclaimer"] === true) {
-				im.acceptService('all');
-			} else {
-				im.rejectService('all');
-			}
 
 			// Personalization
 			if (settings["theme"] != undefined && settings["theme"] != "") {

@@ -5,6 +5,7 @@ import Toggle from "../components/Toggle.astro";
 import Heading from "../components/Heading.astro";
 import Layout from "../layouts/Layout.astro";
 import Input from "../components/Input.astro";
+import Radio from "../components/Radio.astro";
 ---
 
 <Layout title="SWL - Settings">
@@ -24,30 +25,14 @@ import Input from "../components/Input.astro";
 					<Heading>Class</Heading>
 					<div class="mb-4 flex flex-wrap">
 						<div class="flex flex-wrap">
-							<div class="form-control mx-2 my-1">
-								<label class="label cursor-pointer">
-									<span class="label-text">XI-C MIA</span>
-									<input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
-								</label>
-							</div>
-							<div class="form-control mx-2 my-1">
-								<label class="label cursor-pointer">
-									<span class="label-text">XI-C MIA</span>
-									<input type="radio" name="radio-10" class="radio checked:bg-blue-500" checked />
-								</label>
-							</div>
-							<div class="form-control mx-2 my-1">
-								<label class="label cursor-pointer">
-									<span class="label-text">XI-C MIA</span>
-									<input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
-								</label>
-							</div>
-							<div class="form-control mx-2 my-1">
-								<label class="label cursor-pointer">
-									<span class="label-text">XI-C MIA</span>
-									<input type="radio" name="radio-10" class="radio checked:bg-blue-500" checked />
-								</label>
-							</div>
+							<Radio title="XI-A MIA" colour="bg-red-500"/>
+							<Radio title="XI-B MIA" colour="bg-red-500"/>
+							<Radio title="XI-C MIA" colour="bg-blue-500" checked=""/>
+							<Radio title="XI-D MIA" colour="bg-red-500"/>
+							<Radio title="XI-A IIS" colour="bg-red-500"/>
+							<Radio title="XI-B IIS" colour="bg-red-500"/>
+							<Radio title="XI-C IIS" colour="bg-red-500"/>
+							<Radio title="XI-D IIS" colour="bg-red-500"/>
 						</div>
 					</div>
 					<Heading>Performance</Heading>

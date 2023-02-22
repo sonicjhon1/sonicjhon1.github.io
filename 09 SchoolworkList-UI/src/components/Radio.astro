@@ -1,0 +1,20 @@
+---
+export interface Props {
+	title: string;
+    colour: string;
+    checked?: string;
+}
+const { title, colour, checked } = Astro.props;
+---
+<div class="form-control mx-4 my-1 custom-basis max-md:min-w-full">
+    <label class="label cursor-pointer">
+        <input type="radio" name="radio-10" class=`radio checked:${colour}` {checked}/>
+        <span class="label-text pl-4">{title}</span>
+        <div class="flex-1"></div>
+    </label>
+</div>
+<style>
+	.custom-basis {
+		flex-basis: calc((100% / 4) - 2rem);
+	}
+</style>
