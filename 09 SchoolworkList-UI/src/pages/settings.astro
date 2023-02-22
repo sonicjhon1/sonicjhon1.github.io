@@ -20,49 +20,47 @@ import Input from "../components/Input.astro";
 		</div>
 		<div id="setting-container" class="border-base-content/10 bg-primary-content/80 my-4 rounded-lg border py-6 px-40 max-lg:px-6">
 			<div id="general">
-				<div class="flex flex-col items-center font-bold">
-					<div class="mt-4 text-xl">Kelas</div>
-					<hr class="bg-secondary/80 h-[2px] max-h-[1px] w-full max-w-4xl border-0" />
-					<div class="flex flex-wrap">
-						<div class="form-control mx-2 my-1">
-							<label class="label cursor-pointer">
-								<span class="label-text">XI-C MIA</span>
-								<input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
-							</label>
-						</div>
-						<div class="form-control mx-2 my-1">
-							<label class="label cursor-pointer">
-								<span class="label-text">XI-C MIA</span>
-								<input type="radio" name="radio-10" class="radio checked:bg-blue-500" checked />
-							</label>
-						</div>
-						<div class="form-control mx-2 my-1">
-							<label class="label cursor-pointer">
-								<span class="label-text">XI-C MIA</span>
-								<input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
-							</label>
-						</div>
-						<div class="form-control mx-2 my-1">
-							<label class="label cursor-pointer">
-								<span class="label-text">XI-C MIA</span>
-								<input type="radio" name="radio-10" class="radio checked:bg-blue-500" checked />
-							</label>
+				<div class="flex flex-col pb-4">
+					<Heading>Class</Heading>
+					<div class="mb-4 flex flex-wrap">
+						<div class="flex flex-wrap">
+							<div class="form-control mx-2 my-1">
+								<label class="label cursor-pointer">
+									<span class="label-text">XI-C MIA</span>
+									<input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
+								</label>
+							</div>
+							<div class="form-control mx-2 my-1">
+								<label class="label cursor-pointer">
+									<span class="label-text">XI-C MIA</span>
+									<input type="radio" name="radio-10" class="radio checked:bg-blue-500" checked />
+								</label>
+							</div>
+							<div class="form-control mx-2 my-1">
+								<label class="label cursor-pointer">
+									<span class="label-text">XI-C MIA</span>
+									<input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
+								</label>
+							</div>
+							<div class="form-control mx-2 my-1">
+								<label class="label cursor-pointer">
+									<span class="label-text">XI-C MIA</span>
+									<input type="radio" name="radio-10" class="radio checked:bg-blue-500" checked />
+								</label>
+							</div>
 						</div>
 					</div>
-					<div class="mt-10 text-xl">Performance</div>
-					<hr class="bg-secondary/80 h-[2px] max-h-[1px] w-full max-w-4xl border-0" />
-					<Toggle action="handleSettingToggles(this)" text="Enable Turbo JS" id="setting-turbo-js" checked="" />
-					<Toggle action="handleSettingToggles(this)" text="Use custom Backend server URL" id="setting-custom-backend-url" />
-					<input
-						id="setting-custom-backend-url-text"
-						type="text"
-						placeholder="Paste custom backend URL here!"
-						class="input input-bordered input-primary mt-1 mb-4 w-[60%] max-w-4xl font-normal max-lg:w-[100%]"
-						disabled
-					/>
-					<div class="mt-10 text-xl">Other</div>
-					<hr class="bg-secondary/80 h-[2px] max-h-[1px] w-full max-w-4xl border-0" />
-					<Toggle text="Enable Analytic" id="setting-analytic" action="handleSettingToggles(this)" />
+					<Heading>Performance</Heading>
+					<div class="mb-4 flex flex-wrap">
+						<Toggle action="handleSettingToggles(this)" text="Enable Turbo JS" id="setting-turbo-js" checked="" />
+						<Toggle text="Enable Analytic" id="setting-analytic" action="handleSettingToggles(this)" />
+						<Toggle text="Enable Ads" id="setting-ads" action="handleSettingToggles(this)" />
+					</div>
+					<Heading>Other</Heading>
+					<div class="mb-4 flex flex-wrap">
+						<Toggle action="handleSettingToggles(this)" text="Use custom Backend server URL" id="setting-custom-backend-url" />
+						<Input title="Custom Backend URL" id="setting-custom-backend-url-text" placeholder="Paste custom backend URL here!"/>
+					</div>
 				</div>
 			</div>
 			<div id="personalization" class="hidden">

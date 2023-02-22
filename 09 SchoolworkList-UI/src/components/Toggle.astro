@@ -8,9 +8,14 @@ export interface Props {
 
 const { text, checked, id, action } = Astro.props;
 ---
-<div class="form-control max-xl:w-[100%] w-[60%] max-w-4xl my-1">
+<div class="form-control flex-1 mx-1 custom-basis max-md:min-w-full">
     <label class="label cursor-pointer">
         <span class="label-text pr-4">{text}</span>
         <input type="checkbox" id={id} class="toggle toggle-primary" onclick={action} {checked}/>
     </label>
 </div>
+<style>
+	.custom-basis {
+		flex-basis: calc((100% / 2) - 2rem);
+	}
+</style>
