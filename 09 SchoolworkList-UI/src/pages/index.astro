@@ -5,10 +5,10 @@ import Card from "../components/Card.astro";
 
 <Layout title="SWL - Home">
 	<main class="m-auto min-h-[85.75vh] max-w-[80%] p-6 max-md:max-w-full">
-		<h1 class="prose-2xl font-bold">Kelas <span class="text-gradient">XI-C MIA</span></h1>
+		<h1 class="prose-2xl font-bold">Kelas <span id="class" class="text-gradient"></span></h1>
 		<p class="instructions prose mb-4">
-			Simply tap on any post to view the details~<br/>
-			<strong>TIP: </strong>You can personalize this website by going into the setting page!
+			Simply tap on any post to view the details~<br />
+			<strong>TIP:</strong>You can personalize this website by going into the setting page!
 		</p>
 		<ul id="card-list" role="list" class="link-card-grid">
 			<div id="card-template" class="hidden">
@@ -31,25 +31,29 @@ import Card from "../components/Card.astro";
 	</main>
 </Layout>
 <script is:inline>
-	var cardListBackup;
 	function clearCards() {
-		// Quick check if the Card List element is null, then just return
-		if (!document.querySelector("#card-list")) return;
-
-		// If the card list backup is not empty,
-		if (cardListBackup) {
-			// Clear the Card List by overwriting it.
-			document.querySelector("#card-list").outerHTML = cardListBackup;
-		} // Else save it to the variable.
-		cardListBackup = document.querySelector("#card-list").outerHTML;
+		document.querySelectorAll("#work-card").forEach((cardElement) => {
+			cardElement.remove();
+		});
 	}
 
 	async function init() {
 		// Quick check if the Card List element is null, then just return
 		if (!document.querySelector("#card-list")) return;
 
-		clearCards();
-
+		var settings = await localforage.getItem("settings");
+		if (settings != undefined && settings["class"] != undefined && settings["class"] != "") {
+			let kelas = settings["class"].slice(8).toUpperCase();
+			kelas = kelas.replace("IIS", " IIS");
+			kelas = kelas.replace("MIA", " MIA");
+			kelas = kelas.replace("A ", "-A ");
+			kelas = kelas.replace("B ", "-B ");
+			kelas = kelas.replace("C ", "-C ");
+			kelas = kelas.replace("D ", "-D ");
+			kelas = kelas.replace("E ", "-E ");
+			kelas = kelas.replace("F ", "-F ");
+			document.getElementById("class").innerText = kelas;
+		}
 		// Fetch work lists from Backend
 		var backendURL = document.getElementById("backendURL").dataset.backendurl + "query";
 		var responseHTML = document.createElement("doc");
@@ -63,13 +67,17 @@ import Card from "../components/Card.astro";
 			}
 		}
 
-		// Cards variables
-		const cardList = document.querySelector("#card-list");
-		const cardTemplates = cardList.querySelector("#card-template");
 		var cardClass = "xicmia";
+		var settings = await localforage.getItem("settings");
+		if (settings != undefined && settings["class"] != undefined && settings["class"] != "") {
+			cardClass = settings["class"].slice(8);
+		}
 
 		// Classwork Entries
 		async function generateCards() {
+			// Cards variables
+			let cardList = document.querySelector("#card-list");
+			let cardTemplates = cardList.querySelector("#card-template");
 			var currentClassEntry = "#" + cardClass + "Entry";
 			var classWorks = responseHTML.querySelectorAll(currentClassEntry);
 			classWorks.forEach((classWork) => {
@@ -118,12 +126,13 @@ import Card from "../components/Card.astro";
 				);
 				// Append and remove the extra "card" HTMLelement on the outerHTML
 				cardList.appendChild(card);
-				card.outerHTML = card.innerHTML;
+				card.id = "work-card";
 			});
 		}
 
 		await new Promise((sleep) => setTimeout(sleep, 50));
 		await fetchData();
+		clearCards();
 		await generateCards();
 	}
 
