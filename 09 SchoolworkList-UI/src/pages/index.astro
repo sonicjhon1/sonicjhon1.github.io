@@ -30,12 +30,10 @@ import Card from "../components/Card.astro";
 		</ul>
 	</main>
 </Layout>
-<script is:inline>
-	function clearCards() {
-		document.querySelectorAll("#work-card").forEach((cardElement) => {
-			cardElement.remove();
-		});
-	}
+<script is:inline data-turbo-eval="false">
+	document.querySelectorAll("#work-card").forEach((cardElement) => {
+		cardElement.remove();
+	});
 
 	async function init() {
 		// Quick check if the Card List element is null, then just return
@@ -130,9 +128,8 @@ import Card from "../components/Card.astro";
 			});
 		}
 
-		await new Promise((sleep) => setTimeout(sleep, 50));
+		await new Promise((sleep) => setTimeout(sleep, 25));
 		await fetchData();
-		clearCards();
 		await generateCards();
 	}
 
