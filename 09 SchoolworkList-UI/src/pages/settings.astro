@@ -24,15 +24,15 @@ import Radio from "../components/Radio.astro";
 				<div class="flex flex-col pb-4">
 					<Heading>Class</Heading>
 					<div class="mb-4 flex flex-wrap">
-						<div class="flex flex-wrap">
-							<Radio title="XI-A MIA" id="setting-xiamia"/>
-							<Radio title="XI-B MIA" id="setting-xibmia"/>
-							<Radio title="XI-C MIA" id="setting-xicmia" checked=""/>
-							<Radio title="XI-D MIA" id="setting-xidmia"/>
-							<Radio title="XI-A IIS" id="setting-xiaiis"/>
-							<Radio title="XI-B IIS" id="setting-xibiis"/>
-							<Radio title="XI-C IIS" id="setting-xiciis"/>
-							<Radio title="XI-D IIS" id="setting-xidiis"/>
+						<div id="setting-classes" class="flex flex-wrap">
+							<Radio action="handleSettingClass(this)" title="XI-A MIA" id="setting-xiamia"/>
+							<Radio action="handleSettingClass(this)" title="XI-B MIA" id="setting-xibmia"/>
+							<Radio action="handleSettingClass(this)" title="XI-C MIA" id="setting-xicmia" checked=""/>
+							<Radio action="handleSettingClass(this)" title="XI-D MIA" id="setting-xidmia"/>
+							<Radio action="handleSettingClass(this)" title="XI-A IIS" id="setting-xiaiis"/>
+							<Radio action="handleSettingClass(this)" title="XI-B IIS" id="setting-xibiis"/>
+							<Radio action="handleSettingClass(this)" title="XI-C IIS" id="setting-xiciis"/>
+							<Radio action="handleSettingClass(this)" title="XI-D IIS" id="setting-xidiis"/>
 						</div>
 					</div>
 					<Heading>Performance</Heading>
@@ -156,8 +156,16 @@ import Radio from "../components/Radio.astro";
 			document.querySelector("body").dataset.theme = elementToggle.id.slice(6);
 		}
 
+		function handleSettingClass(elementToggle) {
+			Array.from(document.getElementsByClassName("class-selected")).forEach((classCard) => {
+				classCard.classList.remove("class-selected");
+			});
+			elementToggle.classList.add("class-selected");
+		}
+
 		function saveSettings() {
 			let settings = {
+				class: document.querySelector(".class-selected").id,
 				"turbo-js": document.getElementById("setting-turbo-js").checked,
 				"custom-backend-url": document.getElementById("setting-custom-backend-url").checked,
 				"custom-backend-url-text": document.getElementById("setting-custom-backend-url-text").value,
@@ -176,6 +184,12 @@ import Radio from "../components/Radio.astro";
 		async function restoreSettings() {
 			var settings = await localforage.getItem("settings");
 			if (settings == undefined) return;
+			if (settings["class"]) {
+				handleSettingClass(document.getElementById(settings["class"]))
+				document.getElementById(settings["class"]).checked = true;
+			} else {
+				handleSettingClass(document.getElementById("setting-xicmia"))
+			}
 			document.getElementById("setting-turbo-js").checked = settings["turbo-js"];
 			document.getElementById("setting-custom-backend-url").checked = settings["custom-backend-url"];
 			document.getElementById("setting-custom-backend-url-text").disabled = !settings["custom-backend-url"];
