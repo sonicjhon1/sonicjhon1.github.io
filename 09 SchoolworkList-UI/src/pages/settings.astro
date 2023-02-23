@@ -1,5 +1,4 @@
 ---
-import TBI from "../components/TBI.astro";
 import ThemeCard from "../components/ThemeCard.astro";
 import Toggle from "../components/Toggle.astro";
 import Heading from "../components/Heading.astro";
@@ -15,6 +14,14 @@ import Radio from "../components/Radio.astro";
 				><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
 			>
 			<span>Your settings has been applied!</span>
+		</div>
+	</div>
+	<div id="toast-error" class="alert alert-error invisible fixed bottom-4 right-4 z-50 max-w-sm shadow-lg max-md:bottom-auto max-md:top-4 max-md:max-w-[75%]">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"
+				><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+			>
+			<span>Owh Nyoo, Sumthiing wen wong!</span>
 		</div>
 	</div>
 	<main class="m-auto min-h-[85.75vh] max-w-[80%] p-6 max-md:max-w-full">
@@ -93,7 +100,7 @@ import Radio from "../components/Radio.astro";
 			<div id="backup" class="hidden">
 				<Heading>Import / Export as JSON</Heading>
 				<div class="mb-4 flex flex-wrap">
-					<input type="file" class="file-input file-input-primary mx-1 mt-4 flex-1 max-md:min-w-full" />
+					<input id="setting-import-file" type="file" class="file-input file-input-primary mx-1 mt-4 flex-1 max-md:min-w-full" />
 					<button id="setting-import" class="btn btn-primary mx-1 mt-4 max-lg:mt-2" onclick="handleSettingToggles(this)">Import</button>
 					<button id="setting-export" class="btn btn-primary mx-1 mt-4 max-lg:mt-2" onclick="handleSettingToggles(this)">Export</button>
 				</div>
@@ -104,7 +111,24 @@ import Radio from "../components/Radio.astro";
 			</div>
 		</div>
 	</main>
-
+	<script is:inline>
+		function showToastSuccess(message) {
+			let toastSuccess = document.getElementById("toast-success")
+			toastSuccess.querySelector("span").innerText = message;
+			toastSuccess.classList.add("show");
+			setTimeout(function () {
+				toastSuccess.classList.remove("show");
+			}, 3000);
+		}
+		function showToastError(message) {
+			let toastError = document.getElementById("toast-error");
+					toastError.querySelector("span").innerText = message;
+					toastError.classList.add("show");
+					setTimeout(function () {
+						toastError.classList.remove("show");
+					}, 3000);
+		}
+	</script>
 	<script is:inline>
 		var settingsTab = document.getElementById("setting-tabs");
 		var activeTab = document.getElementById("setting-tabs").querySelector(".tab-active");
@@ -142,6 +166,12 @@ import Radio from "../components/Radio.astro";
 					break;
 				case "setting-custom-backend-url":
 					document.getElementById("setting-custom-backend-url-text").disabled = !elementToggle.checked;
+					break;
+				case "setting-import":
+					handleSettingImport();
+					break;
+				case "setting-export":
+					handleSettingExport();
 					break;
 				default:
 					if (elementToggle.id.includes("theme-")) {
@@ -184,9 +214,8 @@ import Radio from "../components/Radio.astro";
 			localforage.setItem("settings", settings).then(function () {
 				applySettings();
 			});
-			
-			document.getElementById("toast-success").classList.add("show");
-			setTimeout(function(){ document.getElementById("toast-success").classList.remove("show") }, 3000);
+
+			showToastSuccess("Settings has been successfully applied!");
 		}
 
 		async function restoreSettings() {
@@ -212,9 +241,44 @@ import Radio from "../components/Radio.astro";
 			}
 			document.getElementById("setting-username").value = settings["username"] || document.getElementById("setting-username").placeholder;
 			document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
+			document.getElementById("setting-import-file").value = null
 		}
 
 		if (window.location.href.indexOf("settings") > -1) restoreSettings();
+
+		async function handleSettingExport() {
+			let fileName = new Date().toISOString().split("T")[0] + ".SWL";
+			let fileData = JSON.stringify(await localforage.getItem("settings"));
+			let downloader = document.createElement("a");
+			downloader.setAttribute("href", "data:application/json;charset=utf-8," + encodeURIComponent(fileData));
+			downloader.setAttribute("download", fileName);
+			downloader.style.display = "none";
+			document.body.appendChild(downloader);
+			downloader.click();
+			document.body.removeChild(downloader);
+			showToastSuccess("Downloading exported settings...");
+		}
+
+		async function handleSettingImport() {
+			let fileData = document.getElementById("setting-import-file").files[0];
+			if (!fileData) {
+				showToastError("Error: No file uploaded.");
+				return false;
+			}
+
+			let reader = new FileReader();
+			reader.onload = function () {
+				try {
+					let fileContent = JSON.parse(reader.result);
+					showToastSuccess("Successfully imported settings from uploaded file!");
+					console.log(fileContent);
+				} catch (e) {
+					showToastError(e.message);
+				}
+			};
+
+			reader.readAsText(fileData);
+		}
 	</script>
 	<style>
 		.text-gradient {
@@ -225,7 +289,8 @@ import Radio from "../components/Radio.astro";
 			background-position: 0%;
 		}
 
-		#toast-success.show {
+		#toast-success.show,
+		#toast-error.show {
 			visibility: visible !important;
 			animation: fadein 0.5s, fadeout 0.5s 2.5s;
 		}
