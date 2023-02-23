@@ -133,16 +133,7 @@ import Card from "../components/Card.astro";
 		await fetchData();
 		await generateCards();
 	}
-
-	try {
-		let locationPath = window.location.pathname;
-		if (document.querySelector("body").dataset.listening !== true && (locationPath.length === 0 || locationPath === "/" || locationPath.match(/^\/?index/))) {
-			addEventListener("turbo:load", init);
-			document.querySelector("body").dataset.listening = true
-		}
-	} catch(e) {
-		console.log(e)
-	}
+	init();
 </script>
 <style>
 	.text-gradient {
