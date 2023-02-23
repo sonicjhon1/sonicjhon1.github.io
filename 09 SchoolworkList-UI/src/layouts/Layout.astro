@@ -49,18 +49,18 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
 		<link rel="manifest" href="./site.webmanifest" />
-		<script src="./turbo.js" defer />
-		<script src="./iframemanager.js" is:raw />
+		<script src="./turbo.js" defer></script>
+		<script src="./iframemanager.js" is:raw></script>
 		<link rel="stylesheet" href="./iframemanager.css" />
-		<script src="./localforage.min.js" is:raw />
+		<script src="./localforage.min.js" is:raw></script>
 	</head>
-	<body class="transition-colors duration-200 ease-in-out" data-theme="halloween">
+	<body class="transition-colors duration-200 ease-in-out" data-theme="halloween" id="body" data-turbo-permanent>
 		<script is:inline>
 			// Bootstrap to fix flashbangs
 			var settings = localforage.getItem("settings").then(() => {
 				if (settings == undefined) return;
 				document.querySelector("body").dataset.theme = settings["theme"] || "halloween";
-			})
+			});
 		</script>
 		<link id="backendURL" data-backendurl={backendURL} />
 		<div class="navbar bg-base-100">
@@ -79,9 +79,9 @@ const backendURL = "https://schoolworklist.pages.dev/";
 							<img id="profile-picture" src="https://img-os-static.hoyolab.com/avatar/avatar30038.png" />
 						</div>
 					</label>
-					<ul tabindex="0" class="menu menu-compact dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow border-solid border border-primary/10">
-						<li id="username" class="font-bold px-4 py-2 break-all">Anonymous</li>
-						<hr class="h-[2px] max-h-[1px] bg-secondary/80 border-0 w-full mb-2">
+					<ul tabindex="0" class="menu menu-compact dropdown-content bg-base-100 rounded-box border-primary/10 mt-3 w-52 border border-solid p-2 shadow">
+						<li id="username" class="break-all px-4 py-2 font-bold">Anonymous</li>
+						<hr class="bg-secondary/80 mb-2 h-[2px] max-h-[1px] w-full border-0" />
 						<li><a href="./settings">Settings</a></li>
 						<li><a href="./about">About</a></li>
 					</ul>
@@ -103,7 +103,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			<a href="https://www.youtube.com/@sonicjhon1" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200"><IconYoutube /></a>
 		</div>
 	</footer>
-	<script is:inline>
+	<script is:inline data-turbo-eval="false">
 		async function applySettings() {
 			var settings = await localforage.getItem("settings");
 			if (settings == undefined) return;
@@ -127,9 +127,9 @@ const backendURL = "https://schoolworklist.pages.dev/";
 				document.getElementById("username").innerHTML = settings["username"];
 			}
 			if (settings["profile"] != undefined && settings["profile"] != "") {
-				document.getElementById("profile-picture").src = settings["profile"]
+				document.getElementById("profile-picture").src = settings["profile"];
 			}
-			
+
 			// Backup
 		}
 
