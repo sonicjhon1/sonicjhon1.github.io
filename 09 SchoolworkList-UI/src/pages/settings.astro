@@ -273,6 +273,7 @@ import Radio from "../components/Radio.astro";
 					showToastSuccess("Successfully imported and applied settings from uploaded file!");
 					localforage.setItem("settings", fileContent).then(function () {
 						applySettings();
+						restoreSettings();
 					});
 				} catch (e) {
 					showToastError(e.message);
