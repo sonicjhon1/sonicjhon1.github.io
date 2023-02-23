@@ -83,9 +83,12 @@ import Radio from "../components/Radio.astro";
 				</div>
 			</div>
 			<div id="backup" class="hidden">
-				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
-					<TBI />
-				</main>
+				<Heading>Import / Export as JSON</Heading>
+				<div class="mb-4 flex flex-wrap">
+					<input type="file" class="file-input file-input-primary flex-1 max-md:min-w-full mx-1 mt-4" />
+					<button id="setting-import" class="btn btn-primary mx-1 max-lg:mt-2 mt-4" onclick="handleSettingToggles(this)">Import</button>
+					<button id="setting-export" class="btn btn-primary mx-1 max-lg:mt-2 mt-4" onclick="handleSettingToggles(this)">Export</button>
+				</div>
 			</div>
 			<div id="setting-button" class="flex justify-end max-md:flex-col">
 				<button class="btn btn-error m-1">Reset defaults</button>
