@@ -103,7 +103,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			<a href="https://www.youtube.com/@sonicjhon1" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200"><IconYoutube /></a>
 		</div>
 	</footer>
-	<script is:inline data-turbo-eval="false">
+	<script is:inline>
 		async function applySettings() {
 			var settings = await localforage.getItem("settings");
 			if (settings == undefined) return;
