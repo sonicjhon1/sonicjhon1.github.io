@@ -83,12 +83,6 @@ import Radio from "../components/Radio.astro";
 				</div>
 			</div>
 			<div id="backup" class="hidden">
-				<button class="btn">Backup</button>
-				<button class="btn btn-primary">Button</button>
-				<button class="btn btn-secondary">Button</button>
-				<button class="btn btn-accent">Button</button>
-				<button class="btn btn-ghost">Button</button>
-				<button class="btn btn-link">Button</button>
 				<main class="m-auto flex max-w-[80%] flex-col items-center p-6 max-md:max-w-full">
 					<TBI />
 				</main>
@@ -206,11 +200,7 @@ import Radio from "../components/Radio.astro";
 			document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
 		}
 
-		addEventListener("turbo:load", () => {
-			if (window.location.href.indexOf("settings") > -1) {
-				restoreSettings();
-			}
-		});
+		if (window.location.href.indexOf("settings") > -1) restoreSettings();
 	</script>
 	<style>
 		.text-gradient {
