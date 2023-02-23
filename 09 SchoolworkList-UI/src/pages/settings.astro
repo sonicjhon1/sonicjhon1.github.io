@@ -113,7 +113,7 @@ import Radio from "../components/Radio.astro";
 	</main>
 	<script is:inline>
 		function showToastSuccess(message) {
-			let toastSuccess = document.getElementById("toast-success")
+			let toastSuccess = document.getElementById("toast-success");
 			toastSuccess.querySelector("span").innerText = message;
 			toastSuccess.classList.add("show");
 			setTimeout(function () {
@@ -122,11 +122,11 @@ import Radio from "../components/Radio.astro";
 		}
 		function showToastError(message) {
 			let toastError = document.getElementById("toast-error");
-					toastError.querySelector("span").innerText = message;
-					toastError.classList.add("show");
-					setTimeout(function () {
-						toastError.classList.remove("show");
-					}, 3000);
+			toastError.querySelector("span").innerText = message;
+			toastError.classList.add("show");
+			setTimeout(function () {
+				toastError.classList.remove("show");
+			}, 3000);
 		}
 	</script>
 	<script is:inline>
@@ -241,7 +241,7 @@ import Radio from "../components/Radio.astro";
 			}
 			document.getElementById("setting-username").value = settings["username"] || document.getElementById("setting-username").placeholder;
 			document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
-			document.getElementById("setting-import-file").value = null
+			document.getElementById("setting-import-file").value = null;
 		}
 
 		if (window.location.href.indexOf("settings") > -1) restoreSettings();
@@ -270,8 +270,10 @@ import Radio from "../components/Radio.astro";
 			reader.onload = function () {
 				try {
 					let fileContent = JSON.parse(reader.result);
-					showToastSuccess("Successfully imported settings from uploaded file!");
-					console.log(fileContent);
+					showToastSuccess("Successfully imported and applied settings from uploaded file!");
+					localforage.setItem("settings", fileContent).then(function () {
+						applySettings();
+					});
 				} catch (e) {
 					showToastError(e.message);
 				}
