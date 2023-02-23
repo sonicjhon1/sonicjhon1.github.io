@@ -30,11 +30,7 @@ import Card from "../components/Card.astro";
 		</ul>
 	</main>
 </Layout>
-<script is:inline data-turbo-eval="false">
-	document.querySelectorAll("#work-card").forEach((cardElement) => {
-		cardElement.remove();
-	});
-
+<script is:inline>
 	async function init() {
 		// Quick check if the Card List element is null, then just return
 		if (!document.querySelector("#card-list")) return;
@@ -75,6 +71,10 @@ import Card from "../components/Card.astro";
 
 		// Classwork Entries
 		async function generateCards() {
+			document.querySelectorAll("#work-card").forEach((cardElement) => {
+				cardElement.remove();
+			});
+
 			// Cards variables
 			let cardList = document.querySelector("#card-list");
 			let cardTemplates = cardList.querySelector("#card-template");
@@ -130,12 +130,19 @@ import Card from "../components/Card.astro";
 			});
 		}
 
-		await new Promise((sleep) => setTimeout(sleep, 25));
 		await fetchData();
 		await generateCards();
 	}
 
-	addEventListener("turbo:load", init);
+	try {
+		let locationPath = window.location.pathname;
+		if (document.querySelector("body").dataset.listening !== true && (locationPath.length === 0 || locationPath === "/" || locationPath.match(/^\/?index/))) {
+			addEventListener("turbo:load", init);
+			document.querySelector("body").dataset.listening = true
+		}
+	} catch(e) {
+		console.log(e)
+	}
 </script>
 <style>
 	.text-gradient {
