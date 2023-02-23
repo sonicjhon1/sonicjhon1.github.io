@@ -133,7 +133,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			// Backup
 		}
 
-		addEventListener("turbo:load", applySettings);
+		addEventListener("turbo:load", applySettings, {once : true});
 	</script>
 	<script>
 		const githubProfiles = document.querySelectorAll("#github-profile");
