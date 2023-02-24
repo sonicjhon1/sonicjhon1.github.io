@@ -3,15 +3,18 @@ export interface Props {
 	text: string;
     checked?: string;
     id: string;
+    tooltip: string;
 }
 
-const { text, checked, id } = Astro.props;
+const { text, checked, id, tooltip } = Astro.props;
 ---
 <div class="form-control flex-1 mx-1 custom-basis max-md:min-w-full">
+    <div class="tooltip tooltip-primary" data-tip={tooltip}>
     <label class="label cursor-pointer">
         <span class="label-text pr-4">{text}</span>
         <input type="checkbox" id={id} class="toggle toggle-primary" onclick=handleSettingToggles(this) {checked}/>
     </label>
+    </div>
 </div>
 <style>
 	.custom-basis {

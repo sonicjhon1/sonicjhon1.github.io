@@ -28,42 +28,52 @@ import Layout from "../layouts/Layout.astro";
 						<div class="bg-neutral-focus text-neutral-content w-4 rounded-full">
 							<img src="https://img-os-static.hoyolab.com/avatar/avatar30038.png" />
 						</div>
-					</div> then go into <button class="btn btn-xs btn-outline">Settings</button> and turn off <span class="underline">Enable ads</span>.
-					After that, click on <button class="btn btn-xs btn-primary" onclick="saveSettings()">Save and Apply</button> and the ads will be turned off.
+					</div> then go into <button class="btn btn-xs btn-outline">Settings</button> and turn off <span class="underline">Enable ads</span>. After that, click on <button
+						class="btn btn-xs btn-primary"
+						onclick="saveSettings()">Save and Apply</button
+					> and the ads will be turned off.
 				</div>
 				<Heading>Tools used for this site?</Heading>
 				<div class="mx-8 my-2 mb-8 max-md:mx-2">
-					This website uses the following frameworks: 
-                    <a class="link link-primary font-bold" href="https://astro.build">Astro</a>, 
-                    <a class="link link-primary font-bold" href="https://tailwindcss.com">TailwindCSS</a>,
-					<a class="link link-primary font-bold" href="https://daisyui.com">DaisyUI</a>, and 
-                    <a class="link link-primary font-bold" href="https://turbo.build">Turborepo</a>. <br/><br/>
-                    Astro Integration used: 
-                    <a class="link link-accent font-bold" href="https://github.com/astro-community/astro-compress">astro-compress</a>, 
-                    <a class="link link-accent font-bold" href="https://docs.astro.build/en/guides/integrations-guide/tailwind">@astrojs/tailwind</a> and 
-					<a class="link link-accent font-bold" href="https://docs.astro.build/en/guides/integrations-guide/mdx">@astrojs/mdx</a>. <br/><br/>
-                    Javascript libraries: 
-                    <a class="link link-primary font-bold" href="https://momentjs.com">moment.js</a>, 
-                    <a class="link link-primary font-bold" href="https://github.com/orestbida/iframemanager">iframemanager</a>,
-					<a class="link link-primary font-bold" href="https://github.com/localForage/localForage">localforage</a>, and 
-                    <a class="link link-primary font-bold" href="https://turbo.hotwired.dev/">turbo</a>. <br/><br/>
-                    Hosted on: 
-                    <a class="link link-accent font-bold" href="https://sonicj.pages.dev/09%20SchoolworkList-UI/">Cloudflare Pages</a> and 
-                    <a class="link link-accent font-bold" href="https://sonicjhon1.github.io/09%20SchoolworkList-UI/">Github Pages (Mirror)</a>. <br/><br/>
-                    Github repository (source code): 
-                    <a class="link link-primary font-bold" href="https://github.com/sonicjhon1/sonicjhon1.github.io/tree/main/09%20SchoolworkList-UI">09 SchoolworkList-UI</a> and 
-                    <a class="link link-primary font-bold" href="https://github.com/sonicjhon1/sonicjhon1.github.io/tree/main/09%20SchoolworkListMDX-UI">09 SchoolworkListMDX-UI</a>. <br/><br/>
-                    Private Github repository for list database: 
-                    <a class="link link-accent font-bold" href="">schoolworklist</a>
+					This website uses the following frameworks:
+					<a class="link link-primary font-bold" href="https://astro.build">Astro</a>,
+					<a class="link link-primary font-bold" href="https://tailwindcss.com">TailwindCSS</a>,
+					<a class="link link-primary font-bold" href="https://daisyui.com">DaisyUI</a>, and
+					<a class="link link-primary font-bold" href="https://turbo.build">Turborepo</a>. <br /><br />
+					Astro Integration used:
+					<a class="link link-accent font-bold" href="https://github.com/astro-community/astro-compress">astro-compress</a>,
+					<a class="link link-accent font-bold" href="https://docs.astro.build/en/guides/integrations-guide/tailwind">@astrojs/tailwind</a> and
+					<a class="link link-accent font-bold" href="https://docs.astro.build/en/guides/integrations-guide/mdx">@astrojs/mdx</a>. <br /><br />
+					Javascript libraries:
+					<a class="link link-primary font-bold" href="https://momentjs.com">moment.js</a>,
+					<a class="link link-primary font-bold" href="https://github.com/orestbida/iframemanager">iframemanager</a>,
+					<a class="link link-primary font-bold" href="https://github.com/localForage/localForage">localforage</a>, and
+					<a class="link link-primary font-bold" href="https://turbo.hotwired.dev/">turbo</a>. <br /><br />
+					Hosted on:
+					<a class="link link-accent font-bold" href="https://sonicj.pages.dev/09%20SchoolworkList-UI/">Cloudflare Pages</a> and
+					<a class="link link-accent font-bold" href="https://sonicjhon1.github.io/09%20SchoolworkList-UI/">Github Pages (Mirror)</a>. <br /><br />
+					Github repository (source code):
+					<a class="link link-primary font-bold" href="https://github.com/sonicjhon1/sonicjhon1.github.io/tree/main/09%20SchoolworkList-UI">09 SchoolworkList-UI</a> and
+					<a class="link link-primary font-bold" href="https://github.com/sonicjhon1/sonicjhon1.github.io/tree/main/09%20SchoolworkListMDX-UI">09 SchoolworkListMDX-UI</a>. <br /><br />
+					Private Github repository for list database:
+					<a class="link link-accent font-bold" href="">schoolworklist</a>
 				</div>
-                <Heading>Founder of this site</Heading>
+				<Heading>Founder of this site</Heading>
 				<div class="mx-8 my-2 mb-8 max-md:mx-2">
-                    <a class="link font-bold">Sonicj</a>,
-                    <a class="link font-bold">Loli Masbro Beast</a>,
-                    <a class="link font-bold">Enzo</a> and
-                    <a class="link font-bold">Plaeneth</a>. <br/>
-                    Shoutout to the old group with the original idea from WhatsApp too!
-                </div>
+					<div class="tooltip tooltip-primary" data-tip="Developer">
+						<a class="link font-bold">Sonicj</a>,
+					</div>
+					<div class="tooltip tooltip-primary" data-tip="Friend, Admin">
+						<a class="link font-bold">Loli Masbro Beast</a>,
+					</div>
+					<div class="tooltip tooltip-primary" data-tip="Friend, Admin">
+					<a class="link font-bold">Enzo</a> and
+					</div>
+					<div class="tooltip tooltip-primary" data-tip="Friend, Admin">
+					<a class="link font-bold">Plaeneth</a>. <br />
+					</div>
+					Shoutout to the old group with the original idea from WhatsApp too!
+				</div>
 			</div>
 		</div>
 	</main>

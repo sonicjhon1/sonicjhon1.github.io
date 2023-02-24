@@ -52,14 +52,14 @@ import Radio from "../components/Radio.astro";
 					</div>
 					<Heading>Performance</Heading>
 					<div class="mb-4 flex flex-wrap">
-						<Toggle text="Enable Turbo JS" id="setting-turbo-js" checked="" />
-						<Toggle text="Enable Analytic" id="setting-analytic" checked="" />
-						<Toggle text="Enable Ads" id="setting-ads" checked="" />
-						<Toggle text="Disable disclaimer on posts" id="setting-disclaimer" />
+							<Toggle text="Enable Turbo JS" id="setting-turbo-js" tooltip="This library preload and cache webpages in the background to speed up loading times." checked="" />
+							<Toggle text="Enable Analytic" id="setting-analytic" tooltip="This will turn off all analytics from this website." checked="" />
+							<Toggle text="Enable Ads" id="setting-ads" tooltip="This will turn off all ads from this website." checked="" />
+							<Toggle text="Disable disclaimer on posts" id="setting-disclaimer" tooltip="This will turn off the disclaimer screen when viewing post" />
 					</div>
 					<Heading>Other</Heading>
 					<div class="mb-4 flex flex-wrap">
-						<Toggle text="Use custom Backend server URL" id="setting-custom-backend-url" />
+						<Toggle text="Use custom Backend server URL" id="setting-custom-backend-url" tooltip="If this is turned on, the website will fetch data from the URL provided."/>
 						<Input title="Custom Backend URL" id="setting-custom-backend-url-text" placeholder="Paste custom backend URL here!" />
 					</div>
 				</div>
