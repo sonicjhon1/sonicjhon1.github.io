@@ -3,14 +3,20 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">		
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>OwO</title>
 	</head>
 	<body class="prose max-w-full" data-theme="halloween">
+		<script is:inline>
+			let URLtheme = new URL(window.location.href).searchParams.get("theme");
+			if (URLtheme) {
+				document.querySelector("body").dataset.theme = URLtheme;
+			}
+		</script>
 		<slot />
 	</body>
 </html>
@@ -36,7 +42,7 @@
 </style>
 <style is:global>
 	@media only screen and (max-width: 700px) {
-	html {
+		html {
 			font-size: 1rem;
 			padding: 0rem;
 		}
@@ -46,27 +52,33 @@
 	html {
 		background-color: hsl(var(--b)) !important;
 		border-radius: 0.75rem;
-		font-family: 'Rubik', sans-serif;
+		font-family: "Rubik", sans-serif;
 		font-size: 1.25rem !important;
 		padding: 1.25rem;
 		margin: 1rem;
 	}
 	.prose {
 		line-height: 1.5rem !important;
-		color: hsla(var(--bc)/var(--tw-text-opacity, 1));
+		color: hsla(var(--bc) / var(--tw-text-opacity, 1));
 	}
 	h1 {
 		margin: 0 !important;
 	}
-	h1, h2, h3, h4, h5, h6, a {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	a {
 		padding: 0rem !important;
 		margin-top: 1rem !important;
 		margin-bottom: 0.5rem !important;
-		font-weight: bold;
+		font-weight: bold !important;
 		color: hsl(var(--p)) !important;
 	}
 	a {
-		font-weight: bold !important;
+		font-weight: normal !important;
 	}
 	ul {
 		margin-top: 0 !important;
@@ -84,16 +96,13 @@
 		background-color: hsl(var(--p));
 		pointer-events: none;
 	}
-	code {
-		color: rgb(var(--ctp-text));
-	}
 	img {
 		width: 100%;
 		border-radius: 0.75rem;
 	}
 	.hashtag {
 		color: hsl(var(--p));
-		background-color: hsl(var(--a)/10%);
+		background-color: hsl(var(--a) / 10%);
 		border-radius: calc(0.75rem);
 		padding-left: 0.5rem;
 		padding-right: 0.5rem;
@@ -102,11 +111,11 @@
 	}
 </style>
 <script>
-	const frontendURL = "https://sonicj.pages.dev/09 SchoolworkList-UI"
-	const searchEngineURL = "https://google.com/search?q="
+	const frontendURL = "https://sonicj.pages.dev/09 SchoolworkList-UI";
+	const searchEngineURL = "https://google.com/search?q=";
 	const hashtags = document.body.innerText.match(/\B(\#[a-zA-Z0-9]+\b)/g);
 	if (hashtags) {
-		hashtags.forEach(hashtag => {
+		hashtags.forEach((hashtag) => {
 			switch (hashtag) {
 				case "#KIMIA":
 				case "#FISIKA":
@@ -123,20 +132,20 @@
 				case "#TIK":
 				case "#PJOK":
 					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${frontendURL + hashtag}"><span class="hashtag">${hashtag}</span></a>`);
-					break
-				default: 
+					break;
+				default:
 					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${searchEngineURL + hashtag.slice(1)}"><span class="hashtag">${hashtag}</span></a>`);
-					break
+					break;
 			}
 		});
 	}
 
-	document.querySelectorAll("input[type=checkbox]").forEach(input => {
+	document.querySelectorAll("input[type=checkbox]").forEach((input) => {
 		input.removeAttribute("disabled");
 		input.setAttribute("aria-disabled", "true");
 	});
 
-	document.querySelectorAll("a").forEach(a => {
+	document.querySelectorAll("a").forEach((a) => {
 		a.setAttribute("target", "_parent");
 	});
 </script>
