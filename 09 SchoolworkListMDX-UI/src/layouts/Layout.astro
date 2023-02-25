@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="theme-dark anp-theme-ext-dark ctp-kanagawa-dark peach">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -10,259 +10,10 @@
 		<meta name="generator" content={Astro.generator} />
 		<title>OwO</title>
 	</head>
-	<body>
+	<body class="prose max-w-full" data-theme="halloween">
 		<slot />
 	</body>
 </html>
-<style is:global>
-	/** Credits to https://github.com/AnubisNekhet/AnuPpuccin */
-	.theme-dark.anp-theme-ext-dark.ctp-kanagawa-dark {
-		--ctp-rosewater: 255, 200, 148;
-		--ctp-flamingo: 210, 126, 129;
-		--ctp-pink: 210, 126, 153;
-		--ctp-mauve: 149, 127, 184;
-		--ctp-red: 255, 93, 98;
-		--ctp-maroon: 228, 104, 118;
-		--ctp-peach: 255, 160, 102;
-		--ctp-yellow: 230, 195, 132;
-		--ctp-green: 152, 187, 108;
-		--ctp-teal: 122, 168, 159;
-		--ctp-sky: 163, 212, 213;
-		--ctp-sapphire: 127, 180, 202;
-		--ctp-blue: 126, 156, 216;
-		--ctp-lavender: 147, 138, 169;
-		--ctp-text: 220, 215, 186;
-		--ctp-subtext1: 212, 206, 170;
-		--ctp-subtext0: 200, 192, 147;
-		--ctp-overlay2: 95, 95, 124;
-		--ctp-overlay1: 84, 84, 109;
-		--ctp-overlay0: 73, 73, 95;
-		--ctp-surface2: 62, 62, 81;
-		--ctp-surface1: 54, 54, 69;
-		--ctp-surface0: 42, 42, 55;
-		--ctp-crust: 11, 11, 15;
-		--ctp-mantle: 22, 22, 29;
-		--ctp-base: 31, 31, 40;
-		--text-muted: rgb(var(--ctp-subtext1));
-		--text-faint: rgb(var(--ctp-subtext0));
-		--border-radius: 0.5rem;
-	}
-	.flamingo {
-		--accent: var(--ctp-flamingo);
-		--h1-color: rgb(var(--ctp-flamingo));
-		--h2-color: rgb(var(--ctp-flamingo));
-		--h3-color: rgb(var(--ctp-flamingo));
-		--h4-color: rgb(var(--ctp-flamingo));
-		--h5-color: rgb(var(--ctp-flamingo));
-		--h6-color: rgb(var(--ctp-flamingo));
-	}
-	.pink {
-		--accent: var(--ctp-pink); 
-		--h1-color: rgb(var(--ctp-pink));
-		--h2-color: rgb(var(--ctp-pink));
-		--h3-color: rgb(var(--ctp-pink));
-		--h4-color: rgb(var(--ctp-pink));
-		--h5-color: rgb(var(--ctp-pink));
-		--h6-color: rgb(var(--ctp-pink));
-	}
-	.rosewater {
-		--accent: var(--ctp-rosewater);
-		--h1-color: rgb(var(--ctp-rosewater));
-		--h2-color: rgb(var(--ctp-rosewater));
-		--h3-color: rgb(var(--ctp-rosewater));
-		--h4-color: rgb(var(--ctp-rosewater));
-		--h5-color: rgb(var(--ctp-rosewater));
-		--h6-color: rgb(var(--ctp-rosewater));
-	}
-	.mauve {
-		--accent: var(--ctp-mauve);
-		--h1-color: rgb(var(--ctp-mauve));
-		--h2-color: rgb(var(--ctp-mauve));
-		--h3-color: rgb(var(--ctp-mauve));
-		--h4-color: rgb(var(--ctp-mauve));
-		--h5-color: rgb(var(--ctp-mauve));
-		--h6-color: rgb(var(--ctp-mauve));
-	}
-	.red {
-		--accent: var(--ctp-red);
-		--h1-color: rgb(var(--ctp-red));
-		--h2-color: rgb(var(--ctp-red));
-		--h3-color: rgb(var(--ctp-red));
-		--h4-color: rgb(var(--ctp-red));
-		--h5-color: rgb(var(--ctp-red));
-		--h6-color: rgb(var(--ctp-red));
-	}
-	.maroon {
-		--accent: var(--ctp-maroon);
-		--h1-color: rgb(var(--ctp-maroon));
-		--h2-color: rgb(var(--ctp-maroon));
-		--h3-color: rgb(var(--ctp-maroon));
-		--h4-color: rgb(var(--ctp-maroon));
-		--h5-color: rgb(var(--ctp-maroon));
-		--h6-color: rgb(var(--ctp-maroon));
-	}
-	.peach {
-		--accent: var(--ctp-peach);
-		--h1-color: rgb(var(--ctp-peach));
-		--h2-color: rgb(var(--ctp-peach));
-		--h3-color: rgb(var(--ctp-peach));
-		--h4-color: rgb(var(--ctp-peach));
-		--h5-color: rgb(var(--ctp-peach));
-		--h6-color: rgb(var(--ctp-peach));
-	}
-	.yellow {
-		--accent: var(--ctp-yellow);
-		--h1-color: rgb(var(--ctp-yellow));
-		--h2-color: rgb(var(--ctp-yellow));
-		--h3-color: rgb(var(--ctp-yellow));
-		--h4-color: rgb(var(--ctp-yellow));
-		--h5-color: rgb(var(--ctp-yellow));
-		--h6-color: rgb(var(--ctp-yellow));
-	}
-	.green {
-		--accent: var(--ctp-green);
-		--h1-color: rgb(var(--ctp-green));
-		--h2-color: rgb(var(--ctp-green));
-		--h3-color: rgb(var(--ctp-green));
-		--h4-color: rgb(var(--ctp-green));
-		--h5-color: rgb(var(--ctp-green));
-		--h6-color: rgb(var(--ctp-green));
-	}
-	.teal {
-		--accent: var(--ctp-teal);
-		--h1-color: rgb(var(--ctp-teal));
-		--h2-color: rgb(var(--ctp-teal));
-		--h3-color: rgb(var(--ctp-teal));
-		--h4-color: rgb(var(--ctp-teal));
-		--h5-color: rgb(var(--ctp-teal));
-		--h6-color: rgb(var(--ctp-teal));
-	}
-	.sky {
-		--accent: var(--ctp-sky);
-		--h1-color: rgb(var(--ctp-sky));
-		--h2-color: rgb(var(--ctp-sky));
-		--h3-color: rgb(var(--ctp-sky));
-		--h4-color: rgb(var(--ctp-sky));
-		--h5-color: rgb(var(--ctp-sky));
-		--h6-color: rgb(var(--ctp-sky));
-	}
-	.blue {
-		--accent: var(--ctp-blue);
-		--h1-color: rgb(var(--ctp-blue));
-		--h2-color: rgb(var(--ctp-blue));
-		--h3-color: rgb(var(--ctp-blue));
-		--h4-color: rgb(var(--ctp-blue));
-		--h5-color: rgb(var(--ctp-blue));
-		--h6-color: rgb(var(--ctp-blue));
-	}
-	.h1-sappire {
-		--accent: var(--ctp-sappire);
-		--h1-color: rgb(var(--ctp-sapphire));
-		--h2-color: rgb(var(--ctp-sapphire));
-		--h3-color: rgb(var(--ctp-sapphire));
-		--h4-color: rgb(var(--ctp-sapphire));
-		--h5-color: rgb(var(--ctp-sapphire));
-		--h6-color: rgb(var(--ctp-sapphire));
-	}
-	.h1-lavender {
-		--accent: var(--ctp-laveder);
-		--h1-color: rgb(var(--ctp-lavender));
-		--h2-color: rgb(var(--ctp-lavender));
-		--h3-color: rgb(var(--ctp-lavender));
-		--h4-color: rgb(var(--ctp-lavender));
-		--h5-color: rgb(var(--ctp-lavender));
-		--h6-color: rgb(var(--ctp-lavender));
-	}
-	.theme-dark {
-		--mono-rgb-0: var(--ctp-crust);
-		--mono-rgb-100: var(--ctp-text);
-		--color-red-rgb: var(--ctp-red);
-		--color-red: rgb(var(--ctp-red));
-		--color-green-rgb: var(--ctp-green);
-		--color-green: rgb(var(--ctp-green));
-		--color-orange-rgb: var(--ctp-peach);
-		--color-orange: rgb(var(--ctp-peach));
-		--color-yellow-rgb: var(--ctp-yellow);
-		--color-yellow: rgb(var(--ctp-yellow));
-		--color-cyan-rgb: var(--ctp-sky);
-		--color-cyan: rgb(var(--ctp-sky));
-		--color-blue-rgb: var(--ctp-blue);
-		--color-blue: rgb(var(--ctp-blue));
-		--color-purple-rgb: var(--ctp-lavender);
-		--color-purple: rgb(var(--ctp-lavender));
-		--color-pink-rgb: var(--ctp-pink);
-		--color-pink: rgb(var(--ctp-pink));
-		--color-base-00: rgb(var(--ctp-crust));
-		--color-base-10: rgb(var(--ctp-mantle));
-		--color-base-20: rgb(var(--ctp-base));
-		--color-base-25: rgb(var(--ctp-surface0));
-		--color-base-30: rgb(var(--ctp-surface1));
-		--color-base-35: rgb(var(--ctp-surface2));
-		--color-base-40: rgb(var(--ctp-overlay0));
-		--color-base-50: rgb(var(--ctp-overlay1));
-		--color-base-60: rgb(var(--ctp-overlay2));
-		--color-base-70: rgb(var(--ctp-subtext0));
-		--color-base-100: rgb(var(--ctp-text));
-		--text-highlight-bg: rgba(var(--ctp-yellow), 0.2);
-		--text-highlight-bg-active: rgba(var(--ctp-yellow), 0.4);
-		--input-shadow: inset 0 0.5px 0.5px 0.5px rgba(var(255, 255, 255), 0.09), 0 2px 4px 0 rgba(var(--ctp-crust), 0.15), 0 1px 1.5px 0 rgba(var(--ctp-crust), 0.1),
-			0 1px 2px 0 rgba(var(--ctp-crust), 0.2), 0 0 0 0 transparent;
-		--input-shadow-hover: inset 0 0.5px 1px 0.5px rgba(var(255, 255, 255), 0.16), 0 2px 3px 0 rgba(var(--ctp-crust), 0.3), 0 1px 1.5px 0 rgba(var(--ctp-crust), 0.2),
-			0 1px 2px 0 rgba(var(--ctp-crust), 0.4), 0 0 0 0 transparent;
-		--shadow-s: 0px 1px 2px rgba(var(--ctp-crust), 0.121), 0px 3.4px 6.7px rgba(var(--ctp-crust), 0.179), 0px 15px 30px rgba(var(--ctp-crust), 0.3);
-		--shadow-l: 0px 1.8px 7.3px rgba(var(--ctp-crust), 0.071), 0px 6.3px 24.7px rgba(var(--ctp-crust), 0.112), 0px 30px 90px rgba(var(--ctp-crust), 0.2);
-		--background-primary: rgb(var(--ctp-base));
-		--background-primary-alt: rgb(var(--ctp-mantle));
-		--background-secondary: rgb(var(--ctp-mantle));
-		--background-secondary-alt: rgb(var(--ctp-crust));
-		--background-modifier-hover: rgba(var(--ctp-text), 0.075);
-		--background-modifier-form-field: rgba(var(--ctp-crust), 0.3);
-		--background-modifier-success: rgba(var(--ctp-green), 1);
-		--background-modifier-success-hover: rgba(var(--ctp-green), 0.9);
-		--background-modifier-success-rgb: var(--ctp-green);
-		--background-modifier-error: rgba(var(--ctp-red), 1);
-		--background-modifier-error-rgb: var(--ctp-red);
-		--background-modifier-error-hover: rgba(var(--ctp-red), 0.9);
-		--background-modifier-message: rgba(var(--ctp-crust), 0.9);
-		--modal-border-color: rgb(var(--ctp-surface0));
-		--text-normal: rgb(var(--ctp-text));
-		--text-muted: rgb(var(--ctp-overlay2));
-		--text-muted-rgb: var(--ctp-overlay2);
-		--text-faint: rgb(var(--ctp-subtext0));
-		--text-error: rgb(var(--ctp-red));
-		--text-error-hover: rgba(var(--ctp-red), 0.8);
-		--text-success: rgb(var(--ctp-green));
-		--text-on-accent: rgb(var(--ctp-base));
-		--interactive-normal: rgb(var(--ctp-surface0));
-		--interactive-hover: rgb(var(--ctp-surface1));
-		--interactive-success: rgb(var(--ctp-green));
-		--workspace-background-translucent: rgba(var(--ctp-crust), 0.6);
-		--blockquote-background-color: rgba(var(--ctp-crust), 0.5);
-		--width-image-gallery: 200px;
-		--min-width-image: 50%;
-		--max-width-image: 90%;
-		--drag-ghost-background: rgb(var(--ctp-text));
-		--drag-ghost-text-color: rgb(var(--ctp-crust));
-		--nav-indentation-guide-color: rgba(var(--ctp-crust), 0.4);
-		--titlebar-text-color-focused: var(--color-accent);
-		--callout-title-padding: var(--size-4-2);
-		--table-border-width: var(--anp-table-thickness, 1px);
-		--icon-color-focused: var(--color-accent);
-		--embed-block-shadow-hover: none; //no shadow
-	}
-	.theme-dark {
-		color-scheme: dark;
-		--highlight-mix-blend-mode: none;
-		--background-modifier-border: rgb(var(--ctp-surface0));
-		--background-modifier-border-hover: rgb(var(--ctp-surface1));
-		--background-modifier-border-focus: rgb(var(--ctp-surface2));
-		--anp-speech-bubble-opacity: var(--anp-sp-op-dark, 0.9);
-		--background-modifier-cover: rgba(var(--ctp-mantle), 0.4);
-		&.theme-dark {
-			--canvas-color: var(--ctp-overlay0);
-		}
-	}
-</style>
 <style is:global>
 	.center {
 		width: 100%;
@@ -293,40 +44,44 @@
 </style>
 <style is:global>
 	html {
-		background-color: rgb(var(--ctp-base));
-		border-radius: var(--border-radius);
+		background-color: hsl(var(--b)) !important;
+		border-radius: 0.75rem;
 		font-family: 'Rubik', sans-serif;
-		font-size: 1.25rem;
-		line-height: 1.5rem;
+		font-size: 1.25rem !important;
 		padding: 1.25rem;
 		margin: 1rem;
 	}
+	.prose {
+		line-height: 1.5rem !important;
+		color: hsla(var(--bc)/var(--tw-text-opacity, 1));
+	}
 	h1 {
-		color: var(--h1-color);
+		margin: 0 !important;
 	}
-	h2 {
-		color: var(--h2-color);
-	}
-	h3 {
-		color: var(--h3-color);
-	}
-	h4 {
-		color: var(--h4-color);
-	}
-	h5 {
-		color: var(--h5-color);
-	}
-	h6 {
-		color: var(--h6-color);
+	h1, h2, h3, h4, h5, h6, a {
+		padding: 0rem !important;
+		margin-top: 1rem !important;
+		margin-bottom: 0.5rem !important;
+		font-weight: bold;
+		color: hsl(var(--p)) !important;
 	}
 	a {
-		color: var(--h1-color)
+		font-weight: bold !important;
+	}
+	ul {
+		margin-top: 0 !important;
+	}
+	li {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
 	}
 	input[type="checkbox"] {
-		accent-color: var(--h1-color);
+		accent-color: hsl(var(--p));
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
 	}
 	input[type="checkbox"][aria-disabled="true"] {
-		background-color: var(--h1-color);
+		background-color: hsl(var(--p));
 		pointer-events: none;
 	}
 	code {
@@ -334,12 +89,12 @@
 	}
 	img {
 		width: 100%;
-		border-radius: var(--border-radius);
+		border-radius: 0.75rem;
 	}
 	.hashtag {
-		color: var(--h1-color);
-		background-color: rgba(var(--accent), 0.1);
-		border-radius: calc(var(--border-radius) + (var(--border-radius) * 0.25));
+		color: hsl(var(--p));
+		background-color: hsl(var(--a)/10%);
+		border-radius: calc(0.75rem);
 		padding-left: 0.5rem;
 		padding-right: 0.5rem;
 		padding-top: 0.1rem;
@@ -370,7 +125,7 @@
 					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${frontendURL + hashtag}"><span class="hashtag">${hashtag}</span></a>`);
 					break
 				default: 
-					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${searchEngineURL + hashtag.slice(1)}"><span class="hashtag">${hashtag}</span>`);
+					document.body.innerHTML = document.body.innerHTML.replace(hashtag, `<a href="${searchEngineURL + hashtag.slice(1)}"><span class="hashtag">${hashtag}</span></a>`);
 					break
 			}
 		});
