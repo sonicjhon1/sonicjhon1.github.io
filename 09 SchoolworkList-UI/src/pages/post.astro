@@ -24,6 +24,9 @@ import Layout from "../layouts/Layout.astro";
 		}
 	}
 	var backendURL = document.getElementById("backendURL").dataset.backendurl;
+	if (settings != undefined && settings["custom-backend-url"] && settings["custom-backend-url-text"] != undefined && settings["custom-backend-url-text"] != "") {
+		backendURL = settings["custom-backend-url-text"];
+	}
 	var postParam = new URL(window.location.href).searchParams.get("post");
 	var classParam = new URL(window.location.href).searchParams.get("class");
 	var postURL = backendURL + classParam + "/" + postParam;
