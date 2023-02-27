@@ -248,7 +248,7 @@ import Radio from "../components/Radio.astro";
 			let fileName = new Date().toISOString().split("T")[0] + ".SWL";
 			let fileData = JSON.stringify(await localforage.getItem("settings"));
 			let downloader = document.createElement("a");
-			downloader.setAttribute("href", "data:application/json;charset=utf-8," + encodeURIComponent(fileData));
+			downloader.setAttribute("href", "data:application/octet-stream;charset=utf-8," + encodeURIComponent(fileData));
 			downloader.setAttribute("download", fileName);
 			downloader.style.display = "none";
 			document.body.appendChild(downloader);
