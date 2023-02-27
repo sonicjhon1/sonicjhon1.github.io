@@ -161,8 +161,8 @@ const backendURL = "https://schoolworklist.pages.dev/";
 				try {
 					const response = await fetch("version");
 					const responseText = await response.text();
-					let latestVersion = parseInt(responseText.match("version: ([0-9]*)")[1])
-					let currentVersion = (Math.floor(Date.now() / 1000))
+					let latestVersion = parseInt(responseText.match("version: ([0-9]*)")[1]);
+					let currentVersion = Math.floor(Date.now() / 1000);
 					console.log(currentVersion, latestVersion)
 					if (currentVersion <= latestVersion) {
 						window.location.reload();
@@ -173,8 +173,11 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			}
 		}
 
-		if (window.location.href.indexOf("localhost") > -1) return;
-		checkUpdates();
+		if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
+			console.log("Development mode detected, fetching the version is not needed.")
+		} else {
+			checkUpdates();
+		}
 	</script>
 	<style is:global>
 		:root {
