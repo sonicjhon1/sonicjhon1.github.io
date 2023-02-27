@@ -24,6 +24,16 @@ import Radio from "../components/Radio.astro";
 			<span>Owh Nyoo, Sumthiing wen wong!</span>
 		</div>
 	</div>
+	<input type="checkbox" id="reset-modal" class="modal-toggle" />
+	<div class="modal modal-bottom sm:modal-middle">
+		<div class="modal-box">
+			<h3 class="text-lg font-bold">All of your settings has been reset to default.</h3>
+			<p class="py-4">Click on the&nbsp;<button class="btn btn-xs btn-primary">Save and Apply</button>&nbsp;to save and apply this change. Otherwise, simply refresh this page to cancel any changes.</p>
+			<div class="modal-action">
+				<label for="reset-modal" class="btn">Dismiss</label>
+			</div>
+		</div>
+	</div>
 	<main class="m-auto min-h-[96vh] max-w-[80%] p-6 max-md:max-w-full">
 		<h1 class="prose-2xl font-bold">Change <span class="text-gradient">Settings</span></h1>
 		<p class="instructions prose mb-4">
@@ -52,14 +62,14 @@ import Radio from "../components/Radio.astro";
 					</div>
 					<Heading>Performance</Heading>
 					<div class="mb-4 flex flex-wrap">
-							<Toggle text="Enable Turbo JS" id="setting-turbo-js" tooltip="This library preload and cache webpages in the background to speed up loading times." checked="" />
-							<Toggle text="Enable Analytic" id="setting-analytic" tooltip="This will turn off all analytics from this website." checked="" />
-							<Toggle text="Enable Ads" id="setting-ads" tooltip="This will turn off all ads from this website." checked="" />
-							<Toggle text="Disable disclaimer on posts" id="setting-disclaimer" tooltip="This will turn off the disclaimer screen when viewing post" />
+						<Toggle text="Enable Turbo JS" id="setting-turbo-js" tooltip="This library preload and cache webpages in the background to speed up loading times." checked="" />
+						<Toggle text="Enable Analytic" id="setting-analytic" tooltip="This will turn off all analytics from this website." checked="" />
+						<Toggle text="Enable Ads" id="setting-ads" tooltip="This will turn off all ads from this website." checked="" />
+						<Toggle text="Disable disclaimer on posts" id="setting-disclaimer" tooltip="This will turn off the disclaimer screen when viewing post" />
 					</div>
 					<Heading>Other</Heading>
 					<div class="mb-4 flex flex-wrap">
-						<Toggle text="Use custom Backend server URL" id="setting-custom-backend-url" tooltip="If this is turned on, the website will fetch data from the URL provided."/>
+						<Toggle text="Use custom Backend server URL" id="setting-custom-backend-url" tooltip="If this is turned on, the website will fetch data from the URL provided." />
 						<Input title="Custom Backend URL" id="setting-custom-backend-url-text" placeholder="https://schoolworklist.pages.dev/" />
 					</div>
 				</div>
@@ -106,7 +116,7 @@ import Radio from "../components/Radio.astro";
 				</div>
 			</div>
 			<div id="setting-button" class="flex justify-end max-md:flex-col">
-				<button class="btn btn-error m-1">Reset defaults</button>
+				<label class="btn btn-error m-1" for="reset-modal" onclick="resetSettings()">Reset defaults</label>
 				<button class="btn btn-primary m-1" onclick="saveSettings()">Save and Apply</button>
 			</div>
 		</div>
@@ -216,6 +226,10 @@ import Radio from "../components/Radio.astro";
 			});
 
 			showToastSuccess("Settings has been successfully applied!");
+		}
+
+		async function resetSettings() {
+			console.log("hi");
 		}
 
 		async function restoreSettings() {
