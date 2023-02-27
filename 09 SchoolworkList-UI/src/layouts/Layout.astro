@@ -174,7 +174,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
 			console.log("Development mode detected, fetching the version is not needed.");
 		} else {
-			checkUpdates();
+			addEventListener("turbo:load", checkUpdates, { once: true });
 		}
 	</script>
 	<style is:global>
