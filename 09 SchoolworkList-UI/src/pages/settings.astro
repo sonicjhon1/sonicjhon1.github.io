@@ -229,7 +229,18 @@ import Radio from "../components/Radio.astro";
 		}
 
 		async function resetSettings() {
-			console.log("hi");
+			handleSettingClass(document.getElementById("setting-xicmia"));
+			handleSettingTheme(document.getElementById("theme-halloween"));
+			document.getElementById("setting-turbo-js").checked = true;
+			document.getElementById("setting-custom-backend-url").checked = false;
+			document.getElementById("setting-custom-backend-url-text").disabled = true;
+			document.getElementById("setting-custom-backend-url-text").value = "";
+			document.getElementById("setting-analytic").checked = true;
+			document.getElementById("setting-ads").checked = true;
+			document.getElementById("setting-disclaimer").checked = false;
+			document.getElementById("setting-username").value = document.getElementById("setting-username").placeholder;
+			document.getElementById("setting-profile").value = document.getElementById("setting-profile").placeholder;
+			document.getElementById("setting-import-file").value = null;
 		}
 
 		async function restoreSettings() {
