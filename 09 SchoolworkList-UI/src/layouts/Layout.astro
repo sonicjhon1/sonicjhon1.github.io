@@ -156,15 +156,14 @@ const backendURL = "https://schoolworklist.pages.dev/";
 	<script is:inline>
 		async function checkUpdates() {
 			while (true) {
-				await new Promise((resolve) => setTimeout(resolve, 5 * 1000 * 60));
+				await new Promise((resolve) => setTimeout(resolve, 1 * 1000 * 60));
 
 				try {
 					const response = await fetch("version");
 					const responseText = await response.text();
 					let latestVersion = parseInt(responseText.match("version: ([0-9]*)")[1]);
 					let currentVersion = Math.floor(Date.now() / 1000);
-					console.log(currentVersion, latestVersion)
-					if (currentVersion <= latestVersion) {
+					if (currentVersion < latestVersion) {
 						window.location.reload();
 					}
 				} catch (err) {
@@ -174,7 +173,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		}
 
 		if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
-			console.log("Development mode detected, fetching the version is not needed.")
+			console.log("Development mode detected, fetching the version is not needed.");
 		} else {
 			checkUpdates();
 		}
