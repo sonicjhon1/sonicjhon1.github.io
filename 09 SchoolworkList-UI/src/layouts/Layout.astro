@@ -155,14 +155,15 @@ const backendURL = "https://schoolworklist.pages.dev/";
 	</script>
 	<script is:inline>
 		async function checkUpdates() {
+			var currentVersion = Math.floor(Date.now() / 1000);
 			while (true) {
 				try {
 					const response = await fetch("version");
 					const responseText = await response.text();
 					let latestVersion = parseInt(responseText.match("version: ([0-9]*)")[1]);
-					let currentVersion = Math.floor(Date.now() / 1000);
 					if (currentVersion < latestVersion) {
 						window.location.reload();
+						currentVersion = latestVersion;
 					}
 				} catch (err) {
 					console.warn("Something went wrong when fetching the data needed.", err);
