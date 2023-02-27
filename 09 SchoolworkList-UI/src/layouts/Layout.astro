@@ -91,7 +91,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		</div>
 		<slot />
 	</body>
-	<footer class="footer bg-neutral text-neutral-content items-center p-4 absolute">
+	<footer class="footer bg-neutral text-neutral-content absolute items-center p-4">
 		<div class="grid-flow-col items-center">
 			<a href="https://github.com/sonicjhon1" class="h-8 shadow-lg transition-all duration-500 ease-in-out hover:brightness-150">
 				<img class="h-full rounded-full" id="github-profile" alt="sonicjhon1" src="https://avatars.githubusercontent.com/u/41381685?v=4" />
@@ -152,6 +152,29 @@ const backendURL = "https://schoolworklist.pages.dev/";
 					);
 			}
 		});
+	</script>
+	<script is:inline>
+		async function checkUpdates() {
+			while (true) {
+				await new Promise((resolve) => setTimeout(resolve, 5 * 1000 * 60));
+
+				try {
+					const response = await fetch("version");
+					const responseText = await response.text();
+					let latestVersion = parseInt(responseText.match("version: ([0-9]*)")[1])
+					let currentVersion = (Math.floor(Date.now() / 1000))
+					console.log(currentVersion, latestVersion)
+					if (currentVersion <= latestVersion) {
+						window.location.reload();
+					}
+				} catch (err) {
+					console.warn("Something went wrong when fetching the data needed.", err);
+				}
+			}
+		}
+
+		if (window.location.href.indexOf("localhost") > -1) return;
+		checkUpdates();
 	</script>
 	<style is:global>
 		:root {
