@@ -50,8 +50,14 @@ import Card from "../components/Card.astro";
 		} else {
 			document.getElementById("class").innerText = "XI-C MIA";
 		}
+
 		// Fetch work lists from Backend
 		var backendURL = document.getElementById("backendURL").dataset.backendurl + "query";
+		var settings = await localforage.getItem("settings");
+		if (settings != undefined && settings["custom-backend-url"] && settings["custom-backend-url-text"] != undefined && settings["custom-backend-url-text"] != "") {
+			backendURL = settings["custom-backend-url-text"] + "query";
+		}
+
 		var responseHTML = document.createElement("doc");
 		async function fetchData() {
 			try {
