@@ -15,7 +15,7 @@
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "astro": "^2.0.14",
     "astro-compress": "^1.1.33",
-    "daisyui": "^2.50.2",
+    "daisyui": "^2.51.1",
     "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
