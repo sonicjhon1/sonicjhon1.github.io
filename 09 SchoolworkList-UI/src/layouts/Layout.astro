@@ -72,7 +72,13 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			</div>
 			<div class="flex-none gap-2">
 				<div class="form-control">
-					<input type="text" placeholder="Search" class="input input-bordered focus:border-base-content focus:bg-base-200 transition-all duration-700 ease-in-out focus:outline-none" />
+					<input
+						id="searchbox"
+						type="text"
+						placeholder="Search"
+						class="input input-bordered focus:border-base-content focus:bg-base-200 transition-all duration-700 ease-in-out focus:outline-none"
+						onkeyup="handleSearch(event.key)"
+					/>
 				</div>
 				<div class="dropdown dropdown-end">
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -176,6 +182,20 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			console.log("Development mode detected, fetching the version is not needed.");
 		} else {
 			addEventListener("turbo:load", checkUpdates, { once: true });
+		}
+	</script>
+	<script is:inline>
+		async function handleSearch(key) {
+			let seachbox = document.getElementById("searchbox");
+			if (key == "Enter" && seachbox.value != "") {
+				if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
+					Turbo.visit("index.html?s=" + seachbox.value);
+				} else {
+					Turbo.visit("index?s=" + seachbox.value);
+				}
+			} else {
+				liveSearch();
+			}
 		}
 	</script>
 	<style is:global>

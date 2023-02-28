@@ -141,6 +141,20 @@ import Card from "../components/Card.astro";
 	}
 	init();
 </script>
+<script is:inline>
+	function liveSearch() {
+		let seachbox = document.getElementById("searchbox");
+		let cards = Array.from(document.querySelectorAll("#work-card"));
+		let search_query = seachbox.value;
+		for (var i = 0; i < cards.length; i++) {
+			if (cards[i].innerText.toLowerCase().includes(search_query.toLowerCase())) {
+				cards[i].className = "";
+			} else {
+				cards[i].className = "hidden";
+			}
+		}
+	}
+</script>
 <style>
 	.text-gradient {
 		background-image: var(--accent-gradient);
