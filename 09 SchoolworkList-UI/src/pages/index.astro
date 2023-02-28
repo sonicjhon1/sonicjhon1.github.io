@@ -31,6 +31,16 @@ import Card from "../components/Card.astro";
 	</main>
 </Layout>
 <script is:inline>
+	async function hrefQuerySearch() {
+		// Check for the s parameter inside of the href
+		let searchQuery = new URL(window.location.href).searchParams.get("s");
+		if (!searchQuery || searchQuery == '""' || searchQuery == "''") {
+			return;
+		} else {
+			liveSearch(searchQuery);
+		}
+	}
+
 	async function init() {
 		// Quick check if the Card List element is null, then just return
 		if (!document.querySelector("#card-list")) return;
@@ -138,14 +148,17 @@ import Card from "../components/Card.astro";
 
 		await fetchData();
 		await generateCards();
+		hrefQuerySearch();
 	}
 	init();
 </script>
 <script is:inline>
-	function liveSearch() {
+	function liveSearch(query = null) {
 		let seachbox = document.getElementById("searchbox");
 		let cards = Array.from(document.querySelectorAll("#work-card"));
 		let search_query = seachbox.value;
+		if (query) search_query = query;
+
 		for (var i = 0; i < cards.length; i++) {
 			if (cards[i].innerText.toLowerCase().includes(search_query.toLowerCase())) {
 				cards[i].className = "";
