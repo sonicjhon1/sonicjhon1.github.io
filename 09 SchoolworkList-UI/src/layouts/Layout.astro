@@ -187,11 +187,19 @@ const backendURL = "https://schoolworklist.pages.dev/";
 	<script is:inline>
 		async function handleSearch(key) {
 			let seachbox = document.getElementById("searchbox");
-			if (key == "Enter" && seachbox.value != "") {
+			if (key == "Enter") {
 				if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
-					Turbo.visit("index.html?s=" + seachbox.value);
+					if (seachbox.value == "") {
+						Turbo.visit("index.html")
+					} else {
+						Turbo.visit("index.html?s=" + seachbox.value);
+					}
 				} else {
-					Turbo.visit("index?s=" + seachbox.value);
+					if (seachbox.value == "") {
+						Turbo.visit("index")
+					} else {
+						Turbo.visit("index?s=" + seachbox.value);
+					}
 				}
 			} else {
 				liveSearch();
