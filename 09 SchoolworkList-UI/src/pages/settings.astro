@@ -376,9 +376,7 @@ import Radio from "../components/Radio.astro";
 					{"key":"profile", 					"value":"${settings["profile"]}", 					"order":10},
 					{"key":"identifier", 				"value":"${settings["identifier"]}", 				"order":11}
 				]`,
-			}).then((response) => {
-				console.log(response);
-			});
+			})
 
 			// Save ll to storage
 			saveLLAnalytic(player_identifier);
