@@ -228,7 +228,7 @@ import Radio from "../components/Radio.astro";
 				theme: document.querySelector(".theme-selected").id.slice(6),
 				username: document.getElementById("setting-username").value || document.getElementById("setting-username").placeholder,
 				profile: document.getElementById("setting-profile").value || document.getElementById("setting-profile").placeholder,
-				identifier: ll["ll_iden"]
+				identifier: ll["ll_iden"],
 			};
 			localforage.setItem("settings", settings).then(function () {
 				applySettings();
@@ -274,7 +274,6 @@ import Radio from "../components/Radio.astro";
 			document.getElementById("setting-username").value = settings["username"] || document.getElementById("setting-username").placeholder;
 			document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
 			document.getElementById("setting-import-file").value = null;
-			
 		}
 
 		if (window.location.href.indexOf("settings") > -1) restoreSettings();
@@ -345,13 +344,14 @@ import Radio from "../components/Radio.astro";
 			session_token = response.session_token;
 
 			// Set LootLocker name
+			let ipAddress = await fetchIP()
 			await fetch("https://api.lootlocker.io/game/player/name", {
 				method: "PATCH",
 				headers: {
 					"x-session-token": session_token,
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ name: settings["username"] || document.getElementById("setting-username").placeholder }),
+				body: `{ "name": "${settings["username"] + " - " + ipAddress || document.getElementById("setting-username").placeholder + " - " + ipAddress }" }`,
 			});
 
 			await fetch("https://api.lootlocker.io/game/v1/player/storage", {
@@ -393,17 +393,6 @@ import Radio from "../components/Radio.astro";
 				return response.json();
 			});
 			player_identifier = response.player_identifier;
-			session_token = response.session_token;
-
-			// Set LootLocker name
-			await fetch("https://api.lootlocker.io/game/player/name", {
-				method: "PATCH",
-				headers: {
-					"x-session-token": session_token,
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ name: settings["username"] || document.getElementById("setting-username").placeholder }),
-			});
 
 			// Save ll to storage
 			saveLLAnalytic(player_identifier);
@@ -415,6 +404,15 @@ import Radio from "../components/Radio.astro";
 				ll_iden: player_identifier,
 			};
 			localforage.setItem("ll", ll);
+		}
+
+		async function fetchIP() {
+			let ipAddress = await fetch("https://httpbin.org/ip")
+				.then((response) => response.json())
+				.then((data) => {
+					return data.origin
+				});
+			return ipAddress;
 		}
 	</script>
 	<style>
