@@ -28,7 +28,9 @@ import Radio from "../components/Radio.astro";
 	<div class="modal modal-bottom sm:modal-middle">
 		<div class="modal-box">
 			<h3 class="text-lg font-bold">All of your settings has been reset to default.</h3>
-			<p class="py-4">Click on the&nbsp;<button class="btn btn-xs btn-primary">Save and Apply</button>&nbsp;to save and apply this change. Otherwise, simply refresh this page to cancel any changes.</p>
+			<p class="py-4">
+				Click on the&nbsp;<button class="btn btn-xs btn-primary">Save and Apply</button>&nbsp;to save and apply this change. Otherwise, simply refresh this page to cancel any changes.
+			</p>
 			<div class="modal-action">
 				<label for="reset-modal" class="btn">Dismiss</label>
 			</div>
@@ -208,8 +210,14 @@ import Radio from "../components/Radio.astro";
 			elementToggle.classList.add("class-selected");
 		}
 
-		function saveSettings() {
-			let settings = {
+		async function saveSettings() {
+			let settings = await localforage.getItem("settings");
+			var ll = await localforage.getItem("ll");
+			if (!ll) {
+				await createAnalytic();
+				ll = await localforage.getItem("ll");
+			}
+			settings = {
 				class: document.querySelector(".class-selected").id,
 				"turbo-js": document.getElementById("setting-turbo-js").checked,
 				"custom-backend-url": document.getElementById("setting-custom-backend-url").checked,
@@ -220,11 +228,12 @@ import Radio from "../components/Radio.astro";
 				theme: document.querySelector(".theme-selected").id.slice(6),
 				username: document.getElementById("setting-username").value || document.getElementById("setting-username").placeholder,
 				profile: document.getElementById("setting-profile").value || document.getElementById("setting-profile").placeholder,
+				identifier: ll["ll_iden"]
 			};
 			localforage.setItem("settings", settings).then(function () {
 				applySettings();
+				analytic();
 			});
-
 			showToastSuccess("Settings has been successfully applied!");
 		}
 
@@ -265,6 +274,7 @@ import Radio from "../components/Radio.astro";
 			document.getElementById("setting-username").value = settings["username"] || document.getElementById("setting-username").placeholder;
 			document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
 			document.getElementById("setting-import-file").value = null;
+			
 		}
 
 		if (window.location.href.indexOf("settings") > -1) restoreSettings();
@@ -304,6 +314,107 @@ import Radio from "../components/Radio.astro";
 			};
 
 			reader.readAsText(fileData);
+		}
+	</script>
+	<script is:inline>
+		async function analytic() {
+			// Var inits
+			var player_identifier, session_token;
+
+			var settings = await localforage.getItem("settings");
+			var ll = await localforage.getItem("ll");
+
+			// If ll is not found, create a new LL account
+			if (ll == undefined) {
+				await createAnalytic();
+				ll = await localforage.getItem("ll");
+			}
+
+			// Sign in as the account saved in ll
+			player_identifier = ll["ll_iden"];
+			var response = await fetch("https://api.lootlocker.io/game/v2/session/guest", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ game_key: "dev_f9dc61e4cd224ab39e29f4666203beaf", player_identifier: player_identifier, game_version: "1.0.0" }),
+			}).then((response) => {
+				return response.json();
+			});
+			player_identifier = response.player_identifier;
+			session_token = response.session_token;
+
+			// Set LootLocker name
+			await fetch("https://api.lootlocker.io/game/player/name", {
+				method: "PATCH",
+				headers: {
+					"x-session-token": session_token,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ name: settings["username"] || document.getElementById("setting-username").placeholder }),
+			});
+
+			await fetch("https://api.lootlocker.io/game/v1/player/storage", {
+				method: "POST",
+				headers: {
+					"x-session-token": session_token,
+					"Content-Type": "application/json",
+				},
+				body: `[
+					{"key":"class", 					"value":"${settings["class"]}", 					"order":1},
+					{"key":"turbo-js", 					"value":"${settings["turbo-js"]}", 					"order":2},
+					{"key":"custom-backend-url", 		"value":"${settings["custom-backend-url"]}", 		"order":3},
+					{"key":"custom-backend-url-text", 	"value":"${settings["custom-backend-url-text"]}", 	"order":4},
+					{"key":"analytic", 					"value":"${settings["analytic"]}", 					"order":5},
+					{"key":"ads", 						"value":"${settings["ads"]}", 						"order":6},
+					{"key":"disclaimer", 				"value":"${settings["disclaimer"]}", 				"order":7},
+					{"key":"theme", 					"value":"${settings["theme"]}", 					"order":8},
+					{"key":"username", 					"value":"${settings["username"]}", 					"order":9},
+					{"key":"profile", 					"value":"${settings["profile"]}", 					"order":10},
+					{"key":"identifier", 				"value":"${settings["identifier"]}", 				"order":11}
+				]`,
+			}).then((response) => {
+				console.log(response);
+			});
+
+			// Save ll to storage
+			saveLLAnalytic(player_identifier);
+		}
+
+		async function createAnalytic() {
+			// Create a new LL account
+			var response = await fetch("https://api.lootlocker.io/game/v2/session/guest", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ game_key: "dev_f9dc61e4cd224ab39e29f4666203beaf", game_version: "1.0.0" }),
+			}).then((response) => {
+				return response.json();
+			});
+			player_identifier = response.player_identifier;
+			session_token = response.session_token;
+
+			// Set LootLocker name
+			await fetch("https://api.lootlocker.io/game/player/name", {
+				method: "PATCH",
+				headers: {
+					"x-session-token": session_token,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ name: settings["username"] || document.getElementById("setting-username").placeholder }),
+			});
+
+			// Save ll to storage
+			saveLLAnalytic(player_identifier);
+		}
+
+		async function saveLLAnalytic(player_identifier) {
+			// Save player identifier to storage
+			let ll = {
+				ll_iden: player_identifier,
+			};
+			localforage.setItem("ll", ll);
 		}
 	</script>
 	<style>
