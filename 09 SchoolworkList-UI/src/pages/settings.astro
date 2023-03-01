@@ -329,6 +329,9 @@ import Radio from "../components/Radio.astro";
 				ll = await localforage.getItem("ll");
 			}
 
+			// If analytics is disabled, return
+			if (!settings["analytic"]) return;
+
 			// Sign in as the account saved in ll
 			player_identifier = ll["ll_iden"];
 			var response = await fetch("https://api.lootlocker.io/game/v2/session/guest", {
