@@ -15,7 +15,7 @@
     "@astrojs/tailwind": "^3.0.1",
     "@tailwindcss/typography": "^0.5.9",
     "astro": "^2.0.15",
-    "astro-compress": "^1.1.33",
+    "astro-compress": "^1.1.35",
     "daisyui": "^2.51.0",
     "moment": "^2.29.4",
     "tailwindcss": "^3.2.7"
