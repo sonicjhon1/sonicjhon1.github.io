@@ -3,13 +3,12 @@ import workbox from "workbox-build";
 workbox.generateSW({
 	cacheId: "SWL",
 	globDirectory: "./",
-	globPatterns: ["**/*.{css, js, webp, png, jpg}"],
-	globIgnores: ["**/ServiceWorker.*", "**/swl-service-worker.js", "**node_modules/**/*"],
+	globIgnores: ["**/sw-generator.js", "**/swl-service-worker.js", "**node_modules/**/*", "**/dist/**/*"],
 	swDest: "public/swl-service-worker.js",
 	runtimeCaching: [
 		{
 			urlPattern: /\.(?:html|htm|xml)$/,
-			handler: "StaleWhileRevalidate",
+			handler: "NetworkFirst",
 			options: {
 				cacheName: "swlmarkup",
 				expiration: {
@@ -18,6 +17,16 @@ workbox.generateSW({
                 precacheFallback: {
                     fallbackURL: './index.html',
                 }
+			},
+		},
+        {
+			urlPattern: /\.(?:css|js|webp|png|jpg|ico|svg)$/,
+			handler: "StaleWhileRevalidate",
+			options: {
+				cacheName: "swlassets",
+				expiration: {
+					maxAgeSeconds: 1000,
+				}
 			},
 		},
 	],
