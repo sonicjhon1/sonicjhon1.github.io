@@ -1,7 +1,7 @@
 {
 	"name": "SchoolWork List",
 	"short_name": "SWL",
-   "start_url": "/",
+   "start_url": "./",
 	"icons": [
 		{
 			"src": "./android-chrome-192x192.png",
