@@ -1,5 +1,7 @@
 # build output
 dist/
+**/workbox*
+**/swl-service-worker*
 
 # generated types
 .astro/
