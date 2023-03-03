@@ -7,16 +7,13 @@ workbox.generateSW({
 	swDest: "public/swl-service-worker.js",
 	runtimeCaching: [
 		{
-			urlPattern: /(?:html|settings|about|index|\/)$/,
+			urlPattern: /(?:(?:html|settings|about|index)|\/$)/,
 			handler: "NetworkFirst",
 			options: {
 				cacheName: "swlmarkup",
 				expiration: {
 					maxAgeSeconds: 1000,
 				},
-                precacheFallback: {
-                    fallbackURL: './index.html',
-                }
 			},
 		},
         {
