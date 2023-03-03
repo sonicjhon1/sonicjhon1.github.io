@@ -110,6 +110,15 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			<a href="https://www.youtube.com/@sonicjhon1" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200"><IconYoutube /></a>
 		</div>
 	</footer>
+	<script>
+		if ("serviceWorker" in navigator) {
+			window.addEventListener("load", () => {
+				navigator.serviceWorker.register("./swl-service-worker.js").then(sw => {
+					console.log(sw)
+				})
+			})
+		}
+	</script>
 	<script is:inline>
 		async function applySettings() {
 			var settings = await localforage.getItem("settings");
