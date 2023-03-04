@@ -6,7 +6,9 @@ import Layout from "../layouts/Layout.astro";
 import Input from "../components/Input.astro";
 import Radio from "../components/Radio.astro";
 ---
-
+<head>
+	<script async src="./catiline.min.js" is:raw></script>
+</head>
 <Layout title="SWL - Settings">
 	<div id="toast-success" class="alert alert-success invisible fixed bottom-4 right-4 z-50 max-w-sm shadow-lg max-md:bottom-auto max-md:top-4 max-md:max-w-[75%]">
 		<div>
@@ -232,7 +234,7 @@ import Radio from "../components/Radio.astro";
 			};
 			localforage.setItem("settings", settings).then(function () {
 				applySettings();
-				analytic();
+				cw(analytic());
 			});
 			showToastSuccess("Settings has been successfully applied!");
 		}
