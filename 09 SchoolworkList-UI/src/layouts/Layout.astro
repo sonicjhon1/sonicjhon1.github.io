@@ -114,10 +114,10 @@ const backendURL = "https://schoolworklist.pages.dev/";
 	<script>
 		if ("serviceWorker" in navigator) {
 			window.addEventListener("load", () => {
-				navigator.serviceWorker.register("./swl-service-worker.js").then(sw => {
-					console.log(sw)
-				})
-			})
+				navigator.serviceWorker.register("./swl-service-worker.js").then((sw) => {
+					console.log(sw);
+				});
+			});
 		}
 	</script>
 	<script is:inline>
@@ -170,28 +170,28 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		});
 	</script>
 	<script is:inline>
+		var currentVersion = Math.floor(Date.now() / 1000);
+		async function startCheckUpdate() {
+			setInterval(checkUpdates, 1000 * 60);
+		}
 		async function checkUpdates() {
-			var currentVersion = Math.floor(Date.now() / 1000);
-			while (true) {
-				try {
-					const response = await fetch("version");
-					const responseText = await response.text();
-					let latestVersion = parseInt(responseText.match("version: ([0-9]*)")[1]);
-					if (currentVersion < latestVersion) {
-						window.location.reload();
-						currentVersion = latestVersion;
-					}
-				} catch (err) {
-					console.warn("Something went wrong when fetching the data needed.", err);
+			try {
+				const response = await fetch("version");
+				const responseText = await response.text();
+				let latestVersion = parseInt(responseText.match("version: ([0-9]*)")[1]);
+				if (currentVersion < latestVersion) {
+					window.location.reload();
+					currentVersion = latestVersion;
 				}
-				await new Promise((resolve) => setTimeout(resolve, 1 * 1000 * 60));
+			} catch (err) {
+				console.warn("Something went wrong when fetching the version data needed.", err);
 			}
 		}
 
 		if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
 			console.log("Development mode detected, fetching the version is not needed.");
 		} else {
-			addEventListener("turbo:load", checkUpdates, { once: true });
+			addEventListener("turbo:load", startCheckUpdate, { once: true });
 		}
 	</script>
 	<script is:inline>
@@ -200,13 +200,13 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			if (key == "Enter") {
 				if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
 					if (seachbox.value == "") {
-						Turbo.visit("index.html")
+						Turbo.visit("index.html");
 					} else {
 						Turbo.visit("index.html?s=" + seachbox.value);
 					}
 				} else {
 					if (seachbox.value == "") {
-						Turbo.visit("index")
+						Turbo.visit("index");
 					} else {
 						Turbo.visit("index?s=" + seachbox.value);
 					}
