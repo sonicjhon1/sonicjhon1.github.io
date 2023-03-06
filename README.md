@@ -1,7 +1,6 @@
 # Sonicjhon1's UI PORTFOLIO
-> •Star 🌟
-
 ## 00 - Portofolio-UI (Vanilla HTML)
+The first ever website hosted from this Github repository.
 > *Note: Updated version is in **10 - Portofolio-Astro-UI**.*  
 > Bug fixes and updates are not included in thisversion anymore.
 
