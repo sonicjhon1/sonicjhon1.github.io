@@ -1,4 +1,6 @@
 # Sonicjhon1's UI PORTFOLIO
+![logo](https://github.com/sonicjhon1/sonicjhon1.github.io/raw/main/.thumbs/SJUI-GFX-1.png)
+<sub><sup>Sauce: [MajinAI](https://majinai.art/ja/i/nxpKRpw)</sup></sub>
 ## 00 - Portofolio-UI (Vanilla HTML)
 The first ever website hosted in this Github repository.
 > *Note: Updated version is in **10 - Portofolio-Astro-UI**.*  
