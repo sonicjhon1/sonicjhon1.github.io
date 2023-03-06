@@ -2,7 +2,7 @@
 ## 00 - Portofolio-UI (Vanilla HTML)
 The first ever website hosted from this Github repository.
 > *Note: Updated version is in **10 - Portofolio-Astro-UI**.*  
-> Bug fixes and updates are not included in thisversion anymore.
+> Bug fixes and updates are not included in this version anymore.
 
 ## 01 - Redirect-UI (Vanilla HTML)
 This HTML will redirect to the youtube Rickroll after a few seconds had passed. It uses the ```<meta>``` tag for redirecting and Javascripts to show the countdown.  
