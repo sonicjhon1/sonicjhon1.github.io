@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^1.1.0",
-    "@astrojs/tailwind": "^3.0.1",
+    "@astrojs/tailwind": "^3.1.0",
     "astro": "^2.0.17",
     "tailwindcss": "^3.2.7"
   }
