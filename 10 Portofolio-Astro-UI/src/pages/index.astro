@@ -6,71 +6,74 @@ import Project from "../layouts/Project.astro";
 import Contact from "../layouts/Contact.astro";
 import About from "../layouts/About.astro";
 import MouseCursor from "../components/MouseCursor.astro";
+
+const metaTitle = "Sonicj's Home";
+const metaThumbnail = "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/10%20Portofolio-Astro-UI/public/assets/images/Kemonomimi.webp";
+const metaDescription = "A website for my projects, progress, etc";
+const metaUrl = "https://sonicj.pages.dev";
 ---
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Sonicj's Home</title>
+		<meta itemprop="name" content={metaTitle} />
+		<meta itemprop="url" content={metaThumbnail} />
+		<meta name="title" content={metaTitle} />
+		<meta name="description" content={metaDescription} />
+		<meta itemprop="description" content={metaDescription} />
+		<meta itemprop="image" content={metaThumbnail} />
+		<meta name="image" content={metaThumbnail} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={metaUrl} />
+		<meta property="og:title" content={metaTitle} />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:image" content={metaThumbnail} />
+		<meta property="og:image:secure_url" itemprop="image" content={metaThumbnail} />
+		<meta property="og:image:type" content="image/jpg" />
+		<meta property="og:image:width" content="300" />
+		<meta property="og:image:height" content="200" />
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={metaUrl} />
+		<meta property="twitter:title" content={metaTitle} />
+		<meta property="twitter:description" content={metaDescription} />
+		<meta property="twitter:image" content={metaThumbnail} />
+		<meta name="theme-color" content="#8c03fc" />
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="generator" content={Astro.generator} />
 
-<head>
-	<title>Sonicj's Home</title>
+		<link type="text/css" rel="stylesheet" href="/assets/css/all.css" media="print" onload="this.media='all'" />
+		<link type="text/css" rel="stylesheet" href="/assets/css/bootstrap.min.css" media="print" onload="this.media='all'" />
+		<link type="text/css" rel="stylesheet" href="/assets/css/fancybox.css" media="print" onload="this.media='all'" />
+		<link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" media="print" onload="this.media='all'" />
+		<link type="text/css" rel="stylesheet" href="/assets/css/colors.css" media="print" onload="this.media='all'" />
+		<link type="image/x-icon" rel="shortcut icon" href="/assets/images/Favicon.webp" />
+		<link type="text/css" rel="stylesheet" href="/assets/fonts/font.css" />
+		<link type="text/css" rel="stylesheet" href="/assets/css/styles.css" />
+		<link type="text/css" rel="stylesheet" href="/assets/css/responsive.css" media="print" onload="this.media='all'" />
 
-	<meta charset="utf-8">
-	<meta name="description" 								content="Sonicj's Home">
-	<meta name="keywords" 									content="Sonicj, Sonicjhon, Sonicjhon1, Sonicjhon56, Sonicjs Home, home, js, html, css">
-	<meta name="author" 									content="Sonicjhon1">
-	<meta property="og:title" 								content="Sonicj's Home">
-	<meta property="og:description" 						content="A website for my projects, progress, etc">
-	<meta property="og:image" 								content="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/public/assets/images/Kemonomimi.webp">
-	<meta property="og:image:secure_url" itemprop="image" 	content="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/public/assets/images/Kemonomimi.webp">
-	<meta property="og:image:type" 							content="image/webp">
-	<meta property="og:image:width" 						content="300">
-	<meta property="og:image:height" 						content="200">
-	<meta property="og:type" 								content="website">
-	<meta name="twitter:site" 								content="Sonicj's Home">
-	<meta name="twitter:title" 								content="Sonicj's Home">
-	<meta name="twitter:description" 						content="A website for my projects, progress, etc">
-	<meta name="twitter:card" 								content="summary_large_image">
-	<meta name="twitter:image:src" 							content="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/public/assets/images/Kemonomimi.webp">
-	<meta name="theme-color" 								content="#8c03fc">
-	<meta name="viewport" 									content="width=device-width, height=device-height, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" 						content="IE=edge">
+		<script src="/assets/js/bootstrap.bundle.min.js" async></script>
+		<script src="/assets/js/fancybox.umd.js" defer></script>
+		<script src="/assets/js/mixitup.min.js" defer></script>
+		<script src="/assets/js/wow.min.js" async></script>
+		<script src="/assets/js/utils.js" defer></script>
+		<script src="/assets/js/preloader.js" defer></script>
+		<script src="/assets/js/custom.js" defer></script>
+	</head>
 
-	<link type="text/css" 									rel="stylesheet" 	href="/assets/css/all.css" 				media="print" onload="this.media='all'"	/>
-	<link type="text/css" 									rel="stylesheet" 	href="/assets/css/bootstrap.min.css" 	media="print" onload="this.media='all'"	/>
-	<link type="text/css" 									rel="stylesheet" 	href="/assets/css/fancybox.css"			media="print" onload="this.media='all'"	/>
-	<link type="text/css" 									rel="stylesheet" 	href="/assets/css/animate.min.css" 		media="print" onload="this.media='all'"	/>
-	<link type="text/css"									rel="stylesheet" 	href="/assets/css/colors.css" 			media="print" onload="this.media='all'"	/>
-	<link type="image/x-icon" 								rel="shortcut icon" href="/assets/images/Favicon.webp"												/>
-	<link type="text/css" 									rel="stylesheet" 	href="/assets/fonts/font.css"													/>
-	<link type="text/css" 									rel="stylesheet" 	href="/assets/css/styles.css" 													/>
-	<link type="text/css" 									rel="stylesheet" 	href="/assets/css/responsive.css" 		media="print" onload="this.media='all'"	/>
-
-	<script src="/assets/js/bootstrap.bundle.min.js" 		async></script>
-	<script src="/assets/js/fancybox.umd.js" 				defer></script>
-	<script src="/assets/js/mixitup.min.js" 				defer></script>
-	<script src="/assets/js/wow.min.js" 					async></script>
-	<script src="/assets/js/utils.js" 						defer></script>
-	<script src="/assets/js/preloader.js" 					defer></script>
-	<script src="/assets/js/custom.js" 						defer></script>
-</head>
-
-<body>
-	<link itemprop="thumbnailUrl" href="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/public/assets/images/Kemonomimi.webp"> 
-	<span itemprop="thumbnail" itemscope itemtype="image/webp"> 
-		<link itemprop="url" href="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/public/assets/images/Kemonomimi.webp"> 
-	</span>
-
-	<!-- MainBody -->
-	<div class="gaspar" data-magic-cursor="show" data-color="crimson">
-		<Preloader/>
-		<Nav/>
-		<div class="container ">
-			<Home/>
-			<Project/>
-			<Contact/>
-			<About/>
+	<body>
+		<!-- MainBody -->
+		<div class="gaspar" data-magic-cursor="show" data-color="crimson">
+			<Preloader />
+			<Nav />
+			<div class="container">
+				<Home />
+				<Project />
+				<Contact />
+				<About />
+			</div>
+			<MouseCursor />
 		</div>
-		<MouseCursor/>
-	</div>
-
-</body>
+	</body>
 </html>
