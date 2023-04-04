@@ -1,0 +1,12 @@
+{
+	"name": "@sonicjhon1/sonicj-wa-gawr-bot",
+	"type": "module",
+	"version": "0.1.0",
+	"scripts": {
+		"dev": "node index.js",
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"@adiwajshing/baileys": "^5.0.0"
+	}
+}
