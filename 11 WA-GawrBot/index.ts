@@ -1,25 +1,27 @@
 import { Boom } from '@hapi/boom'
-import makeWASocket, { AnyMessageContent, Browsers, delay, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, makeInMemoryStore, proto, useMultiFileAuthState, WAMessageContent, WAMessageKey } from '@adiwajshing/baileys'
+import makeWASocket, { AnyMessageContent, delay, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, makeInMemoryStore, proto, useMultiFileAuthState, WAMessageContent, WAMessageKey } from '@adiwajshing/baileys'
 import MAIN_LOGGER from '@adiwajshing/baileys/lib/Utils/logger'
+const { httpServer } = require('./src/http-server.ts')
+
+// Configuration
+const authFile: string = "baileys_store_multi.json"
 
 const logger = MAIN_LOGGER.child({ })
 logger.level = 'trace'
 
-const useStore = !process.argv.includes('--no-store')
+const deviceInfoOS: string = "Gawr"
+const deviceInfoBrowser: string = "Chrome"
+const deviceInfoBrowserVersion: string = "111.0"
 
-// the store maintains the data of the WA connection in memory
-// can be written out to a file & read from it
-const store = useStore ? makeInMemoryStore({ logger }) : undefined
-store?.readFromFile('./baileys_store_multi.json')
-// save every 10s
-setInterval(() => {
-	store?.writeToFile('./baileys_store_multi.json')
-}, 10_000)
+const store = makeInMemoryStore({ logger })
+store?.readFromFile(authFile)
+setInterval(() => {	store?.writeToFile(authFile)}, 10_000)
 
-// start a connection
+
+// Main Sock function
 const startSock = async() => {
 	const { state, saveCreds } = await useMultiFileAuthState('baileys_auth_info')
-	// fetch latest version of WA Web
+
 	const { version, isLatest } = await fetchLatestBaileysVersion()
 	console.log(`WA version: ${version.join('.')}, isLatest: ${isLatest}`)
 
@@ -31,7 +33,7 @@ const startSock = async() => {
 			/** caching makes the store faster to send/recv messages */
 			keys: makeCacheableSignalKeyStore(state.keys, logger),
 		},
-		browser: ['Gawr', 'Chrome', '111.0'],
+		browser: [deviceInfoOS, deviceInfoBrowser, deviceInfoBrowserVersion],
 		generateHighQualityLinkPreview: true,
 		// ignore all broadcast messages -- to receive the same
 		// comment the line below out
@@ -54,13 +56,10 @@ const startSock = async() => {
 		await sock.sendMessage(jid, msg)
 	}
 
-	// the process function lets you process all events that just occurred
-	// efficiently in a batch
+	// process all events that just occurred efficiently in a batch
 	sock.ev.process(
-		// events is a map for event name => event data
 		async(events) => {
 			// something about the connection changed
-			// maybe it closed, or we received all offline message or connection opened
 			if(events['connection.update']) {
 				const update = events['connection.update']
 				const { connection, lastDisconnect } = update
@@ -76,7 +75,6 @@ const startSock = async() => {
 				console.log('Connection updated: ', update)
 			}
 
-			// credentials updated -- save them
 			if(events['creds.update']) {
 				await saveCreds()
 			}
@@ -85,13 +83,11 @@ const startSock = async() => {
 				console.log('Event called: ', events.call)
 			}
 
-			// history received
 			if(events['messaging-history.set']) {
 				const { chats, contacts, messages, isLatest } = events['messaging-history.set']
 				console.log(`Sync status: ${chats.length} chats, ${contacts.length} contacts, ${messages.length} msgs (latest: ${isLatest})`)
 			}
 
-			// received a new message
 			if(events['messages.upsert']) {
 				const upsert = events['messages.upsert']
 				console.log('New Message: ', JSON.stringify(upsert, undefined, 2))
@@ -107,7 +103,6 @@ const startSock = async() => {
 				}
 			}
 
-			// messages updated like status delivered, message deleted etc.
 			if(events['messages.update']) {
 				console.log(`Message status updated: ${JSON.stringify(events['messages.update'], undefined, 2)}`)
 
@@ -171,4 +166,7 @@ const startSock = async() => {
 	}
 }
 
+
+// Startup
+httpServer(authFile)
 startSock()

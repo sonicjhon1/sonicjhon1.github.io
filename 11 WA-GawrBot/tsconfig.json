@@ -16,6 +16,6 @@
     "declaration": true,
     "lib": ["es2020", "esnext.array", "DOM"]
   },
-  "include": ["*"],
+  "include": ["*", "src/*.ts"],
   "exclude": ["node_modules"]
 }
