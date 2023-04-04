@@ -6,7 +6,8 @@
 		"start": "ts-node index.ts"
 	},
 	"dependencies": {
-		"@adiwajshing/baileys": "^5.0.0"
+		"@adiwajshing/baileys": "^5.0.0",
+		"@adiwajshing/keyed-db": "^0.2.4"
 	},
 	"devDependencies": {
 		"ts-node": "^10.9.1",
