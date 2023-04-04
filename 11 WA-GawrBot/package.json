@@ -1,12 +1,15 @@
 {
 	"name": "@sonicjhon1/sonicj-wa-gawr-bot",
-	"type": "module",
 	"version": "0.1.0",
 	"scripts": {
-		"dev": "node index.js",
-		"start": "node index.js"
+		"dev": "ts-node index.ts",
+		"start": "ts-node index.ts"
 	},
 	"dependencies": {
 		"@adiwajshing/baileys": "^5.0.0"
+	},
+	"devDependencies": {
+		"ts-node": "^10.9.1",
+		"typescript": "^5.0.3"
 	}
 }
