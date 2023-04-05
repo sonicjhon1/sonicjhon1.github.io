@@ -18,6 +18,10 @@ model User {
   pinned      Boolean   @default(false)
   updatedAt   DateTime  @default(now()) @updatedAt
   messages    Message[]
+
+  @@index(fields: [updatedAt(sort: Desc)])
+  @@index(fields: [updatedAt(sort: Desc), pinned])
+  @@index(fields: [phoneNumber], type: Hash)
 }
 
 model Message {
@@ -28,4 +32,6 @@ model Message {
   status      String
   user        User     @relation(fields: [userId], references: [id])
   userId      Int
+
+  @@index(fields: [messageTime(sort: Desc)])
 }
