@@ -1,7 +1,8 @@
 import { Boom } from '@hapi/boom'
 import makeWASocket, { AnyMessageContent, delay, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, makeInMemoryStore, proto, useMultiFileAuthState, WAMessageContent, WAMessageKey } from '@adiwajshing/baileys'
 import MAIN_LOGGER from '@adiwajshing/baileys/lib/Utils/logger'
-const { httpServer } = require('./src/http-server.ts')
+const { httpServer } = require('./src/http-server')
+const { prismaHandler } = require('./src/prisma/prisma-handle')
 
 // Configuration
 const authFile: string = "baileys_store_multi.json"
@@ -169,4 +170,5 @@ const startSock = async() => {
 
 // Startup
 httpServer(authFile)
+prismaHandler()
 startSock()
