@@ -17,6 +17,7 @@ pnpm-debug.log*
 */.DS_Store
 
 # Bailey's stuff
+baileys/
 auth_info*.json
 baileys_auth_info*
 baileys_store*.json

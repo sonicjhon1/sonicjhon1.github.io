@@ -1,11 +1,14 @@
 import { Boom } from '@hapi/boom'
 import makeWASocket, { AnyMessageContent, delay, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, makeInMemoryStore, proto, useMultiFileAuthState, WAMessageContent, WAMessageKey } from '@adiwajshing/baileys'
 import MAIN_LOGGER from '@adiwajshing/baileys/lib/Utils/logger'
+import * as fs from 'fs'
 const { httpServer } = require('./src/http-server')
 const { prismaHandler } = require('./src/prisma/prisma-handle')
 
 // Configuration
-const authFile: string = "baileys_store_multi.json"
+const baileysFolder: string = "baileys"
+const authFile: string = baileysFolder + "/baileys_store_multi.json"
+const authState: string = baileysFolder + "/baileys_auth_state"
 
 const logger = MAIN_LOGGER.child({ })
 logger.level = 'trace'
@@ -18,10 +21,13 @@ const store = makeInMemoryStore({ logger })
 store?.readFromFile(authFile)
 setInterval(() => {	store?.writeToFile(authFile)}, 10_000)
 
+if (!fs.existsSync(baileysFolder)){
+    fs.mkdirSync(baileysFolder);
+}
 
 // Main Sock function
 const startSock = async() => {
-	const { state, saveCreds } = await useMultiFileAuthState('baileys_auth_info')
+	const { state, saveCreds } = await useMultiFileAuthState(authState)
 
 	const { version, isLatest } = await fetchLatestBaileysVersion()
 	console.log(`WA version: ${version.join('.')}, isLatest: ${isLatest}`)
