@@ -37,15 +37,13 @@ const startSock = async() => {
 		printQRInTerminal: true,
 		auth: {
 			creds: state.creds,
-			/** caching makes the store faster to send/recv messages */
 			keys: makeCacheableSignalKeyStore(state.keys, logger),
 		},
 		browser: [deviceInfoOS, deviceInfoBrowser, deviceInfoBrowserVersion],
 		generateHighQualityLinkPreview: true,
-		// ignore all broadcast messages -- to receive the same
-		// comment the line below out
+		// ignore all broadcast messages -- to receive the same, uncomment the line below.
 		// shouldIgnoreJid: jid => isJidBroadcast(jid),
-		// implement to handle retries & poll updates
+		// implement to handle retries & poll updates.
 		getMessage,
 	})
 
@@ -63,15 +61,12 @@ const startSock = async() => {
 		await sock.sendMessage(jid, msg)
 	}
 
-	// process all events that just occurred efficiently in a batch
 	sock.ev.process(
 		async(events) => {
-			// something about the connection changed
 			if(events['connection.update']) {
 				const update = events['connection.update']
 				const { connection, lastDisconnect } = update
 				if(connection === 'close') {
-					// reconnect if not logged out
 					if((lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut) {
 						startSock()
 					} else {
