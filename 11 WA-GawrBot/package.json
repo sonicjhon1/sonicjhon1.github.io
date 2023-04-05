@@ -9,7 +9,7 @@
 		"format": "npx prisma format",
 		"generate": "npx prisma generate",
 		"studio": "npx prisma studio",
-		"build": "npm run format && npm run migrate && npm run studio"
+		"build": "npm run format && npm run migrate && npm run generate && npm run studio"
 	},
 	"dependencies": {
 		"@adiwajshing/baileys": "^5.0.0",
