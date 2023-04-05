@@ -3,7 +3,13 @@
 	"version": "0.1.0",
 	"scripts": {
 		"dev": "ts-node index.ts",
-		"start": "ts-node index.ts"
+		"start": "ts-node index.ts",
+		"reset": "npx prisma migrate reset",
+		"migrate": "npx npx prisma migrate dev --name init",
+		"format": "npx prisma format",
+		"generate": "npx prisma generate",
+		"studio": "npx prisma studio",
+		"build": "npm run format && npm run migrate && npm run studio"
 	},
 	"dependencies": {
 		"@adiwajshing/baileys": "^5.0.0",
