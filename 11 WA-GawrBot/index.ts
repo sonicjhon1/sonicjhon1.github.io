@@ -10,12 +10,12 @@ const baileysFolder: string = "baileys"
 const authFile: string = baileysFolder + "/baileys_store_multi.json"
 const authState: string = baileysFolder + "/baileys_auth_state"
 
-const logger = MAIN_LOGGER.child({ })
-logger.level = 'trace'
-
 const deviceInfoOS: string = "Gawr"
 const deviceInfoBrowser: string = "Chrome"
 const deviceInfoBrowserVersion: string = "111.0"
+
+const logger = MAIN_LOGGER.child({ })
+logger.level = 'trace'
 
 const store = makeInMemoryStore({ logger })
 store?.readFromFile(authFile)
@@ -49,18 +49,6 @@ const startSock = async() => {
 
 	store?.bind(sock.ev)
 
-	const sendMessageWTyping = async(msg: AnyMessageContent, jid: string) => {
-		await sock.presenceSubscribe(jid)
-		await delay(500)
-
-		await sock.sendPresenceUpdate('composing', jid)
-		await delay(2000)
-
-		await sock.sendPresenceUpdate('paused', jid)
-
-		await sock.sendMessage(jid, msg)
-	}
-
 	sock.ev.process(
 		async(events) => {
 			if(events['connection.update']) {
@@ -73,7 +61,6 @@ const startSock = async() => {
 						console.log('Connection closed. You are logged out.')
 					}
 				}
-
 				console.log('Connection updated: ', update)
 			}
 
@@ -94,15 +81,15 @@ const startSock = async() => {
 				const upsert = events['messages.upsert']
 				console.log('New Message: ', JSON.stringify(upsert, undefined, 2))
 
-				if(upsert.type === 'notify') {
-					for(const msg of upsert.messages) {
-						//if(!msg.key.fromMe && doReplies) {
-						//	console.log('replying to', msg.key.remoteJid)
-						//	await sock!.readMessages([msg.key])
-						//	await sendMessageWTyping({ text: 'Hello there!' }, msg.key.remoteJid!)
-						//}
-					}
-				}
+				//if(upsert.type === 'notify') {
+				//	for(const msg of upsert.messages) {
+				//		if(!msg.key.fromMe) {
+				//			console.log('replying to', msg.key.remoteJid)
+				//			await sock!.readMessages([msg.key])
+				//			await sendMessageWTyping({ text: 'Hello there!' }, msg.key.remoteJid!, sock)
+				//		}
+				//	}
+				//}
 			}
 
 			if(events['messages.update']) {
@@ -156,20 +143,27 @@ const startSock = async() => {
 	)
 
 	return sock
-
-	async function getMessage(key: WAMessageKey): Promise<WAMessageContent | undefined> {
-		if(store) {
-			const msg = await store.loadMessage(key.remoteJid!, key.id!)
-			return msg?.message || undefined
-		}
-
-		// only if store is present
-		return proto.Message.fromObject({})
-	}
 }
 
+async function getMessage(key: WAMessageKey): Promise<WAMessageContent | undefined> {
+	if(store) {
+		const msg = await store.loadMessage(key.remoteJid!, key.id!)
+		return msg?.message || undefined
+	}
+	// only if store is present
+	return proto.Message.fromObject({})
+}
+
+const sendMessageWTyping = async(msg: AnyMessageContent, jid: string, sock) => {
+	await sock.presenceSubscribe(jid)
+	await delay(500)
+	await sock.sendPresenceUpdate('composing', jid)
+	await delay(2000)
+	await sock.sendPresenceUpdate('paused', jid)
+	await sock.sendMessage(jid, msg)
+}
 
 // Startup
-httpServer(authFile)
-prismaHandler()
+//httpServer(authFile)
+//prismaHandler()
 startSock()
