@@ -113,19 +113,38 @@ const startSock = async () => {
 
 				let phoneNumber: string, name: string | undefined, profilePic: string | null | undefined, pinned;
 				phoneNumber = msg.key.remoteJid;
-				name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
-				profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
 
-				upsertUser(phoneNumber, name!, profilePic!);
+				// User
+				if (phoneNumber.endsWith("@s.whatsapp.net")) {
+					phoneNumber = msg.key.remoteJid;
+					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
+					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
+					if (typeof name == "undefined" && msg.key.fromMe == false) {
+						name = msg.pushName || undefined;
+					}
 
-				// Also call upsertUser for the participant in a group.
-				if (phoneNumber.endsWith('@g.us')) {
+					upsertUser(phoneNumber, name!, profilePic!);
+				}
+
+				// Group
+				if (phoneNumber.endsWith("@g.us")) {
 					if (typeof msg.key.participant !== "string") {
 						return;
 					}
+
+					// Handle group
+					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
+					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
+
+					upsertUser(phoneNumber, name!, profilePic!);
+
+					// Handle participant
 					phoneNumber = msg.key.participant;
 					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
 					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
+					if (typeof name == "undefined" && msg.key.fromMe == false) {
+						name = msg.pushName || undefined;
+					}
 
 					upsertUser(phoneNumber, name!, profilePic!);
 				}
@@ -171,7 +190,7 @@ const startSock = async () => {
 					phoneNumber = contact.id;
 					profilePic = newUrl;
 				}
-				
+
 				if (typeof phoneNumber == "string") {
 					upsertUser(phoneNumber, undefined, profilePic!);
 				}

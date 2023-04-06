@@ -29,7 +29,19 @@ CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 
 -- CreateIndex
+CREATE INDEX "User_updatedAt_idx" ON "User"("updatedAt" DESC);
+
+-- CreateIndex
+CREATE INDEX "User_updatedAt_pinned_idx" ON "User"("updatedAt" DESC, "pinned");
+
+-- CreateIndex
+CREATE INDEX "User_phoneNumber_idx" ON "User" USING HASH ("phoneNumber");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Message_id_key" ON "Message"("id");
+
+-- CreateIndex
+CREATE INDEX "Message_messageTime_idx" ON "Message"("messageTime" DESC);
 
 -- AddForeignKey
 ALTER TABLE "Message" ADD CONSTRAINT "Message_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
