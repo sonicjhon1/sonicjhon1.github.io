@@ -36,3 +36,32 @@ async function getMessages() {
 	const message = await prisma.message.findMany();
 	console.log(message);
 }
+
+export async function upsertMessage(messageId: string, messageType: string, messageStatus: string, phoneNumber: string, messageTime: Date, messageText?: string) {
+	const message = await prisma.message.upsert({
+		where: {
+			id: messageId,
+		},
+		update: {
+			id: messageId,
+			type: messageType,
+			text: messageText,
+			status: messageStatus,
+			user: {
+				connect: { phoneNumber: phoneNumber}
+			},
+			messageTime: messageTime
+		},
+		create: {
+			id: messageId,
+			type: messageType,
+			text: messageText,
+			status: messageStatus,
+			user: {
+				connect: { phoneNumber: phoneNumber}
+			},
+			messageTime: messageTime
+		},
+	});
+	console.log(message);
+}

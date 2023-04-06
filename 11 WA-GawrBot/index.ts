@@ -14,7 +14,7 @@ import makeWASocket, {
 import MAIN_LOGGER from "@adiwajshing/baileys/lib/Utils/logger";
 import * as fs from "fs";
 import { httpServer } from "./src/http-server";
-import { prismaHandler, upsertUser } from "./src/prisma/prisma-handle";
+import { prismaHandler, upsertMessage, upsertUser } from "./src/prisma/prisma-handle";
 
 // Configuration
 const baileysFolder: string = "baileys";
@@ -110,6 +110,7 @@ const startSock = async () => {
 
 			upsert.messages.forEach(async (msg) => {
 				let phoneNumber: string, name: string | undefined, profilePic: string | null | undefined;
+				let messageId: string, messageType: string, messageStatus: string, messageTime: Date, messageText: string | undefined;
 				if (typeof msg.key.remoteJid !== "string") {
 					return;
 				}
@@ -122,10 +123,18 @@ const startSock = async () => {
 					if (typeof name == "undefined" && msg.key.fromMe == false) {
 						name = msg.pushName || undefined;
 					}
-
 					upsertUser(phoneNumber, name!, profilePic!);
-				}
 
+					// Handle message sent by the user
+					if (!msg.key.id || !msg.messageTimestamp) return;
+					messageId = msg.key.id;
+					messageType = "text";
+					messageText = msg.message?.conversation || msg.message?.extendedTextMessage?.text || undefined;
+					messageStatus = "read";
+					phoneNumber = msg.key.remoteJid;
+					messageTime = new Date(Number(msg.messageTimestamp) * 1000);
+					upsertMessage(messageId, messageType, messageStatus, phoneNumber, messageTime, messageText);
+				}
 				// Group
 				if (msg.key.remoteJid.endsWith("@g.us")) {
 					if (typeof msg.key.participant !== "string") {
@@ -136,7 +145,6 @@ const startSock = async () => {
 					phoneNumber = msg.key.remoteJid;
 					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
 					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
-
 					upsertUser(phoneNumber, name!, profilePic!);
 
 					// Handle participant
@@ -146,8 +154,17 @@ const startSock = async () => {
 					if (typeof name == "undefined" && msg.key.fromMe == false) {
 						name = msg.pushName || undefined;
 					}
-
 					upsertUser(phoneNumber, name!, profilePic!);
+
+					// Handle message sent by the participant
+					if (!msg.key.id || !msg.messageTimestamp) return;
+					messageId = msg.key.id;
+					messageType = "text";
+					messageText = msg.message?.conversation || msg.message?.extendedTextMessage?.text || undefined;
+					messageStatus = "read";
+					phoneNumber = msg.key.participant;
+					messageTime = new Date(Number(msg.messageTimestamp) * 1000);
+					upsertMessage(messageId, messageType, messageStatus, phoneNumber, messageTime, messageText);
 				}
 			});
 		}

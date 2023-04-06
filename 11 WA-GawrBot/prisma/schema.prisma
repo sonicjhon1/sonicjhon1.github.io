@@ -25,13 +25,13 @@ model User {
 }
 
 model Message {
-  id          Int      @id @unique @default(autoincrement())
-  messageTime DateTime
-  type        String
-  text        String?
-  status      String
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
+  id              String   @id @unique
+  messageTime     DateTime
+  type            String
+  text            String?
+  status          String
+  user            User     @relation(fields: [userPhoneNumber], references: [phoneNumber])
+  userPhoneNumber String
 
   @@index(fields: [messageTime(sort: Desc)])
 }

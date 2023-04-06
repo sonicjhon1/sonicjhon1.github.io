@@ -12,12 +12,12 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Message" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "messageTime" TIMESTAMP(3) NOT NULL,
     "type" TEXT NOT NULL,
     "text" TEXT,
     "status" TEXT NOT NULL,
-    "userId" INTEGER NOT NULL,
+    "userPhoneNumber" TEXT NOT NULL,
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
 );
@@ -44,4 +44,4 @@ CREATE UNIQUE INDEX "Message_id_key" ON "Message"("id");
 CREATE INDEX "Message_messageTime_idx" ON "Message"("messageTime" DESC);
 
 -- AddForeignKey
-ALTER TABLE "Message" ADD CONSTRAINT "Message_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Message" ADD CONSTRAINT "Message_userPhoneNumber_fkey" FOREIGN KEY ("userPhoneNumber") REFERENCES "User"("phoneNumber") ON DELETE RESTRICT ON UPDATE CASCADE;
