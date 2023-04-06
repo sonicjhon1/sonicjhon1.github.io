@@ -91,10 +91,12 @@ const startSock = async () => {
 
 		if (events["messages.upsert"]) {
 			const upsert = events["messages.upsert"];
-			if (upsert.messages[0].message?.protocolMessage?.type == proto.Message.ProtocolMessage.Type.HISTORY_SYNC_NOTIFICATION) {
+			let isHistorySync: boolean = upsert.messages[0].message?.protocolMessage?.type == proto.Message.ProtocolMessage.Type.HISTORY_SYNC_NOTIFICATION;
+			if (isHistorySync) {
 				console.log("History Sync Progress: ", JSON.stringify(upsert.messages[0].message, undefined, 2));
-				return;
-			} else console.log("New Message: ", JSON.stringify(upsert, undefined, 2));
+			}
+			if (isHistorySync) return;
+			console.log("New Message: ", JSON.stringify(upsert, undefined, 2));
 
 			//if(upsert.type === 'notify') {
 			//	for(const msg of upsert.messages) {
