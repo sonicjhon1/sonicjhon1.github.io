@@ -107,16 +107,15 @@ const startSock = async () => {
 			//}
 
 			upsert.messages.forEach(async (msg) => {
-				if (typeof msg.key.remoteJid !== 'string') {
-					return
+				if (typeof msg.key.remoteJid !== "string") {
+					return;
 				}
 
-				let phoneNumber = msg.key.remoteJid;
-
-				let name: string | undefined;
+				let phoneNumber: string, name: string | undefined, profilePic: string | null | undefined, pinned;
+				phoneNumber = msg.key.remoteJid;
 				name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
-
-				let profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
+				profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
+				pinned = "proto.SyncActionValue.PinAction"
 
 				upsertUser(phoneNumber, name!, profilePic!);
 			});
@@ -158,14 +157,14 @@ const startSock = async () => {
 				let phoneNumber: string | undefined, profilePic: string | null | undefined;
 				if (typeof contact.imgUrl !== "undefined") {
 					const newUrl = contact.imgUrl === null ? null : await sock!.profilePictureUrl(contact.id!).catch(() => null);
-					console.log(`Contact updated: ${contact.id} has a new profile, ${newUrl}`);
 					phoneNumber = contact.id;
 					profilePic = newUrl;
 				}
-
+				
 				if (typeof phoneNumber == "string") {
 					upsertUser(phoneNumber, undefined, profilePic!);
 				}
+				console.log(`Contact updated: ${contact.id}. ${contact}`);
 			}
 		}
 
@@ -196,5 +195,5 @@ const sendMessageWTyping = async (msg: AnyMessageContent, jid: string, sock) => 
 };
 
 // Startup
-httpServer(authFile)
+httpServer(authFile);
 startSock();
