@@ -114,8 +114,6 @@ const startSock = async () => {
 					return;
 				}
 
-				phoneNumber = msg.key.remoteJid;
-
 				// User
 				if (msg.key.remoteJid.endsWith("@s.whatsapp.net")) {
 					phoneNumber = msg.key.remoteJid;
@@ -135,6 +133,7 @@ const startSock = async () => {
 					}
 
 					// Handle group
+					phoneNumber = msg.key.remoteJid;
 					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
 					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
 
