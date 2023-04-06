@@ -109,15 +109,15 @@ const startSock = async () => {
 			//}
 
 			upsert.messages.forEach(async (msg) => {
+				let phoneNumber: string, name: string | undefined, profilePic: string | null | undefined;
 				if (typeof msg.key.remoteJid !== "string") {
 					return;
 				}
 
-				let phoneNumber: string, name: string | undefined, profilePic: string | null | undefined, pinned;
 				phoneNumber = msg.key.remoteJid;
 
 				// User
-				if (phoneNumber.endsWith("@s.whatsapp.net")) {
+				if (msg.key.remoteJid.endsWith("@s.whatsapp.net")) {
 					phoneNumber = msg.key.remoteJid;
 					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
 					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
@@ -129,7 +129,7 @@ const startSock = async () => {
 				}
 
 				// Group
-				if (phoneNumber.endsWith("@g.us")) {
+				if (msg.key.remoteJid.endsWith("@g.us")) {
 					if (typeof msg.key.participant !== "string") {
 						return;
 					}
