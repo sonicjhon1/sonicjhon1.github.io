@@ -1,14 +1,23 @@
 import prisma from "./prisma-client";
 
 async function prismaHandler() {
-	createUser("Hello, world!");
-	createUser("123456789", "Lily!", "lilyProfile.png", true);
+	upsertUser("Hello, world!");
+	upsertUser("123456789", "Lily!", "lilyProfile.png", true);
 	getUsers();
 }
 
-async function createUser(phoneNumber: string, name?: string, profilePic?: string, pinned?: boolean) {
-	const user = await prisma.user.create({
-		data: {
+async function upsertUser(phoneNumber: string, name?: string, profilePic?: string, pinned?: boolean) {
+	const user = await prisma.user.upsert({
+		where: {
+			phoneNumber: phoneNumber,
+		},
+		update: {
+			name: name,
+			profilePic: profilePic,
+			phoneNumber: phoneNumber,
+			pinned: pinned,
+		},
+		create: {
 			name: name,
 			profilePic: profilePic,
 			phoneNumber: phoneNumber,
