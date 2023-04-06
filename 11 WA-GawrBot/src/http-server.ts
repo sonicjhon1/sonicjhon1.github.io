@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const port = 9000;
 
-function httpServer(file: string) {
+export function httpServer(file: string) {
 	http.createServer(function (req, res) {
 		console.log(`${req.method} ${req.url}`);
 
@@ -42,7 +42,3 @@ function httpServer(file: string) {
 	
 	console.log(`Server listening on port ${port}`);
 }
-
-module.exports = {
-	httpServer,
-};
