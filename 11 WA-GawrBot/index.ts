@@ -4,6 +4,7 @@ import makeWASocket, {
 	delay,
 	DisconnectReason,
 	fetchLatestBaileysVersion,
+	getContentType,
 	makeCacheableSignalKeyStore,
 	makeInMemoryStore,
 	proto,
@@ -128,7 +129,7 @@ const startSock = async () => {
 					// Handle message sent by the user
 					if (!msg.key.id || !msg.messageTimestamp) return;
 					messageId = msg.key.id;
-					messageType = "text";
+					messageType = getContentType(msg.message || undefined) || "Unknown";
 					messageText = msg.message?.conversation || msg.message?.extendedTextMessage?.text || undefined;
 					messageStatus = "read";
 					phoneNumber = msg.key.remoteJid;
@@ -159,7 +160,7 @@ const startSock = async () => {
 					// Handle message sent by the participant
 					if (!msg.key.id || !msg.messageTimestamp) return;
 					messageId = msg.key.id;
-					messageType = "text";
+					messageType = getContentType(msg.message || undefined) || "Unknown";
 					messageText = msg.message?.conversation || msg.message?.extendedTextMessage?.text || undefined;
 					messageStatus = "read";
 					phoneNumber = msg.key.participant;
