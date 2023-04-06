@@ -115,9 +115,20 @@ const startSock = async () => {
 				phoneNumber = msg.key.remoteJid;
 				name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
 				profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
-				pinned = "proto.SyncActionValue.PinAction"
 
 				upsertUser(phoneNumber, name!, profilePic!);
+
+				// Also call upsertUser for the participant in a group.
+				if (phoneNumber.endsWith('@g.us')) {
+					if (typeof msg.key.participant !== "string") {
+						return;
+					}
+					phoneNumber = msg.key.participant;
+					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
+					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
+
+					upsertUser(phoneNumber, name!, profilePic!);
+				}
 			});
 		}
 
