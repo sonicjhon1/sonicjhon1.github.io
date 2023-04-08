@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "experimentalDecorators": true,
     "allowJs": false,
     "checkJs": false,
@@ -14,8 +15,8 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "lib": ["es2020", "esnext.array", "DOM"]
+    "lib": ["ESNext"]
   },
-  "include": ["*", "src/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["*", "src/**/*.ts"],
+  "exclude": ["**/node_modules"]
 }
