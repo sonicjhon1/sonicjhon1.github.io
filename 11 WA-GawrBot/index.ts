@@ -124,7 +124,7 @@ const startSock = async () => {
 					if (typeof name == "undefined" && msg.key.fromMe == false) {
 						name = msg.pushName || undefined;
 					}
-					upsertUser(phoneNumber, name!, profilePic!);
+					await upsertUser(phoneNumber, name!, profilePic!);
 
 					// Handle message sent by the user
 					if (!msg.key.id || !msg.messageTimestamp) return;
@@ -155,7 +155,7 @@ const startSock = async () => {
 					if (typeof name == "undefined" && msg.key.fromMe == false) {
 						name = msg.pushName || undefined;
 					}
-					upsertUser(phoneNumber, name!, profilePic!);
+					await upsertUser(phoneNumber, name!, profilePic!);
 
 					// Handle message sent by the participant
 					if (!msg.key.id || !msg.messageTimestamp) return;
