@@ -35,3 +35,7 @@ export function serializePrisma<T extends Record<string, any>>(data: T, removeNu
 
 	return obj;
 }
+
+export function delay(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}

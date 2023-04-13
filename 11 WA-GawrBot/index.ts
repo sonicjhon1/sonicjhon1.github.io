@@ -1,23 +1,36 @@
-import { Boom } from "@hapi/boom";
-import makeWASocket, {
-	AnyMessageContent,
-	delay,
-	DisconnectReason,
-	fetchLatestBaileysVersion,
-	getContentType,
-	makeCacheableSignalKeyStore,
-	makeInMemoryStore,
-	proto,
-	useMultiFileAuthState,
-	WAMessageContent,
-	WAMessageKey,
-} from "@adiwajshing/baileys";
-import MAIN_LOGGER from "@adiwajshing/baileys/lib/Utils/logger";
+import type { ConnectionState, proto, SocketConfig, WASocket } from "@adiwajshing/baileys";
+import makeWASocket, { Browsers, DisconnectReason, isJidBroadcast, makeCacheableSignalKeyStore } from "@adiwajshing/baileys";
+import type { Boom } from "@hapi/boom";
+import { initStore, Store } from "./src/wa/wa-store";
+import { useSession } from "./src/wa/wa-session";
 import * as fs from "fs";
-import { httpServer } from "./src/http-server";
-import { prismaHandler, upsertMessage, upsertUser } from "./src/prisma/prisma-handle";
+//import { httpServer } from "./src/http-server";
+import type { WebSocket } from "ws";
+import { logger, prisma } from "./src/shares";
+import { delay } from "./src/utils";
+
+type Session = WASocket & {
+	destroy: () => Promise<void>;
+	store: Store;
+};
+
+type createSessionOptions = {
+	sessionId: string;
+	SSE?: boolean;
+	readIncomingMessages?: boolean;
+	socketConfig?: SocketConfig;
+};
 
 // Configuration
+const sessions = new Map<string, Session>();
+const retries = new Map<string, number>();
+const SSEQRGenerations = new Map<string, number>();
+
+const RECONNECT_INTERVAL = Number(process.env.RECONNECT_INTERVAL || 0);
+const MAX_RECONNECT_RETRIES = Number(process.env.MAX_RECONNECT_RETRIES || 5);
+const SSE_MAX_QR_GENERATION = Number(process.env.SSE_MAX_QR_GENERATION || 5);
+const SESSION_CONFIG_ID = "session-config";
+
 const baileysFolder: string = "baileys";
 const authFile: string = baileysFolder + "/baileys_store_multi.json";
 const authState: string = baileysFolder + "/baileys_auth_state";
@@ -26,223 +39,160 @@ const deviceInfoOS: string = "Gawr";
 const deviceInfoBrowser: string = "Chrome";
 const deviceInfoBrowserVersion: string = "111.0";
 
-const logger = MAIN_LOGGER.child({});
-logger.level = "trace";
-
-const store = makeInMemoryStore({ logger });
-store?.readFromFile(authFile);
-setInterval(() => {
-	store?.writeToFile(authFile);
-}, 10_000);
-
 if (!fs.existsSync(baileysFolder)) {
 	fs.mkdirSync(baileysFolder);
 }
 
-// Main Sock function
-const startSock = async () => {
-	const { state, saveCreds } = await useMultiFileAuthState(authState);
+// Main Script
+export async function init() {
+	initStore({ prisma, logger });
+	const sessions = await prisma.session.findMany({
+		select: { sessionId: true, data: true },
+		where: { id: { startsWith: SESSION_CONFIG_ID } },
+	});
 
-	const { version, isLatest } = await fetchLatestBaileysVersion();
-	console.log(`WA version: ${version.join(".")}, isLatest: ${isLatest}`);
+	for (const { sessionId, data } of sessions) {
+		const { readIncomingMessages, ...socketConfig } = JSON.parse(data);
+		createSession({ sessionId, readIncomingMessages, socketConfig });
+	}
+}
 
-	const sock = makeWASocket({
-		version,
+export async function createSession(options: createSessionOptions) {
+	const { sessionId, SSE = false, readIncomingMessages = false, socketConfig } = options;
+	const configID = `${SESSION_CONFIG_ID}-${sessionId}`;
+	let connectionState: Partial<ConnectionState> = { connection: "close" };
+
+	const destroy = async (logout = true) => {
+		try {
+			await Promise.all([
+				logout && socket.logout(),
+				prisma.chat.deleteMany({ where: { sessionId } }),
+				prisma.contact.deleteMany({ where: { sessionId } }),
+				prisma.message.deleteMany({ where: { sessionId } }),
+				prisma.session.deleteMany({ where: { sessionId } }),
+			]);
+		} catch (e) {
+			logger.error(e, "An error occured during session destroy");
+		} finally {
+			sessions.delete(sessionId);
+		}
+	};
+
+	const handleConnectionClose = () => {
+		const code = (connectionState.lastDisconnect?.error as Boom)?.output?.statusCode;
+		const restartRequired = code === DisconnectReason.restartRequired;
+
+		if (!restartRequired) {
+			logger.info({ attempts: retries.get(sessionId) ?? 1, sessionId }, "Reconnecting...");
+		}
+		setTimeout(() => createSession(options), restartRequired ? 0 : RECONNECT_INTERVAL);
+	};
+
+	const { state, saveCreds } = await useSession(sessionId);
+	const socket = makeWASocket({
 		printQRInTerminal: true,
+		browser: Browsers.ubuntu("Chrome"),
+		generateHighQualityLinkPreview: true,
+		...socketConfig,
 		auth: {
 			creds: state.creds,
 			keys: makeCacheableSignalKeyStore(state.keys, logger),
 		},
-		browser: [deviceInfoOS, deviceInfoBrowser, deviceInfoBrowserVersion],
-		generateHighQualityLinkPreview: true,
-		// ignore all broadcast messages -- to receive the same, uncomment the line below.
-		// shouldIgnoreJid: jid => isJidBroadcast(jid),
-		// implement to handle retries & poll updates.
-		getMessage,
-	});
-
-	store?.bind(sock.ev);
-
-	sock.ev.process(async (events) => {
-		if (events["connection.update"]) {
-			const update = events["connection.update"];
-			const { connection, lastDisconnect } = update;
-			if (connection === "close") {
-				if ((lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut) {
-					startSock();
-				} else {
-					console.log("Connection closed. You are logged out.");
-				}
-			}
-			console.log("Connection updated: ", update);
-		}
-
-		if (events["creds.update"]) {
-			await saveCreds();
-		}
-
-		// if(events.call) {
-		// 	console.log('Event called: ', events.call)
-		// }
-
-		// if(events['messaging-history.set']) {
-		// 	const { chats, contacts, messages, isLatest } = events['messaging-history.set']
-		// 	console.log(`Sync status: ${chats.length} chats, ${contacts.length} contacts, ${messages.length} msgs (latest: ${isLatest})`)
-		// }
-
-		if (events["messages.upsert"]) {
-			const upsert = events["messages.upsert"];
-			let isHistorySync: boolean = upsert.messages[0].message?.protocolMessage?.type == proto.Message.ProtocolMessage.Type.HISTORY_SYNC_NOTIFICATION;
-			if (isHistorySync) {
-				console.log("History Sync Progress: ", JSON.stringify(upsert.messages[0].message, undefined, 2));
-			}
-			if (isHistorySync) return;
-			console.log("New Message: ", JSON.stringify(upsert, undefined, 2));
-
-			//if(upsert.type === 'notify') {
-			//	for(const msg of upsert.messages) {
-			//		if(!msg.key.fromMe) {
-			//			console.log('replying to', msg.key.remoteJid)
-			//			await sock!.readMessages([msg.key])
-			//			await sendMessageWTyping({ text: 'Hello there!' }, msg.key.remoteJid!, sock)
-			//		}
-			//	}
-			//}
-
-			upsert.messages.forEach(async (msg) => {
-				let phoneNumber: string, name: string | undefined, profilePic: string | null | undefined;
-				let messageId: string, messageType: string, messageStatus: string, messageTime: Date, messageText: string | undefined;
-				if (typeof msg.key.remoteJid !== "string") {
-					return;
-				}
-
-				// User
-				if (msg.key.remoteJid.endsWith("@s.whatsapp.net")) {
-					phoneNumber = msg.key.remoteJid;
-					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
-					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
-					if (typeof name == "undefined" && msg.key.fromMe == false) {
-						name = msg.pushName || undefined;
-					}
-					await upsertUser(phoneNumber, name!, profilePic!);
-
-					// Handle message sent by the user
-					if (!msg.key.id || !msg.messageTimestamp) return;
-					messageId = msg.key.id;
-					messageType = getContentType(msg.message || undefined) || "Unknown";
-					messageText = msg.message?.conversation || msg.message?.extendedTextMessage?.text || undefined;
-					messageStatus = "read";
-					phoneNumber = msg.key.remoteJid;
-					messageTime = new Date(Number(msg.messageTimestamp) * 1000);
-					upsertMessage(messageId, messageType, messageStatus, phoneNumber, messageTime, messageText);
-				}
-				// Group
-				if (msg.key.remoteJid.endsWith("@g.us")) {
-					if (typeof msg.key.participant !== "string") {
-						return;
-					}
-
-					// Handle group
-					phoneNumber = msg.key.remoteJid;
-					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
-					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
-					upsertUser(phoneNumber, name!, profilePic!);
-
-					// Handle participant
-					phoneNumber = msg.key.participant;
-					name = store.contacts[phoneNumber]?.name || store.contacts[phoneNumber]?.notify || undefined;
-					profilePic = await sock!.profilePictureUrl(phoneNumber).catch(() => null);
-					if (typeof name == "undefined" && msg.key.fromMe == false) {
-						name = msg.pushName || undefined;
-					}
-					await upsertUser(phoneNumber, name!, profilePic!);
-
-					// Handle message sent by the participant
-					if (!msg.key.id || !msg.messageTimestamp) return;
-					messageId = msg.key.id;
-					messageType = getContentType(msg.message || undefined) || "Unknown";
-					messageText = msg.message?.conversation || msg.message?.extendedTextMessage?.text || undefined;
-					messageStatus = "read";
-					phoneNumber = msg.key.participant;
-					messageTime = new Date(Number(msg.messageTimestamp) * 1000);
-					upsertMessage(messageId, messageType, messageStatus, phoneNumber, messageTime, messageText);
-				}
+		logger,
+		shouldIgnoreJid: (jid) => isJidBroadcast(jid),
+		getMessage: async (key) => {
+			const data = await prisma.message.findFirst({
+				where: { remoteJid: key.remoteJid!, id: key.id!, sessionId },
 			});
-		}
-
-		// if(events['messages.update']) {
-		// 	console.log(`Message status updated: ${JSON.stringify(events['messages.update'], undefined, 2)}`)
-
-		// 	for(const { key, update } of events['messages.update']) {
-		// 		if(update.pollUpdates) {
-		// 			const pollCreation = await getMessage(key)
-		// 			if(pollCreation) {
-		// 				console.log(
-		// 					'Poll update. Code was removed, need to be reimplemented.'
-		// 				)
-		// 			}
-		// 		}
-		// 	}
-		// }
-
-		// if(events['message-receipt.update']) {
-		// 	//console.log(events['message-receipt.update'])
-		// }
-
-		// if(events['messages.reaction']) {
-		// 	//console.log(events['messages.reaction'])
-		// }
-
-		// if(events['presence.update']) {
-		// 	//console.log(events['presence.update'])
-		// }
-
-		// if(events['chats.update']) {
-		// 	//console.log(events['chats.update'])
-		// }
-
-		if (events["contacts.update"]) {
-			for (const contact of events["contacts.update"]) {
-				let phoneNumber: string | undefined, profilePic: string | null | undefined;
-				if (typeof contact.imgUrl !== "undefined") {
-					const newUrl = contact.imgUrl === null ? null : await sock!.profilePictureUrl(contact.id!).catch(() => null);
-					phoneNumber = contact.id;
-					profilePic = newUrl;
-				}
-
-				if (typeof phoneNumber == "string") {
-					upsertUser(phoneNumber, undefined, profilePic!);
-				}
-				console.log(`Contact updated: ${contact.id}. ${contact}`);
-			}
-		}
-
-		// if(events['chats.delete']) {
-		// 	console.log('Chats deleted: ', events['chats.delete'])
-		// }
+			return (data?.message || undefined) as proto.IMessage | undefined;
+		},
 	});
 
-	return sock;
-};
+	const store = new Store(sessionId, socket.ev);
+	sessions.set(sessionId, { ...socket, destroy, store });
 
-async function getMessage(key: WAMessageKey): Promise<WAMessageContent | undefined> {
-	if (store) {
-		const msg = await store.loadMessage(key.remoteJid!, key.id!);
-		return msg?.message || undefined;
+	socket.ev.on("creds.update", saveCreds);
+	socket.ev.on("connection.update", (update) => {
+		connectionState = update;
+		const { connection } = update;
+
+		if (connection === "open") {
+			retries.delete(sessionId);
+			SSEQRGenerations.delete(sessionId);
+		}
+		if (connection === "close") handleConnectionClose();
+	});
+
+	if (readIncomingMessages) {
+		socket.ev.on("messages.upsert", async (m) => {
+			const message = m.messages[0];
+			if (message.key.fromMe || m.type !== "notify") return;
+
+			await delay(1000);
+			await socket.readMessages([message.key]);
+		});
 	}
-	// only if store is present
-	return proto.Message.fromObject({});
+
+	// Debug events
+	// socket.ev.on('messaging-history.set', (data) => dump('messaging-history.set', data));
+	// socket.ev.on('chats.upsert', (data) => dump('chats.upsert', data));
+	// socket.ev.on('contacts.update', (data) => dump('contacts.update', data));
+	// socket.ev.on('groups.upsert', (data) => dump('groups.upsert', data));
+
+	await prisma.session.upsert({
+		create: {
+			id: configID,
+			sessionId,
+			data: JSON.stringify({ readIncomingMessages, ...socketConfig }),
+		},
+		update: {},
+		where: { sessionId_id: { id: configID, sessionId } },
+	});
 }
 
-const sendMessageWTyping = async (msg: AnyMessageContent, jid: string, sock) => {
-	await sock.presenceSubscribe(jid);
-	await delay(500);
-	await sock.sendPresenceUpdate("composing", jid);
-	await delay(2000);
-	await sock.sendPresenceUpdate("paused", jid);
-	await sock.sendMessage(jid, msg);
-};
+export function getSessionStatus(session: Session) {
+	const state = ["CONNECTING", "CONNECTED", "DISCONNECTING", "DISCONNECTED"];
+	let status = state[(session.ws as WebSocket).readyState];
+	status = session.user ? "AUTHENTICATED" : status;
+	return status;
+}
 
-// Startup
-httpServer(authFile);
-startSock();
+export function listSessions() {
+	return Array.from(sessions.entries()).map(([id, session]) => ({
+		id,
+		status: getSessionStatus(session),
+	}));
+}
+
+export function getSession(sessionId: string) {
+	return sessions.get(sessionId);
+}
+
+export async function deleteSession(sessionId: string) {
+	sessions.get(sessionId)?.destroy();
+}
+
+export function sessionExists(sessionId: string) {
+	return sessions.has(sessionId);
+}
+
+export async function jidExists(session: Session, jid: string, type: "group" | "number" = "number") {
+	try {
+		if (type === "number") {
+			const [result] = await session.onWhatsApp(jid);
+			return !!result?.exists;
+		}
+
+		const groupMeta = await session.groupMetadata(jid);
+		return !!groupMeta.id;
+	} catch (e) {
+		return Promise.reject(e);
+	}
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// export async function dump(fileName: string, data: any) {
+//   const path = join(__dirname, '..', 'debug', `${fileName}.json`);
+//   await writeFile(path, JSON.stringify(data, null, 2));
+// }
+
