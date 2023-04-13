@@ -9,7 +9,7 @@
     "npm-recursive-commands": "^1.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.4",
+    "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.2"
   },
   "packageManager": "npm@9.5.1"

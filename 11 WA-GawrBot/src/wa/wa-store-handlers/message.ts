@@ -11,9 +11,6 @@ export default function messageHandler(sessionId: string, event: BaileysEventEmi
 	const logger = useLogger();
 	let listening = false;
 
-	if (prisma == undefined) return console.error("Prisma is undefined");
-	if (logger == undefined) return console.error("Prisma is undefined");
-
 	const set: BaileysEventHandler<"messaging-history.set"> = async ({ messages, isLatest }) => {
 		try {
 			await prisma.$transaction(async (tx) => {

@@ -1,19 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 import type { SocketConfig } from "@adiwajshing/baileys";
 import { DEFAULT_CONNECTION_CONFIG } from "@adiwajshing/baileys";
+import pino from 'pino';
 
 let prisma: PrismaClient | null = null;
 let logger: SocketConfig["logger"] | null = null;
 
 export function setPrisma(prismaClient: PrismaClient) {
 	prisma = prismaClient;
-	prisma.$use(async (params, next) => {
-		const before = Date.now();
-		const result = await next(params);
-		const after = Date.now();
-		console.log(`Query ${params.model}.${params.action} took ${after - before}ms`);
-		return result;
-	});
 }
 
 export function setLogger(pinoLogger?: SocketConfig["logger"]) {
@@ -21,11 +15,17 @@ export function setLogger(pinoLogger?: SocketConfig["logger"]) {
 }
 
 export function usePrisma() {
-	console.error(prisma, "Prisma client cannot be used before initialization");
+	if (!prisma) {
+		console.error("Prisma client cannot be used before initialization. Initializing a new Prisma client.");
+		return new PrismaClient();
+	}
 	return prisma;
 }
 
 export function useLogger() {
-	console.error(logger, "Pino logger cannot be used before initialization");
+	if (!logger) {
+		console.error("Pino logger cannot be used before initialization. Initializing a new Pino logger.");
+		return pino({ level: process.env.LOG_LEVEL || 'debug' });
+	}
 	return logger;
 }

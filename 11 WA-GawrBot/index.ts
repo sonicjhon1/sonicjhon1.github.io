@@ -3,8 +3,6 @@ import makeWASocket, { Browsers, DisconnectReason, isJidBroadcast, makeCacheable
 import type { Boom } from "@hapi/boom";
 import { initStore, Store } from "./src/wa/wa-store";
 import { useSession } from "./src/wa/wa-session";
-import * as fs from "fs";
-//import { httpServer } from "./src/http-server";
 import type { WebSocket } from "ws";
 import { logger, prisma } from "./src/shares";
 import { delay } from "./src/utils";
@@ -31,17 +29,9 @@ const MAX_RECONNECT_RETRIES = Number(process.env.MAX_RECONNECT_RETRIES || 5);
 const SSE_MAX_QR_GENERATION = Number(process.env.SSE_MAX_QR_GENERATION || 5);
 const SESSION_CONFIG_ID = "session-config";
 
-const baileysFolder: string = "baileys";
-const authFile: string = baileysFolder + "/baileys_store_multi.json";
-const authState: string = baileysFolder + "/baileys_auth_state";
-
 const deviceInfoOS: string = "Gawr";
 const deviceInfoBrowser: string = "Chrome";
 const deviceInfoBrowserVersion: string = "111.0";
-
-if (!fs.existsSync(baileysFolder)) {
-	fs.mkdirSync(baileysFolder);
-}
 
 // Main Script
 export async function init() {
@@ -195,4 +185,3 @@ export async function jidExists(session: Session, jid: string, type: "group" | "
 //   const path = join(__dirname, '..', 'debug', `${fileName}.json`);
 //   await writeFile(path, JSON.stringify(data, null, 2));
 // }
-
