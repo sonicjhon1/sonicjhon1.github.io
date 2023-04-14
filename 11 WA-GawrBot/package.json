@@ -4,12 +4,12 @@
 	"scripts": {
 		"dev": "ts-node index.ts",
 		"start": "ts-node index.ts",
-		"reset": "npx prisma migrate reset",
-		"migrate": "npx npx prisma migrate dev --name init",
-		"format": "npx prisma format",
-		"generate": "npx prisma generate",
 		"studio": "npx prisma studio",
-		"build": "npm run format && npm run migrate && npm run generate"
+		"make": "npm run format && npm run migrate && npm run generate",
+		"reset": "npx prisma migrate reset",
+		"format": "npx prisma format",
+		"migrate": "npx npx prisma migrate dev --name init",
+		"generate": "npx prisma generate"
 	},
 	"dependencies": {
 		"@adiwajshing/baileys": "^5.0.0",
