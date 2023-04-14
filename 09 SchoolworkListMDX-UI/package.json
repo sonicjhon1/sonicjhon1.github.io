@@ -11,12 +11,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.17.2",
+    "@astrojs/mdx": "^0.19.0",
     "@astrojs/tailwind": "^3.0.1",
     "@tailwindcss/typography": "^0.5.9",
     "astro": "^2.0.17",
     "astro-compress": "^1.1.35",
-    "daisyui": "^2.51.3",
+    "daisyui": "^2.51.5",
     "moment": "^2.29.4",
     "tailwindcss": "^3.2.7"
   }
