@@ -1,6 +1,6 @@
 import type { BaileysEventEmitter, MessageUserReceipt, proto, WAMessageKey } from "@adiwajshing/baileys";
 import { jidNormalizedUser, toNumber } from "@adiwajshing/baileys";
-import { useLogger, usePrisma } from "../../prisma/prisma-client";
+import { useLogger, usePrisma } from "../../shared-clients";
 import type { BaileysEventHandler } from "../../types";
 import { transformPrisma } from "../../utils";
 

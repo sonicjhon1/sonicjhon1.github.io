@@ -1,7 +1,7 @@
 import type { BaileysEventEmitter } from "@adiwajshing/baileys";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import type { BaileysEventHandler } from "../../types";
-import { usePrisma, useLogger } from "../../prisma/prisma-client";
+import { usePrisma, useLogger } from "../../shared-clients";
 import { transformPrisma } from "../../utils";
 
 export default function chatHandler(sessionId: string, event: BaileysEventEmitter) {

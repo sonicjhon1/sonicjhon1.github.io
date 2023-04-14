@@ -1,6 +1,6 @@
 import type { BaileysEventEmitter, SocketConfig } from "@adiwajshing/baileys";
 import type { PrismaClient } from "@prisma/client";
-import { setPrisma, setLogger } from "../prisma/prisma-client"
+import { setPrisma, setLogger } from "../shared-clients"
 import * as handlers from "./wa-store-handlers";
 
 type initStoreOptions = {

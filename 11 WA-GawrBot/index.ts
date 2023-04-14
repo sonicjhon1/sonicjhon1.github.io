@@ -4,7 +4,7 @@ import type { Boom } from "@hapi/boom";
 import { initStore, Store } from "./src/wa/wa-store";
 import { useSession } from "./src/wa/wa-session";
 import type { WebSocket } from "ws";
-import { logger, prisma } from "./src/shares";
+import { logger, prisma } from "./src/clients";
 import { delay } from "./src/utils";
 
 type Session = WASocket & {
