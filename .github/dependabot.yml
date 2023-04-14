@@ -47,6 +47,10 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: npm
+    directory: /11 WA-GawrBot
+    schedule:
+      interval: daily
+  - package-ecosystem: npm
     directory: /
     schedule:
       interval: daily
