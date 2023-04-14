@@ -78,6 +78,12 @@ export async function createSession(options: createSessionOptions) {
 		setTimeout(() => createSession(options), restartRequired ? 0 : RECONNECT_INTERVAL);
 	};
 
+	const handleConnectionUpdate = async () => {
+		if (connectionState.qr?.length) {
+			console.log(connectionState.qr);
+		}
+	};
+
 	const { state, saveCreds } = await useSession(sessionId);
 	const socket = makeWASocket({
 		printQRInTerminal: true,
@@ -111,6 +117,7 @@ export async function createSession(options: createSessionOptions) {
 			SSEQRGenerations.delete(sessionId);
 		}
 		if (connection === "close") handleConnectionClose();
+		handleConnectionUpdate();
 	});
 
 	if (readIncomingMessages) {
