@@ -2,7 +2,7 @@
 	"name": "@sonicjhon1/sonicj-wa-gawr-bot",
 	"version": "0.1.0",
 	"scripts": {
-		"dev": "ts-node index.ts",
+		"dev": "npm run make && ts-node index.ts",
 		"start": "ts-node index.ts",
 		"studio": "npx prisma studio",
 		"make": "npm run format && npm run migrate && npm run generate",
