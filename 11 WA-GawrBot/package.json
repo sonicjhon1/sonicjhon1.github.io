@@ -2,14 +2,14 @@
 	"name": "@sonicjhon1/sonicj-wa-gawr-bot",
 	"version": "0.1.0",
 	"scripts": {
-		"dev": "npm run make && ts-node index.ts",
-		"start": "ts-node index.ts",
-		"studio": "npx prisma studio",
-		"make": "npm run format && npm run migrate && npm run generate",
-		"reset": "npx prisma migrate reset",
-		"format": "npx prisma format",
-		"migrate": "npx npx prisma migrate dev --name init",
-		"generate": "npx prisma generate"
+		"start": "pnpm build && ts-node index.ts",
+		"studio": "pnpm dlx prisma studio",
+		"build": "npm run format && npm run migrate && npm run generate",
+		"reset": "pnpm dlx prisma migrate reset",
+		"format": "pnpm dlx prisma format",
+		"migrate": "pnpm dlx prisma migrate dev --name init",
+		"generate": "pnpm dlx prisma generate",
+		"preinstall": "npx only-allow pnpm"
 	},
 	"dependencies": {
 		"@adiwajshing/baileys": "^5.0.0",

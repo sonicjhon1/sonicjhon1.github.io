@@ -8,7 +8,8 @@
     "start": "node public/sw-generator.js && astro dev",
     "build": "node public/sw-generator.js && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+		"preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@astrojs/tailwind": "^3.1.1",
