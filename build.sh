@@ -2,8 +2,8 @@
 
 # Build commands
 prebuild() {
-    # Install NPM deps
-    npm install
+    # Install PNPM deps
+    pnpm install
 }
 build() {
     # Launch build scripts
@@ -19,7 +19,8 @@ postBuild() {
 
 # Initiate build process and deploy the page
 prebuild
-npx turbo run build
+pnpm dlx turbo run build
+rm -rfd node_modules
 
 # Build folders 
 build03UI() {
