@@ -20,7 +20,6 @@ postBuild() {
 # Initiate build process and deploy the page
 prebuild
 pnpm dlx turbo run build
-rm -rfd node_modules
 
 # Build folders 
 build03UI() {
@@ -55,3 +54,6 @@ build10UI() {
 }
 
 build03UI & build04UI & build05UI & build08UI & build09UI & build09MDXUI & build10UI
+
+rm -rfd ../node_modules
+rm -rfd ../**/node_modules
