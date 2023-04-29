@@ -36,6 +36,8 @@ jobs:
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2.0.1
+        with:
+          version: latest
 
       # Static GH Pages
       - name: Setup Pages
