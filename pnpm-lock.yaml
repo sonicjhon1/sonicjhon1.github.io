@@ -34,8 +34,8 @@ importers:
         version: 4.4.0
     devDependencies:
       wrangler:
-        specifier: 2.17.0
-        version: 2.17.0
+        specifier: 2.18.0
+        version: 2.18.0
 
   03 Genshin-Redeem-Code-UI:
     dependencies:
@@ -8000,8 +8000,8 @@ packages:
       workbox-core: 6.5.4
     dev: false
 
-  /wrangler@2.17.0:
-    resolution: {integrity: sha512-ucmVHP5BAUVyC/18hReEKgxGSgU0EOxGd+ElHRHVBeGH6LPcsOoC1TolTaDYYnbOuZMbYmHAR5OH1agayr3kZg==}
+  /wrangler@2.18.0:
+    resolution: {integrity: sha512-e+WJ019AbioAf9u4YiOxjrfKqzOP8K3kDAM9v+lGQa+WKsae/UVcMb3Hn5iMIlIt2fc622WefZfuSNRpkAzrSA==}
     engines: {node: '>=16.13.0'}
     hasBin: true
     dependencies:
