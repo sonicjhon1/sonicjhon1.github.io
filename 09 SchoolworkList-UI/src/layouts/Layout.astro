@@ -132,9 +132,6 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			if (settings["analytic"] != undefined && typeof settings["analytic"] === "boolean" && settings["analytic"] === true) {
 				// TODO: Implement this after adding Lootlocker
 			}
-			if (settings["ads"] != undefined && typeof settings["ads"] === "boolean" && settings["ads"] === true) {
-				// TODO: Implement this after adding Adsense
-			}
 
 			// Personalization
 			if (settings["theme"] != undefined && settings["theme"] != "") {
@@ -146,8 +143,6 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			if (settings["profile"] != undefined && settings["profile"] != "") {
 				document.getElementById("profile-picture").src = settings["profile"];
 			}
-
-			// Backup
 		}
 
 		addEventListener("turbo:load", applySettings, { once: true });
