@@ -1,5 +1,5 @@
 /*
-Turbo 7.2.5
+Turbo 7.3.0
 Copyright © 2023 37signals LLC
  */
 (function (global, factory) {
@@ -93,15 +93,12 @@ Copyright © 2023 37signals LLC
     (function () {
         if ("submitter" in Event.prototype)
             return;
-        let prototype;
+        let prototype = window.Event.prototype;
         if ("SubmitEvent" in window && /Apple Computer/.test(navigator.vendor)) {
             prototype = window.SubmitEvent.prototype;
         }
         else if ("SubmitEvent" in window) {
             return;
-        }
-        else {
-            prototype = window.Event.prototype;
         }
         addEventListener("click", clickCaptured, true);
         Object.defineProperty(prototype, "submitter", {
@@ -119,13 +116,13 @@ Copyright © 2023 37signals LLC
         FrameLoadingStyle["lazy"] = "lazy";
     })(exports.FrameLoadingStyle || (exports.FrameLoadingStyle = {}));
     class FrameElement extends HTMLElement {
+        static get observedAttributes() {
+            return ["disabled", "complete", "loading", "src"];
+        }
         constructor() {
             super();
             this.loaded = Promise.resolve();
             this.delegate = new FrameElement.delegateConstructor(this);
-        }
-        static get observedAttributes() {
-            return ["disabled", "complete", "loading", "src"];
         }
         connectedCallback() {
             this.delegate.connect();
@@ -566,7 +563,7 @@ Copyright © 2023 37signals LLC
                 credentials: "same-origin",
                 headers: this.headers,
                 redirect: "follow",
-                body: this.isIdempotent ? null : this.body,
+                body: this.isSafe ? null : this.body,
                 signal: this.abortSignal,
                 referrer: (_a = this.delegate.referrer) === null || _a === void 0 ? void 0 : _a.href,
             };
@@ -576,8 +573,8 @@ Copyright © 2023 37signals LLC
                 Accept: "text/html, application/xhtml+xml",
             };
         }
-        get isIdempotent() {
-            return this.method == FetchMethod.get;
+        get isSafe() {
+            return this.method === FetchMethod.get;
         }
         get abortSignal() {
             return this.abortController.signal;
@@ -637,9 +634,6 @@ Copyright © 2023 37signals LLC
     }
 
     class StreamMessage {
-        constructor(fragment) {
-            this.fragment = importStreamElements(fragment);
-        }
         static wrap(message) {
             if (typeof message == "string") {
                 return new this(createDocumentFragment(message));
@@ -647,6 +641,9 @@ Copyright © 2023 37signals LLC
             else {
                 return message;
             }
+        }
+        constructor(fragment) {
+            this.fragment = importStreamElements(fragment);
         }
     }
     StreamMessage.contentType = "text/vnd.turbo-stream.html";
@@ -687,6 +684,9 @@ Copyright © 2023 37signals LLC
         }
     }
     class FormSubmission {
+        static confirmMethod(message, _element, _submitter) {
+            return Promise.resolve(confirm(message));
+        }
         constructor(delegate, formElement, submitter, mustRedirect = false) {
             this.state = FormSubmissionState.initialized;
             this.delegate = delegate;
@@ -699,9 +699,6 @@ Copyright © 2023 37signals LLC
             }
             this.fetchRequest = new FetchRequest(this, this.method, this.location, this.body, this.formElement);
             this.mustRedirect = mustRedirect;
-        }
-        static confirmMethod(message, _element, _submitter) {
-            return Promise.resolve(confirm(message));
         }
         get method() {
             var _a;
@@ -730,8 +727,8 @@ Copyright © 2023 37signals LLC
             var _a;
             return formEnctypeFromString(((_a = this.submitter) === null || _a === void 0 ? void 0 : _a.getAttribute("formenctype")) || this.formElement.enctype);
         }
-        get isIdempotent() {
-            return this.fetchRequest.isIdempotent;
+        get isSafe() {
+            return this.fetchRequest.isSafe;
         }
         get stringFormData() {
             return [...this.formData].reduce((entries, [name, value]) => {
@@ -761,7 +758,7 @@ Copyright © 2023 37signals LLC
             }
         }
         prepareRequest(request) {
-            if (!request.isIdempotent) {
+            if (!request.isSafe) {
                 const token = getCookieValue(getMetaContent("csrf-param")) || getMetaContent("csrf-token");
                 if (token) {
                     request.headers["X-CSRF-Token"] = token;
@@ -775,6 +772,7 @@ Copyright © 2023 37signals LLC
             var _a;
             this.state = FormSubmissionState.waiting;
             (_a = this.submitter) === null || _a === void 0 ? void 0 : _a.setAttribute("disabled", "");
+            this.setSubmitsWith();
             dispatch("turbo:submit-start", {
                 target: this.formElement,
                 detail: { formSubmission: this },
@@ -810,17 +808,46 @@ Copyright © 2023 37signals LLC
             var _a;
             this.state = FormSubmissionState.stopped;
             (_a = this.submitter) === null || _a === void 0 ? void 0 : _a.removeAttribute("disabled");
+            this.resetSubmitterText();
             dispatch("turbo:submit-end", {
                 target: this.formElement,
                 detail: Object.assign({ formSubmission: this }, this.result),
             });
             this.delegate.formSubmissionFinished(this);
         }
+        setSubmitsWith() {
+            if (!this.submitter || !this.submitsWith)
+                return;
+            if (this.submitter.matches("button")) {
+                this.originalSubmitText = this.submitter.innerHTML;
+                this.submitter.innerHTML = this.submitsWith;
+            }
+            else if (this.submitter.matches("input")) {
+                const input = this.submitter;
+                this.originalSubmitText = input.value;
+                input.value = this.submitsWith;
+            }
+        }
+        resetSubmitterText() {
+            if (!this.submitter || !this.originalSubmitText)
+                return;
+            if (this.submitter.matches("button")) {
+                this.submitter.innerHTML = this.originalSubmitText;
+            }
+            else if (this.submitter.matches("input")) {
+                const input = this.submitter;
+                input.value = this.originalSubmitText;
+            }
+        }
         requestMustRedirect(request) {
-            return !request.isIdempotent && this.mustRedirect;
+            return !request.isSafe && this.mustRedirect;
         }
         requestAcceptsTurboStreamResponse(request) {
-            return !request.isIdempotent || hasAttribute("data-turbo-stream", this.submitter, this.formElement);
+            return !request.isSafe || hasAttribute("data-turbo-stream", this.submitter, this.formElement);
+        }
+        get submitsWith() {
+            var _a;
+            return (_a = this.submitter) === null || _a === void 0 ? void 0 : _a.getAttribute("data-turbo-submits-with");
         }
     }
     function buildFormData(formElement, submitter) {
@@ -1060,8 +1087,8 @@ Copyright © 2023 37signals LLC
     }
 
     class FrameView extends View {
-        invalidate() {
-            this.element.innerHTML = "";
+        missing() {
+            this.element.innerHTML = `<strong class="turbo-frame-error">Content missing</strong>`;
         }
         get snapshot() {
             return new Snapshot(this.element);
@@ -1222,15 +1249,15 @@ Copyright © 2023 37signals LLC
     }
 
     class Bardo {
-        constructor(delegate, permanentElementMap) {
-            this.delegate = delegate;
-            this.permanentElementMap = permanentElementMap;
-        }
         static async preservingPermanentElements(delegate, permanentElementMap, callback) {
             const bardo = new this(delegate, permanentElementMap);
             bardo.enter();
             await callback();
             bardo.leave();
+        }
+        constructor(delegate, permanentElementMap) {
+            this.delegate = delegate;
+            this.permanentElementMap = permanentElementMap;
         }
         enter() {
             for (const id in this.permanentElementMap) {
@@ -1338,10 +1365,6 @@ Copyright © 2023 37signals LLC
     }
 
     class FrameRenderer extends Renderer {
-        constructor(delegate, currentSnapshot, newSnapshot, renderElement, isPreview, willRender = true) {
-            super(currentSnapshot, newSnapshot, renderElement, isPreview, willRender);
-            this.delegate = delegate;
-        }
         static renderElement(currentElement, newElement) {
             var _a;
             const destinationRange = document.createRange();
@@ -1353,6 +1376,10 @@ Copyright © 2023 37signals LLC
                 sourceRange.selectNodeContents(frameElement);
                 currentElement.appendChild(sourceRange.extractContents());
             }
+        }
+        constructor(delegate, currentSnapshot, newSnapshot, renderElement, isPreview, willRender = true) {
+            super(currentSnapshot, newSnapshot, renderElement, isPreview, willRender);
+            this.delegate = delegate;
         }
         get shouldRender() {
             return true;
@@ -1412,18 +1439,6 @@ Copyright © 2023 37signals LLC
     }
 
     class ProgressBar {
-        constructor() {
-            this.hiding = false;
-            this.value = 0;
-            this.visible = false;
-            this.trickle = () => {
-                this.setValue(this.value + Math.random() / 100);
-            };
-            this.stylesheetElement = this.createStylesheetElement();
-            this.progressElement = this.createProgressElement();
-            this.installStylesheetElement();
-            this.setValue(0);
-        }
         static get defaultCSS() {
             return unindent `
       .turbo-progress-bar {
@@ -1440,6 +1455,18 @@ Copyright © 2023 37signals LLC
         transform: translate3d(0, 0, 0);
       }
     `;
+        }
+        constructor() {
+            this.hiding = false;
+            this.value = 0;
+            this.visible = false;
+            this.trickle = () => {
+                this.setValue(this.value + Math.random() / 100);
+            };
+            this.stylesheetElement = this.createStylesheetElement();
+            this.progressElement = this.createProgressElement();
+            this.installStylesheetElement();
+            this.setValue(0);
         }
         show() {
             if (!this.visible) {
@@ -1611,10 +1638,6 @@ Copyright © 2023 37signals LLC
     }
 
     class PageSnapshot extends Snapshot {
-        constructor(element, headSnapshot) {
-            super(element);
-            this.headSnapshot = headSnapshot;
-        }
         static fromHTMLString(html = "") {
             return this.fromDocument(parseHTMLDocument(html));
         }
@@ -1623,6 +1646,10 @@ Copyright © 2023 37signals LLC
         }
         static fromDocument({ head, body }) {
             return new this(body, new HeadSnapshot(head));
+        }
+        constructor(element, headSnapshot) {
+            super(element);
+            this.headSnapshot = headSnapshot;
         }
         clone() {
             const clonedElement = this.element.cloneNode(true);
@@ -2123,10 +2150,11 @@ Copyright © 2023 37signals LLC
 
     class CacheObserver {
         constructor() {
+            this.selector = "[data-turbo-temporary]";
+            this.deprecatedSelector = "[data-turbo-cache=false]";
             this.started = false;
-            this.removeStaleElements = ((_event) => {
-                const staleElements = [...document.querySelectorAll('[data-turbo-cache="false"]')];
-                for (const element of staleElements) {
+            this.removeTemporaryElements = ((_event) => {
+                for (const element of this.temporaryElements) {
                     element.remove();
                 }
             });
@@ -2134,14 +2162,24 @@ Copyright © 2023 37signals LLC
         start() {
             if (!this.started) {
                 this.started = true;
-                addEventListener("turbo:before-cache", this.removeStaleElements, false);
+                addEventListener("turbo:before-cache", this.removeTemporaryElements, false);
             }
         }
         stop() {
             if (this.started) {
                 this.started = false;
-                removeEventListener("turbo:before-cache", this.removeStaleElements, false);
+                removeEventListener("turbo:before-cache", this.removeTemporaryElements, false);
             }
+        }
+        get temporaryElements() {
+            return [...document.querySelectorAll(this.selector), ...this.temporaryElementsWithDeprecation];
+        }
+        get temporaryElementsWithDeprecation() {
+            const elements = document.querySelectorAll(this.deprecatedSelector);
+            if (elements.length) {
+                console.warn(`The ${this.deprecatedSelector} selector is deprecated and will be removed in a future version. Use ${this.selector} instead.`);
+            }
+            return [...elements];
         }
     }
 
@@ -2341,7 +2379,7 @@ Copyright © 2023 37signals LLC
             if (formSubmission == this.formSubmission) {
                 const responseHTML = await fetchResponse.responseHTML;
                 if (responseHTML) {
-                    const shouldCacheSnapshot = formSubmission.method == FetchMethod.get;
+                    const shouldCacheSnapshot = formSubmission.isSafe;
                     if (!shouldCacheSnapshot) {
                         this.view.clearSnapshotCache();
                     }
@@ -3301,6 +3339,9 @@ Copyright © 2023 37signals LLC
         StreamActions: StreamActions
     });
 
+    class TurboFrameMissingError extends Error {
+    }
+
     class FrameController {
         constructor(element) {
             this.fetchResponseLoaded = (_fetchResponse) => { };
@@ -3401,29 +3442,15 @@ Copyright © 2023 37signals LLC
             try {
                 const html = await fetchResponse.responseHTML;
                 if (html) {
-                    const { body } = parseHTMLDocument(html);
-                    const newFrameElement = await this.extractForeignFrameElement(body);
-                    if (newFrameElement) {
-                        const snapshot = new Snapshot(newFrameElement);
-                        const renderer = new FrameRenderer(this, this.view.snapshot, snapshot, FrameRenderer.renderElement, false, false);
-                        if (this.view.renderPromise)
-                            await this.view.renderPromise;
-                        this.changeHistory();
-                        await this.view.render(renderer);
-                        this.complete = true;
-                        session.frameRendered(fetchResponse, this.element);
-                        session.frameLoaded(this.element);
-                        this.fetchResponseLoaded(fetchResponse);
+                    const document = parseHTMLDocument(html);
+                    const pageSnapshot = PageSnapshot.fromDocument(document);
+                    if (pageSnapshot.isVisitable) {
+                        await this.loadFrameResponse(fetchResponse, document);
                     }
-                    else if (this.willHandleFrameMissingFromResponse(fetchResponse)) {
-                        console.warn(`A matching frame for #${this.element.id} was missing from the response, transforming into full-page Visit.`);
-                        this.visitResponse(fetchResponse.response);
+                    else {
+                        await this.handleUnvisitableFrameResponse(fetchResponse);
                     }
                 }
-            }
-            catch (error) {
-                console.error(error);
-                this.view.invalidate();
             }
             finally {
                 this.fetchResponseLoaded = () => { };
@@ -3477,7 +3504,6 @@ Copyright © 2023 37signals LLC
             this.resolveVisitPromise();
         }
         async requestFailedWithResponse(request, response) {
-            console.error(response);
             await this.loadResponse(response);
             this.resolveVisitPromise();
         }
@@ -3495,9 +3521,13 @@ Copyright © 2023 37signals LLC
             const frame = this.findFrameElement(formSubmission.formElement, formSubmission.submitter);
             frame.delegate.proposeVisitIfNavigatedWithAction(frame, formSubmission.formElement, formSubmission.submitter);
             frame.delegate.loadResponse(response);
+            if (!formSubmission.isSafe) {
+                session.clearCache();
+            }
         }
         formSubmissionFailedWithResponse(formSubmission, fetchResponse) {
             this.element.delegate.loadResponse(fetchResponse);
+            session.clearCache();
         }
         formSubmissionErrored(formSubmission, error) {
             console.error(error);
@@ -3524,6 +3554,24 @@ Copyright © 2023 37signals LLC
         viewInvalidated() { }
         willRenderFrame(currentElement, _newElement) {
             this.previousFrameElement = currentElement.cloneNode(true);
+        }
+        async loadFrameResponse(fetchResponse, document) {
+            const newFrameElement = await this.extractForeignFrameElement(document.body);
+            if (newFrameElement) {
+                const snapshot = new Snapshot(newFrameElement);
+                const renderer = new FrameRenderer(this, this.view.snapshot, snapshot, FrameRenderer.renderElement, false, false);
+                if (this.view.renderPromise)
+                    await this.view.renderPromise;
+                this.changeHistory();
+                await this.view.render(renderer);
+                this.complete = true;
+                session.frameRendered(fetchResponse, this.element);
+                session.frameLoaded(this.element);
+                this.fetchResponseLoaded(fetchResponse);
+            }
+            else if (this.willHandleFrameMissingFromResponse(fetchResponse)) {
+                this.handleFrameMissingFromResponse(fetchResponse);
+            }
         }
         async visit(url) {
             var _a;
@@ -3577,6 +3625,10 @@ Copyright © 2023 37signals LLC
                 session.history.update(method, expandURL(this.element.src || ""), this.restorationIdentifier);
             }
         }
+        async handleUnvisitableFrameResponse(fetchResponse) {
+            console.warn(`The response (${fetchResponse.statusCode}) from <turbo-frame id="${this.element.id}"> is performing a full page visit due to turbo-visit-control.`);
+            await this.visitResponse(fetchResponse.response);
+        }
         willHandleFrameMissingFromResponse(fetchResponse) {
             this.element.setAttribute("complete", "");
             const response = fetchResponse.response;
@@ -3594,6 +3646,14 @@ Copyright © 2023 37signals LLC
                 cancelable: true,
             });
             return !event.defaultPrevented;
+        }
+        handleFrameMissingFromResponse(fetchResponse) {
+            this.view.missing();
+            this.throwFrameMissingError(fetchResponse);
+        }
+        throwFrameMissingError(fetchResponse) {
+            const message = `The response (${fetchResponse.statusCode}) did not contain the expected <turbo-frame id="${this.element.id}"> and will be ignored. To perform a full page visit instead, set turbo-visit-control to reload.`;
+            throw new TurboFrameMissingError(message);
         }
         async visitResponse(response) {
             const wrapped = new FetchResponse(response);
