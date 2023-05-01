@@ -15,39 +15,27 @@ import Layout from "../layouts/Layout.astro";
 <script is:inline>
 	(async () => {
 		var im = iframemanager();
-		async function applyDisclaimer() {
-			var settings = await localforage.getItem("settings");
-			if (settings == undefined) return;
-			if (settings["disclaimer"] != undefined && typeof settings["disclaimer"] === "boolean" && settings["disclaimer"] === true) {
-				im.acceptService("all");
-			} else {
-				im.rejectService("all");
-			}
-		}
+		var settings = await localforage.getItem("settings");
 
 		var backendURL = document.getElementById("backendURL").dataset.backendurl;
 		var theme = document.querySelector("body").dataset.theme;
-		await (async function () {
-			var settings = await localforage.getItem("settings");
-			if (settings != undefined) {
-				if (settings["custom-backend-url"] && settings["custom-backend-url-text"] != undefined && settings["custom-backend-url-text"] != "") {
-					backendURL = settings["custom-backend-url-text"];
-				}
-				if (settings["theme"] != undefined && settings["theme"] != "") {
-					theme = settings["theme"];
-				}
+		if (settings != undefined) {
+			if (settings["custom-backend-url"] && settings["custom-backend-url-text"] && settings["custom-backend-url-text"] != "") {
+				backendURL = settings["custom-backend-url-text"];
 			}
-		})();
+			if (settings["theme"] && settings["theme"] != "") {
+				theme = settings["theme"];
+			}
+		}
+
 		var classParam = new URL(window.location.href).searchParams.get("class");
 		var postParam = new URL(window.location.href).searchParams.get("post");
 		var themeParam = "?theme=" + theme;
 		var postURL = backendURL + classParam + "/" + postParam + themeParam;
-		console.log(postURL);
 		var thumbURL = new URL(window.location.href).searchParams.get("t")
 			? backendURL + new URL(window.location.href).searchParams.get("t")
 			: "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg";
 
-		applyDisclaimer();
 		im.run({
 			currLang: "en",
 			services: {
@@ -70,5 +58,15 @@ import Layout from "../layouts/Layout.astro";
 				},
 			},
 		});
+
+		try {
+			document.querySelector("button.c-la-b").style.display = "none";
+		} catch (e) {
+			console.log("Can't find the button:", e, ". Probably already accepted.");
+		}
+
+		if (settings != null) {
+			settings["disclaimer"] === true ? im.acceptService("all") : im.rejectService("all");
+		}
 	})();
 </script>
