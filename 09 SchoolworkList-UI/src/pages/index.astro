@@ -14,19 +14,13 @@ const DEFAULT_THUMBNAIL_URL = "./003.png";
 		</p>
 		<ul id="card-list" role="list" class="link-card-grid">
 			<div id="card-template" class="hidden">
-				<Card
-					title="{title}"
-					href="{href}"
-					tag="{tag}"
-					body="{body}"
-					image={ DEFAULT_THUMBNAIL_URL }
-				/>
+				<Card title="{title}" href="{href}" tag="{tag}" body="{body}" image={DEFAULT_THUMBNAIL_URL} />
 				<Card
 					title="Tugas Proposal"
 					href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 					tag="B.INDO"
 					body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
-					image={ DEFAULT_THUMBNAIL_URL }
+					image={DEFAULT_THUMBNAIL_URL}
 				/>
 			</div>
 		</ul>
@@ -138,10 +132,7 @@ const DEFAULT_THUMBNAIL_URL = "./003.png";
 				card.innerHTML = card.innerHTML.replace(/{title}/g, judul);
 				card.innerHTML = card.innerHTML.replace(/{body}/g, body);
 				card.innerHTML = card.innerHTML.replace(/{tag}/g, tag);
-				card.innerHTML = card.innerHTML.replace(
-					DEFAULT_THUMBNAIL_URL,
-					thumbnailURL
-				);
+				card.innerHTML = card.innerHTML.replace(DEFAULT_THUMBNAIL_URL, thumbnailURL);
 				// Append and remove the extra "card" HTMLelement on the outerHTML
 				cardList.appendChild(card);
 				card.id = "work-card";
