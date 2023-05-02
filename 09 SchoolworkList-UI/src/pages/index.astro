@@ -15,7 +15,7 @@ const DEFAULT_THUMBNAIL_URL = await getImage({src: imageDefaultThumbnail, format
 			Simply tap on any post to view the details~<br />
 			<strong>TIP:&nbsp;</strong>You can personalize this website by going into the settings page!
 		</p>
-		<ul id="card-list" role="list" class="link-card-grid">
+		<div id="card-list" class="link-card-grid">
 			<div id="card-template" class="hidden">
 				<Card title="{title}" href="{href}" tag="{tag}" body="{body}" image={DEFAULT_THUMBNAIL_URL.src} width={DEFAULT_THUMBNAIL_URL.attributes.width} height={DEFAULT_THUMBNAIL_URL.attributes.height}/>
 				<Card
