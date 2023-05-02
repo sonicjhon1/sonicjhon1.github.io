@@ -1,7 +1,12 @@
 ---
+import { Image } from "astro:assets";
+import imageGithubSonicj from "../assets/sonicjhon1.png";
+import imageDefaultProfile from "../assets/default_profile.png";
+
 import IconGithub from "../components/icons/IconGithub.astro";
 import IconInstagram from "../components/icons/IconInstagram.astro";
 import IconYoutube from "../components/icons/IconYoutube.astro";
+
 export interface Props {
 	title: string;
 }
@@ -54,7 +59,6 @@ const backendURL = "https://schoolworklist.pages.dev/";
 		<script src="./iframemanager.js" is:raw></script>
 		<link rel="stylesheet" href="./iframemanager.css" />
 		<script src="./localforage.min.js" is:raw></script>
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7140583973431970" crossorigin="anonymous"></script>
 	</head>
 	<body class="transition-colors duration-200 ease-in-out" data-theme="halloween" id="body" data-turbo-permanent>
 		<script is:inline>
@@ -84,7 +88,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 				<div class="dropdown dropdown-end">
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 						<div class="w-10 rounded-full">
-							<img id="profile-picture" src="https://img-os-static.hoyolab.com/avatar/avatar30038.png" />
+							<Image class="h-full w-[32px] rounded-full" src={imageDefaultProfile} id="profile-picture" alt="Profile" format="avif"/>
 						</div>
 					</label>
 					<ul tabindex="0" class="menu menu-compact dropdown-content bg-base-100 rounded-box border-primary/10 mt-3 w-52 border border-solid p-2 shadow">
@@ -101,7 +105,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 	<footer class="footer bg-neutral text-neutral-content absolute items-center p-4">
 		<div class="grid-flow-col items-center">
 			<a href="https://github.com/sonicjhon1" class="h-8 shadow-lg transition-all duration-500 ease-in-out hover:brightness-150">
-				<img class="h-full rounded-full" id="github-profile" alt="sonicjhon1" src="https://avatars.githubusercontent.com/u/41381685?v=4" />
+				<Image class="h-full w-[32px] rounded-full" src={imageGithubSonicj} id="github-profile" alt="sonicjhon1" format="avif" />
 			</a>
 			<p class="select-none">Copyright &copy; 2023 - All right reserved</p>
 		</div>
@@ -154,7 +158,7 @@ const backendURL = "https://schoolworklist.pages.dev/";
 			if (!username) return;
 			switch (username) {
 				case "sonicjhon1":
-					profile.setAttribute("src", "https://avatars.githubusercontent.com/u/41381685");
+					break;
 				default:
 					fetch(`https://api.github.com/users/${username}`).then((response) =>
 						response.json().then((data) => {

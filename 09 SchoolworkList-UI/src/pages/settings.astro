@@ -6,6 +6,7 @@ import Layout from "../layouts/Layout.astro";
 import Input from "../components/Input.astro";
 import Radio from "../components/Radio.astro";
 ---
+
 <head>
 	<script async src="./catiline.min.js" is:raw></script>
 </head>
@@ -82,7 +83,7 @@ import Radio from "../components/Radio.astro";
 				<Heading>Change Profile</Heading>
 				<div class="mb-4 flex flex-wrap">
 					<Input title="Customize your username" id="setting-username" placeholder="Anonymous" />
-					<Input title="Customize your profile picture" id="setting-profile" placeholder="https://img-os-static.hoyolab.com/avatar/avatar30038.png" />
+					<Input title="Customize your profile picture" id="setting-profile" placeholder="" />
 				</div>
 				<Heading>Change Main Theme</Heading>
 				<div class="mb-4 flex flex-wrap">
@@ -349,14 +350,14 @@ import Radio from "../components/Radio.astro";
 			session_token = response.session_token;
 
 			// Set LootLocker name
-			let ipAddress = await fetchIP()
+			let ipAddress = await fetchIP();
 			await fetch("https://api.lootlocker.io/game/player/name", {
 				method: "PATCH",
 				headers: {
 					"x-session-token": session_token,
 					"Content-Type": "application/json",
 				},
-				body: `{ "name": "${settings["username"] + " - " + ipAddress || document.getElementById("setting-username").placeholder + " - " + ipAddress }" }`,
+				body: `{ "name": "${settings["username"] + " - " + ipAddress || document.getElementById("setting-username").placeholder + " - " + ipAddress}" }`,
 			});
 
 			await fetch("https://api.lootlocker.io/game/v1/player/storage", {
@@ -378,7 +379,7 @@ import Radio from "../components/Radio.astro";
 					{"key":"profile", 					"value":"${settings["profile"]}", 					"order":10},
 					{"key":"identifier", 				"value":"${settings["identifier"]}", 				"order":11}
 				]`,
-			})
+			});
 
 			// Save ll to storage
 			saveLLAnalytic(player_identifier);
@@ -413,7 +414,7 @@ import Radio from "../components/Radio.astro";
 			let ipAddress = await fetch("https://httpbin.org/ip")
 				.then((response) => response.json())
 				.then((data) => {
-					return data.origin
+					return data.origin;
 				});
 			return ipAddress;
 		}
