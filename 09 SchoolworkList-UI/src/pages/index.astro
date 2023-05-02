@@ -1,8 +1,11 @@
 ---
+import { getImage } from "astro:assets";
+import imageDefaultThumbnail from "../assets/003.png";
+
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 
-const DEFAULT_THUMBNAIL_URL = "./003.png";
+const DEFAULT_THUMBNAIL_URL = (await getImage({src: imageDefaultThumbnail, format: "avif"}, {})).src;
 ---
 
 <Layout title="SWL - Home">
