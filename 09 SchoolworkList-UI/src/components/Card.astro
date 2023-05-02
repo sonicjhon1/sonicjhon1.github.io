@@ -5,14 +5,18 @@ export interface Props {
 	tag: string;
 	href: string;
 	image: string;
+	width?: string;
+	height?: string;
 }
 
-const { title, body, tag, href, image } = Astro.props;
+const { title, body, tag, href, image, width, height } = Astro.props;
 ---
 
 <a href={href} class="card h-min select-none">
 	<div class="card bg-base-100 border-base-content/20 w-full max-w-full border-2 border-solid shadow-xl">
-		<figure><img src={image} alt="owo" loading="lazy" decoding="async"/></figure>
+		<figure>
+			<img src={image} alt="owo" decoding="async" width=`${width}px` height=`${height}px`/>
+		</figure>
 		<div class="card-body">
 			<h2 class="card-title">
 				{title}
