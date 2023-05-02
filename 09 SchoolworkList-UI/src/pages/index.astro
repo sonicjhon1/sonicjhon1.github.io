@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+
+const DEFAULT_THUMBNAIL_URL = "./003.png";
 ---
 
 <Layout title="SWL - Home">
@@ -17,20 +19,20 @@ import Card from "../components/Card.astro";
 					href="{href}"
 					tag="{tag}"
 					body="{body}"
-					image="https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg"
+					image={ DEFAULT_THUMBNAIL_URL }
 				/>
 				<Card
 					title="Tugas Proposal"
 					href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 					tag="B.INDO"
 					body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
-					image="https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg"
+					image={ DEFAULT_THUMBNAIL_URL }
 				/>
 			</div>
 		</ul>
 	</main>
 </Layout>
-<script is:inline>
+<script is:inline define:vars={{ DEFAULT_THUMBNAIL_URL }}>
 	async function hrefQuerySearch() {
 		// Check for the s parameter inside of the href
 		let searchQuery = new URL(window.location.href).searchParams.get("s");
@@ -103,7 +105,7 @@ import Card from "../components/Card.astro";
 				let cardClassParam = "class=" + cardClass;
 				var href = postSlugParam + "&" + cardClassParam;
 
-				var thumbnailURL = "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg";
+				var thumbnailURL = DEFAULT_THUMBNAIL_URL;
 				// Catch errors when query selecting
 				try {
 					var backendURL = document.getElementById("backendURL").dataset.backendurl;
@@ -116,7 +118,7 @@ import Card from "../components/Card.astro";
 						href = href + "&" + thumbnailParam;
 					}
 				} catch (e) {
-					thumbnailURL = "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg";
+					thumbnailURL = DEFAULT_THUMBNAIL_URL;
 				}
 
 				var judul = classWork.querySelector("#judul").innerHTML;
@@ -137,7 +139,7 @@ import Card from "../components/Card.astro";
 				card.innerHTML = card.innerHTML.replace(/{body}/g, body);
 				card.innerHTML = card.innerHTML.replace(/{tag}/g, tag);
 				card.innerHTML = card.innerHTML.replace(
-					"https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg",
+					DEFAULT_THUMBNAIL_URL,
 					thumbnailURL
 				);
 				// Append and remove the extra "card" HTMLelement on the outerHTML

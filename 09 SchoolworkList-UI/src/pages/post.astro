@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const DEFAULT_THUMBNAIL_URL = "./003.png";
 ---
 
 <head>
@@ -15,7 +17,7 @@ import Layout from "../layouts/Layout.astro";
 		</div>
 	</main>
 </Layout>
-<script is:inline data-turbo-eval="false">
+<script is:inline data-turbo-eval="false" define:vars={{ DEFAULT_THUMBNAIL_URL }}>
 	(async () => {
 		var im = iframemanager();
 		var settings = await localforage.getItem("settings");
@@ -36,7 +38,7 @@ import Layout from "../layouts/Layout.astro";
 		var postURL = backendURL + classParam + "/" + postParam;
 		var thumbURL = new URL(window.location.href).searchParams.get("t")
 			? backendURL + new URL(window.location.href).searchParams.get("t")
-			: "https://genshin.global/wp-content/uploads/2022/05/raiden-shogun-yae-miko-official-desktop-wallpaper-genshin-2560x1440-1-2048x1152.jpg";
+			: DEFAULT_THUMBNAIL_URL;
 
 		im.run({
 			currLang: "en",
