@@ -9,7 +9,7 @@ const { theme, active = "" } = Astro.props;
 
 <div
 	id=`theme-${theme}`
-	class=`hover:border-secondary-focus border-primary-content custom-basis m-1 flex flex-1 grow-0 flex-col overflow-hidden rounded-lg border-2 border-solid max-md:min-w-[97.5%] ${active}`
+	class=`hover:border-secondary-focus border-primary-content custom-basis m-1 flex grow-0 flex-col overflow-hidden rounded-lg border-2 border-solid max-md:min-w-[97.5%] ${active}`
 	data-set-theme={theme}
 	data-act-class="outline"
 	onclick=handleSettingToggles(this)
