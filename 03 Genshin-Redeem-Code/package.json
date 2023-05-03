@@ -2,7 +2,7 @@
   "name": "03-genshin-redeem-code",
   "version": "1.0.0",
   "devDependencies": {
-    "wrangler": "2.18.0"
+    "wrangler": "2.19.0"
   },
   "private": true,
   "scripts": {
