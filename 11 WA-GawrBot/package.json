@@ -14,10 +14,10 @@
 	"dependencies": {
 		"@adiwajshing/baileys": "5.0.0",
 		"@adiwajshing/keyed-db": "0.2.4",
-		"@hapi/boom": "^10.0.0",
+		"@hapi/boom": "9.1.4",
 		"@prisma/client": "4.13.0",
-		"long": "^5.2.3",
-		"pino": "^8.12.1",
+		"long": "5.2.3",
+		"pino": "8.12.1",
 		"socket.io": "4.6.1"
 	},
 	"devDependencies": {
@@ -27,7 +27,7 @@
 		"typescript": "5.0.4"
 	},
 	"optionalDependencies": {
-		"bufferutil": "^4.0.7",
-		"utf-8-validate": "^6.0.3"
+		"bufferutil": "4.0.7",
+		"utf-8-validate": "6.0.3"
 	}
 }

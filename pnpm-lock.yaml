@@ -173,26 +173,26 @@ importers:
         specifier: 0.2.4
         version: 0.2.4
       '@hapi/boom':
-        specifier: ^10.0.0
-        version: 10.0.1
+        specifier: 9.1.4
+        version: 9.1.4
       '@prisma/client':
         specifier: 4.13.0
         version: 4.13.0(prisma@4.13.0)
       long:
-        specifier: ^5.2.3
+        specifier: 5.2.3
         version: 5.2.3
       pino:
-        specifier: ^8.12.1
+        specifier: 8.12.1
         version: 8.12.1
       socket.io:
         specifier: 4.6.1
         version: 4.6.1(bufferutil@4.0.7)(utf-8-validate@6.0.3)
     optionalDependencies:
       bufferutil:
-        specifier: ^4.0.7
+        specifier: 4.0.7
         version: 4.0.7
       utf-8-validate:
-        specifier: ^6.0.3
+        specifier: 6.0.3
         version: 6.0.3
     devDependencies:
       '@types/ws':
@@ -2213,20 +2213,10 @@ packages:
     dev: false
     optional: true
 
-  /@hapi/boom@10.0.1:
-    resolution: {integrity: sha512-ERcCZaEjdH3OgSJlyjVk8pHIFeus91CjKP3v+MpgBNp5IvGzP2l/bRiD78nqYcKPaZdbKkK5vDBVPd2ohHBlsA==}
-    dependencies:
-      '@hapi/hoek': 11.0.2
-    dev: false
-
   /@hapi/boom@9.1.4:
     resolution: {integrity: sha512-Ls1oH8jaN1vNsqcaHVYJrKmgMcKsC1wcp8bujvXrHaAqD2iDYq3HoOwsxwo09Cuda5R5nC0o0IxlrlTuvPuzSw==}
     dependencies:
       '@hapi/hoek': 9.3.0
-    dev: false
-
-  /@hapi/hoek@11.0.2:
-    resolution: {integrity: sha512-aKmlCO57XFZ26wso4rJsW4oTUnrgTFw2jh3io7CAtO9w4UltBNwRXvXIVzzyfkaaLRo3nluP/19msA8vDUUuKw==}
     dev: false
 
   /@hapi/hoek@9.3.0:
