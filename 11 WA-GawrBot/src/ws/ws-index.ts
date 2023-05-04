@@ -1,6 +1,12 @@
 import { socketio } from "../clients";
-import { initSocketio } from "./ws-socketio";
+import { useSocketio } from "../shared-clients";
+import { initSocketio, Socketio } from "./ws-socketio";
+
 
 export async function initWebSocket() {
 	initSocketio({ socketio: socketio });
+}
+
+export function startWebSocketHandler() {
+	const socket = new Socketio(useSocketio());
 }

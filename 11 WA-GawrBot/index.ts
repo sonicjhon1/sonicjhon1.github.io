@@ -1,7 +1,6 @@
 import { init, createSession } from "./src/wa/wa-index";
 import { prisma } from "./src/clients";
-import { initWebSocket } from "./src/ws/ws-index";
-import { handleWebSocket } from "./src/ws/ws-handle";
+import { initWebSocket, startWebSocketHandler } from "./src/ws/ws-index";
 
 init().then(async () => {
 	let sessionId = "owo";
@@ -10,5 +9,5 @@ init().then(async () => {
 	}
 });
 initWebSocket().then(async () => {
-	handleWebSocket();
+	startWebSocketHandler();
 });
