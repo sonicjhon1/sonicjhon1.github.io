@@ -13,20 +13,20 @@ export function initSocketio({ socketio }: initSocketioOptions) {
 }
 
 export class Socketio {
-	private readonly wsHandler;
+	private readonly wsMiscHandler;
 
 	constructor(io: Server) {
-		this.wsHandler = handlers.wsMiscHandler(io);
+		this.wsMiscHandler = handlers.wsMiscHandler(io);
 		this.listen();
 	}
 
 	/** Start listening to the events */
 	public listen() {
-		this.wsHandler.listen();
+		this.wsMiscHandler.listen();
 	}
 
 	/** Stop listening to the events */
 	public unlisten() {
-		this.wsHandler.unlisten();
+		this.wsMiscHandler.unlisten();
 	}
 }

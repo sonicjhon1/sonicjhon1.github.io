@@ -1,6 +1,6 @@
 import type { Server, Socket } from "socket.io";
 
-export default function handleWebSocket(io: Server) {
+export default function wsMiscHandler(io: Server) {
 	let listening = false;
 
 	const connection = async (socket: Socket) => {
