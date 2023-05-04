@@ -18,7 +18,7 @@
 		"@prisma/client": "4.13.0",
 		"long": "^5.2.3",
 		"pino": "^8.12.1",
-		"socket.io": "^4.6.1"
+		"socket.io": "4.6.1"
 	},
 	"devDependencies": {
 		"@types/ws": "8.5.4",
