@@ -14,7 +14,10 @@
 	"dependencies": {
 		"@adiwajshing/baileys": "5.0.0",
 		"@adiwajshing/keyed-db": "0.2.4",
-		"@prisma/client": "4.13.0"
+		"@hapi/boom": "^10.0.1",
+		"@prisma/client": "4.13.0",
+		"long": "^5.2.3",
+		"pino": "^8.12.1"
 	},
 	"devDependencies": {
 		"@types/ws": "8.5.4",
