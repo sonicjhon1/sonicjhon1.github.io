@@ -1,5 +1,5 @@
 import type { BaileysEventEmitter, SocketConfig } from "@adiwajshing/baileys";
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "../generated/client";
 import { setPrisma, setLogger } from "../shared-clients"
 import * as handlers from "./wa-store-handlers";
 

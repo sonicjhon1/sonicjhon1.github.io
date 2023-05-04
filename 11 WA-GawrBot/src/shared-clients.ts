@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+import { PrismaClient } from "./generated/client";
+import { PrismaClientKnownRequestError } from "./generated/client/runtime/library";
 import type { SocketConfig } from "@adiwajshing/baileys";
 import { DEFAULT_CONNECTION_CONFIG } from "@adiwajshing/baileys";
 import pino from 'pino';

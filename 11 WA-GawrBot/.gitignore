@@ -29,3 +29,6 @@ docs
 browser-token.json
 Proxy
 messages*.json
+
+# Prisma stuff
+src/generated/

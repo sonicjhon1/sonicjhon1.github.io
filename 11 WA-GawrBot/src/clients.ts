@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from './generated/client';
 import pino from 'pino';
 
 export const prisma = new PrismaClient();
