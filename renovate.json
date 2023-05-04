@@ -3,5 +3,5 @@
   "extends": ["config:base", ":disableRateLimiting", ":noUnscheduledUpdates"],
   "semanticCommits": "enabled",
   "rebaseWhen": "conflicted",
-  "rangeStrategy": "pin"  
+  "rangeStrategy": "auto"  
 }
