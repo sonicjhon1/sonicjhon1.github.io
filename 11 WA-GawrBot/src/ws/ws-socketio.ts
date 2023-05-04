@@ -16,7 +16,7 @@ export class Socketio {
 	private readonly wsHandler;
 
 	constructor(io: Server) {
-		this.wsHandler = handlers.wsHandler(io);
+		this.wsHandler = handlers.wsMiscHandler(io);
 		this.listen();
 	}
 

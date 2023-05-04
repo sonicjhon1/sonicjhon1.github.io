@@ -1,1 +1,1 @@
-export { default as wsHandler } from './misc';
+export { default as wsMiscHandler } from './misc';
