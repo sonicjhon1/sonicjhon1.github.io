@@ -3,16 +3,22 @@ import { PrismaClientKnownRequestError } from "./generated/client/runtime/librar
 import type { SocketConfig } from "@adiwajshing/baileys";
 import { DEFAULT_CONNECTION_CONFIG } from "@adiwajshing/baileys";
 import pino from 'pino';
+import { Server } from "socket.io";
 
 let prisma: PrismaClient | null = null;
 let logger: SocketConfig["logger"] | null = null;
+let socketio: Server | null = null;
 
 export function setPrisma(prismaClient: PrismaClient) {
 	prisma = prismaClient;
 }
 
-export function setLogger(pinoLogger?: SocketConfig["logger"]) {
-	logger = pinoLogger || DEFAULT_CONNECTION_CONFIG.logger;
+export function setLogger(pinoLogger: SocketConfig["logger"]) {
+	logger = pinoLogger;
+}
+
+export function setSocketio(server: Server) {
+	socketio = server;
 }
 
 export function usePrisma() {
@@ -33,4 +39,12 @@ export function useLogger() {
 		return pino({ level: process.env.LOG_LEVEL || 'debug' });
 	}
 	return logger;
+}
+
+export function useSocketio(): Server {
+	if (!socketio) {
+		console.error("Socket.io cannot be used before initialization. Initializing a new Socket.io.");
+		return new Server(Number(process.env.SOCKET_PORT) || 3000);
+	}
+	return socketio;
 }
