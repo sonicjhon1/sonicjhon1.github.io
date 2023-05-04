@@ -14,19 +14,23 @@ export function initSocketio({ socketio }: initSocketioOptions) {
 
 export class Socketio {
 	private readonly wsMiscHandler;
+	private readonly wsServerHandler;
 
 	constructor(io: Server) {
 		this.wsMiscHandler = handlers.wsMiscHandler(io);
+		this.wsServerHandler = handlers.wsServerHandler(io);
 		this.listen();
 	}
 
 	/** Start listening to the events */
 	public listen() {
 		this.wsMiscHandler.listen();
+		this.wsServerHandler.listen();
 	}
 
 	/** Stop listening to the events */
 	public unlisten() {
 		this.wsMiscHandler.unlisten();
+		this.wsServerHandler.unlisten();
 	}
 }
