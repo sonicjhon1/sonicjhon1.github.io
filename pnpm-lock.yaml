@@ -167,7 +167,7 @@ importers:
   11 WA-GawrBot:
     dependencies:
       '@adiwajshing/baileys':
-        specifier: 5.0.0
+        specifier: github:WhiskeySockets/Baileys
         version: 5.0.0(@adiwajshing/keyed-db@0.2.4)
       '@adiwajshing/keyed-db':
         specifier: 0.2.4
