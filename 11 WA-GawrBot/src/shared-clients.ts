@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import type { SocketConfig } from "@adiwajshing/baileys";
 import { DEFAULT_CONNECTION_CONFIG } from "@adiwajshing/baileys";
 import pino from 'pino';
@@ -20,6 +21,10 @@ export function usePrisma() {
 		return new PrismaClient();
 	}
 	return prisma;
+}
+
+export function usePrismaClientKnownRequestError() {
+	return PrismaClientKnownRequestError;
 }
 
 export function useLogger() {

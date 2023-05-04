@@ -1,11 +1,11 @@
 import type { BaileysEventEmitter } from "@adiwajshing/baileys";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import type { BaileysEventHandler } from "../../types";
-import { usePrisma, useLogger } from "../../shared-clients";
+import { usePrisma, useLogger, usePrismaClientKnownRequestError } from "../../shared-clients";
 import { transformPrisma } from "../../utils";
 
 export default function chatHandler(sessionId: string, event: BaileysEventEmitter) {
 	const prisma = usePrisma();
+	const prismaClientKnownRequestError = usePrismaClientKnownRequestError();
 	const logger = useLogger();
 	let listening = false;
 
@@ -65,7 +65,7 @@ export default function chatHandler(sessionId: string, event: BaileysEventEmitte
 					where: { sessionId_id: { id: update.id!, sessionId } },
 				});
 			} catch (e) {
-				if (e instanceof PrismaClientKnownRequestError && e.code === "P2025") {
+				if (e instanceof prismaClientKnownRequestError && e.code === "P2025") {
 					return logger.info({ update }, "Got update for non existent chat");
 				}
 				logger.error(e, "An error occured during chat update");
