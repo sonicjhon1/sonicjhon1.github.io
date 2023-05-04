@@ -1,5 +1,5 @@
 import type { Server } from "socket.io";
-import { setSocketio } from "../shared-clients"
+import { setSocketio } from "../shared-clients";
 
 type initSocketioOptions = {
 	/** Socket.io instance */
