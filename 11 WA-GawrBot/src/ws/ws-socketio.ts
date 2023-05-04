@@ -15,8 +15,8 @@ export function initSocketio({ socketio }: initSocketioOptions) {
 export class Socketio {
 	private readonly wsHandler;
 
-	constructor(server: Server) {
-		this.wsHandler = handlers.wsHandler(server);
+	constructor(io: Server) {
+		this.wsHandler = handlers.wsHandler(io);
 		this.listen();
 	}
 

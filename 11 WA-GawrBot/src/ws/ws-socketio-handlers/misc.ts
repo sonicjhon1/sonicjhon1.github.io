@@ -1,6 +1,6 @@
 import type { Server, Socket } from "socket.io";
 
-export default function handleWebSocket(server: Server) {
+export default function handleWebSocket(io: Server) {
 	let listening = false;
 
 	const set = async (socket: Socket) => {
@@ -10,14 +10,14 @@ export default function handleWebSocket(server: Server) {
 	const listen = () => {
 		if (listening) return;
 
-		server.on("connection", (socket) => set(socket));
+		io.on("connection", set);
 		listening = true;
 	};
 
 	const unlisten = () => {
 		if (!listening) return;
 
-		server.off("connection", set);
+		io.off("connection", set);
 		listening = false;
 	};
 
