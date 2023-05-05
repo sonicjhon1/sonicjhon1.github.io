@@ -1,11 +1,11 @@
-import type { Server, Socket } from "socket.io";
+import type { Server } from "socket.io";
 
 export default function wsServerHandler(io: Server) {
 	let listening = false;
 
-	const ping = async (data: any, socket: Socket) => {
-		console.log(data);
-		socket.emit("ping", "pong");
+	const ping = async (...args: any[]) => {
+		console.log("Event: Ping. Args:", args);
+		io.emit("pong");
 	};
 
 	const listen = () => {

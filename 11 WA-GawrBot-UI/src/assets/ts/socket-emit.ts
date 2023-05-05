@@ -6,6 +6,8 @@ export function emitEvent(name: string, args?: any): void {
     switch(name) {
         case "ping":
             socket.emit(name);
+            console.log("Ping emitted!");
+            break;
         default:
             break;
     }

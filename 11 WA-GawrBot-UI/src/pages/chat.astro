@@ -10,9 +10,13 @@ import { ChatHandler } from "../assets/ts/chat-handler";
 </Layout>
 <script>
     import {ChatHandler} from "../assets/ts/chat-handler";
+    import {MiscHandler} from "../assets/ts/misc-handler";
     import { emitEvent } from "../assets/ts/socket-emit";
 
     ChatHandler();
+    MiscHandler();
 
-    emitEvent("ping")
+    document.querySelector("button")?.addEventListener("click", () => {
+        emitEvent("ping")
+    })
 </script>
