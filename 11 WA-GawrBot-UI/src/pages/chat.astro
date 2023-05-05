@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ChatHandler } from "../assets/ts/chat-handler";
+
+const ChatHandlerReturn = ChatHandler;
+---
+
+<Layout title="Chat">
+	<h1>{ChatHandlerReturn()}</h1>
+</Layout>
