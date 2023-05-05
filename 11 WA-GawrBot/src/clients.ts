@@ -13,4 +13,8 @@ prisma.$use(async (params, next) => {
 
 export const logger = pino({ level: process.env.LOG_LEVEL || "debug" });
 
-export const socketio: Server = new Server(Number(process.env.SOCKET_PORT) || 3000);
+export const socketio: Server = new Server(Number(process.env.SOCKET_PORT) || 3000, {
+	cors: {
+		origin: "*",
+	},
+});

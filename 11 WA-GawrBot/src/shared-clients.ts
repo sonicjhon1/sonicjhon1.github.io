@@ -44,7 +44,11 @@ export function useLogger(): SocketConfig["logger"] {
 export function useSocketio(): Server {
 	if (!socketio) {
 		console.error("Socket.io cannot be used before initialization. Initializing a new Socket.io server.");
-		socketio = new Server(Number(process.env.SOCKET_PORT) || 3000);
+		socketio = new Server(Number(process.env.SOCKET_PORT) || 3000, {
+			cors: {
+				origin: "*",
+			},
+		});
 	}
 	return socketio;
 }
