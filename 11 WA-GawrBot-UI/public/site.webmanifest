@@ -1,0 +1,23 @@
+{
+	"name": "Gawr Bot",
+	"short_name": "Gawr Bot",
+	"description": "WA-GawrBot-UI is an UI that allows you to interact with the Gawr Bot backend to receive and send messages via WA and a bunch of other things.",
+	"start_url": "./",
+	"icons": [
+		{
+			"src": "./android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable any"
+		},
+		{
+			"src": "./android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable any"
+		}
+	],
+	"theme_color": "#0439D9",
+	"background_color": "#010326",
+	"display": "standalone"
+}
