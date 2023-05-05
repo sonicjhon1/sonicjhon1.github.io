@@ -5,8 +5,14 @@ import { ChatHandler } from "../assets/ts/chat-handler";
 
 <Layout title="Chat">
 	<h1>{ChatHandler()}</h1>
+
+    <button class=" rounded-md bg-slate-600 text-slate-100 px-5 py-2 font-bold"> Ping! </button>
 </Layout>
 <script>
     import {ChatHandler} from "../assets/ts/chat-handler";
+    import { emitEvent } from "../assets/ts/socket-emit";
+
     ChatHandler();
+
+    emitEvent("ping")
 </script>
