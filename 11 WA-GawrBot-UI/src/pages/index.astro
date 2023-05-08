@@ -2,13 +2,15 @@
 import Layout from "../layouts/Layout.astro";
 import Chats from "../components/Chats.astro";
 import Main from "../components/Main.astro";
-import Filter from "../components/Filter.astro";
+import SideBar from "../components/SideBar.astro";
 ---
 
 <Layout title="Gawr Bot">
-	<div class="flex flex-row">
-		<Filter />
-		<Chats />
-		<Main />
+	<div class="flex min-h-[100vh] p-2 bg-base-300">
+		<div class="flex flex-row min-h-full min-w-full rounded-md bg-base-100">
+			<SideBar />
+			<Chats />
+			<Main />
+		</div>
 	</div>
 </Layout>

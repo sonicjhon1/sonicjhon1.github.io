@@ -1,0 +1,16 @@
+---
+import { Icon } from "astro-icon";
+
+export interface Props {
+	name: string;
+	text?: string;
+}
+const { name, text } = Astro.props;
+---
+
+<button class="btn btn-sm max-2xl:btn-md max-xl:btn-xs gap-4 max-lg:gap-2 px-4 max-xl:px-2 py-6 max-2xl:py-0 max-xl:py-4 max-lg:py-2 my-1.5 max-lg:my-1 max-md:w-fit content-center justify-start">
+	<Icon name={name} class="h-6 w-6 max-2xl:h-5 max-2xl:w-5 max-xl:h-4 max-xl:w-4 max-lg:h-2 max-lg:w-2" />
+	<div class="max-2xl:text-xs max-xl:text-[0.5rem] max-lg:text-[50%] max-md:hidden">
+		{text}
+	</div>
+</button>
