@@ -14,7 +14,7 @@
   "dependencies": {
     "@astrojs/tailwind": "3.1.2",
     "@tailwindcss/line-clamp": "0.4.4",
-    "astro": "2.4.2",
+    "astro": "2.4.3",
     "tailwindcss": "3.3.2"
   }
 }
