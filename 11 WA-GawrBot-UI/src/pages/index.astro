@@ -1,7 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Chats from "../components/Chats.astro";
+import Main from "../components/Main.astro";
+import Filter from "../components/Filter.astro";
 ---
 
 <Layout title="Gawr Bot">
-	<a href="./chat"><h1 class="font-bold text-xl text-bg-neutral-content">GHAWR</h1></a>
+	<Filter />
+	<Chats />
+	<Main />
 </Layout>
