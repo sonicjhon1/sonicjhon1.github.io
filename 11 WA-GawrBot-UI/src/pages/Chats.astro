@@ -1,0 +1,37 @@
+---
+import Chat from "../components/Chat.astro";
+
+const url = new URL(Astro.request.url);
+const data = url.searchParams.get("data");
+const jsonData = (() => {
+	if (url.pathname === "/Chats" && data) {
+		return JSON.parse(data);
+	} else {
+		const data = `[{
+		"latestMessageTimestamp": 1683537000,
+		"latestMessage": "uwu owo",
+		"username": "TestUser",
+		"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+		"isPinned": false,
+		"isArchived": false
+	},
+	{
+		"latestMessageTimestamp": 1683000000,
+		"latestMessage": "omagah",
+		"username": "Notes",
+		"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/default_profile.png",
+		"isPinned": true,
+		"isArchived": false
+	}]`;
+		return JSON.parse(data);
+	}
+})();
+console.log(jsonData);
+---
+
+<div class="flex flex-col p-4">
+	<div class="mb-2">
+		<input type="text" placeholder="Search" class="input input-bordered w-full max-w-xs px-6 focus:outline-none" />
+	</div>
+	{jsonData.map((chatData: any) => <Chat latestMessageTimestamp={chatData.latestMessageTimestamp} latestMessage={chatData.latestMessage} username={chatData.username} profilePicture={chatData.profilePicture} isPinned={chatData.isPinned} isArchived={chatData.isArchived} />)}
+</div>

@@ -1,3 +1,46 @@
-<div>
-    Here lies the chat (Singular) component.
+---
+import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
+import profilePictureDefault from "../assets/.original/herta.png";
+
+export interface Props {
+	latestMessageTimestamp: number;
+	latestMessage: string;
+	username: string;
+	profilePicture?: string;
+	isPinned: boolean;
+	isArchived: boolean;
+}
+const { latestMessageTimestamp, latestMessage, username, profilePicture = profilePictureDefault.src, isPinned, isArchived } = Astro.props;
+---
+
+<div class="flex flex-row p-2 bg-base-200 hover:bg-base-content/25 rounded-md">
+	<div class="w-14 h-14 p-1 mr-3">
+		<Image class="w-full h-full rounded-full object-cover" src={profilePicture} alt={username} width="56" height="56" format="avif" />
+	</div>
+	<div class="flex flex-1 flex-col">
+		<div class="flex">
+			<span class="flex flex-1 font-bold">
+				{username}
+			</span>
+			<span class="flex self-end text-xs">
+				{
+					new Date(latestMessageTimestamp * 1000).toLocaleDateString("en-US", {
+						day: "2-digit",
+						month: "2-digit",
+						year: "numeric",
+					})
+				}
+			</span>
+		</div>
+		<div class="flex">
+			<div class="flex flex-1 h-full self-center">
+                    {latestMessage}
+            </div>
+			<span class="flex h-full">
+				{isPinned ? (<Icon name="ph:push-pin-fill" class="h-4 w-4 flex self-center" />) : ""}
+				{isArchived ? (<Icon name="ph:archive-fill" class="h-4 w-4 flex self-center" />) : ""}
+			</span>
+		</div>
+	</div>
 </div>
