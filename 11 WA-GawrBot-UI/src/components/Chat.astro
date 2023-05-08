@@ -14,7 +14,7 @@ export interface Props {
 const { latestMessageTimestamp, latestMessage, username, profilePicture = profilePictureDefault.src, isPinned, isArchived } = Astro.props;
 ---
 
-<div class="flex flex-row p-2 bg-base-200 hover:bg-base-content/25 rounded-md max-md:min-w-[15rem] max-md:max-h-min">
+<div class="flex flex-row p-2 hover:bg-base-content/25 hover:rounded-md max-lg:flex-1 max-h-min">
 	<div class="w-14 h-14 p-1 mr-3">
 		<Image class="w-full h-full rounded-full object-cover" src={profilePicture} alt={username} width="56" height="56" format="avif" />
 	</div>

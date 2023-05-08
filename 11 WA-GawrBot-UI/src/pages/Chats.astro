@@ -29,9 +29,11 @@ const jsonData = (() => {
 console.log(jsonData);
 ---
 
-<div class="flex flex-col p-4">
+<div class="flex flex-col p-4 max-lg:flex-1 min-w-fit">
 	<div class="mb-2">
-		<input type="text" placeholder="Search" class="input input-bordered w-full max-w-xs px-6 focus:outline-none" />
+		<input type="text" placeholder="Search" class="input input-bordered w-full px-6 focus:outline-none" />
 	</div>
-	{jsonData.map((chatData: any) => <Chat latestMessageTimestamp={chatData.latestMessageTimestamp} latestMessage={chatData.latestMessage} username={chatData.username} profilePicture={chatData.profilePicture} isPinned={chatData.isPinned} isArchived={chatData.isArchived} />)}
+	<div class="bg-base-200 rounded-md">
+		{jsonData.map((chatData: any) => <Chat latestMessageTimestamp={chatData.latestMessageTimestamp} latestMessage={chatData.latestMessage} username={chatData.username} profilePicture={chatData.profilePicture} isPinned={chatData.isPinned} isArchived={chatData.isArchived} />)}
+	</div>
 </div>
