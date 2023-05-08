@@ -182,8 +182,8 @@ importers:
         specifier: 5.2.3
         version: 5.2.3
       pino:
-        specifier: 8.12.1
-        version: 8.12.1
+        specifier: 8.14.1
+        version: 8.14.1
       socket.io:
         specifier: 4.6.1
         version: 4.6.1(bufferutil@4.0.7)(utf-8-validate@6.0.3)
@@ -6413,8 +6413,8 @@ packages:
       thread-stream: 0.15.2
     dev: false
 
-  /pino@8.12.1:
-    resolution: {integrity: sha512-n4F7nrEUDH0u5pjlUPkrvsN6oZOhScZWwpWPniwVkMnO6a2DhpnMNWDUlW0SawVICgrNhOf0yTNgw2lYQBsPYA==}
+  /pino@8.14.1:
+    resolution: {integrity: sha512-8LYNv7BKWXSfS+k6oEc6occy5La+q2sPwU3q2ljTX5AZk7v+5kND2o5W794FyRaqha6DJajmkNRsWtPpFyMUdw==}
     hasBin: true
     dependencies:
       atomic-sleep: 1.0.0
