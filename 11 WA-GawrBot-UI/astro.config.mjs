@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, sharpImageService } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import compress from "astro-compress";
 import node from "@astrojs/node";
@@ -15,7 +15,7 @@ export default defineConfig({
 	},
 	integrations: [
 		tailwind(),
-    compress({
+		compress({
 			html: {
 				removeAttributeQuotes: false,
 				decodeEntities: true,
@@ -25,7 +25,10 @@ export default defineConfig({
 	experimental: {
 		assets: true,
 		inlineStylesheets: "always",
-		scopedStyleStrategy: "class"
+		scopedStyleStrategy: "class",
+	},
+	image: {
+		service: sharpImageService(),
 	},
 	output: "server",
 	server: {
