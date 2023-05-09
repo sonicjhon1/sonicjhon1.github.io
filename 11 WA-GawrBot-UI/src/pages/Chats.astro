@@ -8,25 +8,40 @@ const jsonData = (() => {
 		return JSON.parse(data);
 	} else {
 		const data = `[{
-		"latestMessageTimestamp": 1683537000,
-		"latestMessage": "uwu owo",
-		"username": "TestUser",
-		"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
-		"isPinned": false,
-		"isArchived": false
-	},
-	{
-		"latestMessageTimestamp": 1683000000,
-		"latestMessage": "omagah",
-		"username": "Notes",
-		"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/default_profile.png",
-		"isPinned": true,
-		"isArchived": false
-	}]`;
+			"latestMessageTimestamp": 1683537000,
+			"latestMessage": "uwu owo",
+			"username": "TestUser",
+			"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+			"isPinned": false,
+			"isArchived": false
+			},
+			{
+			"latestMessageTimestamp": 1683000000,
+			"latestMessage": "omagah",
+			"username": "Notes",
+			"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/default_profile.png",
+			"isPinned": true,
+			"isArchived": false
+			},
+			{
+			"latestMessageTimestamp": 1683555000,
+			"latestMessage": "This is also archived!",
+			"username": "Test B64 1",
+			"profilePicture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+			"isPinned": false,
+			"isArchived": true
+			},
+			{
+			"latestMessageTimestamp": 1680000000,
+			"latestMessage": "Should work too~",
+			"username": "Test B64 2",
+			"profilePicture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC",
+			"isPinned": false,
+			"isArchived": false
+		}]`;
 		return JSON.parse(data);
 	}
 })();
-console.log(jsonData);
 ---
 
 <div class="flex flex-col p-4 max-lg:flex-1 min-w-fit">
@@ -34,6 +49,17 @@ console.log(jsonData);
 		<input type="text" placeholder="Search" class="input input-bordered w-full px-6 focus:outline-none" />
 	</div>
 	<div class="bg-base-200 rounded-md">
-		{jsonData.map((chatData: any) => <Chat latestMessageTimestamp={chatData.latestMessageTimestamp} latestMessage={chatData.latestMessage} username={chatData.username} profilePicture={chatData.profilePicture} isPinned={chatData.isPinned} isArchived={chatData.isArchived} />)}
+		{
+			jsonData.map((chatData: any) => (
+				<Chat
+					latestMessageTimestamp={chatData.latestMessageTimestamp}
+					latestMessage={chatData.latestMessage}
+					username={chatData.username}
+					profilePicture={chatData.profilePicture}
+					isPinned={chatData.isPinned}
+					isArchived={chatData.isArchived}
+				/>
+			))
+		}
 	</div>
 </div>
