@@ -24,6 +24,8 @@ export default defineConfig({
 	],
 	experimental: {
 		assets: true,
+		inlineStylesheets: "always",
+		scopedStyleStrategy: "class"
 	},
 	output: "server",
 	server: {
