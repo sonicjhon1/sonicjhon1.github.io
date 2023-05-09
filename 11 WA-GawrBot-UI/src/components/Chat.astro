@@ -35,11 +35,11 @@ const { latestMessageTimestamp, latestMessage, username, profilePicture = profil
 		</div>
 		<div class="flex">
 			<div class="flex flex-1 h-full self-center">
-                    {latestMessage}
-            </div>
+				{latestMessage}
+			</div>
 			<span class="flex h-full">
-				{isPinned ? (<Icon name="ph:push-pin-fill" class="h-4 w-4 flex self-center" />) : ""}
-				{isArchived ? (<Icon name="ph:archive-fill" class="h-4 w-4 flex self-center" />) : ""}
+				{isPinned ? <Icon name="ph:push-pin-fill" class="h-4 w-4 flex self-center" /> : ""}
+				{isArchived ? <Icon name="ph:archive-fill" class="h-4 w-4 flex self-center" /> : ""}
 			</span>
 		</div>
 	</div>
