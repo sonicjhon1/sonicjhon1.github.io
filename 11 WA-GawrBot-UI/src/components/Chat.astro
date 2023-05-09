@@ -1,7 +1,8 @@
 ---
 import { Icon } from "astro-icon";
-import { Image, getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import profilePictureDefault from "../assets/.original/export.png";
+import sharp from "sharp";
 
 export interface Props {
 	latestMessageTimestamp: number;
@@ -11,15 +12,32 @@ export interface Props {
 	isPinned: boolean;
 	isArchived: boolean;
 }
-const { latestMessageTimestamp, latestMessage, username, profilePicture, isPinned, isArchived } = Astro.props;
+const { latestMessageTimestamp, latestMessage, profilePicture, username, isPinned, isArchived } = Astro.props;
+
 const profilePictureOptimized = profilePicture
-	? (await getImage({ src: profilePicture, format: "avif", width: 56, height: 56 })).src
-	: (await getImage({ src: profilePictureDefault, format: "avif", width: 56, height: 56 })).src;
+	? await sharp(await (await fetch(profilePicture)).arrayBuffer())
+			.resize({
+				width: 80,
+				height: 80,
+				fit: sharp.fit.cover,
+			})
+			.toFormat("avif")
+			.toBuffer()
+			.then((data) => {
+				return `data:image/avif;base64,${data.toString("base64")}`;
+			})
+	: undefined;
 ---
 
 <div class="flex flex-row p-2 hover:bg-base-content/25 hover:rounded-md max-lg:flex-1 max-h-min">
 	<div class="w-14 h-14 p-1 mr-3">
-		<Image class="w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={username} width="56" height="56" format="avif" />
+		{
+			profilePicture ? (
+				<img class="w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={username} width="56" height="56" fetchpriority="high" loading="eager" />
+			) : (
+				<Image class="w-full h-full rounded-full object-cover" src={profilePictureDefault} alt={username} width="56" height="56" format="avif" fetchpriority="high" loading="eager" />
+			)
+		}
 	</div>
 	<div class="flex flex-1 flex-col">
 		<div class="flex">
