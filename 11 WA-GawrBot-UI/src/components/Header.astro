@@ -1,8 +1,8 @@
 ---
 import { Icon } from "astro-icon";
+import { optimizeImage } from "../assets/ts/util/image";
 import { getImage } from "astro:assets";
 import profilePictureDefault from "../assets/.original/export.png";
-import sharp from "sharp";
 
 // Edge browsers doesn't support avif format yet.
 const imageFormat = Astro.request.headers.get("user-agent")?.includes("Edg") ? "webp" : "avif";
@@ -15,17 +15,7 @@ export interface Props {
 const { profilePicture, username, participants } = Astro.props;
 
 const profilePictureOptimized = profilePicture
-	? await sharp(await (await fetch(profilePicture)).arrayBuffer())
-			.resize({
-				width: 80,
-				height: 80,
-				fit: sharp.fit.cover,
-			})
-			.toFormat(imageFormat)
-			.toBuffer()
-			.then((data) => {
-				return `data:image/${imageFormat};base64,${data.toString("base64")}`;
-			})
+	? await optimizeImage(profilePicture, imageFormat, 80, 80)
 	: (await getImage({ src: profilePictureDefault, format: imageFormat, width: 80, height: 80 })).src;
 ---
 
