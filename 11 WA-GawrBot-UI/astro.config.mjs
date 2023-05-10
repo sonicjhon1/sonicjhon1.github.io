@@ -8,7 +8,7 @@ const BASE = import.meta.env.PROD ? "11 WA-GawrBot-UI" : "/";
 
 export default defineConfig({
 	site: SITE,
-	base: BASE,
+	base: import.meta.env.PUBLIC_LOCAL_BUILD ? BASE : "/",
 	build: {
 		// Generate `page.html` instead of `page/index.html` during build.
 		format: "file",
