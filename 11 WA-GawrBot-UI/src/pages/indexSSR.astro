@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Chats from "./Chats.astro";
+import Main from "./Main.astro";
+import SideBar from "../components/SideBar.astro";
+---
+
+<Layout title="Gawr Bot">
+	<div class="fixed flex min-h-screen max-h-screen min-w-[100vw] p-2 bg-base-300 font-roboto">
+		<div class="flex flex-row min-h-full min-w-full max-h-full rounded-md bg-base-100">
+			<SideBar />
+			<Chats />
+			<Main />
+		</div>
+	</div>
+</Layout>
