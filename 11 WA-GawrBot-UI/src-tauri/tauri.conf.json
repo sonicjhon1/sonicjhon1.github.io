@@ -3,8 +3,8 @@
   "build": {
     "beforeBuildCommand": "pnpm build:astro && pnpm build:caxa",
     "beforeDevCommand": "pnpm dev",
-    "devPath": "http://localhost:3006/",
-    "distDir": "http://localhost:3006/"
+    "devPath": "http://localhost:3006?tauri=true",
+    "distDir": "http://localhost:3006?tauri=true"
   },
   "package": {
     "productName": "GawrGura",
@@ -21,6 +21,39 @@
             "sidecar": true
           }
         ]
+      },
+      "window": {
+        "all": false,
+        "center": false,
+        "close": false,
+        "create": false,
+        "hide": false,
+        "maximize": false,
+        "minimize": false,
+        "print": false,
+        "requestUserAttention": false,
+        "setAlwaysOnTop": false,
+        "setContentProtected": false,
+        "setCursorGrab": false,
+        "setCursorIcon": false,
+        "setCursorPosition": false,
+        "setCursorVisible": false,
+        "setDecorations": false,
+        "setFocus": false,
+        "setFullscreen": true,
+        "setIcon": false,
+        "setIgnoreCursorEvents": false,
+        "setMaxSize": false,
+        "setMinSize": false,
+        "setPosition": false,
+        "setResizable": false,
+        "setSize": false,
+        "setSkipTaskbar": false,
+        "setTitle": false,
+        "show": false,
+        "startDragging": false,
+        "unmaximize": false,
+        "unminimize": false
       }
     },
     "bundle": {
