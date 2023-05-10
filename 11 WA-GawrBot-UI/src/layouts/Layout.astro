@@ -12,8 +12,6 @@ const metaTitle = "Gawr Bot";
 const metaThumbnail = "./thumb.png";
 const metaDescription = "WA-GawrBot-UI is an UI that allows you to interact with the Gawr Bot backend to receive and send messages via WA and a bunch of other things.";
 const metaUrl = import.meta.env.SITE + import.meta.env.BASE_URL;
-
-const isTauri = (new URL(Astro.request.url)).searchParams.get("tauri");
 ---
 
 <html lang="en" data-theme="forest">
@@ -48,7 +46,8 @@ const isTauri = (new URL(Astro.request.url)).searchParams.get("tauri");
 		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
 		<link rel="manifest" href="./site.webmanifest" />
-		{ isTauri ? <TauriScripts /> : <Scripts/>}
+		<Scripts />
+		<TauriScripts />
 		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" />
 	</head>
 	<slot />

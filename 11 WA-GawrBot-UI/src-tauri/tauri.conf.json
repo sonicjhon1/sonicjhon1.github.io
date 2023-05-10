@@ -3,8 +3,8 @@
   "build": {
     "beforeBuildCommand": "pnpm build:astro && pnpm build:caxa",
     "beforeDevCommand": "pnpm dev",
-    "devPath": "http://localhost:3006?tauri=true",
-    "distDir": "http://localhost:3006?tauri=true"
+    "devPath": "http://localhost:3006/indexSSR?tauri=true",
+    "distDir": "http://localhost:3006/indexSSR?tauri=true"
   },
   "package": {
     "productName": "GawrGura",
