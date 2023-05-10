@@ -2,11 +2,24 @@
 import Header from "../components/Header.astro";
 import Messages from "./Messages.astro";
 import InputBar from "../components/InputBar.astro";
+
+const url = new URL(Astro.request.url);
+const data = url.searchParams.get("data");
+const jsonData = (() => {
+	if (url.pathname === "/Main" && data) {
+		return JSON.parse(data);
+	} else {
+		const data = `{
+			"username": "TestUser",
+			"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png"
+			}`;
+		return JSON.parse(data);
+	}
+})();
 ---
 
-<div class="flex flex-col p-4 max-lg:hidden">
-	Here lies the main component.
-	<Header />
+<div class="flex flex-1 flex-col m-4 ml-3 rounded-md bg-base-300 max-lg:hidden border-[1.5px] border-secondary/10">
+	<Header username={jsonData.username} profilePicture={jsonData.profilePicture} />
 	<Messages />
 	<InputBar />
 </div>
