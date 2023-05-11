@@ -11,8 +11,86 @@ const jsonData = (() => {
 	} else {
 		const data = `{
 			"username": "TestUser",
-			"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png"
-			}`;
+			"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+			"messages": [
+				{
+					"remoteJid": "1234567891234@s.whatsapp.net",
+					"id": "ID is currently hidden to prevent leaks.",
+					"message": {"conversation":"okok"},
+					"timestamp": 1683424432,
+					"pushName": "TestUser",
+					"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+					"userReceipt": null
+				},
+				{
+					"fromMe": true,
+					"remoteJid": "1234567891234@s.whatsapp.net",
+					"id": "ID is currently hidden to prevent leaks.",
+					"message": {"extendedTextMessage":{"text":"Mhm..","contextInfo":{"quotedMessage":{"conversation":"Tp klo ad tmn gaslh"}}}},
+					"timestamp": 1683104439,
+					"pushName": "Sonicj",
+					"userReceipt": null,
+					"ack": 4
+				},
+				{
+					"remoteJid": "1234567891234@s.whatsapp.net",
+					"id": "ID is currently hidden to prevent leaks.",
+					"message": {"extendedTextMessage":{"text":"Sure"}},
+					"timestamp": 1683104765,
+					"pushName": "TestUser",
+					"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+					"userReceipt": null
+				},
+				{
+					"remoteJid": "1234567890123@s.whatsapp.net",
+					"id": "ID is currently hidden to prevent leaks.",
+					"message": {"extendedTextMessage":{"text":"Test~"}},
+					"timestamp": 1683104765,
+					"pushName": null,
+					"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+					"userReceipt": null
+				},
+				{
+					"remoteJid": "1234567890123@s.whatsapp.net",
+					"id": "ID is currently hidden to prevent leaks.",
+					"message": {"extendedTextMessage":{"text":"Test~"}},
+					"timestamp": 1683104765,
+					"pushName": null,
+					"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+					"userReceipt": null
+				},
+				{
+					"remoteJid": "1234567890123@s.whatsapp.net",
+					"id": "ID is currently hidden to prevent leaks.",
+					"message": {"extendedTextMessage":{"text":"Test~"}},
+					"timestamp": 1683104765,
+					"pushName": null,
+					"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+					"userReceipt": null
+				},
+				{
+					"fromMe": true,
+					"remoteJid": "1234567890123@s.whatsapp.net",
+					"id": "ID is currently hidden to prevent leaks.",
+					"message": {"extendedTextMessage":{"text":"OwO"}},
+					"timestamp": 1683105000,
+					"pushName": "Sonicj",
+					"profilePicture": null,
+					"userReceipt": null,
+					"ack": 3
+				},
+				{
+					"fromMe": true,
+					"remoteJid": "1234567890123@s.whatsapp.net",
+					"id": "ID is currently hidden to prevent leaks.",
+					"message": {"conversation":"owo"},
+					"timestamp": 1683105100,
+					"pushName": "Sonicj",
+					"profilePicture": null,
+					"userReceipt": null,
+					"ack": 0
+				}
+			]}`;
 		return JSON.parse(data);
 	}
 })();
@@ -20,6 +98,6 @@ const jsonData = (() => {
 
 <div class="flex flex-1 flex-col m-4 ml-3 rounded-md bg-base-300 max-lg:hidden border-[1.5px] border-secondary/10">
 	<Header username={jsonData.username} profilePicture={jsonData.profilePicture} />
-	<Messages />
+	<Messages messages={jsonData.messages} />
 	<InputBar />
 </div>
