@@ -24,13 +24,7 @@ const profilePictureOptimized = profilePicture
 
 <div class="flex flex-row p-2 transition-colors hover:bg-base-content/25 rounded-md max-lg:flex-1 max-h-min">
 	<div class="w-14 h-14 p-1 mr-3">
-		{
-			profilePicture ? (
-				<img class="w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={username} width="80" height="80" fetchpriority="high" loading="eager" />
-			) : (
-				<img class="w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={username} width="80" height="80" fetchpriority="high" loading="eager" />
-			)
-		}
+		<img class="w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={username} width="80" height="80" fetchpriority="high" loading="eager" />
 	</div>
 	<div class="flex flex-1 flex-col self-center">
 		<div class="flex">
