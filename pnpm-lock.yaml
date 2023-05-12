@@ -211,8 +211,8 @@ importers:
   11 WA-GawrBot-UI:
     dependencies:
       '@astrojs/node':
-        specifier: 5.1.2
-        version: 5.1.2(astro@2.4.4)
+        specifier: 5.1.3
+        version: 5.1.3(astro@2.4.4)
       '@astrojs/tailwind':
         specifier: 3.1.2
         version: 3.1.2(astro@2.4.4)(tailwindcss@3.3.2)(ts-node@10.9.1)
@@ -399,10 +399,10 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/node@5.1.2(astro@2.4.4):
-    resolution: {integrity: sha512-tDApFnU99O3KQXaRUmfwbkdxqgJhNvPDWou4CVBpybVm3xruigMfz5c+H9P2f4vRo0+sYTzof1L3Hzx9Rh9sQA==}
+  /@astrojs/node@5.1.3(astro@2.4.4):
+    resolution: {integrity: sha512-Uq8PVAmv0IJpIaJ/ecCXwpn9DNEjE3HeJHDn2cC8ARJsyysX6h/leqVKn+40mm2tR4bBT4m3znbY3gnzm+/JXQ==}
     peerDependencies:
-      astro: ^2.3.3
+      astro: ^2.4.5
     dependencies:
       '@astrojs/webapi': 2.1.1
       astro: 2.4.4(@types/node@20.1.1)(sharp@0.32.1)
