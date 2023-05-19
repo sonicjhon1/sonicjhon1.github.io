@@ -13,7 +13,7 @@ export async function optimizeImage(src: string, format: keyof sharp.FormatEnum,
 	}
 
 	// Generate the Base64 image using sharp and store it in the cache
-	const buffer = await sharp(await (await fetch(src)).arrayBuffer())
+	const buffer = await sharp(await (await fetch(decodeURIComponent(src))).arrayBuffer())
 		.resize({
 			width,
 			height,

@@ -5,49 +5,129 @@ import { getImage } from "astro:assets";
 import profilePictureDefault from "../assets/.original/export.png";
 
 // Edge browsers doesn't support avif format yet.
-const imageFormat = Astro.request.headers.get("user-agent")?.includes("Edg") ? "webp" : "avif";
+const imageFormat = Astro.request.headers.get("user-agent")?.includes("Edg")
+	? "webp"
+	: "avif";
 
 export interface Props {
-	latestMessageTimestamp: number;
-	latestMessage: string;
-	username: string;
-	profilePicture?: string;
-	isPinned: boolean;
-	isArchived: boolean;
+	latestMessageTimestamp?: number;
+	latestMessageBody?: string;
+	latestMessageHasmedia?: boolean;
+	latestMessageAuthor?: string;
+	chatName: string;
+	chatPhone: string;
+	chatProfile?: string | null;
+	chatIsPinned: boolean;
+	chatIsArchived: boolean;
 }
-const { latestMessageTimestamp, latestMessage, profilePicture, username, isPinned, isArchived } = Astro.props;
+const {
+	latestMessageTimestamp = 0,
+	latestMessageBody,
+	latestMessageHasmedia,
+	latestMessageAuthor = "",
+	chatProfile,
+	chatName,
+	chatPhone,
+	chatIsPinned,
+	chatIsArchived,
+} = Astro.props;
 
-const profilePictureOptimized = profilePicture
-	? await optimizeImage(profilePicture, imageFormat, 80, 80)
-	: (await getImage({ src: profilePictureDefault, format: imageFormat, width: 80, height: 80 })).src;
+const profilePictureOptimized = chatProfile
+	? await optimizeImage(chatProfile, imageFormat, 80, 80).catch(
+			async (_) =>
+				(
+					await getImage({
+						src: profilePictureDefault,
+						format: imageFormat,
+						width: 80,
+						height: 80,
+					})
+				).src
+	  )
+	: (
+			await getImage({
+				src: profilePictureDefault,
+				format: imageFormat,
+				width: 80,
+				height: 80,
+			})
+	  ).src;
 ---
 
-<div class="flex flex-row p-2 transition-colors hover:bg-base-content/25 rounded-md max-lg:flex-1 max-h-min">
+<div class="flex flex-row p-2 transition-colors hover:bg-base-content/25 rounded-md max-lg:flex-1 max-h-[72px]" id=`chat-${chatPhone}`>
 	<div class="w-14 h-14 p-1 mr-3">
-		<img class="w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={username} width="80" height="80" fetchpriority="high" loading="eager" />
+		<img
+			class="w-full h-full rounded-full object-cover"
+			src={profilePictureOptimized}
+			alt={chatName}
+			width="80"
+			height="80"
+			fetchpriority="high"
+			loading="eager"
+		/>
 	</div>
 	<div class="flex flex-1 flex-col self-center" id="chat">
 		<div class="flex">
 			<span class="flex flex-1 font-bold">
-				{username}
+				{chatName}
 			</span>
 			<span class="flex self-center text-xs ml-1.5">
 				{
-					new Date(latestMessageTimestamp * 1000).toLocaleDateString("en-US", {
-						day: "2-digit",
-						month: "2-digit",
-						year: "numeric",
-					})
+					new Date().setHours(0, 0, 0, 0) == new Date(latestMessageTimestamp * 1000).setHours(0, 0, 0, 0) ? 
+					new Date(latestMessageTimestamp * 1000).toLocaleTimeString("id-ID", { hour12: false, hour: "2-digit", minute: "2-digit" }) :
+					new Date(latestMessageTimestamp * 1000).toLocaleDateString("id-ID", { day: "2-digit", month: "2-digit", year: "numeric" })
 				}
 			</span>
 		</div>
 		<div class="flex">
 			<div class="flex flex-1 h-full self-center font-light text-sm">
-				{latestMessage}
+				<span class="font-normal mr-1">
+					{latestMessageBody ? `${latestMessageAuthor.length > 10 ? latestMessageAuthor.substring(0, latestMessageAuthor.indexOf(' ')) : latestMessageAuthor}: ` : ""}</span
+				>
+				{
+					latestMessageHasmedia ? (
+						<Icon name="ph:file" class="h-5 w-5 flex self-center" />
+					) : (
+						""
+					)
+				}
+				<span class="truncate"
+					>{
+						latestMessageBody ? (
+							`${
+								latestMessageBody.length > 24
+									? `${latestMessageBody
+											.trim()
+											.substring(0, 24)}...`
+									: latestMessageBody
+							}`
+						) : (
+							<span>&nbsp;</span>
+						)
+					}</span
+				>
 			</div>
 			<span class="flex h-full">
-				{isPinned ? <Icon name="ph:push-pin-fill" class="h-4 w-4 flex self-center" /> : ""}
-				{isArchived ? <Icon name="ph:archive-fill" class="h-4 w-4 flex self-center" /> : ""}
+				{
+					chatIsPinned ? (
+						<Icon
+							name="ph:push-pin-fill"
+							class="h-4 w-4 flex self-center"
+						/>
+					) : (
+						""
+					)
+				}
+				{
+					chatIsArchived ? (
+						<Icon
+							name="ph:archive-fill"
+							class="h-4 w-4 flex self-center"
+						/>
+					) : (
+						""
+					)
+				}
 			</span>
 		</div>
 	</div>

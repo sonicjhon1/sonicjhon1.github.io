@@ -1,141 +1,48 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["jsonProtocol"]
-  output          = "../src/generated/client"
+generator kysely {
+  provider = "prisma-kysely"
+  output   = "../src/generated/kysely"
+  fileName = "types.ts"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-model Chat {
-  pkId                      BigInt   @id @default(autoincrement())
-  sessionId                 String
-  archived                  Boolean?
-  contactPrimaryIdentityKey Bytes?
-  conversationTimestamp     BigInt?
-  createdAt                 BigInt?
-  createdBy                 String?
-  description               String?
-  disappearingMode          Json?
-  displayName               String?
-  endOfHistoryTransfer      Boolean?
-  endOfHistoryTransferType  Int?
-  ephemeralExpiration       Int?
-  ephemeralSettingTimestamp BigInt?
-  id                        String
-  isDefaultSubgroup         Boolean?
-  isParentGroup             Boolean?
-  lastMsgTimestamp          BigInt?
-  lidJid                    String?
-  markedAsUnread            Boolean?
-  mediaVisibility           Int?
-  messages                  Json?
-  muteEndTime               BigInt?
-  name                      String?
-  newJid                    String?
-  notSpam                   Boolean?
-  oldJid                    String?
-  pHash                     String?
-  parentGroupId             String?
-  participant               Json?
-  pinned                    Int?
-  pnJid                     String?
-  pnhDuplicateLidThread     Boolean?
-  readOnly                  Boolean?
-  shareOwnPn                Boolean?
-  support                   Boolean?
-  suspended                 Boolean?
-  tcToken                   Bytes?
-  tcTokenSenderTimestamp    BigInt?
-  tcTokenTimestamp          BigInt?
-  terminated                Boolean?
-  unreadCount               Int?
-  unreadMentionCount        Int?
-  wallpaper                 Json?
-  lastMessageRecvTimestamp  Int?
-
-  @@unique([sessionId, id], map: "unique_id_per_session_id_chat")
-  @@index([sessionId])
-}
-
-model Contact {
-  pkId         BigInt  @id @default(autoincrement())
-  sessionId    String
-  id           String
-  name         String?
-  notify       String?
-  verifiedName String?
-  imgUrl       String?
-  status       String?
-
-  @@unique([sessionId, id], map: "unique_id_per_session_id_contact")
-  @@index([sessionId])
-}
-
-model Message {
-  pkId                            BigInt   @id @default(autoincrement())
-  sessionId                       String
-  remoteJid                       String
-  id                              String
-  agentId                         String?
-  bizPrivacyStatus                Int?
-  broadcast                       Boolean?
-  clearMedia                      Boolean?
-  duration                        Int?
-  ephemeralDuration               Int?
-  ephemeralOffToOn                Boolean?
-  ephemeralOutOfSync              Boolean?
-  ephemeralStartTimestamp         BigInt?
-  finalLiveLocation               Json?
-  futureproofData                 Bytes?
-  ignore                          Boolean?
-  keepInChat                      Json?
-  key                             Json
-  labels                          Json?
-  mediaCiphertextSha256           Bytes?
-  mediaData                       Json?
-  message                         Json?
-  messageC2STimestamp             BigInt?
-  messageSecret                   Bytes?
-  messageStubParameters           Json?
-  messageStubType                 Int?
-  messageTimestamp                BigInt?
-  multicast                       Boolean?
-  originalSelfAuthorUserJidString String?
-  participant                     String?
-  paymentInfo                     Json?
-  photoChange                     Json?
-  pollAdditionalMetadata          Json?
-  pollUpdates                     Json?
-  pushName                        String?
-  quotedPaymentInfo               Json?
-  quotedStickerData               Json?
-  reactions                       Json?
-  revokeMessageTimestamp          BigInt?
-  starred                         Boolean?
-  status                          Int?
-  statusAlreadyViewed             Boolean?
-  statusPsa                       Json?
-  urlNumber                       Boolean?
-  urlText                         Boolean?
-  userReceipt                     Json?
-  verifiedBizName                 String?
-
-  @@unique([sessionId, remoteJid, id], map: "unique_message_key_per_session_id")
-  @@index([sessionId])
+  url      = ""
 }
 
 model Session {
-  pkId      BigInt @id @default(autoincrement())
-  sessionId String
-  id        String
-  data      String @db.Text
+  id      String    @id @unique
+  chats   Chat[]
+  Message Message[]
+}
 
-  @@unique([sessionId, id], map: "unique_id_per_session_id_session")
-  @@index([sessionId])
+model Chat {
+  session              Session   @relation(fields: [sessionId], references: [id])
+  sessionId            String
+  chatName             String?
+  chatPhone            String    @unique
+  chatProfile          String?
+  chatIsArchived       Boolean
+  chatIsPinned         Boolean
+  chatMessages         Message[]
+  chatMessageLatest    Json?
+  chatMessageTimestamp Int?
+}
+
+model Message {
+  session          Session @relation(fields: [sessionId], references: [id])
+  sessionId        String
+  chat             Chat    @relation(fields: [messageChat], references: [chatPhone])
+  messageChat      String
+  messageAuthor    String
+  messageName      String
+  messageHasMedia  Boolean
+  messageBody      String
+  messageCaption   String?
+  messageType      String
+  messageTimestamp Int
+  messageFromMe    Boolean
+  messageObject    Json    @unique
 }

@@ -1,6 +1,6 @@
 import { toggleMainComponentMobile } from "./mainLogic";
 
-function attachHeaderLogic() {
+export function attachHeaderLogic() {
 	const buttonMainHeaderBack = document.getElementById("mainHeaderBack");
 	buttonMainHeaderBack?.addEventListener("click", toggleMainComponentMobile);
 }

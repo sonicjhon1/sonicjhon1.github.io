@@ -1,127 +1,226 @@
 ---
+import type { chatsData } from "../assets/ts/type/chats"
 import Chat from "../components/Chat.astro";
+import { Icon } from "astro-icon";
 
 const url = new URL(Astro.request.url);
 const data = url.searchParams.get("data");
-const jsonData = (() => {
+const jsonData: chatsData = (() => {
 	if (url.pathname === "/Chats" && data) {
 		return JSON.parse(data);
 	} else {
-		const data = `[{
-			"latestMessageTimestamp": 1683537000,
-			"latestMessage": "uwu owo",
-			"username": "TestUser",
-			"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
-			"isPinned": false,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1683000000,
-			"latestMessage": "omagah",
-			"username": "Notes",
-			"profilePicture": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/default_profile.png",
-			"isPinned": true,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1683555000,
-			"latestMessage": "This is also archived!",
-			"username": "Test B64 1",
-			"profilePicture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
-			"isPinned": false,
-			"isArchived": true
-			},
-			{
-			"latestMessageTimestamp": 1680000000,
-			"latestMessage": "Should work too~",
-			"username": "Test B64 2",
-			"profilePicture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC",
-			"isPinned": false,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1670555000,
-			"latestMessage": "This will have default profile.",
-			"username": "<-- Profile",
-			"isPinned": false,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1000000000,
-			"latestMessage": "Placeholder to test scroll",
-			"username": "Placeholder",
-			"isPinned": true,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1000000000,
-			"latestMessage": "Placeholder to test scroll",
-			"username": "Placeholder",
-			"isPinned": true,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1000000000,
-			"latestMessage": "Placeholder to test scroll",
-			"username": "Placeholder",
-			"isPinned": true,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1000000000,
-			"latestMessage": "Placeholder to test scroll",
-			"username": "Placeholder",
-			"isPinned": true,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1000000000,
-			"latestMessage": "Placeholder to test scroll",
-			"username": "Placeholder",
-			"isPinned": true,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1000000000,
-			"latestMessage": "Placeholder to test scroll",
-			"username": "Placeholder",
-			"isPinned": true,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1000000000,
-			"latestMessage": "Placeholder to test scroll",
-			"username": "Placeholder",
-			"isPinned": true,
-			"isArchived": false
-			},
-			{
-			"latestMessageTimestamp": 1000000000,
-			"latestMessage": "Placeholder to test scroll",
-			"username": "Placeholder",
-			"isPinned": true,
-			"isArchived": false
-			}
-		]`;
+		const data = `
+[
+	{
+		"chatName": "TestUser",
+		"chatPhone": "123456789@c.us",
+		"chatProfile": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/003.png",
+		"chatIsPinned": true,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1683537000,
+			"messageBody": "uwu owo",
+			"messageName": "TestUser",
+			"messageAuthor": "TestUser",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Notes",
+		"chatPhone": "123456789@c.us",
+		"chatProfile": "https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/09%20SchoolworkList-UI/src/assets/default_profile.png",
+		"chatIsPinned": true,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1683555000,
+			"messageBody": "omagah",
+			"messageName": "Sonicj",
+			"messageAuthor": "Sonicj",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Test B64 1",
+		"chatPhone": "123456789@c.us",
+		"chatProfile": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+		"chatIsPinned": false,
+		"chatIsArchived": true,
+		"chatMessageLatest": {
+			"messageTimestamp": 1683555000,
+			"messageBody": "This is also archived!",
+			"messageName": "Sonicj",
+			"messageAuthor": "Sonicj",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Test B64 2",
+		"chatPhone": "123456789@c.us",
+		"chatProfile": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1680000000,
+			"messageBody": "Should work too~",
+			"messageName": "Sonicj",
+			"messageAuthor": "Sonicj",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "<-- Profile",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1670555000,
+			"messageBody": "This will have default profile.",
+			"messageName": "Sonicj",
+			"messageAuthor": "Sonicj",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+    {
+		"chatName": "How about a media?",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1000000000,
+			"messageBody": "[Media]",
+			"messageName": "Sonicj",
+			"messageAuthor": "Sonicj",
+			"messageFromMe": false,
+			"messageHasMedia": true
+		}
+	},
+	{
+		"chatName": "Placeholder",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1000000000,
+			"messageBody": "Placeholder to test scroll",
+			"messageName": "Placeholder",
+			"messageAuthor": "Placeholder",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Placeholder",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1000000000,
+			"messageBody": "Placeholder to test scroll",
+			"messageName": "Placeholder",
+			"messageAuthor": "Placeholder",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Placeholder",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1000000000,
+			"messageBody": "Placeholder to test scroll",
+			"messageName": "Placeholder",
+			"messageAuthor": "Placeholder",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Placeholder",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1000000000,
+			"messageBody": "Placeholder to test scroll",
+			"messageName": "Placeholder",
+			"messageAuthor": "Placeholder",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Placeholder",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1000000000,
+			"messageBody": "Placeholder to test scroll",
+			"messageName": "Placeholder",
+			"messageAuthor": "Placeholder",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Placeholder",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1000000000,
+			"messageBody": "Placeholder to test scroll",
+			"messageName": "Placeholder",
+			"messageAuthor": "Placeholder",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	},
+	{
+		"chatName": "Placeholder",
+		"chatPhone": "123456789@c.us",
+		"chatIsPinned": false,
+		"chatIsArchived": false,
+		"chatMessageLatest": {
+			"messageTimestamp": 1000000000,
+			"messageBody": "A placeholder!",
+			"messageName": "Placeholder",
+			"messageAuthor": "Placeholder",
+			"messageFromMe": false,
+			"messageHasMedia": false
+		}
+	}
+]`;
 		return JSON.parse(data);
 	}
 })();
 ---
 
 <div class="flex flex-col p-4 max-lg:pb-0 max-lg:flex-1 w-full min-w-min max-w-sm max-lg:max-w-full" id="chats">
-	<div class="mb-2">
-		<input type="text" placeholder="Search" class="input input-bordered w-full px-6 bg-base-100 transition-colors border-[1.5px] hover:border-primary-focus focus:border-secondary-focus hover:bg-base-300 focus:bg-base-300 focus:outline-none" />
+	<div class="mb-4 flex flex-row px-2">
+		<Icon name="ph:list" class="h-10 pr-2 flex self-center transition-colors text-neutral-content hover:text-primary-focus focus:text-secondary-focus" id="listIcon"/>
+		<input type="text" placeholder="Search" class="input input-bordered w-full px-6 bg-base-100 transition-colors border-[1.5px] hover:border-primary-focus focus:border-secondary-focus hover:bg-base-300 focus:bg-base-300 focus:outline-none ml-2 mr-0" />
 	</div>
 	<div class="bg-base-200 rounded-md pr-2 overflow-scroll">
 		{
-			jsonData.map((chatData: any) => (
+			jsonData.map((chatData) => (
 				<Chat
-					latestMessageTimestamp={chatData.latestMessageTimestamp}
-					latestMessage={chatData.latestMessage}
-					username={chatData.username}
-					profilePicture={chatData.profilePicture}
-					isPinned={chatData.isPinned}
-					isArchived={chatData.isArchived}
+					latestMessageTimestamp={chatData?.chatMessageLatest?.messageTimestamp}
+					latestMessageBody={chatData?.chatMessageLatest?.messageBody}
+					latestMessageAuthor={chatData?.chatMessageLatest?.messageName || chatData?.chatMessageLatest?.messageAuthor}
+					latestMessageHasmedia={chatData?.chatMessageLatest?.messageHasMedia}
+					chatName={chatData.chatName}
+					chatPhone={chatData.chatPhone}
+					chatProfile={chatData.chatProfile}
+					chatIsPinned={chatData.chatIsPinned}
+					chatIsArchived={chatData.chatIsArchived}
 				/>
 			))
 		}

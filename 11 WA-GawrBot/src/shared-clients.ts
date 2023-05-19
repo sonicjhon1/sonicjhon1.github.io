@@ -1,44 +1,44 @@
-import { PrismaClient } from "./generated/client";
-import { PrismaClientKnownRequestError } from "./generated/client/runtime/library";
-import type { SocketConfig } from "@adiwajshing/baileys";
-import { DEFAULT_CONNECTION_CONFIG } from "@adiwajshing/baileys";
-import pino from "pino";
+import * as dotenv from "dotenv";
+dotenv.config();
+import type { DB } from "./generated/kysely/types";
+import { SurrealKysely, SurrealDatabase, SurrealDbWebSocketsDialect } from "kysely-surrealdb";
+import Surreal from "surrealdb.js";
 import { Server } from "socket.io";
+import { Client, LocalAuth } from "whatsapp-web.js";
 
-let prisma: PrismaClient | null = null;
-let logger: SocketConfig["logger"] | null = null;
+let db: SurrealKysely<SurrealDatabase<DB>> | null = null;
 let socketio: Server | null = null;
+let wa: Client | null = null;
+let sessionId: string | null = null;
 
-export function setPrisma(prismaClient: PrismaClient) {
-	prisma = prismaClient;
-}
-
-export function setLogger(pinoLogger?: SocketConfig["logger"]) {
-	logger = pinoLogger || DEFAULT_CONNECTION_CONFIG.logger;
+export function setDB(kysely: SurrealKysely<SurrealDatabase<DB>>) {
+	db = kysely;
 }
 
 export function setSocketio(server: Server) {
 	socketio = server;
 }
 
-export function usePrisma() {
-	if (!prisma) {
-		console.error("Prisma client cannot be used before initialization. Initializing a new Prisma client.");
-		return new PrismaClient();
-	}
-	return prisma;
+export function setWA(client: Client, sessionID: string) {
+	wa = client;
+	sessionId = sessionID;
 }
 
-export function usePrismaClientKnownRequestError() {
-	return PrismaClientKnownRequestError;
-}
-
-export function useLogger(): SocketConfig["logger"] {
-	if (!logger) {
-		console.error("Pino logger cannot be used before initialization. Initializing a new Pino logger.");
-		return pino({ level: process.env.LOG_LEVEL || "debug" });
+export function useDB() {
+	if (!db) {
+		console.error("kysely - SurrealDB cannot be used before initialization. Initializing a new kysely - SurrealDB client.");
+		db = new SurrealKysely<SurrealDatabase<DB>>({
+			dialect: new SurrealDbWebSocketsDialect({
+				Driver: Surreal,
+				hostname: process.env.DATABASE_URL?.toString() || "127.0.0.1:8080",
+				namespace: process.env.DATABASE_NAMESPACE?.toString() || "namespace",
+				database: process.env.DATABASE_NAME?.toString() || "name",
+				username: process.env.DATABASE_USERNAME?.toString() || "root",
+				password: process.env.DATABASE_PASSWORD?.toString() || "root",
+			}),
+		});
 	}
-	return logger;
+	return db;
 }
 
 export function useSocketio(): Server {
@@ -51,4 +51,15 @@ export function useSocketio(): Server {
 		});
 	}
 	return socketio;
+}
+
+export function useWA(): Client | null {
+	if (!wa) {
+		console.error("WA cannot be used before initialization.");
+	}
+	return wa;
+}
+
+export function getWASession(): String {
+	return sessionId || "";
 }

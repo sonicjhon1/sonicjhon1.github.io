@@ -8,19 +8,17 @@ export interface Props {
 const { messages } = Astro.props;
 ---
 
-<div class="flex flex-1 flex-col py-2 px-6 bg-base-100 overflow-scroll">
+<div class="flex flex-1 flex-col py-2 px-6 bg-base-100 overflow-scroll" id="messages">
     {
-		messages.map((messageData: any) => (
+		messages.reverse().map((messageData: any) => (
 			<Message
-                fromMe={messageData.fromMe}
-				remoteJid={messageData.remoteJid}
 				id={messageData.id}
-				message={messageData.message}
-				timestamp={messageData.timestamp}
-				pushName={messageData.pushName}
-                profilePicture={messageData.profilePicture}
-				userReceipt={messageData.userReceipt}
-                ack={messageData.ack}
+				messageCaption={messageData.messageCaption}
+                messageFromMe={messageData.messageFromMe}
+				messageHasMedia={messageData.messageHasMedia}
+				messageName={messageData.messageName || messageData.messageAuthor}
+				messageTimestamp={messageData.messageTimestamp}
+                profilePicture={messageData.messageProfile ? messageData.messageProfile[0]?.chatProfile : undefined}
 			/>
 		))
 	}

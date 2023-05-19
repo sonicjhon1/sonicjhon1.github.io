@@ -25,7 +25,7 @@ export default defineConfig({
 	experimental: {
 		assets: true,
 		inlineStylesheets: "always",
-		scopedStyleStrategy: "class",
+		// scopedStyleStrategy: "class",
 	},
 	image: {
 		service: sharpImageService(),

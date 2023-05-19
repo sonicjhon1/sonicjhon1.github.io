@@ -2,7 +2,7 @@
 import Button from "./utils/Button.astro";
 ---
 
-<div class="flex flex-col p-4 max-lg:pb-0 max-md:min-w-fit overflow-scroll" id="sideBar">
+<div class="flex flex-col p-4 max-lg:pb-0 max-md:min-w-fit overflow-scroll max-sm:hidden" id="sideBar">
 	<div class="btn max-2xl:btn-sm max-xl:btn-xs btn-outline normal-case text-xl py-8 max-2xl:py-6 max-xl:py-5 mb-2 2xl:mb-1 content-center max-md:hidden" id="buttonFullscreen">Gawr グラ</div>
 	<div class="btn btn-sm btn-outline normal-case text-xl py-6 mb-2 content-center hidden max-md:flex" id="buttonFullscreen">G</div>
 	<div class="divider max-2xl:my-2 max-xl:my-1 max-lg:hidden"></div>
@@ -14,7 +14,7 @@ import Button from "./utils/Button.astro";
 	</div>
 	<div class="divider max-2xl:my-2 max-xl:my-1 max-lg:hidden"></div>
 	<div class="flex flex-col">
-		<Button name="ci:refresh-02" text="Reload"/>
+		<Button name="ci:refresh-02" text="Reload" id="buttonReload"/>
 		<Button name="ci:user-circle" text="Profile"/>
 		<Button name="ci:settings" text="Settings"/>
 	</div>

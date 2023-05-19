@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon";
 ---
 
-<div class="flex min-h-[4rem] max-h-[4rem] border-t border-accent/10">
+<div class="flex min-h-[4rem] max-h-[4rem] border-t border-accent/10" id="input-bar">
 	<div class="flex min-w-fit ml-3">
         <Icon name="ph:sticker" class="h-5 w-5 mx-2 flex self-center" />
 		<Icon name="ph:paperclip" class="h-5 w-5 mx-2 flex self-center" />
@@ -12,9 +12,10 @@ import { Icon } from "astro-icon";
 			type="text"
 			placeholder="Type here..."
 			class="input input-bordered flex flex-1 self-center text-xs max-h-9 transition-colors border hover:border-primary-focus focus:border-secondary-focus hover:bg-base-300 focus:bg-base-300 focus:outline-none"
+			id="input-text"
 		/>
 	</div>
 	<div class="flex min-w-[1rem] mr-3">
-		<Icon name="ph:check" class="h-5 w-5 mx-1 flex self-center" />
+		<Icon name="ph:check" class="h-5 w-5 mx-1 flex self-center" id="icon-send"/>
 	</div>
 </div>

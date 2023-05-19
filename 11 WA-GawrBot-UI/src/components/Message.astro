@@ -7,25 +7,19 @@ import profilePictureDefault from "../assets/.original/export.png";
 const imageFormat = Astro.request.headers.get("user-agent")?.includes("Edg") ? "webp" : "avif";
 
 export interface Props {
-	fromMe: boolean;
-	remoteJid: string;
 	id: string;
-	message: {
-		conversation?: string;
-		extendedTextMessage?: {
-			text?: string;
-		};
-	};
-	timestamp: number;
-	pushName: string | null;
-	profilePicture: string | null;
-	userReceipt: string | null;
+	messageCaption: string;
+	messageFromMe: boolean;
+	messageHasMedia: boolean;
+	messageName: string;
+	messageTimestamp: number;
+	profilePicture?: string | null;
 	ack?: number | null;
 }
-const { fromMe, remoteJid, id, message, timestamp, pushName, profilePicture, userReceipt, ack } = Astro.props;
+const { id, messageCaption, messageFromMe, messageHasMedia, messageName, messageTimestamp, profilePicture, ack } = Astro.props;
 
 const profilePictureOptimized = profilePicture
-	? await optimizeImage(profilePicture, imageFormat, 80, 80)
+	? await optimizeImage(profilePicture, imageFormat, 80, 80).catch(async (_) => (await getImage({ src: profilePictureDefault, format: imageFormat, width: 80, height: 80 })).src)
 	: (await getImage({ src: profilePictureDefault, format: imageFormat, width: 80, height: 80 })).src;
 
 let bubbleColor = "chat-bubble-secondary";
@@ -47,18 +41,18 @@ switch (ack) {
 }
 ---
 
-<div class=`flex min-w-full ${fromMe ? "justify-end" : "justify-start"}`>
-	<div class=`chat ${fromMe ? "chat-end" : "chat-start"} max-md:max-w-[90%] max-xl:max-w-[80%] max-w-[55%]`>
+<div class=`flex min-w-full ${messageFromMe ? "justify-end" : "justify-start"}` id=`message-${id}` has-media=`${messageHasMedia}`>
+	<div class=`chat ${messageFromMe ? "chat-end" : "chat-start"} max-md:max-w-[90%] max-xl:max-w-[80%] max-w-[55%]`>
 		<div class="chat-image avatar">
 			<div class="w-8 rounded-full">
 				<img src={profilePictureOptimized} />
 			</div>
 		</div>
-		<div class=`chat-header flex py-1 ${fromMe ? "flex-row-reverse" :""}`>
-			{pushName || remoteJid.match(/^[0-9]*/)}
+		<div class=`chat-header flex py-1 ${messageFromMe ? "flex-row-reverse" :""}`>
+			{messageName}
 			<time class="text-xs opacity-50 px-2 self-end">
 				{
-					new Date(timestamp * 1000).toLocaleTimeString("en-US", {
+					new Date(messageTimestamp * 1000).toLocaleTimeString("en-US", {
 						hour: "2-digit",
 						minute: "2-digit",
 					})
@@ -66,8 +60,9 @@ switch (ack) {
 			</time>
 		</div>
 		<div class=`chat-bubble ${bubbleColor} flex flex-col break-word max-md:text-sm`>
-			{message.conversation || message.extendedTextMessage?.text}
-			{fromMe ? <div class="chat-footer opacity-50 self-end max-md:text-xs">{messageAck}</div> : ""}
+			<div id="media">{messageHasMedia ? "[MEDIA]" : ""}</div>
+			{messageCaption}
+			{messageFromMe ? <div class="chat-footer opacity-50 self-end max-md:text-xs">{messageAck}</div> : ""}
 		</div>
 	</div>
 </div>

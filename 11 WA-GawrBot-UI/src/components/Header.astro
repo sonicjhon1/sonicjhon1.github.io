@@ -8,14 +8,14 @@ import profilePictureDefault from "../assets/.original/export.png";
 const imageFormat = Astro.request.headers.get("user-agent")?.includes("Edg") ? "webp" : "avif";
 
 export interface Props {
-	username: string;
-	profilePicture?: string;
+	chatName: string;
+	chatProfile?: string;
 	participants?: string;
 }
-const { profilePicture, username, participants } = Astro.props;
+const { chatProfile, chatName, participants } = Astro.props;
 
-const profilePictureOptimized = profilePicture
-	? await optimizeImage(profilePicture, imageFormat, 80, 80)
+const profilePictureOptimized = chatProfile
+	? await optimizeImage(chatProfile, imageFormat, 80, 80).catch(async (_) => (await getImage({ src: profilePictureDefault, format: imageFormat, width: 80, height: 80 })).src)
 	: (await getImage({ src: profilePictureDefault, format: imageFormat, width: 80, height: 80 })).src;
 ---
 
@@ -26,16 +26,16 @@ const profilePictureOptimized = profilePicture
 	<div class="flex h-full mx-2">
 		<div class="flex self-center w-10 h-10">
 			{
-				profilePicture ? (
-					<img class="flex self-center w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={username} width="80" height="80" fetchpriority="high" loading="eager" />
+				chatProfile ? (
+					<img class="flex self-center w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={chatName} width="80" height="80" fetchpriority="high" loading="eager" />
 				) : (
-					<img class="flex self-center w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={username} width="80" height="80" fetchpriority="high" loading="eager" />
+					<img class="flex self-center w-full h-full rounded-full object-cover" src={profilePictureOptimized} alt={chatName} width="80" height="80" fetchpriority="high" loading="eager" />
 				)
 			}
 		</div>
 	</div>
 	<div class="flex flex-1 flex-col mx-3 py-1">
-		<div class="font-bold">{username}</div>
+		<div class="font-bold">{chatName}</div>
 		<div class="font-light text-xs text-accent">{participants ? participants : "Click to view more info."}</div>
 	</div>
 	<div class="flex min-w-[2rem]">

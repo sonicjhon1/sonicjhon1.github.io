@@ -4,11 +4,12 @@ import { Icon } from "astro-icon";
 export interface Props {
 	name: string;
 	text?: string;
+	id?: string;
 }
-const { name, text } = Astro.props;
+const { name, text, id } = Astro.props;
 ---
 
-<div class="max-md:tooltip " data-tip={text}>
+<div class="max-md:tooltip " data-tip={text} id=`${id}`>
 	<button class="btn btn-sm max-2xl:btn-md gap-4 max-lg:gap-2 max-md:gap-0 px-4 py-6 max-2xl:py-0 max-xl:py-4 my-1.5 w-full max-md:w-fit content-center justify-start" aria-label={text}>
 		<Icon name={name} class="h-6 w-6 max-xl:h-4 max-xl:w-4" />
 		<div class="max-2xl:text-xs max-xl:text-[80%] max-md:hidden">

@@ -1,17 +1,19 @@
-import { PrismaClient } from "./generated/client";
-import pino from "pino";
+import { Kysely } from "kysely";
+import type { DB } from "./generated/kysely/types"
+import { SurrealDatabase, SurrealDbWebSocketsDialect } from "kysely-surrealdb";
+import Surreal from "surrealdb.js";
 import { Server } from "socket.io";
 
-export const prisma = new PrismaClient();
-prisma.$use(async (params, next) => {
-	const before = Date.now();
-	const result = await next(params);
-	const after = Date.now();
-	console.log(`Query ${params.model}.${params.action} took ${after - before}ms`);
-	return result;
+export const db = new Kysely<SurrealDatabase<DB>>({
+	dialect: new SurrealDbWebSocketsDialect({
+		Driver: Surreal,
+		hostname: process.env.DATABASE_URL || "localhost:8080",
+		namespace: process.env.DATABASE_NAMESPACE || "namespace",
+		database: process.env.DATABASE_NAME ||"name",
+		username: process.env.DATABASE_USERNAME || "root",
+		password: process.env.DATABASE_PASSWORD || "root",
+	}),
 });
-
-export const logger = pino({ level: process.env.LOG_LEVEL || "debug" });
 
 export const socketio: Server = new Server(Number(process.env.SOCKET_PORT) || 3000, {
 	cors: {
