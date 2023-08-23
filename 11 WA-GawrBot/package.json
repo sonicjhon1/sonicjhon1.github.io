@@ -11,24 +11,24 @@
 		"preinstall": "npx only-allow pnpm"
 	},
 	"dependencies": {
-		"archiver": "^5.3.1",
+		"archiver": "^6.0.0",
 		"dotenv": "^16.3.1",
-		"kysely": "^0.24.2",
+		"kysely": "^0.26.1",
 		"kysely-surrealdb": "^0.7.4",
-		"node-fetch": "^2.6.11",
-		"prisma-kysely": "^1.4.2",
-		"sharp": "0.32.1",
-		"socket.io": "4.6.1",
+		"node-fetch": "^3.3.2",
+		"prisma-kysely": "^1.6.0",
+		"sharp": "0.32.5",
+		"socket.io": "4.7.2",
 		"surrealdb.js": "^0.7.3",
-		"whatsapp-web.js": "^1.21.0"
+		"whatsapp-web.js": "^1.22.1"
 	},
 	"devDependencies": {
 		"@types/archiver": "^5.3.2",
 		"@types/node-fetch": "^2.6.4",
-		"@types/ws": "8.5.4",
-		"prisma": "4.14.0",
+		"@types/ws": "8.5.5",
+		"prisma": "5.2.0",
 		"ts-node": "10.9.1",
-		"typescript": "5.0.4"
+		"typescript": "5.1.6"
 	},
 	"optionalDependencies": {
 		"bufferutil": "4.0.7",
