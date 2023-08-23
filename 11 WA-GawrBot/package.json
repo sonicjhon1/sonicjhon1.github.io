@@ -18,7 +18,7 @@
 		"node-fetch": "^2.6.11",
 		"prisma-kysely": "^1.4.2",
 		"sharp": "0.32.1",
-		"socket.io": "4.6.1",
+		"socket.io": "4.7.2",
 		"surrealdb.js": "^0.7.3",
 		"whatsapp-web.js": "^1.21.0"
 	},
