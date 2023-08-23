@@ -3,13 +3,13 @@ queue_rules:
     queue_conditions:
       - label=merge
     merge_conditions:
-      - "#approved-reviews-by>=1"
-      - "approved-reviews-by=sonicjhon1"
+    - and:
       - check-success=Cloudflare Pages
 
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
+    - and:
       - "#approved-reviews-by>=1"
       - "approved-reviews-by=sonicjhon1"
     actions:
