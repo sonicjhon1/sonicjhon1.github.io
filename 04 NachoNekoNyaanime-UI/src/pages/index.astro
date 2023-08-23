@@ -1,17 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Banner from '../components/anime/Banner.astro';
-import Section from '../components/Section.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Banner from "../components/anime/Banner.astro";
+import Section from "../components/Section.astro";
 
-const fetchAnime = await fetch('https://api.consumet.org/meta/anilist/info/140960').then(r => r.json());
-const trendingAnime = await fetch('https://api.consumet.org/meta/anilist/trending').then(r => r.json());
-const popularAnime = await fetch('https://api.consumet.org/meta/anilist/popular').then(r => r.json());
+const API_DOWN = "API IS CURRENTLY DOWN. PLEASE CHECK BACK LATER~";
+const fetchAnime = await fetch("https://api.consumet.org/meta/anilist/info/140960").then((r) => r.json());
+const trendingAnime = await fetch("https://api.consumet.org/meta/anilist/trending").then((r) => r.json());
+const popularAnime = await fetch("https://api.consumet.org/meta/anilist/popular").then((r) => r.json());
 ---
-<Layout>
-	<Header/>
-      <Banner anime={fetchAnime}/>
-      <Section title="Trending Now" animeList={trendingAnime.results}/>
-      <Section title="Popular" animeList={popularAnime.results}/>
-</Layout>
 
+<Layout>
+	<Header />
+	{fetchAnime.message ? API_DOWN : <Banner anime={fetchAnime}/>}
+	{trendingAnime.message ? API_DOWN : <Section title="Trending Now" animeList={trendingAnime.results}/>}
+	{popularAnime.message ? API_DOWN : <Section title="Popular" animeList={popularAnime.results} />}
+</Layout>
