@@ -25,7 +25,7 @@
 	"devDependencies": {
 		"@types/archiver": "^5.3.2",
 		"@types/node-fetch": "^2.6.4",
-		"@types/ws": "8.5.4",
+		"@types/ws": "8.5.5",
 		"prisma": "4.14.0",
 		"ts-node": "10.9.1",
 		"typescript": "5.0.4"
