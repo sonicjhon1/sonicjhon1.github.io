@@ -12,7 +12,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "astro": "2.10.12",
+    "astro": "3.6.4",
     "astro-compress": "2.0.14"
   }
 }
