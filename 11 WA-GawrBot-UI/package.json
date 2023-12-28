@@ -26,7 +26,7 @@
     "tailwindcss": "3.3.3"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "1.4.0",
+    "@tauri-apps/cli": "1.5.6",
     "@types/node": "20.5.3",
     "caxa": "3.0.1",
     "ts-node": "10.9.1"
