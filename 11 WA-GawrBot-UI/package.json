@@ -13,7 +13,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "@astrojs/node": "5.3.5",
+    "@astrojs/node": "7.0.4",
     "@astrojs/tailwind": "4.0.0",
     "@tauri-apps/api": "1.4.0",
     "astro": "2.10.12",
