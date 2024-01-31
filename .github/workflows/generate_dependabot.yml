@@ -17,7 +17,7 @@ jobs:
         uses: Makeshift/generate-dependabot-glob-action@master
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
           commit-message: "[WF] Update dependabot YAML [CF-Pages-Skip]"
           title: "WF - Update Dependabot YAML"
